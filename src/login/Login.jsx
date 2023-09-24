@@ -1,10 +1,22 @@
-import React from "react";
-import './Login.css'
+import { useNavigate } from 'react-router';
+import React from 'react';
+
+import './Login.css';
 
 function Login() {
 	const [login, toggle] = React.useState(true);
 
-  return (
+	const navigate = useNavigate()
+	
+	const cadastrar = () => {
+		navigate("/home")
+	}
+
+	const entrar = () => {
+		navigate("/home")
+	}
+
+	return (
 		<div className={`container ${login ? "cadastro-js" : "login-js"}`}>
 
 			<div className="content first-content">
@@ -18,7 +30,7 @@ function Login() {
 
 				<div className="second-column">
 					<h2 className="title">Cadastre-se</h2>
-					<form action="#" method="post" className="form">
+					<form onSubmit={cadastrar} method="post" className="form">
 						<label htmlFor="nome" className="label-input">
 							<input type="text" name="" id="nome" placeholder="Nome" />
 						</label>
@@ -48,7 +60,7 @@ function Login() {
 
 				<div className="second-column">
 					<h2 className="title title-second">login</h2>
-					<form action="#" method="post" className="form">
+					<form onSubmit={entrar} method="post" className="form">
 					<label htmlFor="email" className="label-input">teste
 							<input type="email" name="" id="email" placeholder="E-mail" />
 						</label>
