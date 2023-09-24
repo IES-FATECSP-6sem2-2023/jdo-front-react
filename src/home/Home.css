@@ -1,4 +1,101 @@
-h1{
-    font-size: 100px;
-    color: red;
+@import url('https://fonts.googleapis.com/css2?family=Londrina+Solid&family=Vollkorn:wght@400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Londrina Solid', cursive;
+    font-family: 'Vollkorn', serif;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+.bg-home {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../assets/imagens/backgrounds/cenario_home.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.bg-home-container {
+    width: 90vw;
+    height: 95vh;
+    background-color: aqua;
+    z-index: 1;
+    margin: 2.5vh auto;
+}
+
+.menu-superior {
+    width: 90vw;
+    height: 10vh;
+    background-color: red;
+}
+
+.menu-infos-user {
+    width: 40%;
+    height: 100%;
+    display: flex;
+    overflow-y: hidden;
+    background-color: blue;
+}
+
+.item-menu{
+    width: 30%;
+    height: auto;
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-image: url('../assets/imagens/placas/placa_subtitulo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.icon {
+    background-size: contain;
+    background-repeat: no-repeat;
+    flex: 0 0 auto;
+}
+
+.icon-nivel{
+    width: 30%;
+    height: 60%;
+    background-image: url('../assets/imagens/vetores/nivel.png');
+}
+
+.icon-esmeralda{
+    width: 25%;
+    height: 50%;
+    background-image: url('../assets/imagens/vetores/esmeraldas.png');
+}
+
+.icon-moeda{
+    width: 25%;
+    height: 50%;
+    background-image: url('../assets/imagens/vetores/moedas.png');
+}
+
+.numNivel {
+    margin-left: 18px;
+    margin-top: 8px;
+    font-size: 25px;
+    font-family: 'Londrina Solid', cursive;
+    color: #fff;
+}
+
+.info{
+    width: 50%;
+    height: 50%;
+    display: flex;
+    text-align: left;
+    align-items: center;
+    
+}
+
+.info-p{
+    font-family: 'Londrina Solid', cursive;
+    font-size: 2em;
+    color: #5E2C12;
 }
