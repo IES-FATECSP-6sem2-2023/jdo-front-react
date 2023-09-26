@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Londrina+Solid&family=Vollkorn:wght@400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Londrina Solid', cursive;
+    font-family: 'Vollkorn', serif;
+    overflow: hidden;
+    scroll-behavior: smooth;
+}
+
+.bg-home {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../assets/imagens/backgrounds/cenario_loja.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.bg-home-container {
+    width: 90vw;
+    height: 95vh;
+    z-index: 1;
+    margin: 2.5vh auto;
+    background-color: aqua;
+}
+
+.menu-superior{
+    width: 90vw;
+    height: 8vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu{
+    width: 5vw;
+    height: 8vh;
+}
+
+.item-retorno{
+    width: 80%;
+    height: 100%;
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-image: url('../assets/imagens/placas/placa_icones.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.icon-retorno{
+    width: 55%;
+    height: 70%;
+    background-image: url('../assets/imagens/icones/return.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.titulo {
+    width: 85vw;
+    height: 8vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.placa-titulo {
+    min-width: 200px; 
+    min-height: 100px; 
+    height: 100%;
+    margin: 10px;
+    background-image: url('../assets/imagens/placas/placa_subtitulo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+
+h1{
+    font-family: 'Londrina Solid', cursive;
+    font-size: 2em;
+    color: #5E2C12;
+}
+
+.loja{
+    width: 95vw;
+    height: 80vh;
+    margin: 2.5vh auto;
+    background-color: antiquewhite;
+}
+
+@media screen and (max-width: 1366px) and (max-height: 768px) {
+    .icon-retorno{
+        width: 55%;
+        height: 70%;
+        background-image: url('../assets/imagens/icones/return.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+}
