@@ -1,7 +1,8 @@
 import { useState } from 'react'
-//import Home from './home/home.jsx'
-//import LojaSkin from './lojaSkin/lojaSkin.jsx'
-import LojaMoedas from './lojaMoedas/lojaMoeda.jsx'
+//import Home from './Home/home.jsx'
+//import LojaSkin from './LojaSkin/lojaSkin.jsx'
+//import LojaMoedas from './LojaMoedas/lojaMoeda.jsx'
+import Colecao from './Colecao/colecao.jsx'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -9,7 +10,8 @@ function App() {
   return (
     //<Home/>
     //<LojaSkin/>
-    <LojaMoedas/>
+    //<LojaMoedas/>
+    <Colecao/>
   )
 }
 
