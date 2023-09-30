@@ -6,6 +6,7 @@ import LojaSkin from './LojaSkin/LojaSkin.jsx'
 import LojaMoeda from './LojaMoedas/LojaMoeda.jsx'
 
 function App() {
+  const [count, setCount] = useState(0)
 
   return (
     <>

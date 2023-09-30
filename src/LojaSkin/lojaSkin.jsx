@@ -24,6 +24,20 @@ function LojaSkin(){
                         </div>
                     </div>
                 </div>
+                <div className="moedas-atuais">
+                    <div className="item-qtde esmeraldas">
+                        <div className="icon icon-esmeralda"></div>
+                        <div className="info-esmeralda">
+                            <p className="info-p">1000</p>
+                        </div>
+                    </div>
+                    <div className="item-qtde moedas">
+                        <div className="icon icon-moeda"></div>
+                        <div className="info-esmeralda">
+                            <p className="info-p">1000</p>
+                        </div>
+                    </div>
+                </div>
                 <div className="loja">
                     <div className="loja-item">
                         <div className="skin">
