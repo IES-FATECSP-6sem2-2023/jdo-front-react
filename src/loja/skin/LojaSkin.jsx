@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router';
 import './LojaSkin.css'
-import Skin from '../assets/imagens/skins/onca_amazonia.png'
+import Skin from '../../assets/imagens/skins/onca_amazonia.png'
 
 function LojaSkin(){
     const navigate = useNavigate()

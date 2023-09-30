@@ -2,11 +2,11 @@ import './App.css'
 import { BrowserRouter, Routes, Route, Navigate} from 'react-router-dom'
 import Login from './login/Login.jsx'
 import Home from './home/Home.jsx'
-import LojaSkin from './LojaSkin/LojaSkin.jsx'
-import LojaMoeda from './LojaMoedas/LojaMoeda.jsx'
+import LojaSkin from './loja/skin/lojaSkin'
+import LojaMoeda from './loja/moedas/LojaMoeda.jsx'
+import Colecao from './colecao/Colecao.jsx'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
@@ -17,6 +17,7 @@ function App() {
           <Route path='/home' element={<Home />} />
           <Route path='/loja/skins' element={<LojaSkin />} />
           <Route path='/loja/moedas' element={<LojaMoeda />} />
+          <Route path='/colecao' element={<Colecao />} />
         </Routes>
       </BrowserRouter>
     </>
