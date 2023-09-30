@@ -1,6 +1,17 @@
+import { useNavigate } from 'react-router';
 import './Home.css'
 
 function Home(){
+	const navigate = useNavigate()
+	
+	const lojaSkins = () => {
+		navigate("/loja/skins")
+	}
+
+	const lojaMoedas = () => {
+		navigate("/loja/moedas")
+	}
+
     return (
         <section className="bg-home">
             <div className="bg-home-container">
@@ -15,12 +26,12 @@ function Home(){
                                 <p className="info-p">/100</p>
                             </div>
                         </div>
-                        <div className="item-menu esmeraldas">
+                        <button onClick={lojaMoedas} className="btn item-menu esmeraldas">
                             <div className="icon icon-esmeralda"></div>
                             <div className="info-esmeralda">
                                 <p className="info-p">1000</p>
                             </div>
-                        </div>
+                        </button>
                         <div className="item-menu moedas">
                         <div className="icon icon-moeda"></div>
                             <div className="info-esmeralda">
@@ -45,7 +56,7 @@ function Home(){
                     <div className="menu-principal">
                         <div className="menu-item"><p className="texto-p">JOGAR <br></br> COMO ONÇA</p></div>
                         <div className="menu-item"><p className="texto-p">JOGAR COMO <br></br> CACHORRO</p></div>
-                        <div className="menu-item"><p className="texto-p">LOJA</p></div>
+                        <button className="btn menu-item" onClick={lojaSkins}><p className="texto-p">LOJA</p></button>
                         <div className="menu-item"><p className="texto-p">COLEÇÃO</p></div>
                     </div>
                 </div>

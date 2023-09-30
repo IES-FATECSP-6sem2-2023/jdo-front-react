@@ -65,9 +65,9 @@
 .container {
   display: flex;
   justify-content: center;
+  background-image: url('../assets/imagens/backgrounds/cenario_login-tabuleiro.png');
   align-items: center;
   height: 100vh;
-  background-image: url('../assets/imagens/backgrounds/cenario_login-tabuleiro.png');
   background-repeat: no-repeat;
   background-color: #0AAD44 ;
 }
@@ -139,12 +139,16 @@
   background-color: #eee;
 }
 
+.form input:focus {
+  outline: none;
+}
+
 .label-input {
   background-color: #eee;
   margin: 5px;
   display: flex;
   align-items: center;
-  padding: 0 5px;
+  padding: 0 8px;
 }
 
 .password {
