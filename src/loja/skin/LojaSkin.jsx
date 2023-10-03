@@ -1,15 +1,21 @@
-import React from "react";
-import './lojaSkin.css'
-import Skin from '../assets/imagens/skins/onca_amazonia.png'
+import { useNavigate } from 'react-router';
+import './LojaSkin.css'
+import Skin from '../../assets/imagens/skins/onca_amazonia.png'
 
-function lojaSkin(){
+function LojaSkin(){
+    const navigate = useNavigate()
+
+    function volta() {
+        navigate('/home')
+    }
+
     return(
         <section className="bg-home">
             <div className="bg-home-container">
                 <div className="menu-superior">
                     <div className="menu">
                         <div className="item-retorno">
-                            <div className="icon-retorno"></div>
+                            <button onClick={volta} className=" btn icon-retorno"></button>
                         </div>
                     </div>
                     <div className="titulo">
@@ -183,4 +189,4 @@ function lojaSkin(){
     )
 }
 
-export default lojaSkin
+export default LojaSkin

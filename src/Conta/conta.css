@@ -1,0 +1,290 @@
+@import url('https://fonts.googleapis.com/css2?family=Londrina+Solid&family=Vollkorn:wght@400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Londrina Solid', cursive;
+    font-family: 'Vollkorn', serif;
+    overflow: hidden;
+    scroll-behavior: smooth;
+}
+
+.bg-home {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../assets/imagens/backgrounds/cenario_conta-colecao.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.bg-home-container {
+    width: 90vw;
+    height: 95vh;
+    z-index: 1;
+    margin: 2.5vh auto;
+}
+
+.menu-superior{
+    width: 85vw;
+    height: 8vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu{
+    width: 5vw;
+    height: 8vh;
+}
+
+.item-retorno{
+    width: 80%;
+    height: 100%;
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-image: url('../assets/imagens/placas/placa_icones.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.icon-retorno{
+    width: 55%;
+    height: 70%;
+    background-image: url('../assets/imagens/icones/return.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.titulo {
+    width: 85vw;
+    height: 8vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.placa-titulo {
+    min-width: 200px; 
+    min-height: 100px; 
+    height: 100%;
+    margin: 10px;
+    background-image: url('../assets/imagens/placas/placa_subtitulo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+
+h1{
+    font-family: 'Londrina Solid', cursive;
+    font-size: 2em;
+    color: #5E2C12;
+}
+
+.content-main{
+    width: 90vw;
+    height: 85vh;
+    margin: 1vh auto;
+}
+
+.content-main-superior{
+    width: 60vw;
+    height: 55vh;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.historico-user{
+    width: 90vw;
+    height: 30vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.infos-user{
+    width: 30vw;
+    height: 40vh;
+}
+
+.info{
+    width: 30vw;
+    height: 8vh;
+    display: flex;
+    align-items: center;
+}
+
+.info > label{
+    width: 15%;
+    font-family: 'Londrina Solid', cursive;
+    font-size: 1.8em;
+    color: #fff;
+}
+
+.info > input{
+    margin-left: 10px;
+    width: 75%;
+    height: 60%;
+    padding: 10px;
+    font-size: 1.8em;
+    font-family: 'Londrina Solid', cursive;
+    color: #5E2C12;
+    border: none;
+    border-radius: 2px;
+}
+
+.info > button{
+    margin-left: 10px;
+    width: 75%;
+    height: 60%;
+    font-size: 1.8em;
+    font-family: 'Londrina Solid', cursive;
+    color: #E6B789;
+    background-color: #5E2C12;
+    border: none;
+}
+
+.info > button:hover{
+    border: 3px solid #331809;
+}
+
+.emblemas{
+    width: 30vw;
+    height: 40vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-grow: 4;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    position: absolute;
+    flex-grow: 1;
+    z-index: 1;
+    height: auto;
+    color: #E6B789;
+    font-family: 'Londrina Solid', cursive;
+    font-size: 1.2em;
+    background-color: #5E2C12;
+    padding: 15px;
+}
+
+.hover-text:hover .tooltip-text {
+    visibility: visible;
+}
+
+.hover-text {
+    width: 25%;
+    height: 33%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.hover-text > img{
+    width: 100px;
+    height: 100px;
+    background-color: #fff;
+    border-radius: 50%;
+    border: 4px solid #5E2C12;
+}
+
+#top {
+    margin-top: -50px;
+    margin-left: -150px;
+}  
+
+.placa{
+    width: 90%;
+    height: 100%;
+    margin: 10px 5px;
+    background-image: url('../assets/imagens/placas/placa_home.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.icon-vit{
+    width: 25%;
+    height: 40%;
+    margin-bottom: 8%;
+    background-image: url('../assets/imagens/vetores/vitorias.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.info-item{
+    margin-bottom: 8%;
+}
+
+.icon-der{
+    width: 25%;
+    height: 35%;
+    margin-bottom: 8%;
+    background-image: url('../assets/imagens/vetores/derrotas.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.historico-vitoria{
+    width: 30vw;
+    height: 30vh;
+}
+
+.historico-derrota{
+    width: 30vw;
+    height: 30vh;
+}
+
+
+@media screen and (max-width: 1366px) and (max-height: 768px) {
+    .icon-vit{
+        width: 25%;
+        height: 40%;
+        margin-bottom: 5%;
+        background-image: url('../assets/imagens/vetores/vitorias.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+
+    .icon-der{
+        width: 25%;
+        height: 35%;
+        margin-bottom: 5%;
+        background-image: url('../assets/imagens/vetores/derrotas.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+     
+    .hover-text > img{
+        width: 80px;
+        height: 80px;
+    }
+    
+    .info > label{
+        width: 18%;
+        font-size: 1.6em;
+    }
+
+    .info > input{
+        height: 70%;
+        font-size: 1.6em;
+    }
+
+    .info > button{
+        height: 75%;
+    }
+}
