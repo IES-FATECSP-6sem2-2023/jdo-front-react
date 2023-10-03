@@ -5,6 +5,7 @@ import Home from './home/Home.jsx'
 import LojaSkin from './loja/skin/lojaSkin'
 import LojaMoeda from './loja/moedas/LojaMoeda.jsx'
 import Colecao from './colecao/Colecao.jsx'
+import Conta from './conta/Conta.jsx'
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
           <Route path='/loja/skins' element={<LojaSkin />} />
           <Route path='/loja/moedas' element={<LojaMoeda />} />
           <Route path='/colecao' element={<Colecao />} />
+          <Route path='/perfil' element={<Conta />} />
         </Routes>
       </BrowserRouter>
     </>
