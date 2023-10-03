@@ -1,0 +1,198 @@
+@import url('https://fonts.googleapis.com/css2?family=Londrina+Solid&family=Vollkorn:wght@400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Londrina Solid', cursive;
+    font-family: 'Vollkorn', serif;
+    overflow: hidden;
+    scroll-behavior: smooth;
+}
+
+.bg-home {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../assets/imagens/backgrounds/cenario_conta-colecao.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.bg-home-container {
+    width: 90vw;
+    height: 95vh;
+    z-index: 1;
+    margin: 2.5vh auto;
+}
+
+.menu-superior{
+    width: 85vw;
+    height: 8vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu{
+    width: 5vw;
+    height: 8vh;
+}
+
+.item-retorno{
+    width: 80%;
+    height: 100%;
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-image: url('../assets/imagens/placas/placa_icones.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.icon-retorno{
+    width: 55%;
+    height: 70%;
+    background-image: url('../assets/imagens/icones/return.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.titulo {
+    width: 85vw;
+    height: 8vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.placa-titulo {
+    min-width: 200px; 
+    min-height: 100px; 
+    height: 100%;
+    margin: 10px;
+    background-image: url('../assets/imagens/placas/placa_subtitulo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+
+h1{
+    font-family: 'Londrina Solid', cursive;
+    font-size: 2em;
+    color: #5E2C12;
+}
+
+.sub-menu{
+    width: 90vw;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sub-menu-item {
+    min-width: 160px; 
+    height: 80px; 
+    margin: 10px;
+    background-image: url('../assets/imagens/placas/placa_subtitulo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+
+.sub-menu-item > p{
+    font-family: 'Londrina Solid', cursive;
+    font-size: 1.8em;
+    color: #5E2C12;
+}
+
+.colecao{
+    width: 90vw;
+    height: 62vh;
+    margin: 2vh auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.skin-item{
+    width: 12vw;
+    height: 25vh;
+    margin: 20px 40px;
+}
+
+.radio-button-label {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    line-height: 1.5;
+    text-align: center;
+    font-size: 2.2em;
+    color: #fff;
+    font-family: 'Londrina Solid', cursive;
+}
+
+.radio-button-label::before {
+    content: "";
+    display: inline-block;
+    width: 160px; 
+    height: 160px; 
+    background-image: url('../assets/imagens/skins/onca_amazonia.png');
+    background-size: cover;
+    background-position: center;
+    vertical-align: middle;
+    border: 5px solid #5E2C12;
+    border-radius: 50%;
+    background-color: white;
+}
+
+.radio-button-label input[type="radio"] {
+    display: none;
+}
+
+.salva-padrao{
+    width: 90vw;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.salva-padrao > button{
+    width: 20%;
+    height: 60%;
+    font-family: 'Londrina Solid', cursive;
+    font-size: 1.6em;
+    color: #e6b789;
+    background-color: #5E2C12;
+    border: none;
+}
+
+@media screen and (max-width: 1366px) and (max-height: 768px) {
+    .sub-menu{
+        height: 12vh;
+    }
+
+    .radio-button-label{
+        font-size: 1.6em;
+    }
+
+    .radio-button-label::before {
+        width: 110px;
+        height: 110px;
+    }
+
+    .salva-padrao > button{
+        width: 22%;
+        height: 70%;
+    }
+}
