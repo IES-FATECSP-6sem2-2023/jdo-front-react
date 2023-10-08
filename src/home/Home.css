@@ -56,36 +56,42 @@
 }
 
 .icon-nivel {
-    width: 25%;
-    height: 60%;
+    width: 22%;
+    height: 55%;
     background-image: url('../assets/imagens/vetores/nivel.png');
 }
 
 .icon-esmeralda {
     width: 22%;
-    height: 50%;
+    height: 55%;
     background-image: url('../assets/imagens/vetores/esmeraldas.png');
 }
 
 .icon-moeda {
     width: 22%;
-    height: 50%;
+    height: 55%;
     background-image: url('../assets/imagens/vetores/moedas.png');
 }
 
-.icon-nivel{
-    width: 22%;
-    height: 60%;
-    background-image: url('../assets/imagens/niveis/nivel-1.png');
+.info-nivel{
+    display: flex;
+}
+
+.numNivel {
+    margin-left: 15px;
+    margin-top: 5px;
+    font-size: 1.5em;
+    font-family: 'Londrina Solid', cursive;
+    color: #fff;
 }
 
 .info {
-    width: 50%;
-    height: 50%;
+    width: auto;
+    height: 60%;
     display: flex;
     text-align: left;
     align-items: center;
-
+    justify-content: center;
 }
 
 .info-p {
@@ -176,10 +182,22 @@
 }
 
 .texto-p {
+    width: 75%;
+    height: 30%;
     text-align: center;
     font-family: 'Londrina Solid', cursive;
     font-size: 2em;
     color: #5E2C12;
+}
+
+.menu-item:nth-child(1) .texto-p{
+    width: 75%;
+    height: 50%;
+}
+
+.menu-item:nth-child(2) .texto-p{
+    width: 75%;
+    height: 50%;
 }
 
 @media screen and (max-width: 1366px) and (max-height: 768px) {

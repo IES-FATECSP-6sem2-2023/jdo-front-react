@@ -97,19 +97,23 @@ function Conta(){
                     <div className="historico-user">
                         <div className="historico-vitoria">
                             <div className="placa">
-                                <div className="icon-vit"></div>
-                                <div className="info-item">
-                                    <h1 className="num-vit">X</h1>
-                                    <h1>VITÓRIAS</h1>
+                                <div className="placa-itens">
+                                    <div className="icon-vit"></div>
+                                    <div className="info-item">
+                                        <h1 className="num-vit">X</h1>
+                                        <h1>VITÓRIAS</h1>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div className="historico-derrota">
                             <div className="placa">
-                                <div className="icon-der"></div>
-                                <div className="info-item">
-                                    <h1 className="num-der">X</h1>
-                                    <h1>DERROTAS</h1>
+                                <div className="placa-itens">
+                                    <div className="icon-der"></div>
+                                    <div className="info-item">
+                                        <h1 className="num-der">X</h1>
+                                        <h1>DERROTAS</h1>
+                                    </div>
                                 </div>
                             </div>
                         </div>

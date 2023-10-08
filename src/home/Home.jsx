@@ -9,11 +9,14 @@ function Home(){
                     <div className="menu-infos-user">
                         <div className="item-menu nivel">
                             <div className="icon icon-nivel">
+                                <p className="numNivel">1</p>
                                 <div className="icon-nivel"></div>
                             </div>
-                            <div className="info nivel">
-                                <p className="info-p">100</p>
-                                <p className="info-p">/100</p>
+                            <div className="info inivel">
+                                <div className="info nivel">
+                                    <p className="info-p">100</p>
+                                    <p className="info-p">/100</p>
+                                </div>
                             </div>
                         </div>
                         <div className="item-menu esmeraldas">
@@ -23,7 +26,7 @@ function Home(){
                             </div>
                         </div>
                         <div className="item-menu moedas">
-                        <div className="icon icon-moeda"></div>
+                            <div className="icon icon-moeda"></div>
                             <div className="info-esmeralda">
                                 <p className="info-p">1000</p>
                             </div>
