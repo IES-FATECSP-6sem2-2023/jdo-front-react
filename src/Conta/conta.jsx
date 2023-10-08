@@ -1,5 +1,6 @@
-import './Conta.css'
-import emblema from '../assets/imagens/skins/cachorro_amazonia.png'
+import React from "react";
+import './conta.css'
+
 
 function Conta(){
     return (
@@ -43,54 +44,54 @@ function Conta(){
                             </div>
                         </div>
                         <div className="emblemas">
-                            <div className="hover-text">
-                                <img src={emblema} alt="" />
-                                <span className="tooltip-text" id="top">I'm a tooltip! <br></br> Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum</span>
+                            <div className="emblema-item">
+                                <div className="icon-emblema ativo"></div>
+                                <span className="tooltip-text" id="top">Bem-vindo a floresta <br></br> Jogue sua primeira partida</span>
                             </div>
-                            <div className="hover-text">
-                                <img src={emblema} alt="" />
-                                <span className="tooltip-text" id="top">I'm a tooltip! <br></br> Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum</span>
+                            <div className="emblema-item">
+                                <div className="icon-emblema ativo" alt=""></div>
+                                <span className="tooltip-text" id="top">Bem-vindo a matilha <br></br> Vença sua primeira partida como cachorro</span>
                             </div>
-                            <div className="hover-text">
-                                <img src={emblema} alt="" />
-                                <span className="tooltip-text" id="top">I'm a tooltip! <br></br> Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum</span>
+                            <div className="emblema-item">
+                                <div className="icon-emblema ativo" alt=""></div>
+                                <span className="tooltip-text" id="top">Realeza da floresta <br></br> Vença sua primeira partida como onça</span>
                             </div>
-                            <div className="hover-text">
-                                <img src={emblema} alt="" />
-                                <span className="tooltip-text" id="top">I'm a tooltip! <br></br> Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum</span>
+                            <div className="emblema-item">
+                                <div className="icon-emblema ativo" alt=""></div>
+                                <span className="tooltip-text" id="top">Dominando a selva <br></br> Ganhe 3 partidas consecultivas</span>
                             </div>
-                            <div className="hover-text">
-                                <img src={emblema} alt="" />
-                                <span className="tooltip-text" id="top">I'm a tooltip! <br></br> Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum</span>
+                            <div className="emblema-item">
+                                <div className="icon-emblema ativo" alt=""></div>
+                                <span className="tooltip-text" id="top">Onça invicta <br></br> Ganhe 3 partidas consecultivas como onça</span>
                             </div>
-                            <div className="hover-text">
-                                <img src={emblema} alt="" />
-                                <span className="tooltip-text" id="top">I'm a tooltip! <br></br> Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum</span>
+                            <div className="emblema-item">
+                                <div className="icon-emblema ativo" alt=""></div>
+                                <span className="tooltip-text" id="top">Latido imbatível <br></br> Ganhe 3 partidas consecultivas como cachorro</span>
                             </div>
-                            <div className="hover-text">
-                                <img src={emblema} alt="" />
-                                <span className="tooltip-text" id="top">I'm a tooltip! <br></br> Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum</span>
+                            <div className="emblema-item">
+                                <div className="icon-emblema ativo" alt=""></div>
+                                <span className="tooltip-text" id="top">Estrategista e habilidoso <br></br> Ganhe 5 partidas consecultivas</span>
                             </div>
-                            <div className="hover-text">
-                                <img src={emblema} alt="" />
-                                <span className="tooltip-text" id="top">I'm a tooltip! <br></br> Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum</span>
+                            <div className="emblema-item">
+                                <div className="icon-emblema ativo" alt=""></div>
+                                <span className="tooltip-text" id="top">Topo da cadeia <br></br> Vença 10 partidas</span>
                             </div>
-                            <div className="hover-text">
-                                <img src={emblema} alt="" />
-                                <span className="tooltip-text" id="top">I'm a tooltip! <br></br> Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum</span>
+                            <div className="emblema-item">
+                                <div className="icon-emblema ativo" alt=""></div>
+                                <span className="tooltip-text" id="top">Astúcia felina <br></br> Execute uma captura dupla</span>
                             </div>
-                            <div className="hover-text">
-                                <img src={emblema} alt="" />
-                                <span className="tooltip-text" id="top">I'm a tooltip! <br></br> Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum</span>
+                            <div className="emblema-item">
+                                <div className="icon-emblema ativo" alt=""></div>
+                                <span className="tooltip-text" id="top">Sobrevivente <br></br> Sobreviva a 30 movimentos</span>
                             </div>
-                            <div className="hover-text">
-                                <img src={emblema} alt="" />
-                                <span className="tooltip-text" id="top">I'm a tooltip! <br></br> Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum</span>
+                            <div className="emblema-item">
+                                <div className="icon-emblema ativo" alt=""></div>
+                                <span className="tooltip-text" id="top">Matilha unida <br></br> Encurrale a onça sem perder nenhum cachorro</span>
                             </div>
-                            <div className="hover-text">
-                                <img src={emblema} alt="" />
-                                <span className="tooltip-text" id="top">I'm a tooltip! <br></br> Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum</span>
-                            </div>                            
+                            <div className="emblema-item">
+                                <div className="icon-emblema ativo" alt=""></div>
+                                <span className="tooltip-text" id="top">Rei da selva <br></br> Vença 50 partidas</span>
+                            </div>
                         </div>
                     </div>
                     <div className="historico-user">

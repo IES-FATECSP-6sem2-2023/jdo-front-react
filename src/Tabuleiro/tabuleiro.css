@@ -1,0 +1,317 @@
+@import url('https://fonts.googleapis.com/css2?family=Londrina+Solid&family=Vollkorn:wght@400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Londrina Solid', cursive;
+    font-family: 'Vollkorn', serif;
+    overflow: hidden;
+    scroll-behavior: smooth;
+}
+
+.bg-home {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../assets/imagens/backgrounds/cenario_login-tabuleiro.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.bg-home-container {
+    width: 90vw;
+    height: 95vh;
+    z-index: 1;
+    margin: 2.5vh auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.area-onca {
+    width: 20vw;
+    height: 95vh;
+    display: flex;
+    align-items: baseline;
+}
+
+.area-onca-container {
+    width: 20vw;
+    height: 45vh;
+    align-self: flex-end;
+}
+
+.placar{
+    width: 15vw;
+    height: 20vh;
+    display: flex;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.placar-onca{
+    width: 90px;
+    height: 90px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background-color: #fff;
+    border: 4px solid #5E2C12;
+}
+
+.peca-comida{
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("../assets/imagens/skins/cachorro_amazonia.png");
+}
+
+.contador{
+    width: 20vw;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contador > h1{
+    font-family: 'Londrina Solid', cursive;
+    font-size: 4em;
+    color: #fff;
+}
+
+.info-user {
+    width: 20vw;
+    height: 15vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative; 
+}
+
+.info-user h1 {
+    position: absolute; 
+    text-align: center;
+    font-family: 'Londrina Solid', cursive;
+    font-size: 2em;
+    color: #5E2C12;
+}
+
+.area-cachorro {
+    width: 20vw;
+    height: 95vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.menu-superior {
+    width: 20vw;
+    height: 8vh;
+    display: flex;
+    justify-content: end;
+}
+
+.item-config {
+    width: 20%;
+    height: 70%;
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-image: url('../assets/imagens/placas/placa_icones.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.item-icon {
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.icon-som {
+    width: 60%;
+    height: 60%;
+    background-image: url('../assets/imagens/icones/volume-on.svg');
+}
+
+.icon-logout {
+    width: 60%;
+    height: 60%;
+    background-image: url('../assets/imagens/icones/logout.svg');
+}
+
+.area-cachorro-container {
+    width: 20vw;
+    height: 25vh;
+}
+
+.principal{
+    width: 50vw;
+    height: 95vh;
+}
+
+.tabuleiro{
+    width: 45vw;
+    height: 85vh;
+    margin: 0 auto;
+    background-image: url('../assets/imagens/placas/tabuleiro.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.tabuleiro-container{
+    width: 40vw;
+    height: 80vh;
+    margin: 4vh auto;
+}
+
+.malha-tabuleiro{
+    background-image: url("../assets/imagens/placas/malha-tabuleiro.png");
+    background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+}
+
+.row {
+    width: 40vw;
+    height: calc(80vh / 7);
+    display: flex;
+    justify-content: space-around;
+}
+
+.cell {
+    width: 92px;
+    height: 92px;
+    margin: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid #5E2C12;
+    border-radius: 50%;
+    background-color: #E6B789;
+}
+
+.cell-tri {
+    width: 92px;
+    height: 92px;
+    display: flex;
+    margin: 8px;
+    align-items: center;
+    justify-content: center;
+}
+
+.peca-cachorro ,
+.peca-onca {
+    background-size: 100% 100%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: #fff;
+}
+
+.peca-cachorro {
+    background-image: url("../assets/imagens/skins/cachorro_amazonia.png");
+}
+.peca-onca {
+    background-image: url("../assets/imagens/skins/onca_amazonia.png");
+}
+
+.reacoes{
+    width: 50vw;
+    height: 10vh;
+    margin-top: 1vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.item-reacao {
+    width: 5vw;
+    height: 8vh;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+    background-image: url('../assets/imagens/placas/placa_icones.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.btn-emoji{
+    width: 65%;
+    height: 65%; 
+    border: none;
+    background: transparent;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.emoji-rindo {
+    background-image: url('../assets/imagens/emojis/rindo.png');
+}
+
+.emoji-nervoso {
+    background-image: url('../assets/imagens/emojis/nervoso.png');
+}
+
+.emoji-surpreso {
+    background-image: url('../assets/imagens/emojis/surpreso.png');
+}
+
+.emoji-cachorro{
+    background-image: url('../assets/imagens/emojis/cachorro.png');
+}
+
+.emoji-onca {
+    background-image: url('../assets/imagens/emojis/onca.png');
+}
+
+@media screen and (max-width: 1366px) and (max-height: 768px) {
+    .placar-onca{
+        width: 60px;
+        height: 60px;
+    }
+    
+    .contador > h1{
+        font-family: 'Londrina Solid', cursive;
+        font-size: 3em;
+    }
+
+    .info-user h1 {
+        font-size: 1.4em;
+    }
+
+    .row {
+        width: 40vw;
+        height: 11vh;
+        display: flex;
+        justify-content: space-around;
+    }
+    
+
+    .cell {
+        width: 55px;
+        height: 55px;
+        margin: 8px;
+        border: 4px solid #5E2C12;
+    }
+
+    .cell-tri {
+        width: 55px;
+        height: 55px;
+        border: 1px solid rgba(255, 255, 255, 0);
+        display: flex;
+        border-radius: 50%;
+        margin: 5px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .malha-tabuleiro{
+        background-image: url("../assets/imagens/placas/malha-tabuleiro.png");
+        background-size: 100% 100%;
+        width: 100%;
+        height: 95%;
+    }
+}

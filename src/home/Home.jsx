@@ -19,9 +19,9 @@ function Home(){
                     <div className="menu-infos-user">
                         <div className="item-menu nivel">
                             <div className="icon icon-nivel">
-                                <p className="numNivel">1</p>
+                                <div className="icon-nivel"></div>
                             </div>
-                            <div className="info inivel">
+                            <div className="info nivel">
                                 <p className="info-p">100</p>
                                 <p className="info-p">/100</p>
                             </div>
@@ -52,7 +52,8 @@ function Home(){
                     </div>
                 </div>
                 <div className="main">
-                    <div className="arena"></div>
+                    <div className="arena">
+                    </div>
                     <div className="menu-principal">
                         <div className="menu-item"><p className="texto-p">JOGAR <br></br> COMO ONÇA</p></div>
                         <div className="menu-item"><p className="texto-p">JOGAR COMO <br></br> CACHORRO</p></div>
