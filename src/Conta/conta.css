@@ -167,6 +167,74 @@ h1{
     flex-grow: 4;
 }
 
+.emblema-item {
+    width: 22%;
+    height: 33%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.icon-emblema{
+    width: 100px;
+    height: 100px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: none; /* Remova a borda da imagem */
+    outline: none;
+}
+
+.emblema-item:nth-child(1) .icon-emblema {
+    background-image: url('../assets/imagens/emblemas/emb-1.png');
+}
+
+.emblema-item:nth-child(2) .icon-emblema {
+    background-image: url('../assets/imagens/emblemas/emb-2.png');
+}
+
+.emblema-item:nth-child(3) .icon-emblema {
+    background-image: url('../assets/imagens/emblemas/emb-3.png');
+}
+
+.emblema-item:nth-child(4) .icon-emblema {
+    background-image: url('../assets/imagens/emblemas/emb-4.png');
+}
+
+.emblema-item:nth-child(5) .icon-emblema {
+    background-image: url('../assets/imagens/emblemas/emb-5.png');
+}
+
+.emblema-item:nth-child(6) .icon-emblema {
+    background-image: url('../assets/imagens/emblemas/emb-6.png');
+}
+
+.emblema-item:nth-child(7) .icon-emblema {
+    background-image: url('../assets/imagens/emblemas/emb-7.png');
+}
+
+.emblema-item:nth-child(8) .icon-emblema {
+    background-image: url('../assets/imagens/emblemas/emb-8.png');
+}
+
+.emblema-item:nth-child(9) .icon-emblema {
+    background-image: url('../assets/imagens/emblemas/emb-9.png');
+}
+
+.emblema-item:nth-child(10) .icon-emblema {
+    background-image: url('../assets/imagens/emblemas/emb-10.png');
+}
+
+.emblema-item:nth-child(11) .icon-emblema {
+    background-image: url('../assets/imagens/emblemas/emb-11.png');
+}
+
+.emblema-item:nth-child(12) .icon-emblema {
+    background-image: url('../assets/imagens/emblemas/emb-12.png');
+}
+
+.desativo{
+    background-color: transparent;
+} 
+
 .tooltip-text {
     visibility: hidden;
     position: absolute;
@@ -180,28 +248,13 @@ h1{
     padding: 15px;
 }
 
-.hover-text:hover .tooltip-text {
+.emblema-item:hover .tooltip-text {
     visibility: visible;
 }
 
-.hover-text {
-    width: 25%;
-    height: 33%;
-    text-align: center;
-    cursor: pointer;
-}
-
-.hover-text > img{
-    width: 100px;
-    height: 100px;
-    background-color: #fff;
-    border-radius: 50%;
-    border: 4px solid #5E2C12;
-}
-
 #top {
-    margin-top: -50px;
-    margin-left: -150px;
+    margin-top: -150px;
+    margin-left: -100px;
 }  
 
 .placa{
@@ -286,5 +339,12 @@ h1{
 
     .info > button{
         height: 75%;
+    }
+
+    .icon-emblema{
+        width: 80px;
+        height: 80px;
+        background-repeat: no-repeat;
+        background-size: contain;
     }
 }
