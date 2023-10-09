@@ -152,16 +152,18 @@
 }
 
 .arena {
-    width: 21vw;
-    height: 25vh;
+    width: 25vw;
+    height: 30vh;
     margin: 0 auto;
-    background-color: gray;
+    background-image: url('../assets/imagens/mapas/amazonia.png');
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .menu-principal {
     width: 50vw;
     height: 40vh;
-    margin: 30px auto;
+    margin: 0 auto;
     overflow-y: hidden;
     display: flex;
     flex-wrap: wrap;
