@@ -16,7 +16,7 @@ class Tabuleiro extends Component  {
         if (!somAtivo) {
             btnSomFundo.style.backgroundImage = "url('src/assets/imagens/icones/volume-on.svg')";
             this.musicaDeFundo.loop = true;
-            this.musicaDeFundo.volume = 0.1;
+            // this.musicaDeFundo.volume = 0.8;
             this.musicaDeFundo.play();
         } else {
             btnSomFundo.style.backgroundImage = "url('src/assets/imagens/icones/volume-off.svg')";
@@ -42,25 +42,51 @@ class Tabuleiro extends Component  {
         if (audioLista[valorDaReacao]) {
             const audio = new Audio(audioLista[valorDaReacao]);
             audio.play();
+            console.log("TESTE")
         } 
         else {
           console.log("Valor não reconhecido");
+        }
+
+        const modal = document.getElementById("modal");
+        const modalLoading = document.getElementById("modal-loading");
+        const modalVitoria = document.getElementById("modal-vitoria");
+        const modalDerrota = document.getElementById("modal-derrota");
+        const tabuleiroContainer = document.getElementById("tabuleiro-container");
+
+        
+        //Se o jogador vencer
+        // tabuleiroContainer.style.display = "none"
+        // modal.style.display = "block"
+        // modalVitoria.style.display = "block"
+        // const somVitoria = new Audio('src/assets/sons/tabuleiro/jogo_ganho.mp3');
+        // somVitoria.play();
+
+        //Se o jogador perder
+        // tabuleiroContainer.style.display = "none"
+        // modal.style.display = "block"
+        // modalDerrota.style.display = "block"
+        // const somDerrota = new Audio('src/assets/sons/tabuleiro/jogo_perdido.mp3');
+        // somDerrota.play();
+        
+        mostraLog = (event) => {
+            console.log("TESTE")
         }
     }
 
     render(){
         return(
             <section className="bg-home">
-                <div className="modal-container">
-                    <div class="box-loading">
-                        <div class="loading-area">
-                            <span class="circle"></span>
-                            <span class="circle"></span>
-                            <span class="circle"></span>
-                            <span class="circle"></span>
+                <div className="modal-container" id="modal">
+                    <div className="box-loading" id="modal-loading">
+                        <div className="loading-area">
+                            <span className="circle"></span>
+                            <span className="circle"></span>
+                            <span className="circle"></span>
+                            <span className="circle"></span>
                         </div>
                     </div>
-                    <div className="box-vitoria">
+                    <div className="box-vitoria" id="modal-vitoria">
                         <div className="box-titulo">
                             <h1>VITÓRIA!</h1>
                         </div>
@@ -68,13 +94,26 @@ class Tabuleiro extends Component  {
                             <div className="img-resultado">
                                 <div className="icon-vitoria"></div>
                             </div>
-                            <div className="recompensas"></div>
+                            <div className="recompensas">
+                                <div className="recompensa-xp">
+                                    <div className="recompensa-xp-icon"></div>
+                                    <div className="recompensa-texto">
+                                        <p>+ 25 de XP</p>
+                                    </div>
+                                </div>
+                                <div className="recompensa-moeda">
+                                    <div className="moeda-icon"></div>
+                                    <div className="recompensa-texto">
+                                        <p>+ 30 moedas</p>
+                                    </div>
+                                </div>                                
+                            </div>
                             <div className="home">
                                 <button>VOLTAR PARA A HOME</button>
                             </div>
                         </div>
                     </div>
-                    <div className="box-derrota">
+                    <div className="box-derrota" id="modal-derrota">
                         <div className="box-titulo">
                             <h1>DERROTA!</h1>
                         </div>
@@ -82,14 +121,21 @@ class Tabuleiro extends Component  {
                             <div className="img-resultado">
                                 <div className="icon-derrota"></div>
                             </div>
-                            <div className="recompensas"></div>
+                            <div className="recompensas">
+                                <div className="castigo-xp">
+                                    <div className="castigo-xp-icon"></div>
+                                    <div className="recompensa-texto">
+                                        <p>- 15 de XP</p>
+                                    </div>
+                                </div>
+                            </div>
                             <div className="home">
                                 <button>VOLTAR PARA A HOME</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="bg-home-container">
+                <div className="bg-tabuleiro-container" id="tabuleiro-container">
                     <div className="area-onca">
                         <div className="area-onca-container">
                             <div className="placar">
@@ -106,7 +152,7 @@ class Tabuleiro extends Component  {
                             </div>
                             <div className="info-user jogador-onca">
                                 <img src={placaUser} />
-                                <h1>JOGADOR ONÇA</h1>
+                                <h1 id="contador-onca">JOGADOR ONÇA</h1>
                             </div>
                         </div>
                     </div>

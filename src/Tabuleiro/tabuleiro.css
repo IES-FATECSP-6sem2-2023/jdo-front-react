@@ -143,7 +143,59 @@
 .recompensas{
     width: 500px;
     height: 120px;
-    background-color: red;
+    display: flex;
+}
+
+.recompensa-xp{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.recompensa-xp-icon{
+    width: 30%;
+    height: 50%;
+    background-image: url("../assets/imagens/vetores/nivel.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.recompensa-texto{
+    font-family: 'Londrina Solid', cursive;
+    font-size: 2em;
+    color: #5E2C12;
+}
+
+.recompensa-moeda{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.moeda-icon{
+    width: 30%;
+    height: 50%;
+    background-image: url("../assets/imagens/vetores/moedas.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.castigo-xp{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.castigo-xp-icon{
+    width: 15%;
+    height: 50%;
+    background-image: url("../assets/imagens/vetores/nivel.png");
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .home{
@@ -167,7 +219,7 @@
     border: 3px solid #331809;
 }
 
-.bg-home-container {
+.bg-tabuleiro-container {
     width: 90vw;
     height: 95vh;
     z-index: 1;
@@ -355,15 +407,15 @@
     background-size: 100% 100%;
     cursor: pointer;
     transition: all 0.3s ease;
-    background-color: #fff;
 }
 
 .peca-cachorro {
+    background-color: #ffffff;
     background-image: url("../assets/imagens/skins/cachorro_amazonia.png");
 }
 
 .peca-onca {
-    background-color: #A2724E;
+    background-color: #ff7723;
     background-image: url("../assets/imagens/skins/onca_amazonia.png");
 }
 
@@ -396,6 +448,7 @@
     background: transparent;
     background-size: contain;
     background-repeat: no-repeat;
+    cursor: pointer;
 }
 
 .emoji-rindo {
@@ -449,7 +502,45 @@
     .recompensas{
         width: 500px;
         height: 100px;
-        background-color: red;
+    }
+
+    .recompensa-xp{
+        width: 35%;
+    }
+
+    .recompensa-xp-icon{
+        width: 30%;
+        height: 40%;
+    }
+
+    .recompensa-texto{
+        font-size: 1.5em;
+    }
+
+    .recompensa-moeda{
+        width: 45%;
+        height: 100%;
+    }
+
+    .moeda-icon{
+        width: 25%;
+        height: 40%;
+    }
+
+    .castigo-xp{
+        width: 70%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .castigo-xp-icon{
+        width: 12%;
+        height: 50%;
+        background-image: url("../assets/imagens/vetores/nivel.png");
+        background-size: contain;
+        background-repeat: no-repeat;
     }
     
     .home{
