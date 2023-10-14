@@ -3,14 +3,16 @@ import './tabuleiro.css'
 import placaUser from '../assets/imagens/placas/placa_usuario.png'
 import { render } from "react-dom";
 
-class Tabuleiro extends Component  {
+class Tabuleiro extends Component {
     state = {
         somAtivo: false
     };
     musicaDeFundo = new Audio('src/assets/sons/ambiente/ambiente2.wav');
 
     somFundo = () => {
-        const {somAtivo} = this.state;
+        const {
+            somAtivo
+        } = this.state;
         const btnSomFundo = document.getElementById("icone-som");
 
         if (!somAtivo) {
@@ -27,53 +29,46 @@ class Tabuleiro extends Component  {
             somAtivo: !somAtivo
         });
     }
-    
+
     somReacao = (event) => {
-         const audioLista = {
+        const audioLista = {
             1: 'src/assets/sons/tabuleiro/rindo.mp3',
             2: 'src/assets/sons/tabuleiro/nervoso.mp3',
             3: 'src/assets/sons/tabuleiro/surpreso.mp3',
             4: 'src/assets/sons/tabuleiro/cachorro.mp3',
             5: 'src/assets/sons/tabuleiro/onca.mp3',
         };
-          
+
         const valorDaReacao = parseInt(event.target.value);
-        
+
         if (audioLista[valorDaReacao]) {
             const audio = new Audio(audioLista[valorDaReacao]);
             audio.play();
-            console.log("TESTE")
-        } 
-        else {
-          console.log("Valor não reconhecido");
-        }
-
-        const modal = document.getElementById("modal");
-        const modalLoading = document.getElementById("modal-loading");
-        const modalVitoria = document.getElementById("modal-vitoria");
-        const modalDerrota = document.getElementById("modal-derrota");
-        const tabuleiroContainer = document.getElementById("tabuleiro-container");
-
-        
-        //Se o jogador vencer
-        // tabuleiroContainer.style.display = "none"
-        // modal.style.display = "block"
-        // modalVitoria.style.display = "block"
-        // const somVitoria = new Audio('src/assets/sons/tabuleiro/jogo_ganho.mp3');
-        // somVitoria.play();
-
-        //Se o jogador perder
-        // tabuleiroContainer.style.display = "none"
-        // modal.style.display = "block"
-        // modalDerrota.style.display = "block"
-        // const somDerrota = new Audio('src/assets/sons/tabuleiro/jogo_perdido.mp3');
-        // somDerrota.play();
-        
-        mostraLog = (event) => {
-            console.log("TESTE")
+        } else {
+            console.log("Valor não reconhecido");
         }
     }
 
+    // const modal = document.getElementById("modal");
+    // const modalLoading = document.getElementById("modal-loading");
+    // const modalVitoria = document.getElementById("modal-vitoria");
+    // const modalDerrota = document.getElementById("modal-derrota");
+    // const tabuleiroContainer = document.getElementById("tabuleiro-container");
+  
+    //Se o jogador vencer
+    // tabuleiroContainer.style.display = "none"
+    // modal.style.display = "block"
+    // modalVitoria.style.display = "block"
+    // const somVitoria = new Audio('src/assets/sons/tabuleiro/jogo_ganho.mp3');
+    // somVitoria.play();
+
+    //Se o jogador perder
+    // tabuleiroContainer.style.display = "none"
+    // modal.style.display = "block"
+    // modalDerrota.style.display = "block"
+    // const somDerrota = new Audio('src/assets/sons/tabuleiro/jogo_perdido.mp3');
+    // somDerrota.play();
+    
     render(){
         return(
             <section className="bg-home">
