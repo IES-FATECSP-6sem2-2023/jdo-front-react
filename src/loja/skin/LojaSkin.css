@@ -10,7 +10,102 @@
     scroll-behavior: smooth;
 }
 
-.bg-home {
+
+.modal-container-loja-skin{
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.box-compra-loja-loja-skin{
+    width: 50vw;
+    height: 100vh;
+    display: none;
+    margin: 0 auto;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("../assets/imagens/placas/fundo_modal.png");
+}
+
+.box-titulo-loja-skin{
+    width: 450px;
+    height: 150px;
+    margin: 12vh auto 2vh auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(210, 105, 30, 0);
+}
+
+.box-titulo-loja-skin > h1{
+    position: absolute; 
+    font-family: 'Londrina Solid', cursive;
+    font-size: 5em;
+    color: #5E2C12;
+}
+
+.box-content-loja-skin{
+    width: 500px;
+    height: 450px;
+    margin: 50px auto;
+}
+
+.img-compra-loja-skin{
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-item-comprado-loja-skin{
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.compra-texto-loja-skin{
+    width: 500px;
+    height: 50px;
+    margin: 10px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.compra-texto-loja-skin > p{
+    font-family: 'Londrina Solid', cursive;
+    font-size: 2em;
+    color: #5E2C12;
+}
+
+.loja-skin{
+    width: 500px;
+    height: 80px;
+}
+
+.loja-skin > button{
+    width: 300px;
+    height: 60px;
+    margin: 10px 100px;
+    font-size: 1.8em;
+    font-family: 'Londrina Solid', cursive;
+    color: #E6B789;
+    background-color: #5E2C12;
+    border: none;
+}
+
+.loja-skin > button:hover{
+    cursor: pointer;
+    border: 3px solid #331809;
+}
+
+.bg-loja-skin {
     width: 100vw;
     height: 100vh;
     background-image: url('../../assets/imagens/backgrounds/cenario_loja.png');
@@ -18,15 +113,16 @@
     background-size: cover;
 }
 
-.bg-home-container {
-    width: 90vw;
+.bg-loja-skin-container {
+    width: 95vw;
     height: 95vh;
     z-index: 1;
+    display: block;
     margin: 2.5vh auto;
 }
 
-.menu-superior{
-    width: 85vw;
+.menu-superior-loja-skin{
+    width: 90vw;
     height: 8vh;
     display: flex;
     flex-direction: row;
@@ -34,12 +130,12 @@
     justify-content: center;
 }
 
-.menu{
+.menu-loja-skin{
     width: 5vw;
     height: 8vh;
 }
 
-.item-retorno{
+.item-retorno-loja-skin{
     width: 80%;
     height: 100%;
     margin: 10px;
@@ -52,7 +148,7 @@
     background-repeat: no-repeat;
 }
 
-.icon-retorno{
+.icon-retorno-loja-skin{
     width: 55%;
     height: 70%;
     background-image: url('../../assets/imagens/icones/return.svg');
@@ -60,15 +156,15 @@
     background-repeat: no-repeat;
 }
 
-.titulo {
-    width: 85vw;
+.titulo-loja-skin {
+    width: 95vw;
     height: 10vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.placa-titulo {
+.placa-titulo-loja-skin {
     min-width: 200px; 
     min-height: 100px; 
     height: 100%;
@@ -88,15 +184,15 @@ h1{
     color: #5E2C12;
 }
 
-.moedas-atuais{
-    width: 90vw;
+.moedas-atuais-loja-skin{
+    width: 95vw;
     height: 10vh;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.item-qtde {
+.item-qtde-loja-skin {
     width: 10%;
     height: 70%;
     margin: 10px;
@@ -109,31 +205,31 @@ h1{
     background-repeat: no-repeat;
 }
 
-.icon {
+.icon-loja-skin {
     margin-right: 5px;
     background-size: contain;
     background-repeat: no-repeat;
 }
 
-.icon-nivel {
+.icon-nivel-loja-skin {
     width: 25%;
     height: 60%;
     background-image: url('../../assets/imagens/vetores/nivel.png');
 }
 
-.icon-esmeralda {
+.icon-esmeralda-loja-skin {
     width: 20%;
     height: 50%;
     background-image: url('../../assets/imagens/vetores/esmeraldas.png');
 }
 
-.info-p{
+.info-p-loja-skin{
     font-family: 'Londrina Solid', cursive;
     font-size: 2em;
     color: #5E2C12;
 }
 
-.loja {
+.loja-skin {
     width: 90vw;
     height: 75vh;
     display: flex;
@@ -143,18 +239,17 @@ h1{
     margin: 2.5vh auto;
 }
 
-.loja-item {
+.loja-item-loja-skin {
     width: 20%;
     height: 45%;
-    margin: 20px;
     display: flex;
     flex-direction: column;
     align-items: center; 
 }
 
 .skin {
-    width: 165px;
-    height: 165px;
+    width: 150px;
+    height: 150px;
     border: 5px solid #5E2C12;
     border-radius: 50%;
     display: flex;
@@ -163,7 +258,7 @@ h1{
     background-color: white;
 }
 
-.nome-skin{
+.nome-skin-loja-skin{
     width: 100%;
     height: 20%;
     display: flex;
@@ -171,19 +266,23 @@ h1{
     justify-content: center;
 }
 
-.nome-skin > h1{
+.nome-skin-loja-skin > h1{
     text-align: center;
     font-size: 2em;
     color: #fff;
 }
 
-.precos{
+.precos-loja-skin{
     width: 100%;
     height: 20%;
     display: flex;
 }
 
-.preco-esmeralda{
+.precos-loja-skin > button{
+   border: none;
+}
+
+.preco-esmeralda-loja-skin{
     width: 45%;
     height: 80%;
     margin: 10px;
@@ -193,14 +292,14 @@ h1{
     background-color: #5E2C12;
 }
 
-.preco > p{
+.preco-loja-skin > p{
     font-family: 'Londrina Solid', cursive;
     font-size: 2em;
     margin-left: 5px;
     color: #E6B789;
 }
 
-.preco-moeda{
+.preco-moeda-loja-skin{
     width: 45%;
     height: 80%;
     margin: 10px;
@@ -210,23 +309,70 @@ h1{
     background-color: #5E2C12;
 }
 
-.icon{
+.icon-loja-skin{
     width: 30px;
     height: 30px;
     background-size: contain;
     background-repeat: no-repeat;
 }
 
-.icon-moeda{
+.icon-moeda-loja-skin{
     background-image: url('../../assets/imagens/vetores/moedas.png');
 }
 
-.icon-esmeralda{
+.icon-esmeralda-loja-skin{
     background-image: url('../../assets/imagens/vetores/esmeraldas.png');
 }
 
 @media screen and (max-width: 1366px) and (max-height: 768px) {
-    .icon-retorno{
+    .box-titulo-loja-skin{
+        width: 450px;
+        height: 150px;
+        margin: 10.5vh auto 2vh auto;
+    }
+    
+    .box-titulo-loja-skin > h1{
+        font-size: 3.5em;
+    }
+    
+    .box-content-loja-skin{
+        width: 400px;
+        height: 350px;
+        margin: 0px auto;
+    }
+    
+    .img-compra-loja-skin{
+        width: 200px;
+        height: 200px;
+        margin: 0 auto;
+    }
+    
+    .compra-texto-loja-skin{
+        width: 400px;
+        height: 50px;
+        margin: 5px auto;
+    }
+    
+    .compra-texto-loja-skin > p{
+        font-size: 1.8em;
+    }
+    
+    .loja-skin{
+        width: 400px;
+        height: 70px;
+    }
+    
+    .loja-skin > button{
+        width: 300px;
+        height: 60px;
+        margin: 10px 50px;
+    }
+    
+    .nome-item-loja-skin > h1{
+        font-size: 2em;
+    }
+
+    .icon-retorno-loja-skin{
         width: 55%;
         height: 70%;
         background-image: url('../../assets/imagens/icones/return.svg');
@@ -239,24 +385,24 @@ h1{
         height: 110px;
     }
 
-    .nome-skin > h1{
+    .nome-skin-loja-skin > h1{
         font-size: 1.6em;
     }
 
-    .preco > p{
+    .preco-loja-skin > p{
         font-size: 1.4em;
     }
 
-    .icon{
+    .icon-loja-skin{
         width: 25px;
         height: 25px; 
     }
 
-    .info-p{
+    .info-p-loja-skin{
         font-size: 1.6em;
     }
 
-    .loja-item {
+    .loja-item-loja-skin {
         height: 40%;
     }
 }
