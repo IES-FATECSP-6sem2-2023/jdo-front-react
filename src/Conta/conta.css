@@ -232,7 +232,7 @@ h1{
 }
 
 .desativo{
-    background-color: transparent;
+    background-image: url('../assets/imagens/emblemas/emb-vazio.png');
 } 
 
 .tooltip-text {
@@ -270,23 +270,32 @@ h1{
     text-align: center;
 }
 
+.placa-itens{
+    width: 70%;
+    height: 55%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .icon-vit{
-    width: 25%;
-    height: 40%;
-    margin-bottom: 8%;
+    width: 30%;
+    height: 90%;
+    margin: 2.5% 0;
     background-image: url('../assets/imagens/vetores/vitorias.png');
     background-size: contain;
     background-repeat: no-repeat;
 }
 
 .info-item{
-    margin-bottom: 8%;
+    width: 50%;
+    height: 80%;
 }
 
 .icon-der{
-    width: 25%;
-    height: 35%;
-    margin-bottom: 8%;
+    width: 30%;
+    height: 80%;
+    margin-bottom: 5%;
     background-image: url('../assets/imagens/vetores/derrotas.png');
     background-size: contain;
     background-repeat: no-repeat;
