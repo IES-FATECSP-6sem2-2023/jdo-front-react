@@ -1,9 +1,11 @@
-import React, { Component, useState } from "react";
+import React from "react";
+import { useNavigate } from 'react-router';
+import ReturnIcon from "../../assets/imagens/icones/ReturnIcon";
 import './LojaMoeda.css'
-import { render } from "react-dom";
 
-class LojaMoeda extends Component{
-    compraMoeda = (event) => {
+function LojaMoeda() {
+    const navigate = useNavigate()
+    const compraMoeda = (event) => {
         const modal = document.getElementById("modal")
         const modalCompra = document.getElementById("modal-compra")
         const bgLojaMoeda = document.getElementById("bg-lojaMoeda")
@@ -63,102 +65,101 @@ class LojaMoeda extends Component{
         textoItem.innerText = "VOCÊ COMPROU " + txtItemComprado;
     }
 
-    render(){
         return(
-            <section className="bg-home">
-                <div className="modal-container" id="modal">
-                    <div className="box-compra-loja" id="modal-compra">
-                        <div className="box-titulo">
+            <section className="bg-loja-moeda">
+                <div className="modal-container-loja-moeda" id="modal">
+                    <div className="box-compra-loja-loja-moeda" id="modal-compra">
+                        <div className="box-titulo-loja-moeda">
                             <h1>PARABÉNS!</h1>
                         </div>
-                        <div className="box-content">
-                            <div className="img-compra">
-                                <div className="img-item-comprado" id="img-item-comprado"></div>
+                        <div className="box-content-loja-moeda">
+                            <div className="img-compra-loja-moeda">
+                                <div className="img-item-comprado-loja-moeda" id="img-item-comprado"></div>
                             </div>
-                            <div className="compra-texto">
-                                <p id="texto-item-comprado"></p>
+                            <div className="compra-texto-loja-moeda">
+                                <p id="texto-item-comprado-loja-moeda"></p>
                             </div>
-                            <div className="home">
-                                <button>VOLTAR PARA A HOME</button>
+                            <div className="loja-moeda">
+                                <button onClick={() => {navigate("/menu")}}>VOLTAR PARA A HOME</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="bg-home-container" id="bg-lojaMoeda">
-                    <div className="menu-superior">
-                        <div className="menu">
-                            <div className="item-retorno">
-                                <div className="icon-retorno"></div>
-                            </div>
+                <div className="bg-loja-moeda-container" id="bg-lojaMoeda">
+                    <div className="menu-superior-loja-moeda">
+                        <div className="menu-loja-moeda">
+                            <button className="item-retorno-loja-moeda" onClick={() => {navigate("/menu")}}>
+                                <ReturnIcon />
+                            </button>
                         </div>
-                        <div className="titulo">
-                            <div className="placa-titulo">
+                        <div className="titulo-loja-moeda">
+                            <div className="placa-titulo-loja-moeda">
                                 <h1>LOJA</h1>
                             </div>
                         </div>
                     </div>
-                    <div className="moedas-atuais">
-                        <div className="item-qtde esmeraldas">
-                            <div className="icon icon-esmeralda"></div>
-                            <div className="info-esmeralda">
-                                <p className="info-p">1000</p>
+                    <div className="moedas-atuais-loja-moeda">
+                        <div className="item-qtde-loja-moeda esmeraldas-loja-moeda">
+                            <div className="icon-loja-moeda icon-esmeralda-loja-moeda"></div>
+                            <div className="info-esmeralda-loja-moeda">
+                                <p className="info-p-loja-moeda">1000</p>
                             </div>
                         </div>
-                        <div className="item-qtde moedas">
-                            <div className="icon icon-moeda"></div>
-                            <div className="info-esmeralda">
-                                <p className="info-p">1000</p>
+                        <div className="item-qtde-loja-moeda moedas-loja-moeda">
+                            <div className="icon-loja-moeda icon-moeda-loja-moeda"></div>
+                            <div className="info-esmeralda-loja-moeda">
+                                <p className="info-p-loja-moeda">1000</p>
                             </div>
                         </div>
                     </div>
-                    <div className="loja">
-                        <div className="loja-esmeralda">
-                            <div className="loja-esmeralda-item">
-                                <div className="foto-item esmeralda-p"></div>
-                                <div className="nome-item">
+                    <div className="loja-loja-moeda">
+                        <div className="loja-esmeralda-loja-moeda">
+                            <div className="loja-esmeralda-item-loja-moeda">
+                                <div className="foto-item-loja-moeda esmeralda-p-loja-moeda"></div>
+                                <div className="nome-item-loja-moeda">
                                     <h1>100 ESMERALDAS</h1>
                                 </div>
-                                <button className="valor" value="1" id="1" onClick={this.compraMoeda}>R$10,00</button>
+                                <button className="valor-loja-moeda" value="1" id="1" onClick={compraMoeda}>R$10,00</button>
                             </div>
-                            <div className="loja-esmeralda-item">
-                                <div className="foto-item esmeralda-m"></div>
-                                <div className="nome-item">
+                            <div className="loja-esmeralda-item-loja-moeda">
+                                <div className="foto-item-loja-moeda esmeralda-m-loja-moeda"></div>
+                                <div className="nome-item-loja-moeda">
                                     <h1>500 ESMERALDAS</h1>
                                 </div>
-                                <button className="valor" value="2" onClick={this.compraMoeda}>R$50,00</button>
+                                <button className="valor-loja-moeda" value="2" onClick={compraMoeda}>R$50,00</button>
                             </div>
-                            <div className="loja-esmeralda-item">
-                                <div className="foto-item esmeralda-g"></div>
-                                <div className="nome-item">
+                            <div className="loja-esmeralda-item-loja-moeda">
+                                <div className="foto-item-loja-moeda esmeralda-g-loja-moeda"></div>
+                                <div className="nome-item-loja-moeda">
                                     <h1>1.000 ESMERALDAS</h1>
                                 </div>
-                                <button className="valor" value={3} onClick={this.compraMoeda}>R$100,00</button>
+                                <button className="valor-loja-moeda" value={3} onClick={compraMoeda}>R$100,00</button>
                             </div>
                         </div>
-                        <div className="loja-moeda">
-                            <div className="loja-moeda-item">
-                                <div className="foto-item moeda-p">
+                        <div className="loja-moeda-loja-moeda">
+                            <div className="loja-moeda-item-loja-moeda">
+                                <div className="foto-item-loja-moeda moeda-p-loja-moeda">
                                 </div>
-                                <div className="nome-item">
+                                <div className="nome-item-loja-moeda">
                                     <h1>100 MOEDAS</h1>
                                 </div>
-                                <button className="valor" value={4} onClick={this.compraMoeda}>R$50,00</button>
+                                <button className="valor-loja-moeda" value={4} onClick={compraMoeda}>R$50,00</button>
                             </div>
-                            <div className="loja-moeda-item">
-                                <div className="foto-item moeda-m">
+                            <div className="loja-moeda-item-loja-moeda">
+                                <div className="foto-item-loja-moeda moeda-m-loja-moeda">
                                 </div>
-                                <div className="nome-item">
+                                <div className="nome-item-loja-moeda">
                                     <h1>1.000 MOEDAS</h1>
                                 </div>
-                                <button className="valor" value={5} onClick={this.compraMoeda}>R$20,00</button>
+                                <button className="valor-loja-moeda" value={5} onClick={compraMoeda}>R$20,00</button>
                             </div>
-                            <div className="loja-moeda-item">
-                                <div className="foto-item moeda-g">
+                            <div className="loja-moeda-item-loja-moeda">
+                                <div className="foto-item-loja-moeda moeda-g-loja-moeda">
                                 </div>
-                                <div className="nome-item">
+                                <div className="nome-item-loja-moeda">
                                     <h1>10.000 MOEDAS</h1>
                                 </div>
-                                <button className="valor" value={6} onClick={this.compraMoeda}>R$50,00</button>
+                                <button className="valor-loja-moeda" value={6} onClick={compraMoeda}>R$50,00</button>
                             </div>
                         </div>
                     </div>
@@ -166,6 +167,5 @@ class LojaMoeda extends Component{
             </section>
         )
     }
-}
 
 export default LojaMoeda

@@ -10,7 +10,7 @@
     scroll-behavior: smooth;
 }
 
-.bg-home {
+.bg-conta {
     width: 100vw;
     height: 100vh;
     background-image: url('../assets/imagens/backgrounds/cenario_conta-colecao.png');
@@ -18,14 +18,14 @@
     background-size: cover;
 }
 
-.bg-home-container {
+.bg-conta-container {
     width: 90vw;
     height: 95vh;
     z-index: 1;
     margin: 2.5vh auto;
 }
 
-.menu-superior{
+.menu-superior-conta{
     width: 85vw;
     height: 8vh;
     display: flex;
@@ -34,12 +34,12 @@
     justify-content: center;
 }
 
-.menu{
+.menu-conta{
     width: 5vw;
     height: 8vh;
 }
 
-.item-retorno{
+.item-retorno-conta{
     width: 80%;
     height: 100%;
     margin: 10px;
@@ -52,7 +52,7 @@
     background-repeat: no-repeat;
 }
 
-.icon-retorno{
+.icon-retorno-conta{
     width: 55%;
     height: 70%;
     background-image: url('../assets/imagens/icones/return.svg');
@@ -60,7 +60,7 @@
     background-repeat: no-repeat;
 }
 
-.titulo {
+.titulo-conta {
     width: 85vw;
     height: 8vh;
     display: flex;
@@ -68,7 +68,7 @@
     align-items: center;
 }
 
-.placa-titulo {
+.placa-titulo-conta {
     min-width: 200px; 
     min-height: 100px; 
     height: 100%;
@@ -88,13 +88,13 @@ h1{
     color: #5E2C12;
 }
 
-.content-main{
+.content-main-conta{
     width: 90vw;
     height: 85vh;
     margin: 1vh auto;
 }
 
-.content-main-superior{
+.content-main-superior-conta{
     width: 60vw;
     height: 55vh;
     margin: 0 auto;
@@ -103,7 +103,7 @@ h1{
     justify-content: center;
 }
 
-.historico-user{
+.historico-user-conta{
     width: 90vw;
     height: 30vh;
     display: flex;
@@ -111,26 +111,26 @@ h1{
     justify-content: center;
 }
 
-.infos-user{
+.infos-user-conta{
     width: 30vw;
     height: 40vh;
 }
 
-.info{
+.info-conta{
     width: 30vw;
     height: 8vh;
     display: flex;
     align-items: center;
 }
 
-.info > label{
+.info-conta > label{
     width: 15%;
     font-family: 'Londrina Solid', cursive;
     font-size: 1.8em;
     color: #fff;
 }
 
-.info > input{
+.info-conta > input{
     margin-left: 10px;
     width: 75%;
     height: 60%;
@@ -142,7 +142,7 @@ h1{
     border-radius: 2px;
 }
 
-.info > button{
+.info-conta > button{
     margin-left: 10px;
     width: 75%;
     height: 60%;
@@ -153,11 +153,11 @@ h1{
     border: none;
 }
 
-.info > button:hover{
+.info-conta > button:hover{
     border: 3px solid #331809;
 }
 
-.emblemas{
+.emblemas-conta{
     width: 30vw;
     height: 40vh;
     display: flex;
@@ -167,14 +167,14 @@ h1{
     flex-grow: 4;
 }
 
-.emblema-item {
+.emblema-item-conta {
     width: 22%;
     height: 33%;
     text-align: center;
     cursor: pointer;
 }
 
-.icon-emblema{
+.icon-emblema-conta{
     width: 100px;
     height: 100px;
     background-repeat: no-repeat;
@@ -183,59 +183,59 @@ h1{
     outline: none;
 }
 
-.emblema-item:nth-child(1) .icon-emblema {
+.emblema-item-conta:nth-child(1) .icon-emblema-conta {
     background-image: url('../assets/imagens/emblemas/emb-1.png');
 }
 
-.emblema-item:nth-child(2) .icon-emblema {
+.emblema-item-conta:nth-child(2) .icon-emblema-conta {
     background-image: url('../assets/imagens/emblemas/emb-2.png');
 }
 
-.emblema-item:nth-child(3) .icon-emblema {
+.emblema-item-conta:nth-child(3) .icon-emblema-conta {
     background-image: url('../assets/imagens/emblemas/emb-3.png');
 }
 
-.emblema-item:nth-child(4) .icon-emblema {
+.emblema-item-conta:nth-child(4) .icon-emblema-conta {
     background-image: url('../assets/imagens/emblemas/emb-4.png');
 }
 
-.emblema-item:nth-child(5) .icon-emblema {
+.emblema-item-conta:nth-child(5) .icon-emblema-conta {
     background-image: url('../assets/imagens/emblemas/emb-5.png');
 }
 
-.emblema-item:nth-child(6) .icon-emblema {
+.emblema-item-conta:nth-child(6) .icon-emblema-conta {
     background-image: url('../assets/imagens/emblemas/emb-6.png');
 }
 
-.emblema-item:nth-child(7) .icon-emblema {
+.emblema-item-conta:nth-child(7) .icon-emblema-conta {
     background-image: url('../assets/imagens/emblemas/emb-7.png');
 }
 
-.emblema-item:nth-child(8) .icon-emblema {
+.emblema-item-conta:nth-child(8) .icon-emblema-conta {
     background-image: url('../assets/imagens/emblemas/emb-8.png');
 }
 
-.emblema-item:nth-child(9) .icon-emblema {
+.emblema-item-conta:nth-child(9) .icon-emblema-conta {
     background-image: url('../assets/imagens/emblemas/emb-9.png');
 }
 
-.emblema-item:nth-child(10) .icon-emblema {
+.emblema-item-conta:nth-child(10) .icon-emblema-conta {
     background-image: url('../assets/imagens/emblemas/emb-10.png');
 }
 
-.emblema-item:nth-child(11) .icon-emblema {
+.emblema-item-conta:nth-child(11) .icon-emblema-conta {
     background-image: url('../assets/imagens/emblemas/emb-11.png');
 }
 
-.emblema-item:nth-child(12) .icon-emblema {
+.emblema-item-conta:nth-child(12) .icon-emblema-conta {
     background-image: url('../assets/imagens/emblemas/emb-12.png');
 }
 
-.desativo{
+.desativo-conta{
     background-image: url('../assets/imagens/emblemas/emb-vazio.png');
 } 
 
-.tooltip-text {
+.tooltip-text-conta {
     visibility: hidden;
     position: absolute;
     flex-grow: 1;
@@ -248,7 +248,7 @@ h1{
     padding: 15px;
 }
 
-.emblema-item:hover .tooltip-text {
+.emblema-item-conta:hover .tooltip-text-conta {
     visibility: visible;
 }
 
@@ -257,7 +257,7 @@ h1{
     margin-left: -100px;
 }  
 
-.placa{
+.placa-conta{
     width: 90%;
     height: 100%;
     margin: 10px 5px;
@@ -270,7 +270,7 @@ h1{
     text-align: center;
 }
 
-.placa-itens{
+.placa-itens-conta{
     width: 70%;
     height: 55%;
     display: flex;
@@ -278,7 +278,7 @@ h1{
     justify-content: center;
 }
 
-.icon-vit{
+.icon-vit-conta{
     width: 30%;
     height: 90%;
     margin: 2.5% 0;
@@ -287,12 +287,12 @@ h1{
     background-repeat: no-repeat;
 }
 
-.info-item{
+.info-item-conta{
     width: 50%;
     height: 80%;
 }
 
-.icon-der{
+.icon-der-conta{
     width: 30%;
     height: 80%;
     margin-bottom: 5%;
@@ -301,19 +301,19 @@ h1{
     background-repeat: no-repeat;
 }
 
-.historico-vitoria{
+.historico-vitoria-conta{
     width: 30vw;
     height: 30vh;
 }
 
-.historico-derrota{
+.historico-derrota-conta{
     width: 30vw;
     height: 30vh;
 }
 
 
 @media screen and (max-width: 1366px) and (max-height: 768px) {
-    .icon-vit{
+    .icon-vit-conta{
         width: 25%;
         height: 40%;
         margin-bottom: 5%;
@@ -322,7 +322,7 @@ h1{
         background-repeat: no-repeat;
     }
 
-    .icon-der{
+    .icon-der-conta{
         width: 25%;
         height: 35%;
         margin-bottom: 5%;
@@ -331,26 +331,26 @@ h1{
         background-repeat: no-repeat;
     }
      
-    .hover-text > img{
+    .hover-text-conta > img{
         width: 80px;
         height: 80px;
     }
     
-    .info > label{
+    .info-conta > label{
         width: 18%;
         font-size: 1.6em;
     }
 
-    .info > input{
+    .info-conta > input{
         height: 70%;
         font-size: 1.6em;
     }
 
-    .info > button{
+    .info-conta > button{
         height: 75%;
     }
 
-    .icon-emblema{
+    .icon-emblema-conta{
         width: 80px;
         height: 80px;
         background-repeat: no-repeat;

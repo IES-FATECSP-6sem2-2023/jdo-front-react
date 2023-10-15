@@ -10,7 +10,7 @@
     scroll-behavior: smooth;
 }
 
-.bg-home {
+.bg-colecao {
     width: 100vw;
     height: 100vh;
     background-image: url('../assets/imagens/backgrounds/cenario_conta-colecao.png');
@@ -18,14 +18,14 @@
     background-size: cover;
 }
 
-.bg-home-container {
+.bg-colecao-container {
     width: 90vw;
     height: 95vh;
     z-index: 1;
     margin: 2.5vh auto;
 }
 
-.menu-superior{
+.menu-superior-colecao{
     width: 85vw;
     height: 8vh;
     display: flex;
@@ -34,12 +34,12 @@
     justify-content: center;
 }
 
-.menu{
+.menu-colecao{
     width: 5vw;
     height: 8vh;
 }
 
-.item-retorno{
+.item-retorno-colecao{
     width: 80%;
     height: 100%;
     margin: 10px;
@@ -52,7 +52,7 @@
     background-repeat: no-repeat;
 }
 
-.icon-retorno{
+.icon-retorno-colecao{
     width: 55%;
     height: 70%;
     background-image: url('../assets/imagens/icones/return.svg');
@@ -60,7 +60,7 @@
     background-repeat: no-repeat;
 }
 
-.titulo {
+.titulo-colecao {
     width: 85vw;
     height: 8vh;
     display: flex;
@@ -68,7 +68,7 @@
     align-items: center;
 }
 
-.placa-titulo {
+.placa-titulo-colecao {
     min-width: 200px; 
     min-height: 100px; 
     height: 100%;
@@ -88,7 +88,7 @@ h1{
     color: #5E2C12;
 }
 
-.sub-menu{
+.sub-menu-colecao{
     width: 90vw;
     height: 10vh;
     display: flex;
@@ -96,7 +96,7 @@ h1{
     justify-content: center;
 }
 
-.sub-menu-item {
+.sub-menu-item-colecao {
     min-width: 160px; 
     height: 80px; 
     margin: 10px;
@@ -109,7 +109,7 @@ h1{
     align-items: center;
 }
 
-.sub-menu-item > p{
+.sub-menu-item-colecao > p{
     font-family: 'Londrina Solid', cursive;
     font-size: 1.8em;
     color: #5E2C12;
@@ -124,13 +124,13 @@ h1{
     flex-wrap: wrap;
 }
 
-.skin-item{
+.skin-item-colecao{
     width: 12vw;
     height: 25vh;
     margin: 20px 40px;
 }
 
-.radio-button-label {
+.radio-button-label-colecao {
     display: inline-block;
     position: relative;
     cursor: pointer;
@@ -141,7 +141,7 @@ h1{
     font-family: 'Londrina Solid', cursive;
 }
 
-.radio-button-label::before {
+.radio-button-label-colecao::before {
     content: "";
     display: inline-block;
     width: 160px; 
@@ -155,11 +155,11 @@ h1{
     background-color: white;
 }
 
-.radio-button-label input[type="radio"] {
+.radio-button-label-colecao input[type="radio"] {
     display: none;
 }
 
-.salva-padrao{
+.salva-padrao-colecao{
     width: 90vw;
     height: 10vh;
     display: flex;
@@ -167,7 +167,7 @@ h1{
     justify-content: center;
 }
 
-.salva-padrao > button{
+.salva-padrao-colecao > button{
     width: 20%;
     height: 60%;
     font-family: 'Londrina Solid', cursive;
@@ -178,20 +178,20 @@ h1{
 }
 
 @media screen and (max-width: 1366px) and (max-height: 768px) {
-    .sub-menu{
+    .sub-menu-colecao{
         height: 12vh;
     }
 
-    .radio-button-label{
+    .radio-button-label-colecao{
         font-size: 1.6em;
     }
 
-    .radio-button-label::before {
+    .radio-button-label-colecao::before {
         width: 110px;
         height: 110px;
     }
 
-    .salva-padrao > button{
+    .salva-padrao-colecao > button{
         width: 22%;
         height: 70%;
     }
