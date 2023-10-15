@@ -5,7 +5,6 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Londrina Solid', cursive;
-    font-family: 'Vollkorn', serif;
     overflow: hidden;
     scroll-behavior: smooth;
 }
@@ -18,7 +17,209 @@
     background-size: cover;
 }
 
-.bg-home-container {
+.modal-container{
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.box-loading{
+    width: 8vw;
+    height: 6vh;
+    display: none;
+}
+
+.loading-area{
+    height: 15px;
+    width: 105px;
+    display: flex;
+    position: relative;
+  
+    .circle{
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: #fff;
+        animation: move 500ms linear 0ms infinite;
+        margin-right: 30px;
+    
+            &:first-child{
+                position: absolute;
+                top:0;
+                left:0;
+                animation: grow 500ms linear 0ms infinite;
+        }
+
+        &:last-child{
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin-right: 0;
+            animation: grow 500ms linear 0s infinite reverse;
+        }
+    }
+}
+
+@keyframes grow {
+    from {transform: scale(0,0); opacity: 0;}
+    to {transform: scale(1,1); opacity: 1;}
+}
+
+@keyframes move {
+    from {transform: translateX(0px)}
+    to {transform: translateX(45px)}
+}
+
+.box-vitoria{
+    width: 50vw;
+    height: 100vh;
+    display: none;
+    margin: 0 auto;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("../assets/imagens/placas/fundo_modal.png");
+}
+
+.box-derrota{
+    width: 50vw;
+    height: 100vh;
+    margin: 0 auto;
+    display: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("../assets/imagens/placas/fundo_modal.png");
+}
+
+.box-titulo{
+    width: 450px;
+    height: 150px;
+    margin: 12vh auto 2vh auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(210, 105, 30, 0);
+}
+
+.box-titulo > h1{
+    position: absolute; 
+    font-family: 'Londrina Solid', cursive;
+    font-size: 5em;
+    color: #5E2C12;
+}
+
+.box-content{
+    width: 500px;
+    height: 450px;
+    margin: 50px auto;
+}
+
+.img-resultado{
+    width: 250px;
+    height: 250px;
+    margin: 0 125px;
+    display: flex;
+    justify-content: center;
+}
+
+.icon-vitoria{
+    width: 100%;
+    height: 100%;
+    background-image: url("../assets/imagens/vetores/vitorias.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.icon-derrota{
+    width: 100%;
+    height: 100%;
+    background-image: url("../assets/imagens/vetores/derrotas.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.recompensas{
+    width: 500px;
+    height: 120px;
+    display: flex;
+}
+
+.recompensa-xp{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.recompensa-xp-icon{
+    width: 30%;
+    height: 50%;
+    background-image: url("../assets/imagens/vetores/nivel.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.recompensa-texto{
+    font-family: 'Londrina Solid', cursive;
+    font-size: 2em;
+    color: #5E2C12;
+}
+
+.recompensa-moeda{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.moeda-icon{
+    width: 30%;
+    height: 50%;
+    background-image: url("../assets/imagens/vetores/moedas.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.castigo-xp{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.castigo-xp-icon{
+    width: 15%;
+    height: 50%;
+    background-image: url("../assets/imagens/vetores/nivel.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.home{
+    width: 500px;
+    height: 80px;
+}
+
+.home > button{
+    width: 300px;
+    height: 60px;
+    margin: 10px 100px;
+    font-size: 1.8em;
+    font-family: 'Londrina Solid', cursive;
+    color: #E6B789;
+    background-color: #5E2C12;
+    border: none;
+}
+
+.home > button:hover{
+    cursor: pointer;
+    border: 3px solid #331809;
+}
+
+.bg-tabuleiro-container {
     width: 90vw;
     height: 95vh;
     z-index: 1;
@@ -132,7 +333,7 @@
 .icon-som {
     width: 60%;
     height: 60%;
-    background-image: url('../assets/imagens/icones/volume-on.svg');
+    background-image: url('../assets/imagens/icones/volume-off.svg');
 }
 
 .icon-logout {
@@ -206,13 +407,15 @@
     background-size: 100% 100%;
     cursor: pointer;
     transition: all 0.3s ease;
-    background-color: #fff;
 }
 
 .peca-cachorro {
+    background-color: #ffffff;
     background-image: url("../assets/imagens/skins/cachorro_amazonia.png");
 }
+
 .peca-onca {
+    background-color: #ff7723;
     background-image: url("../assets/imagens/skins/onca_amazonia.png");
 }
 
@@ -245,6 +448,7 @@
     background: transparent;
     background-size: contain;
     background-repeat: no-repeat;
+    cursor: pointer;
 }
 
 .emoji-rindo {
@@ -268,6 +472,94 @@
 }
 
 @media screen and (max-width: 1366px) and (max-height: 768px) {
+    .box-titulo{
+        width: 450px;
+        height: 135px;
+        margin: 10.5vh auto 2vh auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .box-titulo > h1{
+        font-size: 4em;
+    }
+
+    .box-content{
+        width: 350px;
+        height: 350px;
+        margin: 0 auto;
+    }
+
+    .img-resultado{
+        width: 150px;
+        height: 150px;
+        margin: 0 105px;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .recompensas{
+        width: 500px;
+        height: 100px;
+    }
+
+    .recompensa-xp{
+        width: 35%;
+    }
+
+    .recompensa-xp-icon{
+        width: 30%;
+        height: 40%;
+    }
+
+    .recompensa-texto{
+        font-size: 1.5em;
+    }
+
+    .recompensa-moeda{
+        width: 45%;
+        height: 100%;
+    }
+
+    .moeda-icon{
+        width: 25%;
+        height: 40%;
+    }
+
+    .castigo-xp{
+        width: 70%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .castigo-xp-icon{
+        width: 12%;
+        height: 50%;
+        background-image: url("../assets/imagens/vetores/nivel.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+    
+    .home{
+        width: 500px;
+        height: 100px;
+    }
+    
+    .home > button{
+        width: 300px;
+        height: 60px;
+        margin: 20px 25px;
+        font-size: 1.8em;
+        font-family: 'Londrina Solid', cursive;
+        color: #E6B789;
+        background-color: #5E2C12;
+        border: none;
+    
+    }
+       
     .placar-onca{
         width: 60px;
         height: 60px;
