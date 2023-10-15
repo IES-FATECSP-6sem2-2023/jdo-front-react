@@ -10,7 +10,7 @@
     scroll-behavior: smooth;
 }
 
-.bg-home {
+.bg-colecao {
     width: 100vw;
     height: 100vh;
     background-image: url('../assets/imagens/backgrounds/cenario_conta-colecao.png');
@@ -18,7 +18,7 @@
     background-size: cover;
 }
 
-.bg-home-container {
+.bg-colecao-container {
     width: 90vw;
     height: 95vh;
     z-index: 1;
@@ -104,55 +104,71 @@ h1{
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+    background-color: transparent;
+    border: none;
     display: flex;
     justify-content: center; 
     align-items: center;
-}
-
-.sub-menu-item > p{
     font-family: 'Londrina Solid', cursive;
     font-size: 1.8em;
     color: #5E2C12;
 }
 
-.colecao{
+.sub-menu-item:hover{
+    cursor: pointer;
+}
+
+.colecao-onca{
     width: 90vw;
-    height: 62vh;
+    height: 60vh;
     margin: 2vh auto;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
 }
 
-.skin-item{
-    width: 12vw;
+.colecao-cachorro{
+    width: 90vw;
+    height: 60vh;
+    margin: 2vh auto;
+    display: none;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.skin-item {
+    width: 15vw;
     height: 25vh;
-    margin: 20px 40px;
+    margin: 0px;
+    text-align: center;
 }
 
 .radio-button-label {
-    display: inline-block;
+    display: block; 
     position: relative;
     cursor: pointer;
-    line-height: 1.5;
-    text-align: center;
     font-size: 2.2em;
     color: #fff;
     font-family: 'Londrina Solid', cursive;
+    margin-top: 10px; 
 }
 
 .radio-button-label::before {
     content: "";
-    display: inline-block;
-    width: 160px; 
-    height: 160px; 
+    display: block;
+    width: 160px;
+    height: 160px;
+    margin: 0 auto;
     background-image: url('../assets/imagens/skins/onca_amazonia.png');
     background-size: cover;
     background-position: center;
-    vertical-align: middle;
-    border: 5px solid #5E2C12;
     border-radius: 50%;
     background-color: white;
+    margin-bottom: 10px;
+}
+
+.radio-button-label.selected::before {
+    border: 5px solid #5E2C12;
 }
 
 .radio-button-label input[type="radio"] {
@@ -175,6 +191,12 @@ h1{
     color: #e6b789;
     background-color: #5E2C12;
     border: none;
+    cursor: pointer;
+}
+
+.salva-padrao > button:hover{
+    cursor: pointer;
+    border: 3px solid #331809;
 }
 
 @media screen and (max-width: 1366px) and (max-height: 768px) {
