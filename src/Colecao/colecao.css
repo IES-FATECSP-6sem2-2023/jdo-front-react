@@ -104,6 +104,8 @@ h1{
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+    background-color: transparent;
+    border: none;
     display: flex;
     justify-content: center; 
     align-items: center;
@@ -115,44 +117,61 @@ h1{
     color: #5E2C12;
 }
 
-.colecao{
+.sub-menu-item-colecao:hover{
+    cursor: pointer;
+}
+
+.colecao-onca-colecao{
     width: 90vw;
-    height: 62vh;
+    height: 60vh;
     margin: 2vh auto;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
 }
 
-.skin-item-colecao{
-    width: 12vw;
+.colecao-cachorro-colecao{
+    width: 90vw;
+    height: 60vh;
+    margin: 2vh auto;
+    display: none;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.skin-item-colecao {
+    width: 15vw;
     height: 25vh;
-    margin: 20px 40px;
+    margin: 0px;
+    text-align: center;
 }
 
 .radio-button-label-colecao {
-    display: inline-block;
+    display: block;
     position: relative;
     cursor: pointer;
-    line-height: 1.5;
-    text-align: center;
     font-size: 2.2em;
     color: #fff;
     font-family: 'Londrina Solid', cursive;
+    margin-top: 10px;
 }
 
 .radio-button-label-colecao::before {
     content: "";
-    display: inline-block;
-    width: 160px; 
-    height: 160px; 
+    display: block;
+    width: 160px;
+    height: 160px;
+    margin: 0 auto;
     background-image: url('../assets/imagens/skins/onca_amazonia.png');
     background-size: cover;
     background-position: center;
-    vertical-align: middle;
-    border: 5px solid #5E2C12;
     border-radius: 50%;
     background-color: white;
+    margin-bottom: 10px;
+}
+
+.radio-button-label-colecao.selected::before {
+    border: 5px solid #5E2C12;
 }
 
 .radio-button-label-colecao input[type="radio"] {
@@ -175,6 +194,12 @@ h1{
     color: #e6b789;
     background-color: #5E2C12;
     border: none;
+    cursor: pointer;
+}
+
+.salva-padrao-colecao > button:hover{
+    cursor: pointer;
+    border: 3px solid #331809;
 }
 
 @media screen and (max-width: 1366px) and (max-height: 768px) {
