@@ -4,26 +4,28 @@ import LockIcon from '../assets/imagens/icones/LockIcon';
 import UserIcon from '../assets/imagens/icones/UserIcon';
 import MailIcon from '../assets/imagens/icones/MailIcon';
 import TagIcon from '../assets/imagens/icones/TagIcon';
+import Logobranco from '../assets/imagens/vetores/logo-branco.png';
 import React from 'react';
 
 import './Login.css';
 
 function Login() {
-	const [login, toggle] = React.useState(true);
+	const [login, toggle] = React.useState(false);
 
 	const navigate = useNavigate()
 	
 	const cadastrar = () => {
-		navigate("/home")
+		navigate("/menu")
 	}
 
 	const entrar = () => {
-		navigate("/home")
+		navigate("/menu")
 	}
 
 	return (
+		<div className='bg-login'>
 			<div className={`container ${login ? "cadastro-js" : "login-js"}`}>
-			
+				<img src={Logobranco} alt=""/>
 				<div className="content first-content">
 
 					<div className="first-column">
@@ -50,9 +52,9 @@ function Login() {
 							</label>
 							<label htmlFor="senha" className="label-input">
 								<LockIcon />
-								<input type="password" name="" id="senha" placeholder=" Senha" />
+								<input type="password" name="" id="senha" maxLength={6} placeholder=" Senha" />
 							</label>
-							<button className="btn btn-second">cadastrar</button>
+							<button className="btn btn-second" onClick={cadastrar}>cadastrar</button>
 						</form>
 					</div>{/* Segunda Coluna */}
 
@@ -76,15 +78,16 @@ function Login() {
 							</label>
 						<label htmlFor="senha" className="label-input">
 								<LockIcon />
-								<input type="password" name="" id="senha" placeholder=" Senha" />
+								<input type="password" name="" id="senha" maxLength={6} placeholder=" Senha" />
 						</label>
-							<a href="#" className="password">esqueceu a senha?</a>
-							<button className="btn btn-second">entrar</button>
+							<a className="password" onClick={() => {navigate("/login/esqueci-senha")}}>esqueceu a senha?</a>
+							<button className="btn btn-second" onClick={entrar}>entrar</button>
 						</form>
 					</div>{/* Segunda Coluna */}
 
 				</div>{/* Segundo Conteúdo */}
 				
+			</div>
 			</div>
   );
 }
