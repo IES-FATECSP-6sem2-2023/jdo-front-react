@@ -10,7 +10,7 @@
     scroll-behavior: smooth;
 }
 
-.modal-container{
+.modal-container-loja-moeda{
     width: 100vw;
     height: 100vh;
     display: none;
@@ -19,17 +19,17 @@
     background-color: rgba(0, 0, 0, 0.6);
 }
 
-.box-compra-loja{
+.box-compra-loja-loja-moeda{
     width: 50vw;
     height: 100vh;
     display: none;
     margin: 0 auto;
     background-size: contain;
     background-repeat: no-repeat;
-    background-image: url("../assets/imagens/placas/fundo_modal.png");
+    background-image: url("../../assets/imagens/placas/fundo_modal.png");
 }
 
-.box-titulo{
+.box-titulo-loja-moeda{
     width: 450px;
     height: 150px;
     margin: 12vh auto 2vh auto;
@@ -39,20 +39,20 @@
     background-color: rgba(210, 105, 30, 0);
 }
 
-.box-titulo > h1{
-    position: absolute; 
+.box-titulo-loja-moeda > h1{
+    position: absolute;
     font-family: 'Londrina Solid', cursive;
     font-size: 5em;
     color: #5E2C12;
 }
 
-.box-content{
+.box-content-loja-moeda{
     width: 500px;
     height: 450px;
     margin: 50px auto;
 }
 
-.img-compra{
+.img-compra-loja-moeda{
     width: 250px;
     height: 250px;
     margin: 0 150px;
@@ -61,14 +61,14 @@
     align-items: center;
 }
 
-.img-item-comprado{
+.img-item-comprado-loja-moeda{
     width: 100%;
     height: 100%;
     background-size: contain;
     background-repeat: no-repeat;
 }
 
-.compra-texto{
+.compra-texto-loja-moeda{
     width: 500px;
     height: 100px;
     margin: 10px auto;
@@ -77,18 +77,18 @@
     justify-content: center;
 }
 
-.compra-texto > p{
+.compra-texto-loja-moeda > p{
     font-family: 'Londrina Solid', cursive;
     font-size: 2em;
     color: #5E2C12;
 }
 
-.home{
+.loja-moeda{
     width: 500px;
     height: 80px;
 }
 
-.home > button{
+.loja-moeda > button{
     width: 300px;
     height: 60px;
     margin: 10px 100px;
@@ -99,20 +99,20 @@
     border: none;
 }
 
-.home > button:hover{
+.loja-moeda > button:hover{
     cursor: pointer;
     border: 3px solid #331809;
 }
 
-.bg-home {
+.bg-loja-moeda {
     width: 100vw;
     height: 100vh;
-    background-image: url('../assets/imagens/backgrounds/cenario_loja.png');
+    background-image: url('../../assets/imagens/backgrounds/cenario_loja.png');
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-.bg-home-container {
+.bg-loja-moeda-container {
     width: 90vw;
     height: 95vh;
     z-index: 1;
@@ -120,8 +120,7 @@
     display: block;
 }
 
-
-.menu-superior{
+.menu-superior-loja-moeda{
     width: 85vw;
     height: 8vh;
     display: flex;
@@ -130,12 +129,12 @@
     justify-content: center;
 }
 
-.menu{
+.menu-loja-moeda{
     width: 5vw;
     height: 8vh;
 }
 
-.item-retorno{
+.item-retorno-loja-moeda{
     width: 80%;
     height: 100%;
     margin: 10px;
@@ -143,20 +142,12 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background-image: url('../assets/imagens/placas/placa_icones.png');
+    background-image: url('../../assets/imagens/placas/placa_icones.png');
     background-size: contain;
     background-repeat: no-repeat;
 }
 
-.icon-retorno{
-    width: 55%;
-    height: 70%;
-    background-image: url('../assets/imagens/icones/return.svg');
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-
-.titulo {
+.titulo-loja-moeda {
     width: 85vw;
     height: 10vh;
     display: flex;
@@ -164,12 +155,12 @@
     align-items: center;
 }
 
-.placa-titulo {
+.placa-titulo-loja-moeda {
     min-width: 200px; 
     min-height: 100px; 
     height: 100%;
     margin: 10px;
-    background-image: url('../assets/imagens/placas/placa_subtitulo.png');
+    background-image: url('../../assets/imagens/placas/placa_subtitulo.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -185,7 +176,7 @@ h1{
 }
 
 
-.moedas-atuais{
+.moedas-atuais-loja-moeda{
     width: 90vw;
     height: 10vh;
     display: flex;
@@ -193,7 +184,7 @@ h1{
     justify-content: center;
 }
 
-.item-qtde {
+.item-qtde-loja-moeda {
     width: 10%;
     height: 70%;
     margin: 10px;
@@ -201,55 +192,55 @@ h1{
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background-image: url('../assets/imagens/placas/placa_subtitulo.png');
+    background-image: url('../../assets/imagens/placas/placa_subtitulo.png');
     background-size: contain;
     background-repeat: no-repeat;
 }
 
-.icon {
+.icon-loja-moeda {
     margin-right: 5px;
     background-size: contain;
     background-repeat: no-repeat;
 }
 
-.icon-moeda {
+.icon-moeda-loja-moeda {
     width: 25%;
     height: 60%;
-    background-image: url('../assets/imagens/vetores/moedas.png');
+    background-image: url('../../assets/imagens/vetores/moedas.png');
 }
 
-.icon-esmeralda {
+.icon-esmeralda-loja-moeda {
     width: 20%;
     height: 50%;
-    background-image: url('../assets/imagens/vetores/esmeraldas.png');
+    background-image: url('../../assets/imagens/vetores/esmeraldas.png');
 }
 
-.info-p{
+.info-p-loja-moeda{
     font-family: 'Londrina Solid', cursive;
     font-size: 2em;
     color: #5E2C12;
 }
 
-.loja{
+.loja-loja-moeda{
     width: 60vw;
     height: 80vh;
     margin: 2.5vh auto;
 }
 
-.loja-esmeralda{
+.loja-esmeralda-loja-moeda{
     width: 100%;
     height: 45%;
     display: flex;
     margin: 0 auto;
 }
 
-.loja-esmeralda-item{
+.loja-esmeralda-item-loja-moeda{
     width: 30%;
     height: 100%;
     margin: 2%;
 }
 
-.foto-item{
+.foto-item-loja-moeda{
     width: 50%;
     height: 50%;
     margin: 0 auto;
@@ -257,19 +248,19 @@ h1{
     background-repeat: no-repeat;
 }
 
-.esmeralda-p{
-    background-image: url('../assets/imagens/vetores/poucas_esmeraldas.png');
+.esmeralda-p-loja-moeda{
+    background-image: url('../../assets/imagens/vetores/poucas_esmeraldas.png');
 }
 
-.esmeralda-m{
-    background-image: url('../assets/imagens/vetores/saco_esmeraldas.png');
+.esmeralda-m-loja-moeda{
+    background-image: url('../../assets/imagens/vetores/saco_esmeraldas.png');
 }
 
-.esmeralda-g{
-    background-image: url('../assets/imagens/vetores/balde_esmeraldas.png');
+.esmeralda-g-loja-moeda{
+    background-image: url('../../assets/imagens/vetores/balde_esmeraldas.png');
 }
 
-.nome-item > h1{
+.nome-item-loja-moeda > h1{
     font-family: 'Londrina Solid', cursive;
     font-size: 2.5em;
     color: #fff;
@@ -277,7 +268,7 @@ h1{
     text-align: center;
 }
 
-.valor{
+.valor-loja-moeda{
     width: 100%;
     height: 15%;
     margin-top: 20px;
@@ -292,84 +283,84 @@ h1{
     color: #E6B789;
 }
 
-.valor:hover{
+.valor-loja-moeda:hover{
     border: 3px solid #331809;
 }
 
-.loja-moeda{
+.loja-moeda-loja-moeda{
     width: 60vw;
     height: 40vh;
     display: flex;
     margin: 0 auto;
 }
 
-.loja-moeda-item{
+.loja-moeda-item-loja-moeda{
     width: 30%;
     height: 100%;
     margin: 2%;
 }
 
-.moeda-p{
-    background-image: url('../assets/imagens/vetores/poucas_moedas.png');
+.moeda-p-loja-moeda{
+    background-image: url('../../assets/imagens/vetores/poucas_moedas.png');
 }
 
-.moeda-m{
-    background-image: url('../assets/imagens/vetores/saco_moedas.png');
+.moeda-m-loja-moeda{
+    background-image: url('../../assets/imagens/vetores/saco_moedas.png');
 }
 
-.moeda-g{
-    background-image: url('../assets/imagens/vetores/balde_moedas.png');
+.moeda-g-loja-moeda{
+    background-image: url('../../assets/imagens/vetores/balde_moedas.png');
 }
 
 @media screen and (max-width: 1366px) and (max-height: 768px) {
-    .box-titulo{
+    .box-titulo-loja-moeda{
         width: 450px;
         height: 150px;
         margin: 10.5vh auto 2vh auto;
     }
-    
-    .box-titulo > h1{
+
+    .box-titulo-loja-moeda > h1{
         font-size: 3.5em;
     }
-    
-    .box-content{
+
+    .box-content-loja-moeda{
         width: 400px;
         height: 350px;
         margin: 0px auto;
     }
-    
-    .img-compra{
+
+    .img-compra-loja-moeda{
         width: 150px;
         height: 150px;
         margin: 0 auto;
     }
-    
-    .compra-texto{
+
+    .compra-texto-loja-moeda{
         width: 400px;
         height: 80px;
         margin: 5px auto;
     }
-    
-    .compra-texto > p{
+
+    .compra-texto-loja-moeda > p{
         font-size: 1.8em;
     }
-    
-    .home{
+
+    .loja-moeda{
         width: 400px;
         height: 70px;
     }
-    
-    .home > button{
+
+    .loja-moeda > button{
         width: 300px;
         height: 60px;
         margin: 10px 50px;
     }
-    
-    .nome-item > h1{
+
+    .nome-item-loja-moeda > h1{
         font-size: 2em;
     }
 
-    .valor{
+    .valor-loja-moeda{
         margin-top: 10px;
         font-size: 1.5em;
     }

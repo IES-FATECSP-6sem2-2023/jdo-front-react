@@ -1,0 +1,267 @@
+@import url('https://fonts.googleapis.com/css2?family=Blinker&family=Londrina+Solid&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Blinker', sans-serif;
+}
+
+.title {
+  font-family: 'Londrina Solid', cursive;
+  font-size: 30px;
+  text-transform: capitalize;
+  margin: 2rem 0;
+}
+
+.title-primary,
+.description-primary,
+.btn {
+  color: #fff;
+}
+
+.title-second {
+  color: #115510  ;
+}
+
+.description {
+  font-size: 14px;
+  line-height: 25px;
+}
+
+.btn {
+  border-radius: 15px;
+  text-transform: uppercase;
+  padding: 10px 0;
+  align-self: center;
+  font-weight: bold;
+  cursor: pointer;
+  width: 150px;
+  margin: 1rem 0;
+  border: none;
+  transition: .6s;
+}
+
+.btn-primary {
+  border: 1px solid #fff;
+  background: transparent;
+}
+
+.btn-primary:hover {
+  background-color: #fff;
+  color: #1DD55F; 
+}
+
+.btn-second {
+  background-color: #1DD55F;
+  border: 1px solid #1DD55F;
+}
+
+.btn-second:hover {
+  background-color: #fff;
+  color: #1DD55F;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.content {
+  background-color: #fff;
+  width: 55%;
+  height: 400px;
+  border-radius: 15px;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4rem;
+}
+
+/*CONTEÚDO*/
+.content:before {
+  content: "";
+  position: absolute;
+  background: linear-gradient(to right, #1DD55F, #0AAD44);
+  width: 40%;
+  height: 100%;
+}
+
+.first-content {
+  display: flex;
+  position: relative;
+}
+
+.second-content {
+  margin-top: 15.7%;
+  position: absolute;
+  display: flex;
+}
+
+.second-content .first-column {
+  order: 2;
+  z-index: -1;
+}
+
+.second-content .second-column {
+  order: 1;
+  z-index: -1;
+}
+
+ /*COLUMN*/
+.first-column {
+  width: 40%;
+  text-align: center;
+  z-index: 10;
+}
+
+.second-column {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-js .first-content .first-column {
+  z-index: -1;
+}
+
+.login-js .first-content .second-column {
+  z-index: -1;
+  animation: deslocamentoEsq .6s linear;
+}
+
+.login-js .second-content .first-column {
+  z-index: 3;
+}
+
+.login-js .second-content .second-column {
+  z-index: 1;
+}
+
+.login-js .content::before {
+  left: 60%;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px; 
+  animation: slideLogin 1.5s linear;
+  z-index: 2;
+}
+
+.cadastro-js .first-content .first-column {
+  z-index: 3;
+}
+.cadastro-js .first-content .second-column {
+  z-index: 1;
+}
+
+.cadastro-js .second-content .first-column {
+  z-index: -1;
+}
+
+.cadastro-js .second-content .second-column {
+  z-index: -1;
+  animation: deslocamentoDir .6s linear;
+}
+
+.cadastro-js .content::before {
+  left: 0%;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  animation: slideCadastro 1.5s linear;
+  z-index: 2;
+}
+
+/* KeyFrames */
+
+@keyframes deslocamentoEsq {
+
+  from {
+      opacity: 1;
+      z-index: 2;
+  }
+
+  25% {
+      opacity: .5;
+  }
+
+  50% {
+      opacity: .2;
+  }
+
+  to {
+      opacity: 0;
+      z-index: -1;
+  }
+}
+
+
+@keyframes deslocamentoDir {
+
+  from {
+    opacity: 1;
+    z-index: 1;
+  }
+
+  25% {
+    opacity: .5;
+  }
+
+  50% {
+    opacity: .2;
+  }
+
+  to {
+    opacity: 0;
+    z-index: -1;
+  }
+}
+
+@keyframes slideLogin {
+
+  from {
+    left: 0%;
+    width: 40%;
+  }
+
+  33% {
+    left: 0%;
+    width: 65%;
+  }
+
+  66% {
+    left: 35%;
+    width: 50%;
+  }
+
+  to {
+    left: 60%;
+    width: 40%;
+  }
+  
+}
+
+@keyframes slideCadastro {
+
+  from {
+    left: 60%;
+    width: 40%;
+  }
+
+  33% {
+    left: 35%;
+    width: 50%;
+  }
+
+  66% {
+    left: 0%;
+    width: 65%;
+  }
+
+  to {
+    left: 0%;
+    width: 40%;
+  }
+  
+}

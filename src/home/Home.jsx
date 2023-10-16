@@ -1,7 +1,27 @@
-import React from "react";
+import { useNavigate } from 'react-router';
+import React from 'react';
+import LogOutIcon from '../assets/imagens/icones/LogOutIcon';
+import UsuarioIcon from '../assets/imagens/icones/UsuarioIcon';
+import VolumeOnIcon from '../assets/imagens/icones/VolumeOnIcon'
+import VolumeOffIcon from '../assets/imagens/icones/VolumeOffIcon'
 import './Home.css'
 
 function Home(){
+    const [turnOnOffVolume, setVolumeState] = React.useState(false);
+    
+    const toggleVolume = () => {
+        setVolumeState(!turnOnOffVolume);
+    }
+
+	const navigate = useNavigate()
+	
+    const logout = () => {
+        navigate("/login")
+    }
+
+    const jogar = () => {
+        navigate("/tabuleiro")
+    }
     return (
         <section className="bg-home">
             <div className="bg-home-container">
@@ -19,39 +39,39 @@ function Home(){
                                 </div>
                             </div>
                         </div>
-                        <div className="item-menu esmeraldas">
+                        <button onClick={() => {navigate("/loja/moedas")}} className="item-menu esmeraldas">
                             <div className="icon icon-esmeralda"></div>
                             <div className="info-esmeralda">
                                 <p className="info-p">1000</p>
                             </div>
-                        </div>
-                        <div className="item-menu moedas">
+                        </button>
+                        <button onClick={() => {navigate("/loja/moedas")}} className="item-menu moedas">
                             <div className="icon icon-moeda"></div>
                             <div className="info-esmeralda">
                                 <p className="info-p">1000</p>
                             </div>
-                        </div>
+                        </button>
                     </div>
                     <div className="menu-itens-config">
-                        <div className="item-config">
-                            <div className="item-icon icon-som"></div>
-                        </div>
-                        <div className="item-config">
-                            <div className="item-icon icon-conta"></div>
-                        </div>
-                        <div className="item-config">
-                            <div className="item-icon icon-logout"></div>
-                        </div>
+                        <button className="item-config" onClick={toggleVolume}>
+                            {turnOnOffVolume ? <VolumeOnIcon /> : <VolumeOffIcon />}
+                        </button>
+                        <button className="item-config" onClick={() => navigate("/conta")}>
+                            <UsuarioIcon />
+                        </button>
+                        <button className="item-config" onClick={logout}>
+                            <LogOutIcon />
+                        </button>
                     </div>
                 </div>
                 <div className="main">
                     <div className="arena">
                     </div>
                     <div className="menu-principal">
-                        <div className="menu-item"><p className="texto-p">JOGAR <br></br> COMO ONÇA</p></div>
-                        <div className="menu-item"><p className="texto-p">JOGAR COMO <br></br> CACHORRO</p></div>
-                        <div className="menu-item"><p className="texto-p">LOJA</p></div>
-                        <div className="menu-item"><p className="texto-p">COLEÇÃO</p></div>
+                        <button className="btn menu-item" onClick={jogar}><p className="texto-p">JOGAR <br></br> COMO ONÇA</p></button>
+                        <button className="btn menu-item" onClick={jogar}><p className="texto-p">JOGAR COMO <br></br> CACHORRO</p></button>
+                        <button className="btn menu-item" onClick={() => {navigate("/loja/skins")}}><p className="texto-p">LOJA</p></button>
+                        <button className="btn menu-item" onClick={() => {navigate("/colecao")}}><p className="texto-p">COLEÇÃO</p></button>
                     </div>
                 </div>
             </div>
