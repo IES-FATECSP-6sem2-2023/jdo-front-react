@@ -39,7 +39,7 @@ function EsqueciSenha() {
       <div className="row bg-white">
         <div className="col">
           <h2 className='title title-second'>Redefina  senha</h2>
-          <form className='form' onSubmit={redefine}>
+          <form className='form form-redefine' onSubmit={redefine}>
             <label htmlFor="" className='label-input'>
               <MailIcon />
               <input
@@ -74,7 +74,7 @@ function EsqueciSenha() {
               />
             </label>
             {senhaErro && <p className='description color-red'>{senhaErro}</p>}
-            <a href="/login" className='color-red'>cancelar</a>
+            <a href="/login" className='color-red password'>Voltar ao login</a>
             <button className='btn btn-second' type="submit">redefinir</button>
           </form>
         </div>

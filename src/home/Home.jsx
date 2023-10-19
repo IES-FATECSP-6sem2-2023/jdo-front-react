@@ -33,10 +33,10 @@ function Home(){
                                 <div className="icon-nivel"></div>
                             </div>
                             <div className="info inivel">
-                                <div className="info nivel">
+                                <button className="info nivel">
                                     <p className="info-p">100</p>
                                     <p className="info-p">/100</p>
-                                </div>
+                                </button>
                             </div>
                         </div>
                         <button onClick={() => {navigate("/loja/moedas")}} className="item-menu esmeraldas">

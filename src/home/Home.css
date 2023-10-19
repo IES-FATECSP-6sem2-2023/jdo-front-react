@@ -48,6 +48,8 @@
     background-image: url('../assets/imagens/placas/placa_subtitulo.png');
     background-size: contain;
     background-repeat: no-repeat;
+    background-color: transparent;
+    border: none;
 }
 
 .icon {
@@ -92,6 +94,8 @@
     text-align: left;
     align-items: center;
     justify-content: center;
+    border: none;
+    background-color: transparent;
 }
 
 .info-p {
@@ -120,6 +124,8 @@
     background-image: url('../assets/imagens/placas/placa_icones.png');
     background-size: contain;
     background-repeat: no-repeat;
+    background-color: transparent;
+    border: none;
 }
 
 .item-icon {
@@ -181,6 +187,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: transparent !important;
+    border-radius: 1px !important;
 }
 
 .texto-p {
@@ -188,7 +196,8 @@
     height: 30%;
     text-align: center;
     font-family: 'Londrina Solid', cursive;
-    font-size: 2em;
+    font-size: 1.4em;
+    font-weight: 500;
     color: #5E2C12;
 }
 

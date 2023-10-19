@@ -10,7 +10,7 @@ function LojaMoeda() {
         const modalCompra = document.getElementById("modal-compra")
         const bgLojaMoeda = document.getElementById("bg-lojaMoeda")
         const imgItem = document.getElementById("img-item-comprado");
-        const textoItem = document.getElementById("texto-item-comprado");
+        const textoItem = document.getElementById("texto-item-comprado-loja-moeda");
 
         bgLojaMoeda.style.display = 'none';
         modal.style.display = 'flex';
@@ -23,34 +23,34 @@ function LojaMoeda() {
 
         switch (parseInt(event.target.value)) {
             case 1:
-                imgItemComprado = 'src/assets/imagens/vetores/poucas_esmeraldas.png';
+                imgItemComprado = '/src/assets/imagens/vetores/poucas_esmeraldas.png';
                 txtItemComprado = '100 ESMERALDAS!';
                 qtdeMoeda = 100;
                 break;
             case 2:
-                imgItemComprado = 'src/assets/imagens/vetores/saco_esmeraldas.png';
+                imgItemComprado = '/src/assets/imagens/vetores/saco_esmeraldas.png';
                 txtItemComprado = '500 ESMERALDAS!';
                 qtdeMoeda = 500;
                 break;
             case 3:
-                imgItemComprado = 'src/assets/imagens/vetores/balde_esmeraldas.png';
+                imgItemComprado = '/src/assets/imagens/vetores/balde_esmeraldas.png';
                 txtItemComprado = '1.000 ESMERALDAS!';
                 qtdeMoeda = 1000;
                 break;
             case 4:
-                imgItemComprado = 'src/assets/imagens/vetores/poucas_moedas.png';
+                imgItemComprado = '/src/assets/imagens/vetores/poucas_moedas.png';
                 txtItemComprado = '100 MOEDAS!';
                 tipoMoeda = 1;
                 qtdeMoeda = 100;
                 break;
             case 5:
-                imgItemComprado = 'src/assets/imagens/vetores/saco_moedas.png';
+                imgItemComprado = '/src/assets/imagens/vetores/saco_moedas.png';
                 txtItemComprado = '1.000 MOEDAS!';
                 tipoMoeda = 1;
                 qtdeMoeda = 1000;
                 break;
             case 6:
-                imgItemComprado = 'src/assets/imagens/vetores/balde_moedas.png';
+                imgItemComprado = '/src/assets/imagens/vetores/balde_moedas.png';
                 txtItemComprado = '10.000 MOEDAS!';
                 tipoMoeda = 1;
                 qtdeMoeda = 10000;

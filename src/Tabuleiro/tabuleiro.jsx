@@ -111,8 +111,8 @@ function Tabuleiro() {
                                     </div>
                                 </div>                                
                             </div>
-                            <div className="tabuleiro">
-                                <button>VOLTAR PARA A HOME</button>
+                            <div className="area-btn-modal">
+                                <button className="btn-modal-tabuleiro">VOLTAR PARA A HOME</button>
                             </div>
                         </div>
                     </div>
@@ -132,8 +132,8 @@ function Tabuleiro() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="tabuleiro">
-                                <button>VOLTAR PARA A HOME</button>
+                            <div className="area-btn-modal">
+                                <button className="btn-modal-tabuleiro">VOLTAR PARA A HOME</button>
                             </div>
                         </div>
                     </div>

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Blinker&family=Londrina+Solid&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Blinker:wght@400;700&display=swap');
 
 * {
   margin: 0;
@@ -8,10 +8,15 @@
 }
 
 .title {
-  font-family: 'Londrina Solid', cursive;
-  font-size: 30px;
-  text-transform: capitalize;
+  font-size: 2em;
   margin: 2rem 0;
+  font-family: 'Blinker', sans-serif;
+  font-weight: bold;
+  color: #115510;
+}
+
+.title-secondary {
+  margin: 1rem 0;
 }
 
 .title-primary,
@@ -20,36 +25,43 @@
   color: #fff;
 }
 
-.title-second {
-  color: #115510  ;
+.description {
+  font-size: 1.4em;
+  font-family: 'Blinker', sans-serif;
+  margin: 0px 30px;
 }
 
-.description {
-  font-size: 14px;
-  line-height: 25px;
+.password {
+  cursor: pointer;
+  text-decoration: underline;
+  font-family: 'Blinker', sans-serif;
 }
 
 .btn {
-  border-radius: 15px;
+  border-radius: 50px;
   text-transform: uppercase;
   padding: 10px 0;
   align-self: center;
   font-weight: bold;
   cursor: pointer;
-  width: 150px;
+  width: 200px;
+  height: 45px;
   margin: 1rem 0;
   border: none;
   transition: .6s;
+  font-family: 'Blinker', sans-serif;
+  font-size: 1.2em;
 }
 
 .btn-primary {
+  margin: 30px;
   border: 1px solid #fff;
   background: transparent;
 }
 
 .btn-primary:hover {
   background-color: #fff;
-  color: #1DD55F; 
+  color: #1DD55F;
 }
 
 .btn-second {
@@ -110,7 +122,7 @@
   z-index: -1;
 }
 
- /*COLUMN*/
+/*COLUMN*/
 .first-column {
   width: 40%;
   text-align: center;
@@ -144,7 +156,7 @@
 .login-js .content::before {
   left: 60%;
   border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px; 
+  border-bottom-right-radius: 15px;
   animation: slideLogin 1.5s linear;
   z-index: 2;
 }
@@ -152,6 +164,7 @@
 .cadastro-js .first-content .first-column {
   z-index: 3;
 }
+
 .cadastro-js .first-content .second-column {
   z-index: 1;
 }
@@ -178,21 +191,21 @@
 @keyframes deslocamentoEsq {
 
   from {
-      opacity: 1;
-      z-index: 2;
+    opacity: 1;
+    z-index: 2;
   }
 
   25% {
-      opacity: .5;
+    opacity: .5;
   }
 
   50% {
-      opacity: .2;
+    opacity: .2;
   }
 
   to {
-      opacity: 0;
-      z-index: -1;
+    opacity: 0;
+    z-index: -1;
   }
 }
 
@@ -239,7 +252,7 @@
     left: 60%;
     width: 40%;
   }
-  
+
 }
 
 @keyframes slideCadastro {
@@ -263,5 +276,5 @@
     left: 0%;
     width: 40%;
   }
-  
+
 }
