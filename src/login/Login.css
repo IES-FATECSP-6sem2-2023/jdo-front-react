@@ -89,7 +89,7 @@
   border-radius: 15px;
   justify-content: space-between;
   align-items: center;
-  margin-top: 4rem;
+  margin-top: 3.2rem;
 }
 
 /*CONTEÚDO*/
@@ -184,6 +184,18 @@
   border-bottom-left-radius: 15px;
   animation: slideCadastro 1.5s linear;
   z-index: 2;
+}
+
+.btn-som {
+  position: relative;
+  float: right;
+  padding: 0 15px;
+  background-image: url('../assets/imagens/placas/placa_icones.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: none;
 }
 
 /* KeyFrames */

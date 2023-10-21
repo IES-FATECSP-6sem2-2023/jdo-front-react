@@ -1,16 +1,20 @@
 import { useNavigate } from 'react-router';
-// import { LockIcon, UserIcon } from '../assets/imagens/icones';
 import LockIcon from '../assets/imagens/icones/LockIcon';
 import UserIcon from '../assets/imagens/icones/UserIcon';
 import MailIcon from '../assets/imagens/icones/MailIcon';
 import TagIcon from '../assets/imagens/icones/TagIcon';
 import Logobranco from '../assets/imagens/vetores/logo-branco.png';
+import VolumeOnIcon from '../assets/imagens/icones/VolumeOnIcon';
+import VolumeOffIcon from '../assets/imagens/icones/VolumeOffIcon';
 import React from 'react';
-
 import './Login.css';
 
-function Login() {
+function Login({musicaAtiva, toggleMusica}) {
 	const [login, toggle] = React.useState(false);
+
+	const toggleVolume = () => {
+        toggleMusica()
+    }
 
 	const navigate = useNavigate()
 	
@@ -24,6 +28,9 @@ function Login() {
 
 	return (
 		<div className='bg-login'>
+			<button className='btn-som' onClick={toggleVolume}>
+                            {musicaAtiva ? <VolumeOnIcon /> : <VolumeOffIcon />}
+                        </button>
 			<div className={`container ${login ? "cadastro-js" : "login-js"}`}>
 				<img src={Logobranco} alt=""/>
 				<div className="content first-content">

@@ -1,19 +1,17 @@
 import { useNavigate } from 'react-router';
-import React from 'react';
+import React, {useEffect} from 'react';
 import LogOutIcon from '../assets/imagens/icones/LogOutIcon';
 import UsuarioIcon from '../assets/imagens/icones/UsuarioIcon';
-import VolumeOnIcon from '../assets/imagens/icones/VolumeOnIcon'
-import VolumeOffIcon from '../assets/imagens/icones/VolumeOffIcon'
+import VolumeOnIcon from '../assets/imagens/icones/VolumeOnIcon';
+import VolumeOffIcon from '../assets/imagens/icones/VolumeOffIcon';
 import './Home.css'
 
-function Home(){
-    const [turnOnOffVolume, setVolumeState] = React.useState(false);
-    
-    const toggleVolume = () => {
-        setVolumeState(!turnOnOffVolume);
-    }
+function Home({musicaAtiva, toggleMusica}) {
+    const navigate = useNavigate();
 
-	const navigate = useNavigate()
+    const toggleVolume = () => {
+        toggleMusica()
+    }
 	
     const logout = () => {
         navigate("/login")
@@ -54,7 +52,7 @@ function Home(){
                     </div>
                     <div className="menu-itens-config">
                         <button className="item-config" onClick={toggleVolume}>
-                            {turnOnOffVolume ? <VolumeOnIcon /> : <VolumeOffIcon />}
+                            {musicaAtiva ? <VolumeOnIcon /> : <VolumeOffIcon />}
                         </button>
                         <button className="item-config" onClick={() => navigate("/conta")}>
                             <UsuarioIcon />

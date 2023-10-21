@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React from "react";
 import './Tabuleiro.css'
 import VolumeOnIcon from "../assets/imagens/icones/VolumeOnIcon";
 import VolumeOffIcon from "../assets/imagens/icones/VolumeOffIcon";
@@ -6,37 +6,15 @@ import placaUser from '../assets/imagens/placas/placa_usuario.png'
 import LogOutIcon from "../assets/imagens/icones/LogOutIcon";
 import { useNavigate } from "react-router-dom";
 
-function Tabuleiro() {
+function Tabuleiro({musicaAtiva, toggleMusica}) {
     const navigate = useNavigate()
-    const [musicaDeFundo, setMusicaDeFundo] = useState(new Audio('src/assets/sons/ambiente/ambiente2.wav'));
-    const [turnOnOffVolume, setVolumeState] = React.useState(false);
-    
+
     const toggleVolume = () => {
-        setVolumeState(!turnOnOffVolume);
-        somFundo(turnOnOffVolume);
+        toggleMusica()
     }
 
     const desistir = () => {
         navigate("/menu")
-    }
-
-    const somFundo = (somAtivo) => {
-        // const somAtivo = false
-        // const btnSomFundo = document.getElementById("icone-som");
-
-        if (!somAtivo) {
-            // btnSomFundo.style.backgroundImage = "url('src/assets/imagens/icones/volume-on.svg')";
-            musicaDeFundo.loop = true;
-            // this.musicaDeFundo.volume = 0.8;
-            musicaDeFundo.play();
-        } else {
-            // btnSomFundo.style.backgroundImage = "url('src/assets/imagens/icones/volume-off.svg')";
-            musicaDeFundo.pause();
-        }
-
-        // this.setState({
-        //     somAtivo: !somAtivo
-        // });
     }
 
     const somReacao = (event) => {
@@ -236,7 +214,7 @@ function Tabuleiro() {
                     <div className="area-cachorro-tabuleiro">
                         <div className="menu-superior-tabuleiro">
                             <button className="item-config-tabuleiro" onClick={toggleVolume}>
-                                {turnOnOffVolume ? <VolumeOnIcon /> : <VolumeOffIcon />}
+                                {musicaAtiva ? <VolumeOnIcon /> : <VolumeOffIcon />}
                             </button>
                             <button className="item-config-tabuleiro" onClick={desistir}>
                                 <LogOutIcon />
