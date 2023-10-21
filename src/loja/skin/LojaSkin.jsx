@@ -22,14 +22,13 @@ function LojaSkin() {
 
         switch (parseInt(event.currentTarget.value)) {
             case 1:
-                imgItemComprado = 'src/assets/imagens/skins/cachorro_caatinga.png';
+                imgItemComprado = '/src/assets/imagens/skins/cachorro_caatinga.png';
                 tipoMoeda = 0;
                 valorMoeda = 55;
                 break;
             case 2:
-                imgItemComprado = 'src/assets/imagens/skins/cachorro_caatinga.png';
+                imgItemComprado = '/src/assets/imagens/skins/cachorro_caatinga.png';
                 tipoMoeda = 1;
-                qtdeMoeda = 200;
                 break;
             default:
                 break;
@@ -52,9 +51,7 @@ function LojaSkin() {
                             <div className="compra-texto-loja-skin">
                                 <p id="texto-item-comprado-loja-skin">VOCÊ COMPROU UMA NOVA SKIN!</p>
                             </div>
-                            <div className="loja-skin">
-                                <button>VER NA COLEÇÃO</button>
-                            </div>
+                            <button className="btn-loja-skin">VER NA COLEÇÃO</button>
                         </div>
                     </div>
                 </div>
@@ -72,18 +69,18 @@ function LojaSkin() {
                         </div>
                     </div>
                     <div className="moedas-atuais-loja-skin">
-                        <div className="item-qtde-loja-skin esmeraldas-loja-skin">
+                        <button onClick={() => {navigate("/loja/moedas")}} className="item-qtde-loja-skin esmeraldas-loja-skin">
                             <div className="icon-loja-skin icon-esmeralda-loja-skin"></div>
                             <div className="info-esmeralda-loja-skin">
                                 <p className="info-p-loja-skin">1000</p>
                             </div>
-                        </div>
-                        <div className="item-qtde-loja-skin moedas-loja-skin">
+                        </button>
+                        <button onClick={() => {navigate("/loja/moedas")}} className="item-qtde-loja-skin moedas-loja-skin">
                             <div className="icon-loja-skin icon-moeda-loja-skin"></div>
                             <div className="info-esmeralda-loja-skin">
                                 <p className="info-p-loja-skin">1000</p>
                             </div>
-                        </div>
+                        </button>
                     </div>
                     <div className="loja-skin">
                         <div className="loja-item-loja-skin">

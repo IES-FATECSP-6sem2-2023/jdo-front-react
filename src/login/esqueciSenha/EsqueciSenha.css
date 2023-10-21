@@ -2,8 +2,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    
-    border-radius: 5px ;
+
+    border-radius: 5px;
     width: 25%;
     padding: 1rem 0;
     margin: 1rem 0;
@@ -14,7 +14,16 @@
  }
 
  .col {
-  flex: 1 0 0%;
-  
-  width: 95%;
-}
+    flex: 1 0 0%;
+    width: 95%;
+ }
+
+ .form-redefine {
+    display: flex;
+    width: 80% !important;
+    margin: 0 auto;
+ }
+
+ .title-second {
+    text-align: center;
+ }

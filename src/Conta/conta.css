@@ -41,7 +41,7 @@
 
 .item-retorno-conta{
     width: 80%;
-    height: 100%;
+    height: 80%;
     margin: 10px;
     display: flex;
     flex-direction: row;
@@ -50,6 +50,8 @@
     background-image: url('../assets/imagens/placas/placa_icones.png');
     background-size: contain;
     background-repeat: no-repeat;
+    border: none;
+    background-color: transparent;
 }
 
 .icon-retorno-conta{

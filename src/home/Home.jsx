@@ -1,19 +1,17 @@
 import { useNavigate } from 'react-router';
-import React from 'react';
+import React, {useEffect} from 'react';
 import LogOutIcon from '../assets/imagens/icones/LogOutIcon';
 import UsuarioIcon from '../assets/imagens/icones/UsuarioIcon';
-import VolumeOnIcon from '../assets/imagens/icones/VolumeOnIcon'
-import VolumeOffIcon from '../assets/imagens/icones/VolumeOffIcon'
+import VolumeOnIcon from '../assets/imagens/icones/VolumeOnIcon';
+import VolumeOffIcon from '../assets/imagens/icones/VolumeOffIcon';
 import './Home.css'
 
-function Home(){
-    const [turnOnOffVolume, setVolumeState] = React.useState(false);
-    
-    const toggleVolume = () => {
-        setVolumeState(!turnOnOffVolume);
-    }
+function Home({musicaAtiva, toggleMusica}) {
+    const navigate = useNavigate();
 
-	const navigate = useNavigate()
+    const toggleVolume = () => {
+        toggleMusica()
+    }
 	
     const logout = () => {
         navigate("/login")
@@ -33,10 +31,10 @@ function Home(){
                                 <div className="icon-nivel"></div>
                             </div>
                             <div className="info inivel">
-                                <div className="info nivel">
+                                <button className="info nivel">
                                     <p className="info-p">100</p>
                                     <p className="info-p">/100</p>
-                                </div>
+                                </button>
                             </div>
                         </div>
                         <button onClick={() => {navigate("/loja/moedas")}} className="item-menu esmeraldas">
@@ -54,7 +52,7 @@ function Home(){
                     </div>
                     <div className="menu-itens-config">
                         <button className="item-config" onClick={toggleVolume}>
-                            {turnOnOffVolume ? <VolumeOnIcon /> : <VolumeOffIcon />}
+                            {musicaAtiva ? <VolumeOnIcon /> : <VolumeOffIcon />}
                         </button>
                         <button className="item-config" onClick={() => navigate("/conta")}>
                             <UsuarioIcon />
