@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router';
-import React, {useEffect} from 'react';
+import React, { useEffect, useState }, {useEffect} from 'react';
+import axios from 'axios';
 import LogOutIcon from '../assets/imagens/icones/LogOutIcon';
 import UsuarioIcon from '../assets/imagens/icones/UsuarioIcon';
 import VolumeOnIcon from '../assets/imagens/icones/VolumeOnIcon';
@@ -20,6 +21,27 @@ function Home({musicaAtiva, toggleMusica}) {
     const jogar = () => {
         navigate("/tabuleiro")
     }
+
+    //Teste de integração com API
+
+    const [userId, setUserId] = useState(null);
+
+    const getInfo = async () => {
+        try {
+            const response = await axios.get("https://jsonplaceholder.typicode.com/posts/5");
+            const data = response.data;
+            console.log(data);
+            setUserId(data.id);
+        } 
+        catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() =>{
+        getInfo();
+    }, []);
+
     return (
         <section className="bg-home">
             <div className="bg-home-container">
@@ -27,7 +49,7 @@ function Home({musicaAtiva, toggleMusica}) {
                     <div className="menu-infos-user">
                         <div className="item-menu nivel">
                             <div className="icon icon-nivel">
-                                <p className="numNivel">1</p>
+                                <p className="numNivel">{userId}</p>
                                 <div className="icon-nivel"></div>
                             </div>
                             <div className="info inivel">
