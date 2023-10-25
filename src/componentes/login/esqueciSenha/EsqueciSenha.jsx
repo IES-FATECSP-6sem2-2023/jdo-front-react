@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import LogoBranca from '../../assets/imagens/vetores/logo-branco.png';
-import MailIcon from '../../assets/imagens/icones/MailIcon';
-import LockIcon from '../../assets/imagens/icones/LockIcon';
+import LogoBranca from '../../../assets/imagens/vetores/logo-branco.png';
+import MailIcon from '../../../assets/imagens/icones/MailIcon';
+import LockIcon from '../../../assets/imagens/icones/LockIcon';
 import './EsqueciSenha.css';
 import { useNavigate } from 'react-router-dom';
 

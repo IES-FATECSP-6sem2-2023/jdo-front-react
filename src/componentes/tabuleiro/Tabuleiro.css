@@ -11,7 +11,7 @@
 .bg-tabuleiro {
     width: 100vw;
     height: 100vh;
-    background-image: url('../assets/imagens/backgrounds/cenario_login-tabuleiro.png');
+    background-image: url('src/assets/imagens/backgrounds/cenario_login-tabuleiro.png');
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -79,7 +79,7 @@
     margin: 0 auto;
     background-size: contain;
     background-repeat: no-repeat;
-    background-image: url("../assets/imagens/placas/fundo_modal.png");
+    background-image: url("src/assets/imagens/placas/fundo_modal.png");
 }
 
 .box-derrota-tabuleiro{
@@ -89,7 +89,7 @@
     display: none;
     background-size: contain;
     background-repeat: no-repeat;
-    background-image: url("../assets/imagens/placas/fundo_modal.png");
+    background-image: url("src/assets/imagens/placas/fundo_modal.png");
 }
 
 .box-titulo-tabuleiro{
@@ -126,7 +126,7 @@
 .icon-vitoria-tabuleiro{
     width: 100%;
     height: 100%;
-    background-image: url("../assets/imagens/vetores/vitorias.png");
+    background-image: url("src/assets/imagens/vetores/vitorias.png");
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -134,7 +134,7 @@
 .icon-derrota-tabuleiro{
     width: 100%;
     height: 100%;
-    background-image: url("../assets/imagens/vetores/derrotas.png");
+    background-image: url("src/assets/imagens/vetores/derrotas.png");
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -155,7 +155,7 @@
 .recompensa-xp-icon-tabuleiro{
     width: 30%;
     height: 50%;
-    background-image: url("../assets/imagens/vetores/nivel.png");
+    background-image: url("src/assets/imagens/vetores/nivel.png");
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -176,7 +176,7 @@
 .moeda-icon-tabuleiro{
     width: 30%;
     height: 50%;
-    background-image: url("../assets/imagens/vetores/moedas.png");
+    background-image: url("src/assets/imagens/vetores/moedas.png");
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -192,7 +192,7 @@
 .castigo-xp-icon-tabuleiro{
     width: 15%;
     height: 50%;
-    background-image: url("../assets/imagens/vetores/nivel.png");
+    background-image: url("src/assets/imagens/vetores/nivel.png");
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -260,7 +260,7 @@
 .peca-comida-tabuleiro{
     background-size: contain;
     background-repeat: no-repeat;
-    background-image: url("../assets/imagens/skins/cachorro_amazonia.png");
+    background-image: url("src/assets/imagens/skins/cachorro_amazonia.png");
 }
 
 .contador-tabuleiro{
@@ -319,7 +319,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background-image: url('../assets/imagens/placas/placa_icones.png');
+    background-image: url('src/assets/imagens/placas/placa_icones.png');
     background-size: contain;
     background-repeat: no-repeat;
     border: none;
@@ -334,13 +334,13 @@
 .icon-som-tabuleiro {
     width: 60%;
     height: 60%;
-    background-image: url('../assets/imagens/icones/volume-off.svg');
+    background-image: url('src/assets/imagens/icones/volume-off.svg');
 }
 
 .icon-logout-tabuleiro {
     width: 60%;
     height: 60%;
-    background-image: url('../assets/imagens/icones/logout.svg');
+    background-image: url('src/assets/imagens/icones/logout.svg');
 }
 
 .area-cachorro-container-tabuleiro {
@@ -357,7 +357,7 @@
     width: 45vw;
     height: 85vh;
     margin: 0 auto;
-    background-image: url('../assets/imagens/placas/tabuleiro.png');
+    background-image: url('src/assets/imagens/placas/tabuleiro.png');
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -369,7 +369,7 @@
 }
 
 .malha-tabuleiro{
-    background-image: url("../assets/imagens/placas/malha-tabuleiro.png");
+    background-image: url("src/assets/imagens/placas/malha-tabuleiro.png");
     background-size: 100% 100%;
     width: 100%;
     height: 100%;
@@ -412,12 +412,12 @@
 
 .peca-cachorro-tabuleiro {
     background-color: #ffffff;
-    background-image: url("../assets/imagens/skins/cachorro_amazonia.png");
+    background-image: url("src/assets/imagens/skins/cachorro_amazonia.png");
 }
 
 .peca-onca-tabuleiro {
     background-color: #ff7723;
-    background-image: url("../assets/imagens/skins/onca_amazonia.png");
+    background-image: url("src/assets/imagens/skins/onca_amazonia.png");
 }
 
 .reacoes-tabuleiro{
@@ -437,7 +437,7 @@
     flex-direction: column;
     align-items: center; 
     justify-content: center;
-    background-image: url('../assets/imagens/placas/placa_icones.png');
+    background-image: url('src/assets/imagens/placas/placa_icones.png');
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -453,23 +453,23 @@
 }
 
 .emoji-rindo-tabuleiro {
-    background-image: url('../assets/imagens/emojis/rindo.png');
+    background-image: url('src/assets/imagens/emojis/rindo.png');
 }
 
 .emoji-nervoso-tabuleiro {
-    background-image: url('../assets/imagens/emojis/nervoso.png');
+    background-image: url('src/assets/imagens/emojis/nervoso.png');
 }
 
 .emoji-surpreso-tabuleiro {
-    background-image: url('../assets/imagens/emojis/surpreso.png');
+    background-image: url('src/assets/imagens/emojis/surpreso.png');
 }
 
 .emoji-cachorro-tabuleiro{
-    background-image: url('../assets/imagens/emojis/cachorro.png');
+    background-image: url('src/assets/imagens/emojis/cachorro.png');
 }
 
 .emoji-onca-tabuleiro {
-    background-image: url('../assets/imagens/emojis/onca.png');
+    background-image: url('src/assets/imagens/emojis/onca.png');
 }
 
 @media screen and (max-width: 1366px) and (max-height: 768px) {
@@ -539,7 +539,7 @@
     .castigo-xp-icon-tabuleiro{
         width: 12%;
         height: 50%;
-        background-image: url("../assets/imagens/vetores/nivel.png");
+        background-image: url("src/assets/imagens/vetores/nivel.png");
         background-size: contain;
         background-repeat: no-repeat;
     }
@@ -602,7 +602,7 @@
     }
 
     .malha-tabuleiro{
-        background-image: url("../assets/imagens/placas/malha-tabuleiro.png");
+        background-image: url("src/assets/imagens/placas/malha-tabuleiro.png");
         background-size: 100% 100%;
         width: 100%;
         height: 95%;

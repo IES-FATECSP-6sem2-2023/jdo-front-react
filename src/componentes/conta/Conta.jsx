@@ -1,10 +1,26 @@
-import React from "react";
-import ReturnIcon from '../assets/imagens/icones/ReturnIcon'
-import './conta.css'
-import { useNavigate } from "react-router";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
+import ReturnIcon from '../../assets/imagens/icones/ReturnIcon';
+import ContaService from '../../services/ContaService';
+import './Conta.css';
 
 function Conta() {
-    const navigate = useNavigate()
+    const [response, setResponse] = useState(null);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchData = async (id) => {
+          try {
+            const data = await ContaService.getConta(id);
+            setResponse(data);
+          } catch (error) {
+            console.error('Erro na busca de dados:', error);
+          }
+        };
+    
+        fetchData(1);
+      }, []);
+    
     return (
         <section className="bg-conta">
             <div className="bg-conta-container">
@@ -25,20 +41,20 @@ function Conta() {
                         <div className="infos-user-conta">
                             <div className="info-conta info-nome-conta">
                                 <label htmlFor="">NOME:</label>
-                                <input type="text" name="" id="" required/>
+                                <input type="text" name="" id="" value={response?.jogador?.nome} required/>
                             </div>
                             <div className="info-conta info-user-conta">
                                 <label htmlFor="">USER:</label>
-                                <input type="text" name="" id="" required/>
+                                <input type="text" name="" id="" value={response?.jogador?.username} required/>
                             </div>
                             <div className="info-conta info-email-conta">
                                 <label htmlFor="">E-MAIL:</label>
-                                <input type="email" name="" id="" pattern="^\w.{2,}\u0040[a-z]{2,}.[a-z]{2,}\S"
+                                <input type="email" name="" id="" value={response?.jogador?.email} pattern="^\w.{2,}\u0040[a-z]{2,}.[a-z]{2,}\S"
                                 title="Formato esperado: seuemail@email.com" required/>
                             </div>
                             <div className="info-conta info-senha-conta">
                                 <label htmlFor="">SENHA:</label>
-                                <input type="password" name="" id="" maxLength={6} required/>
+                                <input type="password" name="" id="" value={response?.jogador?.senha} maxLength={6} required/>
                             </div>
                             <div className="info-conta atualiza-info-conta">
                                 <label htmlFor="">&nbsp;</label>
