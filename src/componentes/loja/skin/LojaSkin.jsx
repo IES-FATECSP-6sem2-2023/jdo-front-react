@@ -1,15 +1,15 @@
-import React from "react";
+import React from 'react';
 import { useNavigate } from 'react-router';
-import './LojaSkin.css'
-import ReturnIcon from '../../assets/imagens/icones/ReturnIcon'
-import Skin from '../../assets/imagens/skins/onca_amazonia.png'
+import ReturnIcon from '../../../assets/imagens/icones/ReturnIcon';
+import Skin from '../../../assets/imagens/skins/onca_amazonia.png';
+import './LojaSkin.css';
 
 function LojaSkin() {
     const navigate = useNavigate()
     const compraSkin = (event) => {
-        const modal = document.getElementById("modal")
-        const modalCompra = document.getElementById("modal-compra")
-        const bgLojaSkin = document.getElementById("bg-lojaSkin")
+        const modal = document.getElementById("modal");
+        const modalCompra = document.getElementById("modal-compra");
+        const bgLojaSkin = document.getElementById("bg-lojaSkin");
         const imgItem = document.getElementById("img-item-comprado");
 
         bgLojaSkin.style.display = 'none';

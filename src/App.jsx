@@ -1,24 +1,22 @@
-import './App.css'
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate} from 'react-router-dom'
-import Login from './login/Login.jsx'
-import EsqueciSenha from './login/esqueciSenha/EsqueciSenha.jsx'
-import Home from './home/Home.jsx'
-import LojaSkin from './loja/skin/lojaSkin.jsx'
-import LojaMoeda from './loja/moedas/LojaMoeda.jsx'
-import Colecao from './colecao/Colecao.jsx'
-import Conta from './conta/Conta.jsx'
-import Tabuleiro from './tabuleiro/tabuleiro.jsx'
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import './App.css';
+import Colecao from './componentes/colecao/Colecao.jsx';
+import Conta from './componentes/conta/Conta.jsx';
+import Home from './componentes/home/Home.jsx';
+import Login from './componentes/login/Login.jsx';
+import EsqueciSenha from './componentes/login/esqueciSenha/EsqueciSenha.jsx';
+import LojaMoeda from './componentes/loja/moedas/LojaMoeda.jsx';
+import LojaSkin from './componentes/loja/skin/LojaSkin.jsx';
+import Tabuleiro from './componentes/tabuleiro/Tabuleiro.jsx';
 
 function App() {
+
   const [musicaDeFundo, setMusicaDeFundo] = useState(new Audio('src/assets/sons/ambiente/ambiente2.wav'));
   const [musicaAtiva, setMusicaAtiva] = useState(false);
 
-  useEffect(() => {
-    toggleMusica();
-  }, []);
-
   const toggleMusica = () => {
+    
     if (musicaAtiva) {
       musicaDeFundo.pause();
     } else {
@@ -28,6 +26,10 @@ function App() {
     }
     setMusicaAtiva(!musicaAtiva);
   }
+
+  useEffect(() => {
+    toggleMusica();
+  }, []);
 
   return (
     <>
