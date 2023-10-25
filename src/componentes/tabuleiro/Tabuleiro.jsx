@@ -1,10 +1,10 @@
-import React from "react";
-import './Tabuleiro.css'
-import VolumeOnIcon from "../assets/imagens/icones/VolumeOnIcon";
-import VolumeOffIcon from "../assets/imagens/icones/VolumeOffIcon";
-import placaUser from '../assets/imagens/placas/placa_usuario.png'
-import LogOutIcon from "../assets/imagens/icones/LogOutIcon";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import LogOutIcon from '../../assets/imagens/icones/LogOutIcon';
+import VolumeOffIcon from '../../assets/imagens/icones/VolumeOffIcon';
+import VolumeOnIcon from '../../assets/imagens/icones/VolumeOnIcon';
+import placaUser from '../../assets/imagens/placas/placa_usuario.png';
+import './Tabuleiro.css';
 
 function Tabuleiro({musicaAtiva, toggleMusica}) {
     const navigate = useNavigate()

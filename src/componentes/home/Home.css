@@ -12,7 +12,7 @@
 .bg-home {
     width: 100vw;
     height: 100vh;
-    background-image: url('../assets/imagens/backgrounds/cenario_home.png');
+    background-image: url('src/assets/imagens/backgrounds/cenario_home.png');
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -45,7 +45,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background-image: url('../assets/imagens/placas/placa_subtitulo.png');
+    background-image: url('src/assets/imagens/placas/placa_subtitulo.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-color: transparent;
@@ -60,19 +60,19 @@
 .icon-nivel {
     width: 22%;
     height: 55%;
-    background-image: url('../assets/imagens/vetores/nivel.png');
+    background-image: url('src/assets/imagens/vetores/nivel.png');
 }
 
 .icon-esmeralda {
     width: 22%;
     height: 55%;
-    background-image: url('../assets/imagens/vetores/esmeraldas.png');
+    background-image: url('src/assets/imagens/vetores/esmeraldas.png');
 }
 
 .icon-moeda {
     width: 22%;
     height: 55%;
-    background-image: url('../assets/imagens/vetores/moedas.png');
+    background-image: url('src/assets/imagens/vetores/moedas.png');
 }
 
 .info-nivel{
@@ -121,7 +121,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background-image: url('../assets/imagens/placas/placa_icones.png');
+    background-image: url('src/assets/imagens/placas/placa_icones.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-color: transparent;
@@ -136,19 +136,19 @@
 .icon-som {
     width: 60%;
     height: 60%;
-    background-image: url('../assets/imagens/icones/volume-on.svg');
+    background-image: url('src/assets/imagens/icones/volume-on.svg');
 }
 
 .icon-conta {
     width: 60%;
     height: 60%;
-    background-image: url('../assets/imagens/icones/usuario.svg');
+    background-image: url('src/assets/imagens/icones/usuario.svg');
 }
 
 .icon-logout {
     width: 60%;
     height: 60%;
-    background-image: url('../assets/imagens/icones/logout.svg');
+    background-image: url('src/assets/imagens/icones/logout.svg');
 }
 
 .main {
@@ -161,7 +161,7 @@
     width: 25vw;
     height: 30vh;
     margin: 0 auto;
-    background-image: url('../assets/imagens/mapas/amazonia.png');
+    background-image: url('src/assets/imagens/mapas/amazonia.png');
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -181,7 +181,7 @@
     width: 33%;
     height: 40%;
     margin: 10px 5px;
-    background-image: url('../assets/imagens/placas/placa_home.png');
+    background-image: url('src/assets/imagens/placas/placa_home.png');
     background-size: contain;
     background-repeat: no-repeat;
     display: flex;

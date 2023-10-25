@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 import { useNavigate } from 'react-router';
-import ReturnIcon from "../../assets/imagens/icones/ReturnIcon";
-import './LojaMoeda.css'
+import ReturnIcon from '../../../assets/imagens/icones/ReturnIcon';
+import './LojaMoeda.css';
 
 function LojaMoeda() {
     const navigate = useNavigate()

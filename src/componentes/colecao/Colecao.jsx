@@ -1,7 +1,7 @@
-import React from "react";
-import './colecao.css'
-import ReturnIcon from '../assets/imagens/icones/ReturnIcon'
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import ReturnIcon from '../../assets/imagens/icones/ReturnIcon';
+import './Colecao.css';
 
 function Colecao() {
     const navigate = useNavigate()

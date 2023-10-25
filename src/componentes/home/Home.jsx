@@ -1,11 +1,11 @@
-import { useNavigate } from 'react-router';
-import React, { useEffect, useState }, {useEffect} from 'react';
 import axios from 'axios';
-import LogOutIcon from '../assets/imagens/icones/LogOutIcon';
-import UsuarioIcon from '../assets/imagens/icones/UsuarioIcon';
-import VolumeOnIcon from '../assets/imagens/icones/VolumeOnIcon';
-import VolumeOffIcon from '../assets/imagens/icones/VolumeOffIcon';
-import './Home.css'
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
+import LogOutIcon from '../../assets/imagens/icones/LogOutIcon';
+import UsuarioIcon from '../../assets/imagens/icones/UsuarioIcon';
+import VolumeOffIcon from '../../assets/imagens/icones/VolumeOffIcon';
+import VolumeOnIcon from '../../assets/imagens/icones/VolumeOnIcon';
+import './Home.css';
 
 function Home({musicaAtiva, toggleMusica}) {
     const navigate = useNavigate();

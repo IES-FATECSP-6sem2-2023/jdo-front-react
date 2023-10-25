@@ -13,7 +13,7 @@
 .bg-colecao {
     width: 100vw;
     height: 100vh;
-    background-image: url('../assets/imagens/backgrounds/cenario_conta-colecao.png');
+    background-image: url('src/assets/imagens/backgrounds/cenario_conta-colecao.png');
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -47,7 +47,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background-image: url('../assets/imagens/placas/placa_icones.png');
+    background-image: url('src/assets/imagens/placas/placa_icones.png');
     background-size: contain;
     background-repeat: no-repeat;
     border: none;
@@ -57,7 +57,7 @@
 .icon-retorno-colecao{
     width: 55%;
     height: 70%;
-    background-image: url('../assets/imagens/icones/return.svg');
+    background-image: url('src/assets/imagens/icones/return.svg');
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -75,7 +75,7 @@
     min-height: 100px; 
     height: 100%;
     margin: 10px;
-    background-image: url('../assets/imagens/placas/placa_subtitulo.png');
+    background-image: url('src/assets/imagens/placas/placa_subtitulo.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -102,7 +102,7 @@ h1{
     min-width: 160px; 
     height: 80px; 
     margin: 10px;
-    background-image: url('../assets/imagens/placas/placa_subtitulo.png');
+    background-image: url('src/assets/imagens/placas/placa_subtitulo.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -161,7 +161,7 @@ h1{
     width: 160px;
     height: 160px;
     margin: 0 auto;
-    background-image: url('../assets/imagens/skins/onca_amazonia.png');
+    background-image: url('src/assets/imagens/skins/onca_amazonia.png');
     background-size: cover;
     background-position: center;
     border-radius: 50%;
