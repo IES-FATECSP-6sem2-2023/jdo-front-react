@@ -26,7 +26,7 @@
     margin: 0 auto;
     background-size: contain;
     background-repeat: no-repeat;
-    background-image: url("../../assets/imagens/placas/fundo_modal.png");
+    background-image: url("src/assets/imagens/placas/fundo_modal.png");
 }
 
 .box-titulo-loja-skin{
@@ -107,7 +107,7 @@
 .bg-loja-skin {
     width: 100vw;
     height: 100vh;
-    background-image: url('../../assets/imagens/backgrounds/cenario_loja.png');
+    background-image: url('src/assets/imagens/backgrounds/cenario_loja.png');
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -142,7 +142,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background-image: url('../../assets/imagens/placas/placa_icones.png');
+    background-image: url('src/assets/imagens/placas/placa_icones.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-color: transparent;
@@ -152,7 +152,7 @@
 .icon-retorno-loja-skin{
     width: 55%;
     height: 70%;
-    background-image: url('../../assets/imagens/icones/return.svg');
+    background-image: url('src/assets/imagens/icones/return.svg');
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -170,7 +170,7 @@
     min-height: 100px; 
     height: 100%;
     margin: 10px;
-    background-image: url('../../assets/imagens/placas/placa_subtitulo.png');
+    background-image: url('src/assets/imagens/placas/placa_subtitulo.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -201,7 +201,7 @@ h1{
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background-image: url('../../assets/imagens/placas/placa_subtitulo.png');
+    background-image: url('src/assets/imagens/placas/placa_subtitulo.png');
     background-size: contain;
     background-repeat: no-repeat;
     border: none;
@@ -217,13 +217,13 @@ h1{
 .icon-nivel-loja-skin {
     width: 25%;
     height: 60%;
-    background-image: url('../../assets/imagens/vetores/nivel.png');
+    background-image: url('src/assets/imagens/vetores/nivel.png');
 }
 
 .icon-esmeralda-loja-skin {
     width: 20%;
     height: 50%;
-    background-image: url('../../assets/imagens/vetores/esmeraldas.png');
+    background-image: url('src/assets/imagens/vetores/esmeraldas.png');
 }
 
 .info-p-loja-skin{
@@ -320,11 +320,11 @@ h1{
 }
 
 .icon-moeda-loja-skin{
-    background-image: url('../../assets/imagens/vetores/moedas.png');
+    background-image: url('src/assets/imagens/vetores/moedas.png');
 }
 
 .icon-esmeralda-loja-skin{
-    background-image: url('../../assets/imagens/vetores/esmeraldas.png');
+    background-image: url('src/assets/imagens/vetores/esmeraldas.png');
 }
 
 @media screen and (max-width: 1366px) and (max-height: 768px) {
@@ -378,7 +378,7 @@ h1{
     .icon-retorno-loja-skin{
         width: 55%;
         height: 70%;
-        background-image: url('../../assets/imagens/icones/return.svg');
+        background-image: url('src/assets/imagens/icones/return.svg');
         background-size: contain;
         background-repeat: no-repeat;
     }
