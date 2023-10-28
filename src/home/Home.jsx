@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router';
-import React, { useEffect, useState }, {useEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import LogOutIcon from '../assets/imagens/icones/LogOutIcon';
 import UsuarioIcon from '../assets/imagens/icones/UsuarioIcon';
