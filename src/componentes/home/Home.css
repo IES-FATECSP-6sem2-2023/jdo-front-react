@@ -178,9 +178,9 @@
 }
 
 .menu-item {
-    width: 33%;
-    height: 40%;
-    margin: 10px 5px;
+    width: 33% !important;
+    height: 40% !important;
+    margin: 10px 5px !important;
     background-image: url('src/assets/imagens/placas/placa_home.png');
     background-size: contain;
     background-repeat: no-repeat;
