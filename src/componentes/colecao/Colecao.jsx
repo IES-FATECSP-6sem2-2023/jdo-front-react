@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import ReturnIcon from '../../assets/imagens/icones/ReturnIcon';
+import ReturnIcon from '/src/assets/imagens/icones/ReturnIcon';
 import './Colecao.css';
 
 function Colecao() {

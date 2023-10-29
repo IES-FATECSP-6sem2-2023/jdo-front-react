@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
-import ReturnIcon from '../../../assets/imagens/icones/ReturnIcon';
+import ReturnIcon from '/src/assets/imagens/icones/ReturnIcon';
+import LojaMoedaService from '/src/services/LojaMoedasService';
 import './LojaMoeda.css';
 
 function LojaMoeda() {
@@ -63,6 +64,24 @@ function LojaMoeda() {
 
         imgItem.style.backgroundImage = `url(${imgItemComprado})`;
         textoItem.innerText = "VOCÊ COMPROU " + txtItemComprado;
+
+        const compraMoedas = async (id, moeda, quantidade) => {
+            try {
+                const data = await LojaMoedaService.sendCoins(id, moeda, quantidade);
+                
+                if (data.status === 200) {
+                    setResponse(data);
+                } 
+                else {
+                    console.error('Erro na resposta do servidor:', data);
+                }
+            } 
+            catch (error) {
+                console.error('Erro na busca de dados:', error);
+            }
+        };
+
+        compraMoedas(1, tipoMoeda, qtdeMoeda);
     }
 
         return(
