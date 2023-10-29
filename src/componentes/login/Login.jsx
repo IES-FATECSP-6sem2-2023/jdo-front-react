@@ -6,24 +6,48 @@ import TagIcon from '/src/assets/imagens/icones/TagIcon';
 import Logobranco from '/src/assets/imagens/vetores/logo-branco.png';
 import VolumeOnIcon from '/src/assets/imagens/icones/VolumeOnIcon';
 import VolumeOffIcon from '/src/assets/imagens/icones/VolumeOffIcon';
-import React from 'react';
+import React, { useState } from 'react';
+import {validatePassword} from '/src/utils/Regex.jsx';
 import './Login.css';
+import useAuthConta from '/src/hooks/AuthConta';
 
 function Login({musicaAtiva, toggleMusica}) {
+	const navigate = useNavigate();
+	const { signin, signup } = useAuthConta();
 	const [login, toggle] = React.useState(false);
+
+	const [email, setEmail] = useState("");
+	const [nome, setNome] = useState("");
+
+	const [senha, setSenha] = useState("");
+	const [senhaErr, setSenhaErr] = useState(false);
+
+	const [userName, setUserName] = useState("");
 
 	const toggleVolume = () => {
         toggleMusica()
     }
 
-	const navigate = useNavigate()
+	const validaSenha = () => {
+		!validatePassword.test(senha) ? setSenhaErr(true) : setSenhaErr(false);
+	}
 	
-	const cadastrar = () => {
-		navigate("/menu")
+	const cadastrar = (e) => {
+		e.preventDefault();
+		validaSenha();
+		if (!senhaErr) {
+			const res = signup(nome, userName, email, senha);
+			//navigate("/menu")
+		}
 	}
 
-	const entrar = () => {
-		navigate("/menu")
+	const entrar = (e) => {
+		e.preventDefault();
+		validaSenha();
+		if (!senhaErr) {
+			const res = signin(email, senha);
+			//navigate("/menu")
+		}
 	}
 
 	return (
@@ -44,23 +68,24 @@ function Login({musicaAtiva, toggleMusica}) {
 
 					<div className="second-column">
 						<h2 className="title title-secondary">Cadastre-se</h2>
-						<form onSubmit={cadastrar} method="post" className="form">
+						<form className="form">
 							<label htmlFor="nome" className="label-input">
 								<UserIcon />
-								<input type="text" name="" id="nome" placeholder=" Nome" />
+								<input type="text" placeholder=" Nome" value={nome} onChange={(e) => {setNome(e.target.value)}} required />
 							</label>
 							<label htmlFor="user" className="label-input">
 								<TagIcon />
-								<input type="text" name="" id="user" placeholder=" Usuário" />
+								<input type="text" placeholder=" Usuário" value={userName} onChange={(e) => {setUserName(e.target.value)}} required />
 							</label>
 							<label htmlFor="email" className="label-input">
 								<MailIcon />
-								<input type="email" name="" id="email" placeholder=" E-mail" />
+								<input type="email" placeholder=" E-mail" value={email} onChange={(e) => {setEmail(e.target.value)}} required />
 							</label>
 							<label htmlFor="senha" className="label-input">
 								<LockIcon />
-								<input type="password" name="" id="senha" maxLength={6} placeholder=" Senha" />
+								<input type="text" placeholder=" Senha" value={senha} onChange={(e) => {setSenha(e.target.value)}} required />
 							</label>
+							{senhaErr && <span>A senha precisa conter: A-a, 0-9, (6-20)</span>}
 							<button className="btn btn-second" onClick={cadastrar}>cadastrar</button>
 						</form>
 					</div>{/* Segunda Coluna */}
@@ -78,15 +103,16 @@ function Login({musicaAtiva, toggleMusica}) {
 
 					<div className="second-column">
 						<h2 className="title title-second">Login</h2>
-						<form onSubmit={entrar} method="post" className="form">
-						<label htmlFor="email" className="label-input">
-								<MailIcon />
-								<input type="email" name="" id="email" placeholder=" E-mail" />
+						<form className="form">
+							<label htmlFor="email" className="label-input">
+									<MailIcon />
+									<input type="email" name="" id="email" placeholder=" E-mail" value={email} onChange={(e) => {setEmail(e.target.value)}} required />
+								</label>
+							<label htmlFor="senha" className="label-input">
+									<LockIcon />
+									<input type="password" name="" id="senha" placeholder=" Senha" value={senha} onChange={(e) => {setSenha(e.target.value)}} required />
 							</label>
-						<label htmlFor="senha" className="label-input">
-								<LockIcon />
-								<input type="password" name="" id="senha" maxLength={6} placeholder=" Senha" />
-						</label>
+							{senhaErr && <span>A senha precisa conter: A-a, 0-9, (6-20)</span>}
 							<a className="password" onClick={() => {navigate("/login/esqueci-senha")}}>Esqueceu a senha?</a>
 							<button className="btn btn-second" onClick={entrar}>entrar</button>
 						</form>
@@ -95,7 +121,7 @@ function Login({musicaAtiva, toggleMusica}) {
 				</div>{/* Segundo Conteúdo */}
 				
 			</div>
-			</div>
+		</div>
   );
 }
 
