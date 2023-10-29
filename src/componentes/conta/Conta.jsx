@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import ReturnIcon from '../../assets/imagens/icones/ReturnIcon';
-import ContaService from '../../services/ContaService';
+import ReturnIcon from '/src/assets/imagens/icones/ReturnIcon';
+import ContaService from '/src/services/ContaService';
 import './Conta.css';
 
 function Conta() {

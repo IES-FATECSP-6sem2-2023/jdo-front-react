@@ -13,7 +13,7 @@
 .bg-conta {
     width: 100vw;
     height: 100vh;
-    background-image: url('src/assets/imagens/backgrounds/cenario_conta-colecao.png');
+    background-image: url('/src/assets/imagens/backgrounds/cenario_conta-colecao.png');
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -47,7 +47,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background-image: url('src/assets/imagens/placas/placa_icones.png');
+    background-image: url('/src/assets/imagens/placas/placa_icones.png');
     background-size: contain;
     background-repeat: no-repeat;
     border: none;
@@ -57,7 +57,7 @@
 .icon-retorno-conta{
     width: 55%;
     height: 70%;
-    background-image: url('src/assets/imagens/icones/return.svg');
+    background-image: url('/src/assets/imagens/icones/return.svg');
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -75,7 +75,7 @@
     min-height: 100px; 
     height: 100%;
     margin: 10px;
-    background-image: url('src/assets/imagens/placas/placa_subtitulo.png');
+    background-image: url('/src/assets/imagens/placas/placa_subtitulo.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -186,55 +186,55 @@ h1{
 }
 
 .emblema-item-conta:nth-child(1) .icon-emblema-conta {
-    background-image: url('src/assets/imagens/emblemas/emb-1.png');
+    background-image: url('/src/assets/imagens/emblemas/emb-1.png');
 }
 
 .emblema-item-conta:nth-child(2) .icon-emblema-conta {
-    background-image: url('src/assets/imagens/emblemas/emb-2.png');
+    background-image: url('/src/assets/imagens/emblemas/emb-2.png');
 }
 
 .emblema-item-conta:nth-child(3) .icon-emblema-conta {
-    background-image: url('src/assets/imagens/emblemas/emb-3.png');
+    background-image: url('/src/assets/imagens/emblemas/emb-3.png');
 }
 
 .emblema-item-conta:nth-child(4) .icon-emblema-conta {
-    background-image: url('src/assets/imagens/emblemas/emb-4.png');
+    background-image: url('/src/assets/imagens/emblemas/emb-4.png');
 }
 
 .emblema-item-conta:nth-child(5) .icon-emblema-conta {
-    background-image: url('src/assets/imagens/emblemas/emb-5.png');
+    background-image: url('/src/assets/imagens/emblemas/emb-5.png');
 }
 
 .emblema-item-conta:nth-child(6) .icon-emblema-conta {
-    background-image: url('src/assets/imagens/emblemas/emb-6.png');
+    background-image: url('/src/assets/imagens/emblemas/emb-6.png');
 }
 
 .emblema-item-conta:nth-child(7) .icon-emblema-conta {
-    background-image: url('src/assets/imagens/emblemas/emb-7.png');
+    background-image: url('/src/assets/imagens/emblemas/emb-7.png');
 }
 
 .emblema-item-conta:nth-child(8) .icon-emblema-conta {
-    background-image: url('src/assets/imagens/emblemas/emb-8.png');
+    background-image: url('/src/assets/imagens/emblemas/emb-8.png');
 }
 
 .emblema-item-conta:nth-child(9) .icon-emblema-conta {
-    background-image: url('src/assets/imagens/emblemas/emb-9.png');
+    background-image: url('/src/assets/imagens/emblemas/emb-9.png');
 }
 
 .emblema-item-conta:nth-child(10) .icon-emblema-conta {
-    background-image: url('src/assets/imagens/emblemas/emb-10.png');
+    background-image: url('/src/assets/imagens/emblemas/emb-10.png');
 }
 
 .emblema-item-conta:nth-child(11) .icon-emblema-conta {
-    background-image: url('src/assets/imagens/emblemas/emb-11.png');
+    background-image: url('/src/assets/imagens/emblemas/emb-11.png');
 }
 
 .emblema-item-conta:nth-child(12) .icon-emblema-conta {
-    background-image: url('src/assets/imagens/emblemas/emb-12.png');
+    background-image: url('/src/assets/imagens/emblemas/emb-12.png');
 }
 
 .desativo-conta{
-    background-image: url('src/assets/imagens/emblemas/emb-vazio.png');
+    background-image: url('/src/assets/imagens/emblemas/emb-vazio.png');
 } 
 
 .tooltip-text-conta {
@@ -263,7 +263,7 @@ h1{
     width: 90%;
     height: 100%;
     margin: 10px 5px;
-    background-image: url('src/assets/imagens/placas/placa_home.png');
+    background-image: url('/src/assets/imagens/placas/placa_home.png');
     background-size: contain;
     background-repeat: no-repeat;
     display: flex;
@@ -284,7 +284,7 @@ h1{
     width: 30%;
     height: 90%;
     margin: 2.5% 0;
-    background-image: url('src/assets/imagens/vetores/vitorias.png');
+    background-image: url('/src/assets/imagens/vetores/vitorias.png');
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -298,7 +298,7 @@ h1{
     width: 30%;
     height: 80%;
     margin-bottom: 5%;
-    background-image: url('src/assets/imagens/vetores/derrotas.png');
+    background-image: url('/src/assets/imagens/vetores/derrotas.png');
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -319,7 +319,7 @@ h1{
         width: 25%;
         height: 40%;
         margin-bottom: 5%;
-        background-image: url('src/assets/imagens/vetores/vitorias.png');
+        background-image: url('/src/assets/imagens/vetores/vitorias.png');
         background-size: contain;
         background-repeat: no-repeat;
     }
@@ -328,7 +328,7 @@ h1{
         width: 25%;
         height: 35%;
         margin-bottom: 5%;
-        background-image: url('src/assets/imagens/vetores/derrotas.png');
+        background-image: url('/src/assets/imagens/vetores/derrotas.png');
         background-size: contain;
         background-repeat: no-repeat;
     }

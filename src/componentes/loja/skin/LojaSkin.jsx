@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
-import ReturnIcon from '../../../assets/imagens/icones/ReturnIcon';
-import Skin from '../../../assets/imagens/skins/onca_amazonia.png';
+import ReturnIcon from '/src/assets/imagens/icones/ReturnIcon';
+import Skin from '/src/assets/imagens/skins/onca_amazonia.png';
 import './LojaSkin.css';
 
 function LojaSkin() {
