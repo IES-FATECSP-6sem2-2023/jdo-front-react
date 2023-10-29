@@ -1,10 +1,10 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import LogOutIcon from '../../assets/imagens/icones/LogOutIcon';
-import UsuarioIcon from '../../assets/imagens/icones/UsuarioIcon';
-import VolumeOffIcon from '../../assets/imagens/icones/VolumeOffIcon';
-import VolumeOnIcon from '../../assets/imagens/icones/VolumeOnIcon';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import LogOutIcon from '/src/assets/imagens/icones/LogOutIcon';
+import UsuarioIcon from '/src/assets/imagens/icones/UsuarioIcon';
+import VolumeOffIcon from '/src/assets/imagens/icones/VolumeOffIcon';
+import VolumeOnIcon from '/src/assets/imagens/icones/VolumeOnIcon';
 import './Home.css';
 
 function Home({musicaAtiva, toggleMusica}) {
