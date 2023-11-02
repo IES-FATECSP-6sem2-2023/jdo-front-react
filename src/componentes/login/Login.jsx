@@ -14,14 +14,13 @@ import useAuthConta from '/src/hooks/AuthConta';
 function Login({musicaAtiva, toggleMusica}) {
 	const navigate = useNavigate();
 	const { signin, signup } = useAuthConta();
-	const [login, toggle] = React.useState(false);
+	
+	const [login, toggle] = React.useState(true);
 
 	const [email, setEmail] = useState("");
 	const [nome, setNome] = useState("");
-
 	const [senha, setSenha] = useState("");
 	const [senhaErr, setSenhaErr] = useState(false);
-
 	const [userName, setUserName] = useState("");
 
 	const toggleVolume = () => {
@@ -32,21 +31,21 @@ function Login({musicaAtiva, toggleMusica}) {
 		!validatePassword.test(senha) ? setSenhaErr(true) : setSenhaErr(false);
 	}
 	
-	const cadastrar = (e) => {
+	const cadastrar = async (e) => {
 		e.preventDefault();
 		validaSenha();
 		if (!senhaErr) {
-			const res = signup(nome, userName, email, senha);
-			//navigate("/menu")
+			const cadastroSucesso = signup(nome, userName, email, senha);
+			cadastroSucesso ? toggle(!login) : '';
 		}
 	}
 
-	const entrar = (e) => {
+	const entrar = async (e) => {
 		e.preventDefault();
 		validaSenha();
 		if (!senhaErr) {
-			const res = signin(email, senha);
-			//navigate("/menu")
+			const loginSucesso = await signin(email, senha);
+			loginSucesso ? navigate("/menu") : '';
 		}
 	}
 

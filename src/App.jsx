@@ -10,8 +10,14 @@ import LojaMoeda from './componentes/loja/moedas/LojaMoeda.jsx';
 import LojaSkin from './componentes/loja/skin/LojaSkin.jsx';
 import Tabuleiro from './componentes/tabuleiro/Tabuleiro.jsx';
 import { AuthContaProvider } from './contexts/AuthContaContext';
+import useAuthConta from '/src/hooks/AuthConta';
 
-function App() {
+const Private = () => {
+  const { signed } = useAuthConta();
+  return signed > 0 ? <Navigate to={'/menu'} /> : <Navigate to={'/login'} />
+}
+const App = () => {
+ 
 
   const [musicaDeFundo, setMusicaDeFundo] = useState(new Audio('src/assets/sons/ambiente/ambiente2.wav'));
   const [musicaAtiva, setMusicaAtiva] = useState(false);
@@ -34,21 +40,23 @@ function App() {
 
   return (
     <>
-      <AuthContaProvider>
+      
         <BrowserRouter>
+        <AuthContaProvider>
           <Routes>
-            <Route path='/' element={<Navigate to='/login' />} />
-            <Route path='/login' element={<Login musicaAtiva={musicaAtiva} toggleMusica={toggleMusica} />} />
-            <Route path='/login/esqueci-senha' element={<EsqueciSenha/>} />
-            <Route path='/menu' element={<Home musicaAtiva={musicaAtiva} toggleMusica={toggleMusica} />} />
-            <Route path='/loja/skins' element={<LojaSkin />} />
-            <Route path='/loja/moedas' element={<LojaMoeda />} />
-            <Route path='/colecao' element={<Colecao />} />
-            <Route path='/conta' element={<Conta />} />
-            <Route path='/tabuleiro' element={<Tabuleiro musicaAtiva={musicaAtiva} toggleMusica={toggleMusica} />} />
+              <Route path='/' element={<Private/>} />
+              <Route path='/login' element={<Login musicaAtiva={musicaAtiva} toggleMusica={toggleMusica} />} />
+              <Route path='/menu' element={<Home musicaAtiva={musicaAtiva} toggleMusica={toggleMusica} />} />
+              <Route path='/login/esqueci-senha' element={<EsqueciSenha/>} />
+              <Route path='/loja/skins' element={<LojaSkin />} />
+              <Route path='/loja/moedas' element={<LojaMoeda />} />
+              <Route path='/colecao' element={<Colecao />} />
+              <Route path='/conta' element={<Conta />} />
+              <Route path='/tabuleiro' element={<Tabuleiro musicaAtiva={musicaAtiva} toggleMusica={toggleMusica} />} />
           </Routes>
+          </AuthContaProvider>
         </BrowserRouter>
-      </AuthContaProvider>
+      
     </>
   )
 }
