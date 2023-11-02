@@ -190,7 +190,7 @@
   position: relative;
   float: right;
   padding: 0 15px;
-  background-image: url('../assets/imagens/placas/placa_icones.png');
+  background-image: url('/src/assets/imagens/placas/placa_icones.png');
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
