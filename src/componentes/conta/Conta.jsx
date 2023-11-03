@@ -80,7 +80,7 @@ function Conta() {
                                 <button className="btn-atualiza">ATUALIZAR</button>
                             </div>
                         </form>
-                        {/* @ToDo: montar lógica para habilitar e desabilitar emblemas da conta */}
+                        {/* @ToDo: montar lógica para habilitar e desabilitar emblemas da */}
                         <div className="emblemas-conta">
                             <div className="emblema-item-conta">
                                 <div className="icon-emblema-conta ativo"></div>
@@ -149,8 +149,8 @@ function Conta() {
                                 <div className="placa-itens-conta">
                                     <div className="icon-der-conta"></div>
                                     <div className="info-item-conta">
-                                        <h1 className="num-der-conta">{user?.jogador?.qntpartidasjogadas}</h1>
-                                        <h1>PARTIDAS JOGADAS</h1>
+                                        <h1 className="num-der-conta">{(user?.jogador?.qntpartidasjogadas)-(user?.jogador?.qntvitorias)}</h1>
+                                        <h1>DERROTAS</h1>
                                     </div>
                                 </div>
                             </div>
