@@ -58,64 +58,6 @@ function Tabuleiro({musicaAtiva, toggleMusica}) {
     
         return(
             <section className="bg-tabuleiro">
-                <div className="modal-container-tabuleiro" id="modal">
-                    <div className="box-loading-tabuleiro" id="modal-loading">
-                        <div className="loading-area-tabuleiro">
-                            <span className="circle-tabuleiro"></span>
-                            <span className="circle-tabuleiro"></span>
-                            <span className="circle-tabuleiro"></span>
-                            <span className="circle-tabuleiro"></span>
-                        </div>
-                    </div>
-                    <div className="box-vitoria-tabuleiro" id="modal-vitoria">
-                        <div className="box-titulo-tabuleiro">
-                            <h1>VITÓRIA!</h1>
-                        </div>
-                        <div className="box-content-tabuleiro">
-                            <div className="img-resultado-tabuleiro">
-                                <div className="icon-vitoria-tabuleiro"></div>
-                            </div>
-                            <div className="recompensas-tabuleiro">
-                                <div className="recompensa-xp-tabuleiro">
-                                    <div className="recompensa-xp-icon-tabuleiro"></div>
-                                    <div className="recompensa-texto-tabuleiro">
-                                        <p>+ 25 de XP</p>
-                                    </div>
-                                </div>
-                                <div className="recompensa-moeda-tabuleiro">
-                                    <div className="moeda-icon-tabuleiro"></div>
-                                    <div className="recompensa-texto-tabuleiro">
-                                        <p>+ 30 moedas</p>
-                                    </div>
-                                </div>                                
-                            </div>
-                            <div className="area-btn-modal">
-                                <button className="btn-modal-tabuleiro">VOLTAR PARA A HOME</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="box-derrota-tabuleiro" id="modal-derrota">
-                        <div className="box-titulo-tabuleiro">
-                            <h1>DERROTA!</h1>
-                        </div>
-                        <div className="box-content-tabuleiro">
-                            <div className="img-resultado-tabuleiro">
-                                <div className="icon-derrota-tabuleiro"></div>
-                            </div>
-                            <div className="recompensas-tabuleiro">
-                                <div className="castigo-xp-tabuleiro">
-                                    <div className="castigo-xp-icon-tabuleiro"></div>
-                                    <div className="recompensa-texto-tabuleiro">
-                                        <p>- 15 de XP</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="area-btn-modal">
-                                <button className="btn-modal-tabuleiro">VOLTAR PARA A HOME</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div className="bg-tabuleiro-container" id="tabuleiro-container">
                     <div className="area-onca-tabuleiro">
                         <div className="area-onca-container-tabuleiro">

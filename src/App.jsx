@@ -7,8 +7,13 @@ import Home from './componentes/home/Home.jsx';
 import Login from './componentes/login/Login.jsx';
 import EsqueciSenha from './componentes/login/esqueciSenha/EsqueciSenha.jsx';
 import LojaMoeda from './componentes/loja/moedas/LojaMoeda.jsx';
-import LojaSkin from './componentes/loja/skin/LojaSkin.jsx';
+import LojaSkin from './componentes/loja/skins/LojaSkin.jsx';
 import Tabuleiro from './componentes/tabuleiro/Tabuleiro.jsx';
+import Loading from './componentes/modals/loading/loading.jsx';
+import Erro from './componentes/modals/erro/erro.jsx';
+import Vitoria from './componentes/modals/vitoria/vitoria.jsx';
+import Derrota from './componentes/modals/derrota/derrota.jsx';
+import CompraMoedas from './componentes/modals/compras/moedas/CompraMoedas.jsx';
 import { AuthContaProvider } from './contexts/AuthContaContext';
 import useAuthConta from '/src/hooks/AuthConta';
 
@@ -53,6 +58,11 @@ const App = () => {
               <Route path='/colecao' element={<Colecao />} />
               <Route path='/conta' element={<Conta />} />
               <Route path='/tabuleiro' element={<Tabuleiro musicaAtiva={musicaAtiva} toggleMusica={toggleMusica} />} />
+              <Route path='/loading' element={<Loading />} />
+              <Route path='/erro' element={<Erro />} />
+              <Route path='/vitoria' element={<Vitoria />} />
+              <Route path='/derrota' element={<Derrota />} />    
+              <Route path='/compras/moedas' element={<CompraMoedas />} />    
           </Routes>
           </AuthContaProvider>
         </BrowserRouter>
