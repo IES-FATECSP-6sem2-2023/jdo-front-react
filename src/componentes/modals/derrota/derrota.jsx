@@ -1,12 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './derrota.css';
 
 function derrota() {
-    useEffect(() => {
-        const somDerrota = new Audio('src/assets/sons/tabuleiro/jogo_perdido.mp3');
-        somDerrota.play();
-    }, []);
-
     return(
         <section className="background">
             <div className="modal-container" id="modal">

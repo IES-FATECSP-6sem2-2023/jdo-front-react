@@ -5,22 +5,7 @@ import { useNavigate } from 'react-router';
 function compraMoedas() {
     const navigate = useNavigate();
 
-    // const modal = document.getElementById("modal")
-    // const modalCompra = document.getElementById("modal-compra")
-    // const bgLojaMoeda = document.getElementById("bg-lojaMoeda")
-    // const imgItem = document.getElementById("img-item-comprado");
-    // const textoItem = document.getElementById("texto-item-comprado-loja-moeda");
-
-    // bgLojaMoeda.style.display = 'none';
-    // modal.style.display = 'flex';
-    // modalCompra.style.display = 'block';
-
-    // let imgItemComprado = '';
-    // let txtItemComprado = '';
-    // let tipoMoeda = 0; //0-esmeralda; 1-moeda
-    // let qtdeMoeda = 0;
-
-    // switch (parseInt(event.target.value)) {
+    // switch (x) {
     //     case 1:
     //         imgItemComprado = '/src/assets/imagens/vetores/poucas_esmeraldas.png';
     //         txtItemComprado = '100 ESMERALDAS!';
@@ -50,14 +35,11 @@ function compraMoedas() {
     //         txtItemComprado = '';
     //         break;
     // }
-
-    
-
-    const imgItem = document.getElementById("img-moeda-comprada");
-    const textoItem = document.getElementById("texto-item-comprado-loja-moeda");
-
-    //imgItem.style.backgroundImage = `url(${imgItemComprado})`;
-    //textoItem.innerText = "VOCÊ COMPROU " + txtItemComprado;
+    //
+    // const imgItem = document.getElementById("img-moeda-comprada");
+    // const textoItem = document.getElementById("texto-item-comprado-loja-moeda");
+    // imgItem.style.backgroundImage = `url(${imgItemComprado})`;
+    // textoItem.innerText = "VOCÊ COMPROU " + txtItemComprado;
     
     return(
         <section className="background">
@@ -74,7 +56,7 @@ function compraMoedas() {
                             <p id="texto-item-comprado-loja-moeda"></p>
                         </div>
                         <div className="loja-moeda">
-                            <button onClick={() => {navigate("/loja/moedas")}}>VOLTAR PARA A HOME</button>
+                            <button onClick={() => {navigate("/loja/moedas")}}>VOLTAR PARA A LOJA</button>
                         </div>
                     </div>
                 </div>

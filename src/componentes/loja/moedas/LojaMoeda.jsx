@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState } from 'react';
 import { useNavigate } from 'react-router';
 import './LojaMoeda.css';
 import ReturnIcon from '/src/assets/imagens/icones/ReturnIcon';
@@ -15,6 +15,7 @@ function LojaMoeda() {
     const compraMoeda = (event) => {
         let idMoeda = parseInt(event.target.value)
         let qtdeMoeda, tipoMoeda;
+        setIdCompra(idMoeda);
 
         switch (idMoeda) {
             case 1:
