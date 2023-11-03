@@ -1,11 +1,16 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
-import ReturnIcon from '/src/assets/imagens/icones/ReturnIcon';
-import LojaMoedaService from '/src/services/LojaMoedasService';
 import './LojaMoeda.css';
+import ReturnIcon from '/src/assets/imagens/icones/ReturnIcon';
+import useAuthConta from '/src/hooks/AuthConta';
+import LojaMoedaService from '/src/services/LojaMoedasService';
 
 function LojaMoeda() {
     const navigate = useNavigate()
+    const { user } = useAuthConta();
+
+    // @Todo: pegar informação da "compra" e salvar na conta do usuário + atulizar sessão (paulo fica responsavel pela parte da sessão)
+
     const compraMoeda = (event) => {
         const modal = document.getElementById("modal")
         const modalCompra = document.getElementById("modal-compra")
@@ -121,13 +126,13 @@ function LojaMoeda() {
                         <div className="item-qtde-loja-moeda esmeraldas-loja-moeda">
                             <div className="icon-loja-moeda icon-esmeralda-loja-moeda"></div>
                             <div className="info-esmeralda-loja-moeda">
-                                <p className="info-p-loja-moeda">1000</p>
+                                <p className="info-p-loja-moeda">{user?.jogador?.qntmoedaespecial}</p>
                             </div>
                         </div>
                         <div className="item-qtde-loja-moeda moedas-loja-moeda">
                             <div className="icon-loja-moeda icon-moeda-loja-moeda"></div>
                             <div className="info-esmeralda-loja-moeda">
-                                <p className="info-p-loja-moeda">1000</p>
+                                <p className="info-p-loja-moeda">{user?.jogador?.qntmoedanormal}</p>
                             </div>
                         </div>
                     </div>
