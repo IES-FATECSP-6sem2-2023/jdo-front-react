@@ -1,12 +1,43 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import ReturnIcon from '/src/assets/imagens/icones/ReturnIcon';
+import VisibilityIcon from '/src/assets/imagens/icones/VisibilityIcon';
+import VisibilityOffIcon from '/src/assets/imagens/icones/VisibilityOffIcon';
+import {validatePassword} from '/src/utils/Regex.jsx';
 import useAuthConta from '/src/hooks/AuthConta';
 import './Conta.css';
 
 function Conta() {
     const navigate = useNavigate();
+    const [visibilityStatus, setVisibilityStatus] = useState(false);
     const { user } = useAuthConta();
+
+    const [email, setEmail] = useState(user?.jogador?.email);
+	const [nome, setNome] = useState(user?.jogador?.nome);
+	const [senha, setSenha] = useState("");
+	const [senhaErr, setSenhaErr] = useState(false);
+	const [userName, setUserName] = useState(user?.jogador?.username);
+
+    const handleFieldChange = (e, setStateFunction) => {
+        setStateFunction(e.target.value);
+    };
+
+    const validaSenha = () => {
+		!validatePassword.test(senha) ? setSenhaErr(true) : setSenhaErr(false);
+	}
+
+    const toggleVisibility = (e) => {
+		e.preventDefault();
+		setVisibilityStatus(!visibilityStatus);
+	}
+
+    const atualizaUser = async (e) => {
+		e.preventDefault();
+		validaSenha();
+        if (!senhaErr) {
+            // @ToDo: chamada para atualizar as informações do usuário + atualizar session (monta a chamada, paulo faz a atualização da sessão depois)
+        }
+    }
     
     return (
         <section className="bg-conta">
@@ -25,29 +56,31 @@ function Conta() {
                 </div>
                 <div className="content-main-conta">
                     <div className="content-main-superior-conta">
-                        <div className="infos-user-conta">
+                        <form className="infos-user-conta">
                             <div className="info-conta info-nome-conta">
                                 <label htmlFor="">NOME:</label>
-                                <input type="text" name="" id="" value={user?.jogador?.nome} required/>
+                                <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} required/>
                             </div>
                             <div className="info-conta info-user-conta">
                                 <label htmlFor="">USER:</label>
-                                <input type="text" name="" id="" value={user?.jogador?.username} required/>
+                                <input type="text" value={userName} onChange={(e) => handleFieldChange(e.target.value, setUserName)} required/>
                             </div>
                             <div className="info-conta info-email-conta">
                                 <label htmlFor="">E-MAIL:</label>
-                                <input type="email" name="" id="" value={user?.jogador?.email} pattern="^\w.{2,}\u0040[a-z]{2,}.[a-z]{2,}\S"
-                                title="Formato esperado: seuemail@email.com" required/>
+                                <input type="email" value={email} pattern="^\w.{2,}\u0040[a-z]{2,}.[a-z]{2,}\S"
+                                title="Formato esperado: seuemail@email.com" onChange={(e) => handleFieldChange(e.target.value, setEmail)} required/>
                             </div>
                             <div className="info-conta info-senha-conta">
                                 <label htmlFor="">SENHA:</label>
-                                <input type="password" name="" id="" required/>
+                                <input type={visibilityStatus ? "text" : "password"} onChange={(e) => handleFieldChange(e.target.value, setSenha)} required/>
+                                <button className="btn-visibility btn-senha-conta" onClick={toggleVisibility}>{visibilityStatus ? <VisibilityIcon /> : <VisibilityOffIcon />}</button>
                             </div>
                             <div className="info-conta atualiza-info-conta">
                                 <label htmlFor="">&nbsp;</label>
-                                <button>ATUALIZAR</button>
+                                <button className="btn-atualiza">ATUALIZAR</button>
                             </div>
-                        </div>
+                        </form>
+                        {/* @ToDo: montar lógica para habilitar e desabilitar emblemas da conta */}
                         <div className="emblemas-conta">
                             <div className="emblema-item-conta">
                                 <div className="icon-emblema-conta ativo"></div>
@@ -105,7 +138,7 @@ function Conta() {
                                 <div className="placa-itens-conta">
                                     <div className="icon-vit-conta"></div>
                                     <div className="info-item-conta">
-                                        <h1 className="num-vit-conta">X</h1>
+                                        <h1 className="num-vit-conta">{user?.jogador?.qntvitorias}</h1>
                                         <h1>VITÓRIAS</h1>
                                     </div>
                                 </div>
@@ -116,8 +149,8 @@ function Conta() {
                                 <div className="placa-itens-conta">
                                     <div className="icon-der-conta"></div>
                                     <div className="info-item-conta">
-                                        <h1 className="num-der-conta">X</h1>
-                                        <h1>DERROTAS</h1>
+                                        <h1 className="num-der-conta">{user?.jogador?.qntpartidasjogadas}</h1>
+                                        <h1>PARTIDAS JOGADAS</h1>
                                     </div>
                                 </div>
                             </div>
