@@ -1,11 +1,16 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
+import './LojaSkin.css';
 import ReturnIcon from '/src/assets/imagens/icones/ReturnIcon';
 import Skin from '/src/assets/imagens/skins/onca_amazonia.png';
-import './LojaSkin.css';
+import useAuthConta from '/src/hooks/AuthConta';
 
 function LojaSkin() {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const { user } = useAuthConta();
+
+    // @ToDo: montar lógica para validar se é possível comprar skin (se não, mandar para loja de moeda) + salvar ela na conta do usuario + atualizar informação na sessão (essa parte o paulo faz)
+
     const compraSkin = (event) => {
         const modal = document.getElementById("modal");
         const modalCompra = document.getElementById("modal-compra");
@@ -72,13 +77,13 @@ function LojaSkin() {
                         <button onClick={() => {navigate("/loja/moedas")}} className="item-qtde-loja-skin esmeraldas-loja-skin">
                             <div className="icon-loja-skin icon-esmeralda-loja-skin"></div>
                             <div className="info-esmeralda-loja-skin">
-                                <p className="info-p-loja-skin">1000</p>
+                                <p className="info-p-loja-skin">{user?.jogador?.qntmoedaespecial}</p>
                             </div>
                         </button>
                         <button onClick={() => {navigate("/loja/moedas")}} className="item-qtde-loja-skin moedas-loja-skin">
                             <div className="icon-loja-skin icon-moeda-loja-skin"></div>
                             <div className="info-esmeralda-loja-skin">
-                                <p className="info-p-loja-skin">1000</p>
+                                <p className="info-p-loja-skin">{user?.jogador?.qntmoedanormal}</p>
                             </div>
                         </button>
                     </div>

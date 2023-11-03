@@ -198,6 +198,12 @@
   border: none;
 }
 
+.btn-visibility {
+  border: none;
+  background: none;
+  padding-right: 3px;
+}
+
 /* KeyFrames */
 
 @keyframes deslocamentoEsq {

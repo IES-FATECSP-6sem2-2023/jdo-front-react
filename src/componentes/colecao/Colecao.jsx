@@ -5,6 +5,9 @@ import './Colecao.css';
 
 function Colecao() {
     const navigate = useNavigate()
+
+    // @ToDo: montar lógica para alterar tanto cachorro e onça para o usuário e ver como salvar essa info para o usuário
+    
     const mudaColecao = (event) => {
         const colecaoOnca = document.getElementById("colecao-onca");
         const colecaoCachorro = document.getElementById("colecao-cachorro");
