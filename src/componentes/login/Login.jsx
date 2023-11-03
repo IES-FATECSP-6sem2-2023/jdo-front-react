@@ -6,6 +6,8 @@ import TagIcon from '/src/assets/imagens/icones/TagIcon';
 import Logobranco from '/src/assets/imagens/vetores/logo-branco.png';
 import VolumeOnIcon from '/src/assets/imagens/icones/VolumeOnIcon';
 import VolumeOffIcon from '/src/assets/imagens/icones/VolumeOffIcon';
+import VisibilityIcon from '/src/assets/imagens/icones/VisibilityIcon';
+import VisibilityOffIcon from '/src/assets/imagens/icones/VisibilityOffIcon';
 import React, { useState } from 'react';
 import {validatePassword} from '/src/utils/Regex.jsx';
 import './Login.css';
@@ -13,6 +15,7 @@ import useAuthConta from '/src/hooks/AuthConta';
 
 function Login({musicaAtiva, toggleMusica}) {
 	const navigate = useNavigate();
+	const [visibilityStatus, setVisibilityStatus] = useState(false);
 	const { signin, signup } = useAuthConta();
 	
 	const [login, toggle] = React.useState(true);
@@ -22,6 +25,11 @@ function Login({musicaAtiva, toggleMusica}) {
 	const [senha, setSenha] = useState("");
 	const [senhaErr, setSenhaErr] = useState(false);
 	const [userName, setUserName] = useState("");
+
+	const toggleVisibility = (e) => {
+		e.preventDefault();
+		setVisibilityStatus(!visibilityStatus);
+	}
 
 	const toggleVolume = () => {
         toggleMusica()
@@ -82,7 +90,8 @@ function Login({musicaAtiva, toggleMusica}) {
 							</label>
 							<label htmlFor="senha" className="label-input">
 								<LockIcon />
-								<input type="text" placeholder=" Senha" value={senha} onChange={(e) => {setSenha(e.target.value)}} required />
+								<input type={visibilityStatus ? "text" : "password"} placeholder=" Senha" value={senha} onChange={(e) => {setSenha(e.target.value)}} required />
+								<button className="btn-visibility" onClick={toggleVisibility}>{visibilityStatus ? <VisibilityIcon /> : <VisibilityOffIcon />}</button>
 							</label>
 							{senhaErr && <span>A senha precisa conter: A-a, 0-9, (6-20)</span>}
 							<button className="btn btn-second" onClick={cadastrar}>cadastrar</button>
@@ -105,11 +114,12 @@ function Login({musicaAtiva, toggleMusica}) {
 						<form className="form">
 							<label htmlFor="email" className="label-input">
 									<MailIcon />
-									<input type="email" name="" id="email" placeholder=" E-mail" value={email} onChange={(e) => {setEmail(e.target.value)}} required />
+									<input type="email" placeholder=" E-mail" value={email} onChange={(e) => {setEmail(e.target.value)}} required />
 								</label>
 							<label htmlFor="senha" className="label-input">
 									<LockIcon />
-									<input type="password" name="" id="senha" placeholder=" Senha" value={senha} onChange={(e) => {setSenha(e.target.value)}} required />
+									<input type={visibilityStatus ? "text" : "password"} placeholder=" Senha" value={senha} onChange={(e) => {setSenha(e.target.value)}} required />
+									<button className="btn-visibility" onClick={toggleVisibility}>{visibilityStatus ? <VisibilityIcon /> : <VisibilityOffIcon />}</button>
 							</label>
 							{senhaErr && <span>A senha precisa conter: A-a, 0-9, (6-20)</span>}
 							<a className="password" onClick={() => {navigate("/login/esqueci-senha")}}>Esqueceu a senha?</a>
