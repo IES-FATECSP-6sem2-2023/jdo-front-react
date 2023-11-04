@@ -14,6 +14,8 @@ import Erro from './componentes/modals/erro/erro.jsx';
 import Sucesso from './componentes/modals/sucesso/sucesso.jsx';
 import Vitoria from './componentes/modals/vitoria/vitoria.jsx';
 import Derrota from './componentes/modals/derrota/derrota.jsx';
+import Desistir from './componentes/modals/desistir/desistir.jsx';
+import Fila from './componentes/modals/fila/fila.jsx';
 import CompraMoedas from './componentes/modals/compras/moedas/CompraMoedas.jsx';
 import CompraSkins from './componentes/modals/compras/skins/compraSkins.jsx';
 import { AuthContaProvider } from './contexts/AuthContaContext';
@@ -61,10 +63,12 @@ const App = () => {
               <Route path='/conta' element={<Conta />} />
               <Route path='/tabuleiro' element={<Tabuleiro musicaAtiva={musicaAtiva} toggleMusica={toggleMusica} />} />
               <Route path='/loading' element={<Loading />} />
+              <Route path='/fila' element={<Fila />} />
               <Route path='/erro' element={<Erro />} />
               <Route path='/sucesso' element={<Sucesso />} />
               <Route path='/vitoria' element={<Vitoria />} />
               <Route path='/derrota' element={<Derrota />} />    
+              <Route path='/desistir' element={<Desistir />} />    
               <Route path='/compras/moedas' element={<CompraMoedas />} />    
               <Route path='/compras/skins' element={<CompraSkins />} />    
           </Routes>
