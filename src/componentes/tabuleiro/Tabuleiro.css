@@ -8,6 +8,14 @@
     scroll-behavior: smooth;
 }
 
+.bg-tabuleiro {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('/src/assets/imagens/backgrounds/cenario_login-tabuleiro.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .bg-tabuleiro-container {
     width: 90vw;
     height: 95vh;
