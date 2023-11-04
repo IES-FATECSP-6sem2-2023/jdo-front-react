@@ -1,7 +1,10 @@
 import React from 'react';
 import './sucesso.css';
+import { useNavigate } from 'react-router';
 
 function sucesso() {
+    const navigate = useNavigate();
+
     return(
         <section className="background">
             <div className="modal-container" id="modal">
@@ -19,7 +22,7 @@ function sucesso() {
                             </div>
                         </div>
                         <div className="area-btn-modal">
-                            <button className="btn-modal-tabuleiro">VOLTAR PARA A HOME</button>
+                            <button className="btn-modal-tabuleiro" onClick={() => {navigate("/menu")}}>VOLTAR PARA A HOME</button>
                         </div>
                     </div>
                 </div>

@@ -73,7 +73,7 @@ function Home({musicaAtiva, toggleMusica}) {
                         <button className="btn menu-item" onClick={jogar}><p className="texto-p">JOGAR <br></br> COMO ONÇA</p></button>
                         <button className="btn menu-item" onClick={jogar}><p className="texto-p">JOGAR COMO <br></br> CACHORRO</p></button>
                         <button className="btn menu-item" onClick={() => {navigate("/loja/skins")}}><p className="texto-p">LOJA</p></button>
-                        <button className="btn menu-item" onClick={() => {navigate("/sucesso")}}><p className="texto-p">COLEÇÃO</p></button>
+                        <button className="btn menu-item" onClick={() => {navigate("/colecao")}}><p className="texto-p">COLEÇÃO</p></button>
                     </div>
                 </div>
             </div>

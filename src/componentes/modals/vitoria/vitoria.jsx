@@ -1,7 +1,10 @@
 import React from 'react';
 import './vitoria.css';
+import { useNavigate } from 'react-router';
 
 function vitoria() {
+    const navigate = useNavigate();
+    
     return(
         <section className="background">
             <div className="modal-container" id="modal">
@@ -28,7 +31,7 @@ function vitoria() {
                             </div>
                         </div>
                         <div className="area-btn-modal">
-                            <button className="btn-modal-tabuleiro">VOLTAR PARA A HOME</button>
+                            <button className="btn-modal-tabuleiro" onClick={() => {navigate("/menu")}}>VOLTAR PARA A HOME</button>
                         </div>
                     </div>
                 </div>

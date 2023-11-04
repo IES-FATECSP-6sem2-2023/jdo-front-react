@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import './derrota.css';
+import { useNavigate } from 'react-router';
 
 function derrota() {
+    const navigate = useNavigate();
+
     return(
         <section className="background">
             <div className="modal-container" id="modal">
@@ -22,7 +25,7 @@ function derrota() {
                             </div>
                         </div>
                         <div className="area-btn-modal">
-                            <button className="btn-modal-tabuleiro">VOLTAR PARA A HOME</button>
+                            <button className="btn-modal-tabuleiro" onClick={() => {navigate("/menu")}}>VOLTAR PARA A HOME</button>
                         </div>
                     </div>
                 </div>

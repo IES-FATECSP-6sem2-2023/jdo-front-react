@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import './desistir.css';
+import { useNavigate } from 'react-router';
 
 function desistir() {
+    const navigate = useNavigate();
+
     return(
         <section className="background">
             <div className="modal-container" id="modal">
@@ -19,8 +22,8 @@ function desistir() {
                             </div>
                         </div>
                         <div className="area-btn-modal">
-                            <button className="btn-modal btn-sim">SIM</button>
-                            <button className="btn-modal btn-nao">NÃO</button>
+                            <button className="btn-modal btn-sim" onClick={() => {navigate("/menu")}}>SIM</button>
+                            <button className="btn-modal btn-nao" onClick={() => {navigate("/tabuleiro")}}>NÃO</button>
                         </div>
                     </div>
                 </div>
