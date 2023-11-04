@@ -17,7 +17,7 @@ import Derrota from './componentes/modals/derrota/derrota.jsx';
 import Desistir from './componentes/modals/desistir/desistir.jsx';
 import Fila from './componentes/modals/fila/fila.jsx';
 import CompraMoedas from './componentes/modals/compras/moedas/CompraMoedas.jsx';
-import CompraSkins from './componentes/modals/compras/skins/compraSkins.jsx';
+import CompraSkins from './componentes/modals/compras/skins/compraSkin.jsx'
 import { AuthContaProvider } from './contexts/AuthContaContext';
 import useAuthConta from '/src/hooks/AuthConta';
 
@@ -69,8 +69,8 @@ const App = () => {
               <Route path='/vitoria' element={<Vitoria />} />
               <Route path='/derrota' element={<Derrota />} />    
               <Route path='/desistir' element={<Desistir />} />    
-              <Route path='/compras/moedas' element={<CompraMoedas />} />    
-              <Route path='/compras/skins' element={<CompraSkins />} />    
+              <Route path='/compras/moedas' element={<CompraMoedas />} />      
+              <Route path='/compras/skins' element={<CompraSkins />} />      
           </Routes>
           </AuthContaProvider>
         </BrowserRouter>

@@ -4,18 +4,25 @@ import './LojaMoeda.css';
 import ReturnIcon from '/src/assets/imagens/icones/ReturnIcon';
 import useAuthConta from '/src/hooks/AuthConta';
 import LojaMoedaService from '/src/services/LojaMoedasService';
+import ModalCompraMoeda from '/src/componentes/modals/compras/moedas/compraMoedas.jsx';
+
+// @Todo: pegar informação da "compra" e salvar na conta do usuário + atulizar sessão (paulo fica responsavel pela parte da sessão)
 
 function LojaMoeda() {
     const navigate = useNavigate()
     const { user } = useAuthConta();
     const [idCompra, setIdCompra] = useState(null);
+    const [isModalVisible, setIsModalVisible] = useState(false);
 
-    // @Todo: pegar informação da "compra" e salvar na conta do usuário + atulizar sessão (paulo fica responsavel pela parte da sessão)
-
+    const closeModal = () => {
+        setIsModalVisible(false);
+    };
+  
     const compraMoeda = (event) => {
         let idMoeda = parseInt(event.target.value)
         let qtdeMoeda, tipoMoeda;
         setIdCompra(idMoeda);
+
 
         switch (idMoeda) {
             case 1:
@@ -43,10 +50,12 @@ function LojaMoeda() {
                 tipoMoeda = 1;
                 break;
             default:
-                imgItemComprado = '';
-                txtItemComprado = '';
+                qtdeMoeda;
+                tipoMoeda;
                 break;
         }
+
+        setIsModalVisible(true); 
 
         // const compraMoedas = async (id, moeda, quantidade) => {
         //     try {
@@ -54,6 +63,7 @@ function LojaMoeda() {
                 
         //         if (data.status === 200) {
         //             setResponse(data);
+        //             
         //         } 
         //         else {
         //             console.error('Erro na resposta do servidor:', data);
@@ -69,6 +79,7 @@ function LojaMoeda() {
     
     return(
         <section className="bg-loja-moeda">
+            {isModalVisible && <ModalCompraMoeda idCompra={idCompra} onClose={closeModal} />}
             <div className="bg-loja-moeda-container" id="bg-lojaMoeda">
                 <div className="menu-superior-loja-moeda">
                     <div className="menu-loja-moeda">

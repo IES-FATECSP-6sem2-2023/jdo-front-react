@@ -6,7 +6,7 @@
     scroll-behavior: smooth;
 }
 
-.background {
+.background-modal-compra-moeda{
     width: 100vw;
     height: 100vh;
     background-image: url('/src/assets/imagens/backgrounds/cenario_loja.png');

@@ -1,17 +1,13 @@
-import React from 'react';
-import './compraSkins.css';
+import React from "react";
+import './compraSkin.css';
 import { useNavigate } from 'react-router';
 
-function compraSkins() {
+function modalCompraSkin() {
     const navigate = useNavigate();
-
-    // switch (x) {}
-
-    // imgItem.style.backgroundImage = `url(${imgItemComprado})`;
     
     return(
-        <section className="background">
-            <div className="modal-container" id="modal">
+        <section className="background-modal-compra-skin">
+            <div className="modal-container-compra-skin" id="modal">
                 <div className="box-compra-loja-loja-skin" id="modal-compra">
                     <div className="box-titulo-loja-skin">
                         <h1>PARABÉNS!</h1>
@@ -31,4 +27,4 @@ function compraSkins() {
     )
 }
 
-export default compraSkins
+export default modalCompraSkin

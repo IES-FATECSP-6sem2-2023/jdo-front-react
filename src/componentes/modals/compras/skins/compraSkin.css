@@ -7,8 +7,15 @@
     scroll-behavior: smooth;
 }
 
+.background-modal-compra-skin {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('/src/assets/imagens/backgrounds/cenario_loja.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 
-.modal-container-loja-skin{
+.modal-container-compra-skin{
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -16,6 +23,7 @@
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.6);
 }
+
 
 .box-compra-loja-loja-skin{
     width: 50vw;
@@ -79,11 +87,6 @@
     font-family: 'Londrina Solid', cursive;
     font-size: 2em;
     color: #5E2C12;
-}
-
-.loja-skin{
-    width: 500px;
-    height: 80px;
 }
 
 .btn-loja-skin{
