@@ -11,7 +11,7 @@ import ModalCompraMoeda from '/src/componentes/modals/compras/moedas/compraMoeda
 function LojaMoeda() {
     const navigate = useNavigate()
     const { user } = useAuthConta();
-    const [idCompra, setIdCompra] = useState(null);
+    const [idCompraMoeda, setIdCompraMoeda] = useState(null);
     const [isModalVisible, setIsModalVisible] = useState(false);
 
     const closeModal = () => {
@@ -21,8 +21,7 @@ function LojaMoeda() {
     const compraMoeda = (event) => {
         let idMoeda = parseInt(event.target.value)
         let qtdeMoeda, tipoMoeda;
-        setIdCompra(idMoeda);
-
+        setIdCompraMoeda(idMoeda);
 
         switch (idMoeda) {
             case 1:
@@ -79,7 +78,7 @@ function LojaMoeda() {
     
     return(
         <section className="bg-loja-moeda">
-            {isModalVisible && <ModalCompraMoeda idCompra={idCompra} onClose={closeModal} />}
+            {isModalVisible && <ModalCompraMoeda idCompraMoeda={idCompraMoeda} onClose={closeModal} />}
             <div className="bg-loja-moeda-container" id="bg-lojaMoeda">
                 <div className="menu-superior-loja-moeda">
                     <div className="menu-loja-moeda">

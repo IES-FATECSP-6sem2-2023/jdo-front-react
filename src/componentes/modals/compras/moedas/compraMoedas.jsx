@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 
 function compraMoedas(idItemComprado) {
     const navigate = useNavigate();
-    const { idCompra } = idItemComprado;
+    const { idCompraMoeda } = idItemComprado;
 
     const imgItemRef = useRef(null);
     const textoItemRef = useRef(null);
@@ -15,7 +15,7 @@ function compraMoedas(idItemComprado) {
         const textoItem = textoItemRef.current;
         let imgItemComprado, txtItemComprado;
 
-        switch (idCompra) {
+        switch (idCompraMoeda) {
             case 1:
                 imgItemComprado = '/src/assets/imagens/vetores/poucas_esmeraldas.png';
                 txtItemComprado = 'VOCÊ COMPROU 100 ESMERALDAS!';
@@ -51,7 +51,7 @@ function compraMoedas(idItemComprado) {
             textoItem.textContent = txtItemComprado;
         }
 
-    },[idCompra])
+    },[idCompraMoeda])
     
     return(
         <section className="background-modal-compra-moeda">

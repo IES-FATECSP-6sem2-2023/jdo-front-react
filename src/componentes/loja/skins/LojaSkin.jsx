@@ -1,21 +1,33 @@
-import React from 'react';
+import React, {useState } from 'react';
 import { useNavigate } from 'react-router';
 import './LojaSkin.css';
 import ReturnIcon from '/src/assets/imagens/icones/ReturnIcon';
 import Skin from '/src/assets/imagens/skins/onca_amazonia.png';
 import useAuthConta from '/src/hooks/AuthConta';
+import ModalCompraSkin from '/src/componentes/modals/compras/skins/compraSkin';
+
 // @ToDo: montar lógica para validar se é possível comprar skin (se não, mandar para loja de moeda) + salvar ela na conta do usuario +atualizar informação na sessão (essa parte o paulo faz)
 
 function LojaSkin() {
     const navigate = useNavigate();
     const { user } = useAuthConta();
+    const [idCompraSkin, setIdCompraSkin] = useState(null);
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
+    const closeModal = () => {
+        setIsModalVisible(false);
+    };
    
     const compraSkin = (event) => {
-
+        let idSkin = parseInt(event.currentTarget.value);
+        console.log(idSkin)
+        setIdCompraSkin(idSkin);
+        setIsModalVisible(true);
     }
 
     return (
             <section className="bg-loja-skin">
+                {isModalVisible && <ModalCompraSkin idCompraSkin={idCompraSkin} onClose={closeModal} />}
                 <div className="bg-loja-skin-container" id="bg-lojaSkin">
                     <div className="menu-superior-loja-skin">
                         <div className="menu-loja-skin">
