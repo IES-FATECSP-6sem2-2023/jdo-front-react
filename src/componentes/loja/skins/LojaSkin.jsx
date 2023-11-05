@@ -1,65 +1,33 @@
-import React from 'react';
+import React, {useState } from 'react';
 import { useNavigate } from 'react-router';
 import './LojaSkin.css';
 import ReturnIcon from '/src/assets/imagens/icones/ReturnIcon';
 import Skin from '/src/assets/imagens/skins/onca_amazonia.png';
 import useAuthConta from '/src/hooks/AuthConta';
+import ModalCompraSkin from '/src/componentes/modals/compras/skins/compraSkin';
+
+// @ToDo: montar lógica para validar se é possível comprar skin (se não, mandar para loja de moeda) + salvar ela na conta do usuario +atualizar informação na sessão (essa parte o paulo faz)
 
 function LojaSkin() {
     const navigate = useNavigate();
     const { user } = useAuthConta();
+    const [idCompraSkin, setIdCompraSkin] = useState(null);
+    const [isModalVisible, setIsModalVisible] = useState(false);
 
-    // @ToDo: montar lógica para validar se é possível comprar skin (se não, mandar para loja de moeda) + salvar ela na conta do usuario + atualizar informação na sessão (essa parte o paulo faz)
-
+    const closeModal = () => {
+        setIsModalVisible(false);
+    };
+   
     const compraSkin = (event) => {
-        const modal = document.getElementById("modal");
-        const modalCompra = document.getElementById("modal-compra");
-        const bgLojaSkin = document.getElementById("bg-lojaSkin");
-        const imgItem = document.getElementById("img-item-comprado");
-
-        bgLojaSkin.style.display = 'none';
-        modal.style.display = 'flex';
-        modalCompra.style.display = 'block';
-
-        let imgItemComprado = '';
-        let tipoMoeda = 0; //0-esmeralda; 1-moeda
-        let valorMoeda = 0;
-
-        switch (parseInt(event.currentTarget.value)) {
-            case 1:
-                imgItemComprado = '/src/assets/imagens/skins/cachorro_caatinga.png';
-                tipoMoeda = 0;
-                valorMoeda = 55;
-                break;
-            case 2:
-                imgItemComprado = '/src/assets/imagens/skins/cachorro_caatinga.png';
-                tipoMoeda = 1;
-                break;
-            default:
-                break;
-        }
-
-        imgItem.style.backgroundImage = `url(${imgItemComprado})`;
+        let idSkin = parseInt(event.currentTarget.value);
+        console.log(idSkin)
+        setIdCompraSkin(idSkin);
+        setIsModalVisible(true);
     }
 
     return (
             <section className="bg-loja-skin">
-                <div className="modal-container-loja-skin" id="modal">
-                    <div className="box-compra-loja-loja-skin" id="modal-compra">
-                        <div className="box-titulo-loja-skin">
-                            <h1>PARABÉNS!</h1>
-                        </div>
-                        <div className="box-content-loja-skin">
-                            <div className="img-compra-loja-skin">
-                                <div className="img-item-comprado-loja-skin" id="img-item-comprado"></div>
-                            </div>
-                            <div className="compra-texto-loja-skin">
-                                <p id="texto-item-comprado-loja-skin">VOCÊ COMPROU UMA NOVA SKIN!</p>
-                            </div>
-                            <button className="btn-loja-skin">VER NA COLEÇÃO</button>
-                        </div>
-                    </div>
-                </div>
+                {isModalVisible && <ModalCompraSkin idCompraSkin={idCompraSkin} onClose={closeModal} />}
                 <div className="bg-loja-skin-container" id="bg-lojaSkin">
                     <div className="menu-superior-loja-skin">
                         <div className="menu-loja-skin">
