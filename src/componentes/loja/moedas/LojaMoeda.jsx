@@ -52,28 +52,26 @@ function LojaMoeda() {
                 qtdeMoeda;
                 tipoMoeda;
                 break;
-        }
+        } 
 
-        setIsModalVisible(true); 
-
-        // const compraMoedas = async (id, moeda, quantidade) => {
-        //     try {
-        //         const data = await LojaMoedaService.sendCoins(id, moeda, quantidade);
+        const compraMoedas = async (id, moeda, quantidade) => {
+            try {
+                const data = await LojaMoedaService.sendCoins(id, moeda, quantidade);
                 
-        //         if (data.status === 200) {
-        //             setResponse(data);
-        //             
-        //         } 
-        //         else {
-        //             console.error('Erro na resposta do servidor:', data);
-        //         }
-        //     } 
-        //     catch (error) {
-        //         console.error('Erro na busca de dados:', error);
-        //     }
-        // };
+                if (data.status === 200) {
+                    setResponse(data);
+                    setIsModalVisible(true);                    
+                } 
+                else {
+                    console.error('Erro na resposta do servidor:', data);
+                }
+            } 
+            catch (error) {
+                console.error('Erro na busca de dados:', error);
+            }
+        };
 
-        // compraMoedas(1, tipoMoeda, qtdeMoeda);
+        compraMoedas(user, tipoMoeda, qtdeMoeda);
     }
     
     return(
