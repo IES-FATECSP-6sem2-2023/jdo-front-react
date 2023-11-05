@@ -1,13 +1,25 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import LogOutIcon from '/src/assets/imagens/icones/LogOutIcon';
 import VolumeOffIcon from '/src/assets/imagens/icones/VolumeOffIcon';
 import VolumeOnIcon from '/src/assets/imagens/icones/VolumeOnIcon';
 import placaUser from '/src/assets/imagens/placas/placa_usuario.png';
+import Cronometro from './cronometro/Cronometro';
 import './Tabuleiro.css';
 
 function Tabuleiro({musicaAtiva, toggleMusica}) {
     const navigate = useNavigate()
+
+    const [jogadorAtual, setJogadorAtual] = useState(2);
+
+    const alternarJogador = () => {
+      setJogadorAtual(jogadorAtual === 1 ? 2 : 1);
+    };
+  
+    const handleTempoEsgotado = (jogador) => {
+      console.log(`Tempo esgotado para Jogador ${jogador}`);
+      alternarJogador();
+    };
 
     const toggleVolume = () => {
         toggleMusica()
@@ -128,9 +140,7 @@ function Tabuleiro({musicaAtiva, toggleMusica}) {
                                 <div className="placar-onca-tabuleiro"></div>
                                 <div className="placar-onca-tabuleiro"></div>
                             </div>
-                            <div className="contador-tabuleiro">
-                                <h1>10</h1>
-                            </div>
+                            <Cronometro jogador={1} ativo={jogadorAtual === 1} onTempoEsgotado={handleTempoEsgotado} />
                             <div className="info-user-tabuleiro jogador-onca-tabuleiro">
                                 <img src={placaUser} />
                                 <h1 id="contador-onca-tabuleiro">JOGADOR ONÇA</h1>
@@ -221,9 +231,7 @@ function Tabuleiro({musicaAtiva, toggleMusica}) {
                             </button>
                         </div>
                         <div className="area-cachorro-container-tabuleiro">
-                            <div className="contador-tabuleiro">
-                                <h1>10</h1>
-                            </div>
+                            <Cronometro jogador={2} ativo={jogadorAtual === 2} onTempoEsgotado={handleTempoEsgotado} />
                             <div className="info-user-tabuleiro jogador-cachorro-tabuleiro">
                                 <img src={placaUser} />
                                 <h1>JOGADOR CACHORRO</h1>
