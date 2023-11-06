@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 function Cronometro({ jogador, ativo, onTempoEsgotado }) {
-    const [tempoRestante, setTempoRestante] = useState(15);
+    const [tempoRestante, setTempoRestante] = useState(10);
   
     useEffect(() => {
       if (tempoRestante > 0 && ativo) {
