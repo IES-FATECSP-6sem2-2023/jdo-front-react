@@ -40,7 +40,7 @@ export const TabuleiroProvider = ({ children }) => {
             if (session.jogador.id === partida.primeirojogador.idJogador) localStorage.setItem("timeTabuleiro", 1);
             if (session.jogador.id === partida.segundojogador.idJogador) localStorage.setItem("timeTabuleiro", 2);
         }
-    }, [partida]);
+    }, []);
 
     const criarPartida = async () => {
         try {
@@ -72,7 +72,6 @@ export const TabuleiroProvider = ({ children }) => {
     const movimentarPartida = async (xOri, yOri, xDes, yDes, jogador) => {
         if (partida) {
             try {
-                debugger
                 const partidaReturn = await TabuleiroService.movimentaPartida(partida);
                 setPartida(partidaReturn.data);
                 return;
