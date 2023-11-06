@@ -12,7 +12,7 @@ function Tabuleiro({musicaAtiva, toggleMusica}) {
     const {partida, movimentarPartida, finalizarPartida} = useTabuleiro();
     const navigate = useNavigate()
 
-    const jogadorOnline = localStorage.getItem("timeTabuleiro") == 2 ? "cachorro" : "onca";
+    const jogadorOnline = localStorage.getItem("timeTabuleiro") === 1 ? "onca" : "cachorro";
     const [jogadorDaVez, setJogadorAtual] = useState("cachorro");
 
     const alternarJogador = () => {
