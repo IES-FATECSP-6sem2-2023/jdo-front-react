@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
-import ContaService from '/src/services/ContaService';
 import AuthService from "/src/services/AuthService";
+import ContaService from '/src/services/ContaService';
 
 export const AuthContaContext = createContext({});
 
@@ -30,7 +30,7 @@ export const AuthContaProvider = ({ children }) => {
           sessionUser(responseLogin.id);
         } 
       } catch (e) {
-        alert("Conta não encontrada!")
+        toast.error("Conta não encontrada!")
         return false;
       }
       return true;
@@ -40,10 +40,10 @@ export const AuthContaProvider = ({ children }) => {
         try {
           const responseCadastro = await AuthService.authCadastroConta(nome, userName, email, senha);
           if (responseCadastro) {
-            alert("Cadastro realizado com sucesso!")
+            toast.success("Cadastro realizado com sucesso!")
           }
         } catch(e) {
-          alert("Erro ao fazer Cadastro!")
+          toast.error("Erro ao fazer Cadastro!")
           return false;
         }
         return true;

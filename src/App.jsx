@@ -8,17 +8,17 @@ import Login from './componentes/login/Login.jsx';
 import EsqueciSenha from './componentes/login/esqueciSenha/EsqueciSenha.jsx';
 import LojaMoeda from './componentes/loja/moedas/LojaMoeda.jsx';
 import LojaSkin from './componentes/loja/skins/LojaSkin.jsx';
-import TabuleiroWithProvider from './providers/TabuleiroWithProvider.jsx';
-import GlobalProvider from './providers/GlobalProvider.jsx';
-import Loading from './componentes/modals/loading/loading.jsx';
-import Erro from './componentes/modals/erro/erro.jsx';
-import Sucesso from './componentes/modals/sucesso/sucesso.jsx';
-import Vitoria from './componentes/modals/vitoria/vitoria.jsx';
+import CompraMoedas from './componentes/modals/compras/moedas/CompraMoedas.jsx';
+import CompraSkins from './componentes/modals/compras/skins/compraSkin.jsx';
 import Derrota from './componentes/modals/derrota/derrota.jsx';
 import Desistir from './componentes/modals/desistir/desistir.jsx';
+import Erro from './componentes/modals/erro/erro.jsx';
 import Fila from './componentes/modals/fila/fila.jsx';
-import CompraMoedas from './componentes/modals/compras/moedas/CompraMoedas.jsx';
-import CompraSkins from './componentes/modals/compras/skins/compraSkin.jsx'
+import Loading from './componentes/modals/loading/loading.jsx';
+import Sucesso from './componentes/modals/sucesso/sucesso.jsx';
+import Vitoria from './componentes/modals/vitoria/vitoria.jsx';
+import GlobalProvider from './providers/GlobalProvider.jsx';
+import TabuleiroWithProvider from './providers/TabuleiroWithProvider.jsx';
 import useAuthConta from '/src/hooks/AuthConta';
 
 const Private = () => {
@@ -74,7 +74,7 @@ const App = () => {
             </Routes>
           </GlobalProvider>
         </BrowserRouter>
-      
+        
     </>
   )
 }

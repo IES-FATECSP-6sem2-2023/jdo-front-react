@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import TabuleiroService from "../services/TabuleiroService";
 
 export const TabuleiroContext = createContext({});
@@ -49,7 +50,7 @@ export const TabuleiroProvider = ({ children }) => {
             }
             return;
         } catch (e) {
-            alert("Erro ao tentar criar uma partida!");
+            toast.error("Erro ao tentar criar uma partida!");
             return;
         }
     }
@@ -62,7 +63,7 @@ export const TabuleiroProvider = ({ children }) => {
                 setPartida(partida.data);
                 return;
             } catch (e) {
-                alert("Erro ao tentar entrar em uma partida!");
+                toast.error("Erro ao tentar entrar em uma partida!");
                 return;
             }
         }
@@ -71,11 +72,12 @@ export const TabuleiroProvider = ({ children }) => {
     const movimentarPartida = async (xOri, yOri, xDes, yDes, jogador) => {
         if (partida) {
             try {
+                debugger
                 const partidaReturn = await TabuleiroService.movimentaPartida(partida);
                 setPartida(partidaReturn.data);
                 return;
             } catch (e) {
-                console.error("Erro ao tentar efetuar movimentação!")
+                toast.error("Erro ao tentar efetuar movimentação!")
                 // @ToDo: ver como voltar o tabuleiro a versão anterior dessa movimentação
                 return;
             }            
@@ -94,7 +96,7 @@ export const TabuleiroProvider = ({ children }) => {
                 setPartida(partidaReturn.data);
                 return;
             } catch (e) {
-                alert("Erro inesperado ao finalizar partida!")
+                toast.error("Erro inesperado ao finalizar partida!")
                 return;
             }
         }

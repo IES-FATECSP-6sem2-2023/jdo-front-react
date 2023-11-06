@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function Cronometro({ jogador, ativo, onTempoEsgotado }) {
     const [tempoRestante, setTempoRestante] = useState(10);
@@ -12,8 +12,8 @@ function Cronometro({ jogador, ativo, onTempoEsgotado }) {
         return () => clearTimeout(timer);
       } else if (tempoRestante === 0 && ativo) {
         onTempoEsgotado(jogador);
-        setTempoRestante(10);
       }
+      setTempoRestante(10);
     }, [tempoRestante, jogador, ativo, onTempoEsgotado]);
 
   return (

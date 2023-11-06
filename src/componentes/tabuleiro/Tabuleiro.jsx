@@ -1,12 +1,12 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './Tabuleiro.css';
+import Cronometro from './cronometro/Cronometro';
 import LogOutIcon from '/src/assets/imagens/icones/LogOutIcon';
 import VolumeOffIcon from '/src/assets/imagens/icones/VolumeOffIcon';
 import VolumeOnIcon from '/src/assets/imagens/icones/VolumeOnIcon';
 import placaUser from '/src/assets/imagens/placas/placa_usuario.png';
-import Cronometro from './cronometro/Cronometro';
 import useTabuleiro from '/src/hooks/TabuleiroHook';
-import './Tabuleiro.css';
 
 function Tabuleiro({musicaAtiva, toggleMusica}) {
     const {partida, movimentarPartida, finalizarPartida} = useTabuleiro();
@@ -71,7 +71,7 @@ function Tabuleiro({musicaAtiva, toggleMusica}) {
         if (jogadorOnline === jogadorDaVez && peca === jogadorDaVez && peca !== "" && peca !== "tri") {
           setPecaSelecionada({ y, x });
         } else if (peca === "" && pecaSelecionada.y !== undefined) {
-          const movimentoValido = movimentarPartida(pecaSelecionada.x, pecaSelecionada.y, x, y);
+          const movimentoValido = movimentarPartida(pecaSelecionada.y, pecaSelecionada.x, y, x);
           if (movimentoValido) {
           
             const novaFormacaoTabuleiro = [...formacaoInicialTabuleiro];
@@ -79,7 +79,7 @@ function Tabuleiro({musicaAtiva, toggleMusica}) {
             novaFormacaoTabuleiro[pecaSelecionada.y][pecaSelecionada.x] = "";
           
             setFormacaoInicialTabuleiro(novaFormacaoTabuleiro);
-            handleTempoEsgotado(jogadorDaVez) // @ToDo: arrumar quando é feito movimentação
+            handleTempoEsgotado(jogadorDaVez);
           }
         }
       };
