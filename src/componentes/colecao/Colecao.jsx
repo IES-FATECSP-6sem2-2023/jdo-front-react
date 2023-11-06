@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import ReturnIcon from '/src/assets/imagens/icones/ReturnIcon';
 import './Colecao.css';
+import ReturnIcon from '/src/assets/imagens/icones/ReturnIcon';
 
 function Colecao() {
     const navigate = useNavigate()
@@ -44,9 +44,9 @@ function Colecao() {
         const opcaoSkin = document.querySelector('input[type="radio"][name="opcaoSkin"]:checked');
         if (opcaoSkin) {
             let skinSelecionada = opcaoSkin.value;
-            console.log('Opção selecionada: ' + skinSelecionada);
+            toast.info('Opção selecionada: ' + skinSelecionada);
         } else {
-            console.log('Nenhuma opção selecionada.');
+            toast.info('Nenhuma opção selecionada.');
         }
     }
 
