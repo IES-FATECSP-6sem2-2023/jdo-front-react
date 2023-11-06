@@ -208,13 +208,20 @@
     transition: all 0.3s ease;
 }
 
+.peca-selecionada-tabuleiro {
+    background-color: #ff7723 !important;
+}
+.peca-jogador-tabuleiro {
+    background-color: #fff !important;
+}
+
 .peca-cachorro-tabuleiro {
-    background-color: #ffffff;
+    background-color: #c2c2c2e6;
     background-image: url("/src/assets/imagens/skins/cachorro_amazonia.png");
 }
 
 .peca-onca-tabuleiro {
-    background-color: #ff7723;
+    background-color: #c2c2c2e6;
     background-image: url("/src/assets/imagens/skins/onca_amazonia.png");
 }
 

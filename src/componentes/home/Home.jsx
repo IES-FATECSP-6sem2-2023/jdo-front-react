@@ -32,7 +32,6 @@ function Home({musicaAtiva, toggleMusica}) {
                         <div className="item-menu nivel">
                             <div className="icon icon-nivel">
                                 <p className="numNivel">{user?.jogador?.nivelatual}</p>
-                                <div className="icon-nivel"></div>
                             </div>
                             <div className="info inivel">
                                 <button className="info nivel">

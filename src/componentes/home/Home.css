@@ -60,6 +60,7 @@
 .icon-nivel {
     width: 22%;
     height: 55%;
+    background-position: center;
     background-image: url('/src/assets/imagens/vetores/nivel.png');
 }
 
@@ -80,7 +81,7 @@
 }
 
 .numNivel {
-    margin-left: 15px;
+    text-align: center;
     margin-top: 5px;
     font-size: 1.5em;
     font-family: 'Londrina Solid', cursive;

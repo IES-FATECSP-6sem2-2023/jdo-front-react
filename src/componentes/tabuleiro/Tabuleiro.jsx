@@ -1,23 +1,27 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './Tabuleiro.css';
+import Cronometro from './cronometro/Cronometro';
 import LogOutIcon from '/src/assets/imagens/icones/LogOutIcon';
 import VolumeOffIcon from '/src/assets/imagens/icones/VolumeOffIcon';
 import VolumeOnIcon from '/src/assets/imagens/icones/VolumeOnIcon';
 import placaUser from '/src/assets/imagens/placas/placa_usuario.png';
-import Cronometro from './cronometro/Cronometro';
-import './Tabuleiro.css';
+import useTabuleiro from '/src/hooks/TabuleiroHook';
 
 function Tabuleiro({musicaAtiva, toggleMusica}) {
+    const {partida, movimentarPartida, finalizarPartida} = useTabuleiro();
     const navigate = useNavigate()
 
-    const [jogadorAtual, setJogadorAtual] = useState(2);
+    const jogadorOnline = localStorage.getItem("timeTabuleiro") == 2 ? "cachorro" : "onca";
+    const [jogadorDaVez, setJogadorAtual] = useState("cachorro");
 
     const alternarJogador = () => {
-      setJogadorAtual(jogadorAtual === 1 ? 2 : 1);
+      setJogadorAtual(jogadorDaVez === "onca" ? "cachorro" : "onca");
     };
   
     const handleTempoEsgotado = (jogador) => {
       console.log(`Tempo esgotado para Jogador ${jogador}`);
+      setPecaSelecionada({})
       alternarJogador();
     };
 
@@ -26,6 +30,8 @@ function Tabuleiro({musicaAtiva, toggleMusica}) {
     }
 
     const desistir = () => {
+        localStorage.removeItem("timeTabuleiro")
+        finalizarPartida()
         navigate("/menu")
     }
 
@@ -47,6 +53,36 @@ function Tabuleiro({musicaAtiva, toggleMusica}) {
             console.log("Valor não reconhecido");
         }
     }
+
+    const [formacaoInicialTabuleiro, setFormacaoInicialTabuleiro] = useState([
+        ["cachorro", "cachorro", "cachorro", "cachorro", "cachorro"],
+        ["cachorro", "cachorro", "cachorro", "cachorro", "cachorro"],
+        ["cachorro", "cachorro", "onca", "cachorro", "cachorro"],
+        ["", "", "", "", ""],
+        ["", "", "", "", ""],
+        ["tri", "", "", "", "tri"],
+        ["", "tri", "", "tri", ""],
+        
+    ]);
+
+    const [pecaSelecionada, setPecaSelecionada] = useState({});
+    
+    const handleCellClick = (x, y, peca) => {
+        if (jogadorOnline === jogadorDaVez && peca === jogadorDaVez && peca !== "" && peca !== "tri") {
+          setPecaSelecionada({ y, x });
+        } else if (peca === "" && pecaSelecionada.y !== undefined) {
+          const movimentoValido = movimentarPartida(pecaSelecionada.y, pecaSelecionada.x, y, x);
+          if (movimentoValido) {
+          
+            const novaFormacaoTabuleiro = [...formacaoInicialTabuleiro];
+            novaFormacaoTabuleiro[y][x] = jogadorDaVez;
+            novaFormacaoTabuleiro[pecaSelecionada.y][pecaSelecionada.x] = "";
+          
+            setFormacaoInicialTabuleiro(novaFormacaoTabuleiro);
+            handleTempoEsgotado(jogadorDaVez);
+          }
+        }
+      };
 
     // const modal = document.getElementById("modal");
     // const modalLoading = document.getElementById("modal-loading");
@@ -82,7 +118,7 @@ function Tabuleiro({musicaAtiva, toggleMusica}) {
                                 <div className="placar-onca-tabuleiro"></div>
                                 <div className="placar-onca-tabuleiro"></div>
                             </div>
-                            <Cronometro jogador={1} ativo={jogadorAtual === 1} onTempoEsgotado={handleTempoEsgotado} />
+                            <Cronometro jogador={"onca"} ativo={jogadorDaVez === "onca"} onTempoEsgotado={handleTempoEsgotado} />
                             <div className="info-user-tabuleiro jogador-onca-tabuleiro">
                                 <img src={placaUser} />
                                 <h1 id="contador-onca-tabuleiro">JOGADOR ONÇA</h1>
@@ -93,55 +129,29 @@ function Tabuleiro({musicaAtiva, toggleMusica}) {
                         <div className="tabuleiro">
                             <div className="tabuleiro-container">
                                 <div className="malha-tabuleiro">
-                                    <div className="row-tabuleiro">
-                                        <div className="cell-tabuleiro peca-cachorro-tabuleiro" data-x="0" data-y="0"></div>
-                                        <div className="cell-tabuleiro peca-cachorro-tabuleiro" data-x="1" data-y="0"></div>
-                                        <div className="cell-tabuleiro peca-cachorro-tabuleiro" data-x="2" data-y="0"></div>
-                                        <div className="cell-tabuleiro peca-cachorro-tabuleiro" data-x="3" data-y="0"></div>
-                                        <div className="cell-tabuleiro peca-cachorro-tabuleiro" data-x="4" data-y="0"></div>
+                                    {/* Renderização dinâmica do tabuleiro */}
+                                    {formacaoInicialTabuleiro.map((row, y) => (
+                                    <div className="row-tabuleiro" key={y}>
+                                        {row.map((peca, x) => (
+                                        peca === "tri" ? (
+                                            <div className="cell-tri-tabuleiro" data-x={x} data-y={y} key={x}></div>
+                                        ) : (
+                                            <div
+                                                className={`
+                                                cell-tabuleiro 
+                                                peca-${peca}-tabuleiro
+                                                ${x === pecaSelecionada?.x && y === pecaSelecionada?.y ? 'peca-selecionada-tabuleiro' : ''}
+                                                ${peca === jogadorDaVez && !(x === pecaSelecionada?.x && y === pecaSelecionada?.y) ? 'peca-jogador-tabuleiro' : ''} 
+                                                `}
+                                                data-x={x}
+                                                data-y={y}
+                                                key={x}
+                                                onClick={() => handleCellClick(x, y, peca)}
+                                            ></div>
+                                        )
+                                        ))}
                                     </div>
-                                    <div className="row-tabuleiro">
-                                        <div className="cell-tabuleiro peca-cachorro-tabuleiro" data-x="0" data-y="1"></div>
-                                        <div className="cell-tabuleiro peca-cachorro-tabuleiro" data-x="1" data-y="1"></div>
-                                        <div className="cell-tabuleiro peca-cachorro-tabuleiro" data-x="2" data-y="1"></div>
-                                        <div className="cell-tabuleiro peca-cachorro-tabuleiro" data-x="3" data-y="1"></div>
-                                        <div className="cell-tabuleiro peca-cachorro-tabuleiro" data-x="4" data-y="1"></div>
-                                    </div>
-                                    <div className="row-tabuleiro">
-                                        <div className="cell-tabuleiro peca-cachorro-tabuleiro" data-x="0" data-y="2"></div>
-                                        <div className="cell-tabuleiro peca-cachorro-tabuleiro" data-x="1" data-y="2"></div>
-                                        <div className="cell-tabuleiro peca-onca-tabuleiro" data-x="2" data-y="2"></div>
-                                        <div className="cell-tabuleiro peca-cachorro-tabuleiro" data-x="3" data-y="2"></div>
-                                        <div className="cell-tabuleiro peca-cachorro-tabuleiro" data-x="4" data-y="2"></div>
-                                    </div>
-                                    <div className="row-tabuleiro">
-                                        <div className="cell-tabuleiro" data-x="0" data-y="3"></div>
-                                        <div className="cell-tabuleiro" data-x="1" data-y="3"></div>
-                                        <div className="cell-tabuleiro" data-x="2" data-y="3"></div>
-                                        <div className="cell-tabuleiro" data-x="3" data-y="3"></div>
-                                        <div className="cell-tabuleiro" data-x="4" data-y="3"></div>
-                                    </div>
-                                    <div className="row-tabuleiro">
-                                        <div className="cell-tabuleiro" data-x="0" data-y="4"></div>
-                                        <div className="cell-tabuleiro" data-x="1" data-y="4"></div>
-                                        <div className="cell-tabuleiro" data-x="2" data-y="4"></div>
-                                        <div className="cell-tabuleiro" data-x="3" data-y="4"></div>
-                                        <div className="cell-tabuleiro" data-x="4" data-y="4"></div>
-                                    </div>
-                                    <div className="row-tabuleiro">
-                                        <div className="cell-tri-tabuleiro" data-x="0" data-y="5"></div>
-                                        <div className="cell-tabuleiro" data-x="1" data-y="5"></div>
-                                        <div className="cell-tabuleiro" data-x="2" data-y="5"></div>
-                                        <div className="cell-tabuleiro" data-x="3" data-y="5"></div>
-                                        <div className="cell-tri-tabuleiro" data-x="4" data-y="5"></div>
-                                    </div>
-                                    <div className="row-tabuleiro">
-                                        <div className="cell-tabuleiro" data-x="0" data-y="6"></div>
-                                        <div className="cell-tri-tabuleiro" data-x="1" data-y="6"></div>
-                                        <div className="cell-tabuleiro" data-x="2" data-y="6"></div>
-                                        <div className="cell-tri-tabuleiro" data-x="3" data-y="6"></div>
-                                        <div className="cell-tabuleiro" data-x="4" data-y="6"></div>
-                                    </div>
+                                    ))}
                                 </div>
                             </div>
                         </div>
@@ -173,7 +183,7 @@ function Tabuleiro({musicaAtiva, toggleMusica}) {
                             </button>
                         </div>
                         <div className="area-cachorro-container-tabuleiro">
-                            <Cronometro jogador={2} ativo={jogadorAtual === 2} onTempoEsgotado={handleTempoEsgotado} />
+                            <Cronometro jogador={"cachorro"} ativo={jogadorDaVez === "cachorro"} onTempoEsgotado={handleTempoEsgotado} />
                             <div className="info-user-tabuleiro jogador-cachorro-tabuleiro">
                                 <img src={placaUser} />
                                 <h1>JOGADOR CACHORRO</h1>
