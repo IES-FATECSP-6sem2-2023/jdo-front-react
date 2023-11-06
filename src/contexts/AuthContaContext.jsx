@@ -11,7 +11,6 @@ export const AuthContaProvider = ({ children }) => {
       const userToken = localStorage.getItem("userToken");
       if (userToken) {
        let getSession = JSON.parse(localStorage.getItem("userLogin"));
-       console.log(getSession);
        setUser(getSession)
       }
     }, []);
