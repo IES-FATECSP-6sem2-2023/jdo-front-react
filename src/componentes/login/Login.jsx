@@ -1,17 +1,17 @@
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
+import './Login.css';
 import LockIcon from '/src/assets/imagens/icones/LockIcon';
-import UserIcon from '/src/assets/imagens/icones/UserIcon';
 import MailIcon from '/src/assets/imagens/icones/MailIcon';
 import TagIcon from '/src/assets/imagens/icones/TagIcon';
-import Logobranco from '/src/assets/imagens/vetores/logo-branco.png';
-import VolumeOnIcon from '/src/assets/imagens/icones/VolumeOnIcon';
-import VolumeOffIcon from '/src/assets/imagens/icones/VolumeOffIcon';
+import UserIcon from '/src/assets/imagens/icones/UserIcon';
 import VisibilityIcon from '/src/assets/imagens/icones/VisibilityIcon';
 import VisibilityOffIcon from '/src/assets/imagens/icones/VisibilityOffIcon';
-import React, { useState } from 'react';
-import {validatePassword} from '/src/utils/Regex.jsx';
-import './Login.css';
+import VolumeOffIcon from '/src/assets/imagens/icones/VolumeOffIcon';
+import VolumeOnIcon from '/src/assets/imagens/icones/VolumeOnIcon';
+import Logobranco from '/src/assets/imagens/vetores/logo-branco.png';
 import useAuthConta from '/src/hooks/AuthConta';
+import { validatePassword } from '/src/utils/Regex.jsx';
 
 function Login({musicaAtiva, toggleMusica}) {
 	const navigate = useNavigate();
@@ -42,7 +42,6 @@ function Login({musicaAtiva, toggleMusica}) {
 		} else {
 			setSenhaErr(false);
 			const cadastroSucesso = await signup(nome, userName, email, senha);
-			debugger
 			cadastroSucesso ? toggle(!login) : '';
 		}
 	}

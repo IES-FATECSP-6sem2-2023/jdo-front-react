@@ -11,54 +11,61 @@ export const AuthContaProvider = ({ children }) => {
     useEffect(() => {
       const userToken = localStorage.getItem("userToken");
       if (userToken) {
-       let getSession = JSON.parse(localStorage.getItem("userLogin"));
-       setUser(getSession)
+        let getSession = JSON.parse(localStorage.getItem("userLogin"));
+        setUser(getSession)
       }
     }, []);
 
     const sessionUser = async (id) => {
-      const data = await ContaService.getConta(id);
-      const token = Math.random().toString(36).substring(2);
-      localStorage.setItem("userLogin", JSON.stringify(data))
-      localStorage.setItem("userToken", token)
-      setUser(data);
+      try {
+        const data = await ContaService.getConta(id);
+        const token = Math.random().toString(36).substring(2);
+        localStorage.setItem("userLogin", JSON.stringify(data))
+        localStorage.setItem("userToken", token)
+        setUser(data);
+      } catch (error) {
+        console.error(error);
+        toast.error("Erro ao salvar informações!\nTente novamente!");
+        throw error;
+      }
     }
 
     const signin = async (email, senha) => {
       try {
         const responseLogin = await AuthService.authLoginConta(email, senha);
-        if (responseLogin) {
-          sessionUser(responseLogin.id);
-        } 
+        sessionUser(responseLogin.id);
+        toast.success("Login realizado com sucesso!");
         return true;
-      } catch (e) {
-        toast.error("Conta não encontrada!")
+      } catch (error) {
+        console.error(error);
+        toast.error("Conta não encontrada!");
         return false;
       }
     };
     
-      const signup = async (nome, userName, email, senha) => {
-        try {
-          const responseCadastro = await AuthService.authCadastroConta(nome, userName, email, senha);
-          if (responseCadastro) {
-            toast.success("Cadastro realizado com sucesso!");
-          }
+    const signup = async (nome, userName, email, senha) => {
+      try {
+        const responseCadastro = await AuthService.authCadastroConta(nome, userName, email, senha);
+        if (responseCadastro) {
+          toast.success("Cadastro realizado com sucesso!");
           return true;
-        } catch(e) {
-          toast.error("Erro ao fazer Cadastro!")
-          return false;
         }
-      };
+      } catch (error) {
+        console.error(error);
+        toast.error("Erro ao fazer Cadastro!");
+        return false;
+      }
+    };
     
-      const signout = () => {
-        setUser(null);
-        localStorage.removeItem("userToken");
-        localStorage.removeItem("userLogin");
-      };
+    const signout = () => {
+      setUser(null);
+      localStorage.removeItem("userToken");
+      localStorage.removeItem("userLogin");
+    };
 
     return (
-        <AuthContaContext.Provider value={{user, signed: !user, signin, signup, signout}}>
-            {children}
-        </AuthContaContext.Provider>
+      <AuthContaContext.Provider value={{user, signed: !!user, signin, signup, signout}}>
+        {children}
+      </AuthContaContext.Provider>
     )
 }
