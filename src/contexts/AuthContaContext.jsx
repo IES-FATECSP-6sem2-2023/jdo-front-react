@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import AuthService from "/src/services/AuthService";
 import ContaService from '/src/services/ContaService';
 
@@ -29,24 +30,24 @@ export const AuthContaProvider = ({ children }) => {
         if (responseLogin) {
           sessionUser(responseLogin.id);
         } 
+        return true;
       } catch (e) {
         toast.error("Conta não encontrada!")
         return false;
       }
-      return true;
     };
     
       const signup = async (nome, userName, email, senha) => {
         try {
           const responseCadastro = await AuthService.authCadastroConta(nome, userName, email, senha);
           if (responseCadastro) {
-            toast.success("Cadastro realizado com sucesso!")
+            toast.success("Cadastro realizado com sucesso!");
           }
+          return true;
         } catch(e) {
           toast.error("Erro ao fazer Cadastro!")
           return false;
         }
-        return true;
       };
     
       const signout = () => {
@@ -56,7 +57,7 @@ export const AuthContaProvider = ({ children }) => {
       };
 
     return (
-        <AuthContaContext.Provider value={{user, signed: !!user, signin, signup, signout}}>
+        <AuthContaContext.Provider value={{user, signed: !user, signin, signup, signout}}>
             {children}
         </AuthContaContext.Provider>
     )

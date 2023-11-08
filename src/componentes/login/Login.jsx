@@ -34,24 +34,25 @@ function Login({musicaAtiva, toggleMusica}) {
 	const toggleVolume = () => {
         toggleMusica()
     }
-
-	const validaSenha = () => {
-		!validatePassword.test(senha) ? setSenhaErr(true) : setSenhaErr(false);
-	}
 	
 	const cadastrar = async (e) => {
 		e.preventDefault();
-		validaSenha();
-		if (!senhaErr) {
-			const cadastroSucesso = signup(nome, userName, email, senha);
+		if (!validatePassword.test(senha)) {
+			setSenhaErr(true);
+		} else {
+			setSenhaErr(false);
+			const cadastroSucesso = await signup(nome, userName, email, senha);
+			debugger
 			cadastroSucesso ? toggle(!login) : '';
 		}
 	}
 
 	const entrar = async (e) => {
 		e.preventDefault();
-		validaSenha();
-		if (!senhaErr) {
+		if (!validatePassword.test(senha)) {
+			setSenhaErr(true);
+		} else {
+			setSenhaErr(false);
 			const loginSucesso = await signin(email, senha);
 			loginSucesso ? navigate("/menu") : '';
 		}
