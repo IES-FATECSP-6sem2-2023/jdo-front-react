@@ -1,17 +1,17 @@
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
+import './Login.css';
 import LockIcon from '/src/assets/imagens/icones/LockIcon';
-import UserIcon from '/src/assets/imagens/icones/UserIcon';
 import MailIcon from '/src/assets/imagens/icones/MailIcon';
 import TagIcon from '/src/assets/imagens/icones/TagIcon';
-import Logobranco from '/src/assets/imagens/vetores/logo-branco.png';
-import VolumeOnIcon from '/src/assets/imagens/icones/VolumeOnIcon';
-import VolumeOffIcon from '/src/assets/imagens/icones/VolumeOffIcon';
+import UserIcon from '/src/assets/imagens/icones/UserIcon';
 import VisibilityIcon from '/src/assets/imagens/icones/VisibilityIcon';
 import VisibilityOffIcon from '/src/assets/imagens/icones/VisibilityOffIcon';
-import React, { useState } from 'react';
-import {validatePassword} from '/src/utils/Regex.jsx';
-import './Login.css';
+import VolumeOffIcon from '/src/assets/imagens/icones/VolumeOffIcon';
+import VolumeOnIcon from '/src/assets/imagens/icones/VolumeOnIcon';
+import Logobranco from '/src/assets/imagens/vetores/logo-branco.png';
 import useAuthConta from '/src/hooks/AuthConta';
+import { validatePassword } from '/src/utils/Regex.jsx';
 
 function Login({musicaAtiva, toggleMusica}) {
 	const navigate = useNavigate();
@@ -34,24 +34,24 @@ function Login({musicaAtiva, toggleMusica}) {
 	const toggleVolume = () => {
         toggleMusica()
     }
-
-	const validaSenha = () => {
-		!validatePassword.test(senha) ? setSenhaErr(true) : setSenhaErr(false);
-	}
 	
 	const cadastrar = async (e) => {
 		e.preventDefault();
-		validaSenha();
-		if (!senhaErr) {
-			const cadastroSucesso = signup(nome, userName, email, senha);
+		if (!validatePassword.test(senha)) {
+			setSenhaErr(true);
+		} else {
+			setSenhaErr(false);
+			const cadastroSucesso = await signup(nome, userName, email, senha);
 			cadastroSucesso ? toggle(!login) : '';
 		}
 	}
 
 	const entrar = async (e) => {
 		e.preventDefault();
-		validaSenha();
-		if (!senhaErr) {
+		if (!validatePassword.test(senha)) {
+			setSenhaErr(true);
+		} else {
+			setSenhaErr(false);
 			const loginSucesso = await signin(email, senha);
 			loginSucesso ? navigate("/menu") : '';
 		}

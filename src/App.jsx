@@ -25,14 +25,13 @@ const Private = () => {
   const { signed } = useAuthConta();
   return signed > 0 ? <Navigate to={'/menu'} /> : <Navigate to={'/login'} />
 }
+
 const App = () => {
- 
 
   const [musicaDeFundo, setMusicaDeFundo] = useState(new Audio('src/assets/sons/ambiente/ambiente2.wav'));
   const [musicaAtiva, setMusicaAtiva] = useState(false);
 
   const toggleMusica = () => {
-    
     if (musicaAtiva) {
       musicaDeFundo.pause();
     } else {
@@ -49,32 +48,30 @@ const App = () => {
 
   return (
     <>
-      
-        <BrowserRouter>
-          <GlobalProvider>
-            <Routes>
-                <Route path='/' element={<Private/>} />
-                <Route path='/login' element={<Login musicaAtiva={musicaAtiva} toggleMusica={toggleMusica} />} />
-                <Route path='/menu' element={<Home musicaAtiva={musicaAtiva} toggleMusica={toggleMusica} />} />
-                <Route path='/login/esqueci-senha' element={<EsqueciSenha/>} />
-                <Route path='/loja/skins' element={<LojaSkin />} />
-                <Route path='/loja/moedas' element={<LojaMoeda />} />
-                <Route path='/colecao' element={<Colecao />} />
-                <Route path='/conta' element={<Conta />} />
-                <Route path='/tabuleiro' element={<TabuleiroWithProvider musicaAtiva={musicaAtiva} toggleMusica={toggleMusica} />} />
-                <Route path='/loading' element={<Loading />} />
-                <Route path='/fila' element={<Fila />} />
-                <Route path='/erro' element={<Erro />} />
-                <Route path='/sucesso' element={<Sucesso />} />
-                <Route path='/vitoria' element={<Vitoria />} />
-                <Route path='/derrota' element={<Derrota />} />    
-                <Route path='/desistir' element={<Desistir />} />    
-                <Route path='/compras/moedas' element={<CompraMoedas />} />      
-                <Route path='/compras/skins' element={<CompraSkins />} />      
-            </Routes>
-          </GlobalProvider>
-        </BrowserRouter>
-        
+      <BrowserRouter>
+        <GlobalProvider>
+          <Routes>
+              <Route path='/' element={<Private/>} />
+              <Route path='/login' element={<Login musicaAtiva={musicaAtiva} toggleMusica={toggleMusica} />} />
+              <Route path='/menu' element={<Home musicaAtiva={musicaAtiva} toggleMusica={toggleMusica} />} />
+              <Route path='/login/esqueci-senha' element={<EsqueciSenha/>} />
+              <Route path='/loja/skins' element={<LojaSkin />} />
+              <Route path='/loja/moedas' element={<LojaMoeda />} />
+              <Route path='/colecao' element={<Colecao />} />
+              <Route path='/conta' element={<Conta />} />
+              <Route path='/tabuleiro' element={<TabuleiroWithProvider musicaAtiva={musicaAtiva} toggleMusica={toggleMusica} />} />
+              <Route path='/loading' element={<Loading />} />
+              <Route path='/fila' element={<Fila />} />
+              <Route path='/erro' element={<Erro />} />
+              <Route path='/sucesso' element={<Sucesso />} />
+              <Route path='/vitoria' element={<Vitoria />} />
+              <Route path='/derrota' element={<Derrota />} />    
+              <Route path='/desistir' element={<Desistir />} />    
+              <Route path='/compras/moedas' element={<CompraMoedas />} />      
+              <Route path='/compras/skins' element={<CompraSkins />} />      
+          </Routes>
+        </GlobalProvider>
+      </BrowserRouter>
     </>
   )
 }
