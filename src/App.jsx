@@ -8,7 +8,7 @@ import Login from './componentes/login/Login.jsx';
 import EsqueciSenha from './componentes/login/esqueciSenha/EsqueciSenha.jsx';
 import LojaMoeda from './componentes/loja/moedas/LojaMoeda.jsx';
 import LojaSkin from './componentes/loja/skins/LojaSkin.jsx';
-import CompraMoedas from './componentes/modals/compras/moedas/CompraMoedas.jsx';
+import CompraMoedas from './componentes/modals/compras/moedas/compraMoedas.jsx';
 import CompraSkins from './componentes/modals/compras/skins/compraSkin.jsx';
 import Derrota from './componentes/modals/derrota/derrota.jsx';
 import Desistir from './componentes/modals/desistir/desistir.jsx';
