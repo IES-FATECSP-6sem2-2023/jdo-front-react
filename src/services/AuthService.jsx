@@ -16,7 +16,7 @@ import axios from "axios";
         }
     };
 
-    const authCadastroConta = (nome, username, email, senha) => {
+    const authCadastroConta = async (nome, username, email, senha) => {
         try {
             const authCadastroContaRequest = {
                 nome: nome,
@@ -24,7 +24,7 @@ import axios from "axios";
                 email: email,
                 senha: senha
             }
-            const response = axios.post(api.concat('/autenticacao/cadastra'), authCadastroContaRequest);
+            const response = await axios.post(api.concat('/autenticacao/cadastra'), authCadastroContaRequest);
             return response.data;
         } catch (e) {
             console.error(e);
