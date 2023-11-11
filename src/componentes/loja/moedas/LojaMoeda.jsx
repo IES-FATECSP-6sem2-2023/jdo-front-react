@@ -26,15 +26,15 @@ function LojaMoeda() {
         switch (idMoeda) {
             case 1:
                 qtdeMoeda = 100;
-                tipoMoeda = 0;
+                tipoMoeda = 2;
                 break;
             case 2:
                 qtdeMoeda = 500;
-                tipoMoeda = 0;
+                tipoMoeda = 2;
                 break;
             case 3:
                 qtdeMoeda = 1000;
-                tipoMoeda = 0;
+                tipoMoeda = 2;
                 break;
             case 4:
                 qtdeMoeda = 100;
