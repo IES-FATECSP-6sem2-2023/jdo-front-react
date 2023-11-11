@@ -1,9 +1,25 @@
 import axios from "axios";
 
-const url = 'http://localhost:8080';
+const api = 'http://localhost:8080';
 
-const sendCoins = async (idJogador, tipoMoeda, quantidadeMoeda) => {
-
+const sendCoins = async (idUser, tipoMoeda, quantidadeMoeda) => {
+    try {
+        const authSendCoinsRequest = {
+            idJogador: idUser,
+            idItens: [{
+                idItem: tipoMoeda,
+                qntItem: quantidadeMoeda,
+                itemFavorito: false
+            }],
+            pagamentoMoedaRara: false,
+            valorTotal: 0
+        }
+        const response = axios.post(api.concat('/loja/compra'), authSendCoinsRequest);
+        return response.data;
+    } catch (e) {
+        console.error(e);
+        throw e;
+    }
 }
 
 const LojaMoedaService = {
