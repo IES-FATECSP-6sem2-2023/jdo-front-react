@@ -21,14 +21,11 @@ function Conta() {
 	const [userName, setUserName] = useState(user?.jogador?.username);
 
     const handleFieldChange = (e, setStateFunction) => {
-        console.log(e.target)
         setStateFunction(e.target.value);
     };
 
     const validaSenha = () => {
         // se a senha não for válida, seta o erro como true
-        console.log(validatePassword.test(senha))
-        console.log(senha)
 		validatePassword.test(senha) ? setSenhaErr(false) : setSenhaErr(true);
 	}
 
