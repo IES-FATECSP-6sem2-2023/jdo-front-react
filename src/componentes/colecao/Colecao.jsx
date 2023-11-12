@@ -47,6 +47,30 @@ function Colecao() {
         }
     }
 
+    const escolheSkinPadrao = () => {
+        const opcoesSkins = document.querySelectorAll('input[type="radio"][name="opcaoSkin"]');
+        
+        opcoesSkins.forEach((input) => {
+            input.addEventListener('change', (event) => {
+                opcoesSkins.forEach((skinInput) => {
+                    const label = skinInput.parentElement;
+                    const img = label.querySelector('.colecao-skin');
+    
+                    label.classList.remove('selected');
+                    img.classList.remove('selected-img');
+    
+                    if (event.target.checked) {
+                        const selectedLabel = event.target.parentElement;
+                        const selectedImg = selectedLabel.querySelector('.colecao-skin');
+                        
+                        selectedLabel.classList.add('selected');
+                        selectedImg.classList.add('selected-img');
+                    }
+                });
+            });
+        });
+    };
+
     const defineSkinPadrao = async () => {
         try {
             const opcaoSkin = document.querySelector('input[type="radio"][name="opcaoSkin"]:checked');
@@ -85,18 +109,18 @@ function Colecao() {
                     <button className="sub-menu-item-colecao" value={2} onClick={mudaColecao}>CACHORRO</button>
                 </div>
                 <div className="colecao-onca-colecao" id="colecao-onca">
-                    {skinsOncas.map((item) => (
+                    {/* {skinsOncas.map((item) => (
                         <div key={item.id} className="skin-item-colecao">
                             <label className="radio-button-label-colecao">
-                                <input type="radio" name="opcaoSkin" value={item.id} />
+                                <input type="radio" name="opcaoSkin" value={item.id} onChange={escolheSkinPadrao}/>
                                 <img src={`/src/assets/imagens/skins/${item.imagem}`} className="colecao-skin"/>
                                 <span className="colecao-skin-nome">{item.nome}</span>
                             </label>
                         </div>
-                    ))}
+                    ))} */}
                 </div>
                 <div className="colecao-cachorro-colecao" id="colecao-cachorro">
-                    {skinsCachorro.map((item) => (
+                    {/* {skinsCachorro.map((item) => (
                         <div key={item.id} className="skin-item-colecao">
                             <label className="radio-button-label-colecao">
                                 <input type="radio" name="opcaoSkin" value={item.id} />
@@ -104,7 +128,7 @@ function Colecao() {
                                 <span className="colecao-skin-nome">{item.nome}</span>
                             </label>
                         </div>
-                    ))}
+                    ))} */}
                 </div>
                 <div className="salva-padrao-colecao">
                     <button onClick={defineSkinPadrao}>DEFINIR COMO PADRÃO</button>

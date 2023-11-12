@@ -167,7 +167,7 @@ h1{
     margin-top: 10px;
 }
 
-.colecao-skin.selected::before {
+.selected-img {
     border: 5px solid #5E2C12;
 }
 
