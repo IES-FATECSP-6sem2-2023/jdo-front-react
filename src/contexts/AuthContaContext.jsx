@@ -16,24 +16,25 @@ export const AuthContaProvider = ({ children }) => {
       }
     }, []);
 
-    const sessionUser = async (id) => {
+    const atualizaUser = async (id) => {
       try {
-        const data = await ContaService.getConta(id);
-        const token = Math.random().toString(36).substring(2);
-        localStorage.setItem("userLogin", JSON.stringify(data))
-        localStorage.setItem("userToken", token)
-        setUser(data);
+          const data = await ContaService.getConta(id);
+          const token = Math.random().toString(36).substring(2);
+          localStorage.setItem("userLogin", JSON.stringify(data));
+          localStorage.setItem("userToken", token);
+          setUser(data);
       } catch (error) {
-        console.error(error);
-        toast.error("Erro ao salvar informações!\nTente novamente!");
-        throw error;
+          console.error(error);
+          toast.error("Erro ao salvar informações!\nTente novamente!");
+          throw error;
       }
-    }
+  };
+  
 
     const signin = async (email, senha) => {
       try {
         const responseLogin = await AuthService.authLoginConta(email, senha);
-        sessionUser(responseLogin.id);
+        atualizaUser(responseLogin.id);
         toast.success("Login realizado com sucesso!");
         return true;
       } catch (error) {
@@ -64,7 +65,7 @@ export const AuthContaProvider = ({ children }) => {
     };
 
     return (
-      <AuthContaContext.Provider value={{user, signed: !!user, signin, signup, signout}}>
+      <AuthContaContext.Provider value={{user, signed: !!user, atualizaUser, signin, signup, signout}}>
         {children}
       </AuthContaContext.Provider>
     )
