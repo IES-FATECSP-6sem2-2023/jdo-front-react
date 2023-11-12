@@ -6,6 +6,7 @@ import Skin from '/src/assets/imagens/skins/onca_amazonia.png';
 import useAuthConta from '/src/hooks/AuthConta';
 import LojaSkinService from '/src/services/LojaSkinsService';
 import ModalCompraSkin from '/src/componentes/modals/compras/skins/compraSkin';
+import { toast } from 'react-toastify';
 
 // @ToDo: montar lógica para validar se é possível comprar skin (se não, mandar para loja de moeda) + salvar ela na conta do usuario +atualizar informação na sessão (essa parte o paulo faz)
 
@@ -41,32 +42,38 @@ function LojaSkin() {
 
     }, []);
 
-   
-    const compraSkin = (event) => {
-        // let idSkin = parseInt(event.currentTarget.value);
-        // console.log(idSkin)
-        // setIdCompraSkin(idSkin);
-        // setIsModalVisible(true);
+    const verificaSaldo = (idItem, valor, formaPagamento) => {
+        let pagamentoMoedaRara = formaPagamento === 'esmeralda' ? true : false;
 
-        const compraSkin = async (id, idItem, tipoPagamento) => {
-            try {
-                const data = await LojaSkinService.sendSkin(id, idItem, tipoPagamento);
-                
-                if (data.status === 200) {
-                    setResponse(data);
-                    setIsModalVisible(true);                    
-                } 
-                else {
-                    console.error('Erro na resposta do servidor:', data);
-                }
+        if (tipoPagamento === 'esmeralda' && jogador.qntmoedanormal >= valor) {
+            compraSkin(user.jogador.id, idItem, pagamentoMoedaRara)
+        }
+        else if (tipoPagamento === 'moeda' && jogador.qntmoedaespecial >= valor) {
+            compraSkin(user.jogador.id, idItem, pagamentoMoedaRara)
+        } 
+        else {
+            toast.info("Saldo insuficiente!");
+        }
+    };
+
+    const compraSkin = async (idJogador, idSkin, pagamento) => {
+        setIdCompraSkin(idSkin);
+
+        try {
+            const data = await LojaSkinService.sendSkin(idJogador, idSkin, pagamento);
+            
+            if (data.status === 200) {
+                setResponse(data);
+                setIsModalVisible(true);                
             } 
-            catch (error) {
-                console.error('Erro na busca de dados:', error);
+            else {
+                console.error('Erro na resposta do servidor:', data);
             }
-        };
-
-        compraSkin(user.jogador.id, idItem, tipoPagamento);
-    }
+        } 
+        catch (error) {
+            console.error('Erro na busca de dados:', error);
+        }
+    };
 
     return (
             <section className="bg-loja-skin">
@@ -99,44 +106,26 @@ function LojaSkin() {
                         </button>
                     </div>
                     <div className="loja-skin">
-                        {/* <div className="loja-item-loja-skin">
-                            <div className="skin">
-                                <img src={Skin} alt="" />
-                            </div>
-                            <div className="nome-skin-loja-skin">
-                                <h1>SKIN MATA ATLÂNTICA</h1>
-                            </div>
-                            <div className="precos-loja-skin">
-                                <button className="preco-esmeralda-loja-skin" value={5} onClick={compraSkin}>
-                                    <div className="icon-loja-skin icon-esmeralda-loja-skin"></div>
-                                    <div className="preco-loja-skin"><p>100</p></div>
-                                </button>
-                                <button className="preco-moeda-loja-skin" value={5} onClick={compraSkin}>
-                                    <div className="icon-loja-skin icon-moeda-loja-skin"></div>
-                                    <div className="preco-loja-skin"><p>1000</p></div>
-                                </button>
-                            </div>
-                        </div> */} 
-                        {response.map((item, index) => (
-                            <div key={index} className="loja-item-loja-skin">
+                        {response.map((item) => (
+                            <div className="loja-item-loja-skin">
                                 <div className="skin">
-                                    <img src={item.imagem} alt={item.nome} />
+                                    <img src={`/src/assets/imagens/skins/${item.imagem}`} />
                                 </div>
                                 <div className="nome-skin-loja-skin">
                                     <h1>{item.nome}</h1>
                                 </div>
                                 <div className="precos-loja-skin">
-                                    <button className="preco-esmeralda-loja-skin" value={index + 1} onClick={compraSkin}>
-                                        <div className="icon-loja-skin icon-esmeralda-loja-skin"></div>
+                                    <button className="preco-esmeralda-loja-skin" onClick={()=> verificaSaldo(item.id, item.valorrara, 'esmeralda')}>
+                                        <div className="icon-loja-skin icon-moeda-loja-skin"></div>
                                         <div className="preco-loja-skin">
                                             <p>{item.valorrara}</p>
                                         </div>
                                     </button>
-                                    <button className="preco-moeda-loja-skin" value={index + 1} onClick={compraSkin}>
+                                    <button className="preco-moeda-loja-skin" onClick={()=> verificaSaldo(item.id, item.valornormal, 'moeda')}>
                                         <div className="icon-loja-skin icon-moeda-loja-skin"></div>
-                                        <div className="preco-loja-skin">
-                                            <p>{item.valornormal}</p>
-                                        </div>
+                                            <div className="preco-loja-skin">
+                                                <p>{item.valornormal}</p>
+                                            </div>
                                     </button>
                                 </div>
                             </div>
