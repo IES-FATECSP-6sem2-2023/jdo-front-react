@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import './Colecao.css';
 import { toast } from 'react-toastify';
 import ReturnIcon from '/src/assets/imagens/icones/ReturnIcon';
-import { toast } from 'react-toastify';
 import useAuthConta from '/src/hooks/AuthConta';
 import ColecaoService from '/src/services/ColecaoService';
 
