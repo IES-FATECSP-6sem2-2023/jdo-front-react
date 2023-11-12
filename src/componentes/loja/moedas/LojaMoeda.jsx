@@ -71,7 +71,7 @@ function LojaMoeda() {
             }
         };
 
-        compraMoedas(user, tipoMoeda, qtdeMoeda);
+        compraMoedas(user.jogador.id, tipoMoeda, qtdeMoeda);
     }
     
     return(

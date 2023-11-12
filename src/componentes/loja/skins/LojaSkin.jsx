@@ -1,9 +1,10 @@
-import React, {useState } from 'react';
+import React, { useEffect, useState} from 'react';
 import { useNavigate } from 'react-router';
 import './LojaSkin.css';
 import ReturnIcon from '/src/assets/imagens/icones/ReturnIcon';
 import Skin from '/src/assets/imagens/skins/onca_amazonia.png';
 import useAuthConta from '/src/hooks/AuthConta';
+import LojaSkinService from '/src/services/LojaSkinsService';
 import ModalCompraSkin from '/src/componentes/modals/compras/skins/compraSkin';
 
 // @ToDo: montar lógica para validar se é possível comprar skin (se não, mandar para loja de moeda) + salvar ela na conta do usuario +atualizar informação na sessão (essa parte o paulo faz)
@@ -11,18 +12,60 @@ import ModalCompraSkin from '/src/componentes/modals/compras/skins/compraSkin';
 function LojaSkin() {
     const navigate = useNavigate();
     const { user } = useAuthConta();
+    const [response, setResponse] = useState(null);
     const [idCompraSkin, setIdCompraSkin] = useState(null);
     const [isModalVisible, setIsModalVisible] = useState(false);
 
     const closeModal = () => {
         setIsModalVisible(false);
     };
+
+    useEffect(() => {
+        const getOpcoesCompraSkin = async (idJogador) => {
+            try {
+                const data = await LojaSkinService.getOpcoesCompraSkin(idJogador);
+                
+                if (data.status === 200) {
+                    setResponse(data);                 
+                } 
+                else {
+                    console.error('Erro na resposta do servidor:', data);
+                }
+            } 
+            catch (error) {
+                console.error('Erro na busca de dados:', error);
+            }
+        };
+
+        getOpcoesCompraSkin(user.jogador.id);
+
+    }, []);
+
    
     const compraSkin = (event) => {
-        let idSkin = parseInt(event.currentTarget.value);
-        console.log(idSkin)
-        setIdCompraSkin(idSkin);
-        setIsModalVisible(true);
+        // let idSkin = parseInt(event.currentTarget.value);
+        // console.log(idSkin)
+        // setIdCompraSkin(idSkin);
+        // setIsModalVisible(true);
+
+        const compraSkin = async (id, idItem, tipoPagamento) => {
+            try {
+                const data = await LojaSkinService.sendSkin(id, idItem, tipoPagamento);
+                
+                if (data.status === 200) {
+                    setResponse(data);
+                    setIsModalVisible(true);                    
+                } 
+                else {
+                    console.error('Erro na resposta do servidor:', data);
+                }
+            } 
+            catch (error) {
+                console.error('Erro na busca de dados:', error);
+            }
+        };
+
+        compraSkin(user.jogador.id, idItem, tipoPagamento);
     }
 
     return (
@@ -56,7 +99,7 @@ function LojaSkin() {
                         </button>
                     </div>
                     <div className="loja-skin">
-                        <div className="loja-item-loja-skin">
+                        {/* <div className="loja-item-loja-skin">
                             <div className="skin">
                                 <img src={Skin} alt="" />
                             </div>
@@ -73,169 +116,31 @@ function LojaSkin() {
                                     <div className="preco-loja-skin"><p>1000</p></div>
                                 </button>
                             </div>
-                        </div>
-                        <div className="loja-item-loja-skin">
-                            <div className="skin">
-                                <img src={Skin} alt="" />
+                        </div> */} 
+                        {response.map((item, index) => (
+                            <div key={index} className="loja-item-loja-skin">
+                                <div className="skin">
+                                    <img src={item.imagem} alt={item.nome} />
+                                </div>
+                                <div className="nome-skin-loja-skin">
+                                    <h1>{item.nome}</h1>
+                                </div>
+                                <div className="precos-loja-skin">
+                                    <button className="preco-esmeralda-loja-skin" value={index + 1} onClick={compraSkin}>
+                                        <div className="icon-loja-skin icon-esmeralda-loja-skin"></div>
+                                        <div className="preco-loja-skin">
+                                            <p>{item.valorrara}</p>
+                                        </div>
+                                    </button>
+                                    <button className="preco-moeda-loja-skin" value={index + 1} onClick={compraSkin}>
+                                        <div className="icon-loja-skin icon-moeda-loja-skin"></div>
+                                        <div className="preco-loja-skin">
+                                            <p>{item.valornormal}</p>
+                                        </div>
+                                    </button>
+                                </div>
                             </div>
-                            <div className="nome-skin-loja-skin">
-                                <h1>NOME DA SKIN</h1>
-                            </div>
-                            <div className="precos-loja-skin">
-                                <button className="preco-esmeralda-loja-skin" value={6} onClick={compraSkin}>
-                                    <div className="icon icon-esmeralda-loja-skin"></div>
-                                    <div className="preco-loja-skin"><p>100</p></div>
-                                </button>
-                                <button className="preco-moeda-loja-skin" value={6} onClick={compraSkin}>
-                                    <div className="icon-loja-skin icon-moeda-loja-skin"></div>
-                                    <div className="preco-loja-skin"><p>1000</p></div>
-                                </button>
-                            </div>
-                        </div>
-                        <div className="loja-item-loja-skin">
-                            <div className="skin">
-                                <img src={Skin} alt="" />
-                            </div>
-                            <div className="nome-skin-loja-skin">
-                                <h1>NOME DA SKIN</h1>
-                            </div>
-                            <div className="precos-loja-skin">
-                                <button className="preco-esmeralda-loja-skin" value={7} onClick={compraSkin}>
-                                    <div className="icon-loja-skin icon-esmeralda-loja-skin"></div>
-                                    <div className="preco-loja-skin"><p>100</p></div>
-                                </button>
-                                <button className="preco-moeda-loja-skin" value={7} onClick={compraSkin}>
-                                    <div className="icon-loja-skin icon-moeda-loja-skin"></div>
-                                    <div className="preco-loja-skin"><p>1000</p></div>
-                                </button>
-                            </div>
-                        </div>
-                        <div className="loja-item-loja-skin">
-                            <div className="skin">
-                                <img src={Skin} alt="" />
-                            </div>
-                            <div className="nome-skin-loja-skin">
-                                <h1>NOME DA SKIN</h1>
-                            </div>
-                            <div className="precos-loja-skin">
-                                <button className="preco-esmeralda-loja-skin" value={8} onClick={compraSkin}>
-                                    <div className="icon-loja-skin icon-esmeralda-loja-skin"></div>
-                                    <div className="preco-loja-skin"><p>100</p></div>
-                                </button>
-                                <button className="preco-moeda-loja-skin" value={8} onClick={compraSkin}>
-                                    <div className="icon-loja-skin icon-moeda-loja-skin"></div>
-                                    <div className="preco-loja-skin"><p>1000</p></div>
-                                </button>
-                            </div>
-                        </div>
-                        <div className="loja-item-loja-skin">
-                            <div className="skin">
-                                <img src={Skin} alt="" />
-                            </div>
-                            <div className="nome-skin-loja-skin">
-                                <h1>NOME DA SKIN</h1>
-                            </div>
-                            <div className="precos-loja-skin">
-                                <button className="preco-esmeralda-loja-skin" value={9} onClick={compraSkin}>
-                                    <div className="icon-loja-skin icon-esmeralda-loja-skin"></div>
-                                    <div className="preco-loja-skin"><p>100</p></div>
-                                </button>
-                                <button className="preco-moeda-loja-skin" value={9} onClick={compraSkin}>
-                                    <div className="icon-loja-skin icon-moeda-loja-skin"></div>
-                                    <div className="preco-loja-skin"><p>1000</p></div>
-                                </button>
-                            </div>
-                        </div>
-                        <div className="loja-item-loja-skin">
-                            <div className="skin">
-                                <img src={Skin} alt="" />
-                            </div>
-                            <div className="nome-skin-loja-skin">
-                                <h1>NOME DA SKIN</h1>
-                            </div>
-                            <div className="precos-loja-skin">
-                                <button className="preco-esmeralda-loja-skin" value={10} onClick={compraSkin}>
-                                    <div className="icon-loja-skin icon-esmeralda-loja-skin"></div>
-                                    <div className="preco-loja-skin"><p>100</p></div>
-                                </button>
-                                <button className="preco-moeda-loja-skin" value={10} onClick={compraSkin}>
-                                    <div className="icon-loja-skin icon-moeda-loja-skin"></div>
-                                    <div className="preco-loja-skin"><p>1000</p></div>
-                                </button>
-                            </div>
-                        </div>
-                        <div className="loja-item-loja-skin">
-                            <div className="skin">
-                                <img src={Skin} alt="" />
-                            </div>
-                            <div className="nome-skin-loja-skin">
-                                <h1>NOME DA SKIN</h1>
-                            </div>
-                            <div className="precos-loja-skin">
-                                <button className="preco-esmeralda-loja-skin" value={11} onClick={compraSkin}>
-                                    <div className="icon-loja-skin icon-esmeralda-loja-skin"></div>
-                                    <div className="preco-loja-skin"><p>100</p></div>
-                                </button>
-                                <button className="preco-moeda-loja-skin" value={11} onClick={compraSkin}>
-                                    <div className="icon-loja-skin icon-moeda-loja-skin"></div>
-                                    <div className="preco-loja-skin"><p>1000</p></div>
-                                </button>
-                            </div>
-                        </div>
-                        <div className="loja-item-loja-skin">
-                            <div className="skin">
-                                <img src={Skin} alt="" />
-                            </div>
-                            <div className="nome-skin-loja-skin">
-                                <h1>NOME DA SKIN</h1>
-                            </div>
-                            <div className="precos-loja-skin">
-                                <button className="preco-esmeralda-loja-skin" value={12} onClick={compraSkin}>
-                                    <div className="icon-loja-skin icon-esmeralda-loja-skin"></div>
-                                    <div className="preco-loja-skin"><p>100</p></div>
-                                </button>
-                                <button className="preco-moeda-loja-skin" value={12} onClick={compraSkin}>
-                                    <div className="icon-loja-skin icon-moeda-loja-skin"></div>
-                                    <div className="preco-loja-skin"><p>1000</p></div>
-                                </button>
-                            </div>
-                        </div>
-                        <div className="loja-item-loja-skin">
-                            <div className="skin">
-                                <img src={Skin} alt="" />
-                            </div>
-                            <div className="nome-skin-loja-skin">
-                                <h1>NOME DA SKIN</h1>
-                            </div>
-                            <div className="precos-loja-skin">
-                                <button className="preco-esmeralda-loja-skin" value={13} onClick={compraSkin}>
-                                    <div className="icon-loja-skin icon-esmeralda-loja-skin"></div>
-                                    <div className="preco-loja-skin"><p>100</p></div>
-                                </button>
-                                <button className="preco-moeda-loja-skin" value={13} onClick={compraSkin}>
-                                    <div className="icon-loja-skin icon-moeda-loja-skin"></div>
-                                    <div className="preco-loja-skin"><p>1000</p></div>
-                                </button>
-                            </div>
-                        </div>
-                        <div className="loja-item-loja-skin">
-                            <div className="skin">
-                                <img src={Skin} alt="" />
-                            </div>
-                            <div className="nome-skin-loja-skin">
-                                <h1>NOME DA SKIN</h1>
-                            </div>
-                            <div className="precos-loja-skin">
-                                <button className="preco-esmeralda-loja-skin" value={14} onClick={compraSkin}>
-                                    <div className="icon-loja-skin icon-esmeralda-loja-skin"></div>
-                                    <div className="preco-loja-skin"><p>100</p></div>
-                                </button>
-                                <button className="preco-moeda-loja-skin" value={14} onClick={compraSkin}>
-                                    <div className="icon-loja-skin icon-moeda-loja-skin"></div>
-                                    <div className="preco-loja-skin"><p>1000</p></div>
-                                </button>
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </section>

@@ -141,7 +141,6 @@ h1{
     width: 90vw;
     height: 75vh;
     display: flex;
-    align-items: center;
     justify-content: center;
     flex-wrap: wrap;
     margin: 2.5vh auto;
