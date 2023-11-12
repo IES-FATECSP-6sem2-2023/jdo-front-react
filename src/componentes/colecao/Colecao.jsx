@@ -118,6 +118,48 @@ function Colecao() {
                             </label>
                         </div>
                     ))} */}
+                    <div key={1} className="skin-item-colecao">
+                        <label className="radio-button-label-colecao">
+                            <input type="radio" name="opcaoSkin" value={1} onChange={escolheSkinPadrao}/>
+                            <img src={`/src/assets/imagens/skins/onca_amazonia.png`} className="colecao-skin"/>
+                            <span className="colecao-skin-nome">SKIN AMAZÔNIA</span>
+                        </label>
+                    </div>
+                    <div key={2} className="skin-item-colecao">
+                        <label className="radio-button-label-colecao">
+                            <input type="radio" name="opcaoSkin" value={1} onChange={escolheSkinPadrao}/>
+                            <img src={`/src/assets/imagens/skins/onca_amazonia.png`} className="colecao-skin"/>
+                            <span className="colecao-skin-nome">SKIN CAATINGA</span>
+                        </label>
+                    </div>
+                    <div key={3} className="skin-item-colecao">
+                        <label className="radio-button-label-colecao">
+                            <input type="radio" name="opcaoSkin" value={1} onChange={escolheSkinPadrao}/>
+                            <img src={`/src/assets/imagens/skins/onca_amazonia.png`} className="colecao-skin"/>
+                            <span className="colecao-skin-nome">SKIN MATA ATLÂNTICA</span>
+                        </label>
+                    </div>
+                    <div key={4} className="skin-item-colecao">
+                        <label className="radio-button-label-colecao">
+                            <input type="radio" name="opcaoSkin" value={1} onChange={escolheSkinPadrao}/>
+                            <img src={`/src/assets/imagens/skins/onca_amazonia.png`} className="colecao-skin"/>
+                            <span className="colecao-skin-nome">SKIN PANTANAL</span>
+                        </label>
+                    </div>
+                    <div key={3} className="skin-item-colecao">
+                        <label className="radio-button-label-colecao">
+                            <input type="radio" name="opcaoSkin" value={1} onChange={escolheSkinPadrao}/>
+                            <img src={`/src/assets/imagens/skins/onca_amazonia.png`} className="colecao-skin"/>
+                            <span className="colecao-skin-nome">SKIN HALLOWEEN</span>
+                        </label>
+                    </div>
+                    <div key={4} className="skin-item-colecao">
+                        <label className="radio-button-label-colecao">
+                            <input type="radio" name="opcaoSkin" value={1} onChange={escolheSkinPadrao}/>
+                            <img src={`/src/assets/imagens/skins/onca_amazonia.png`} className="colecao-skin"/>
+                            <span className="colecao-skin-nome">SKIN NATAL</span>
+                        </label>
+                    </div>
                 </div>
                 <div className="colecao-cachorro-colecao" id="colecao-cachorro">
                     {/* {skinsCachorro.map((item) => (

@@ -175,9 +175,10 @@ h1{
 }
 
 .nome-skin-loja-skin > h1{
-    text-align: center;
     font-size: 2em;
+    font-weight: 500;
     color: #fff;
+    font-family: 'Londrina Solid', cursive;
 }
 
 .precos-loja-skin{
@@ -232,6 +233,10 @@ h1{
     background-image: url('/src/assets/imagens/vetores/esmeraldas.png');
 }
 
+button{
+    cursor: pointer;
+}
+
 @media screen and (max-width: 1366px) and (max-height: 768px) {
     .box-titulo-loja-skin{
         width: 450px;
@@ -263,17 +268,12 @@ h1{
     
     .compra-texto-loja-skin > p{
         font-size: 1.8em;
-    }
-    
-    .loja-skin{
-        width: 400px;
-        height: 70px;
-    }
+    }    
     
     .loja-skin > button{
         width: 300px;
         height: 60px;
-        margin: 10px 50px;
+        margin: 10px 10px;
     }
     
     .nome-item-loja-skin > h1{

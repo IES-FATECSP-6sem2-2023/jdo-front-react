@@ -61,47 +61,29 @@ function LojaSkin() {
                                 <img src={Skin} alt="" />
                             </div>
                             <div className="nome-skin-loja-skin">
-                                <h1>NOME DA SKIN</h1>
-                            </div>
-                            <div className="precos-loja-skin">
-                                <button className="preco-esmeralda-loja-skin" value={1} onClick={compraSkin}>
-                                    <div className="icon-loja-skin icon-esmeralda-loja-skin"></div>
-                                    <div className="preco-loja-skin"><p>100</p></div>
-                                </button>
-                                <button className="preco-moeda-loja-skin" value={2} onClick={compraSkin}>
-                                    <div className="icon-loja-skin icon-moeda-loja-skin"></div>
-                                    <div className="preco-loja-skin"><p>1000</p></div>
-                                </button>
-                            </div>
-                        </div>
-                        <div className="loja-item-loja-skin">
-                            <div className="skin">
-                                <img src={Skin} alt="" />
-                            </div>
-                            <div className="nome-skin-loja-skin">
-                                <h1>NOME DA SKIN</h1>
-                            </div>
-                            <div className="precos-loja-skin">
-                                <button className="preco-esmeralda-loja-skin" value={3} onClick={compraSkin}>
-                                    <div className="icon icon-esmeralda-loja-skin"></div>
-                                    <div className="preco-loja-skin"><p>100</p></div>
-                                </button>
-                                <button className="preco-moeda-loja-skin" value={4} onClick={compraSkin}>
-                                    <div className="icon-loja-skin icon-moeda-loja-skin"></div>
-                                    <div className="preco-loja-skin"><p>1000</p></div>
-                                </button>
-                            </div>
-                        </div>
-                        <div className="loja-item-loja-skin">
-                            <div className="skin">
-                                <img src={Skin} alt="" />
-                            </div>
-                            <div className="nome-skin-loja-skin">
-                                <h1>NOME DA SKIN</h1>
+                                <h1>SKIN MATA ATLÂNTICA</h1>
                             </div>
                             <div className="precos-loja-skin">
                                 <button className="preco-esmeralda-loja-skin" value={5} onClick={compraSkin}>
                                     <div className="icon-loja-skin icon-esmeralda-loja-skin"></div>
+                                    <div className="preco-loja-skin"><p>100</p></div>
+                                </button>
+                                <button className="preco-moeda-loja-skin" value={5} onClick={compraSkin}>
+                                    <div className="icon-loja-skin icon-moeda-loja-skin"></div>
+                                    <div className="preco-loja-skin"><p>1000</p></div>
+                                </button>
+                            </div>
+                        </div>
+                        <div className="loja-item-loja-skin">
+                            <div className="skin">
+                                <img src={Skin} alt="" />
+                            </div>
+                            <div className="nome-skin-loja-skin">
+                                <h1>NOME DA SKIN</h1>
+                            </div>
+                            <div className="precos-loja-skin">
+                                <button className="preco-esmeralda-loja-skin" value={6} onClick={compraSkin}>
+                                    <div className="icon icon-esmeralda-loja-skin"></div>
                                     <div className="preco-loja-skin"><p>100</p></div>
                                 </button>
                                 <button className="preco-moeda-loja-skin" value={6} onClick={compraSkin}>
@@ -119,6 +101,24 @@ function LojaSkin() {
                             </div>
                             <div className="precos-loja-skin">
                                 <button className="preco-esmeralda-loja-skin" value={7} onClick={compraSkin}>
+                                    <div className="icon-loja-skin icon-esmeralda-loja-skin"></div>
+                                    <div className="preco-loja-skin"><p>100</p></div>
+                                </button>
+                                <button className="preco-moeda-loja-skin" value={7} onClick={compraSkin}>
+                                    <div className="icon-loja-skin icon-moeda-loja-skin"></div>
+                                    <div className="preco-loja-skin"><p>1000</p></div>
+                                </button>
+                            </div>
+                        </div>
+                        <div className="loja-item-loja-skin">
+                            <div className="skin">
+                                <img src={Skin} alt="" />
+                            </div>
+                            <div className="nome-skin-loja-skin">
+                                <h1>NOME DA SKIN</h1>
+                            </div>
+                            <div className="precos-loja-skin">
+                                <button className="preco-esmeralda-loja-skin" value={8} onClick={compraSkin}>
                                     <div className="icon-loja-skin icon-esmeralda-loja-skin"></div>
                                     <div className="preco-loja-skin"><p>100</p></div>
                                 </button>
@@ -140,6 +140,24 @@ function LojaSkin() {
                                     <div className="icon-loja-skin icon-esmeralda-loja-skin"></div>
                                     <div className="preco-loja-skin"><p>100</p></div>
                                 </button>
+                                <button className="preco-moeda-loja-skin" value={9} onClick={compraSkin}>
+                                    <div className="icon-loja-skin icon-moeda-loja-skin"></div>
+                                    <div className="preco-loja-skin"><p>1000</p></div>
+                                </button>
+                            </div>
+                        </div>
+                        <div className="loja-item-loja-skin">
+                            <div className="skin">
+                                <img src={Skin} alt="" />
+                            </div>
+                            <div className="nome-skin-loja-skin">
+                                <h1>NOME DA SKIN</h1>
+                            </div>
+                            <div className="precos-loja-skin">
+                                <button className="preco-esmeralda-loja-skin" value={10} onClick={compraSkin}>
+                                    <div className="icon-loja-skin icon-esmeralda-loja-skin"></div>
+                                    <div className="preco-loja-skin"><p>100</p></div>
+                                </button>
                                 <button className="preco-moeda-loja-skin" value={10} onClick={compraSkin}>
                                     <div className="icon-loja-skin icon-moeda-loja-skin"></div>
                                     <div className="preco-loja-skin"><p>1000</p></div>
@@ -155,6 +173,24 @@ function LojaSkin() {
                             </div>
                             <div className="precos-loja-skin">
                                 <button className="preco-esmeralda-loja-skin" value={11} onClick={compraSkin}>
+                                    <div className="icon-loja-skin icon-esmeralda-loja-skin"></div>
+                                    <div className="preco-loja-skin"><p>100</p></div>
+                                </button>
+                                <button className="preco-moeda-loja-skin" value={11} onClick={compraSkin}>
+                                    <div className="icon-loja-skin icon-moeda-loja-skin"></div>
+                                    <div className="preco-loja-skin"><p>1000</p></div>
+                                </button>
+                            </div>
+                        </div>
+                        <div className="loja-item-loja-skin">
+                            <div className="skin">
+                                <img src={Skin} alt="" />
+                            </div>
+                            <div className="nome-skin-loja-skin">
+                                <h1>NOME DA SKIN</h1>
+                            </div>
+                            <div className="precos-loja-skin">
+                                <button className="preco-esmeralda-loja-skin" value={12} onClick={compraSkin}>
                                     <div className="icon-loja-skin icon-esmeralda-loja-skin"></div>
                                     <div className="preco-loja-skin"><p>100</p></div>
                                 </button>
@@ -176,61 +212,25 @@ function LojaSkin() {
                                     <div className="icon-loja-skin icon-esmeralda-loja-skin"></div>
                                     <div className="preco-loja-skin"><p>100</p></div>
                                 </button>
+                                <button className="preco-moeda-loja-skin" value={13} onClick={compraSkin}>
+                                    <div className="icon-loja-skin icon-moeda-loja-skin"></div>
+                                    <div className="preco-loja-skin"><p>1000</p></div>
+                                </button>
+                            </div>
+                        </div>
+                        <div className="loja-item-loja-skin">
+                            <div className="skin">
+                                <img src={Skin} alt="" />
+                            </div>
+                            <div className="nome-skin-loja-skin">
+                                <h1>NOME DA SKIN</h1>
+                            </div>
+                            <div className="precos-loja-skin">
+                                <button className="preco-esmeralda-loja-skin" value={14} onClick={compraSkin}>
+                                    <div className="icon-loja-skin icon-esmeralda-loja-skin"></div>
+                                    <div className="preco-loja-skin"><p>100</p></div>
+                                </button>
                                 <button className="preco-moeda-loja-skin" value={14} onClick={compraSkin}>
-                                    <div className="icon-loja-skin icon-moeda-loja-skin"></div>
-                                    <div className="preco-loja-skin"><p>1000</p></div>
-                                </button>
-                            </div>
-                        </div>
-                        <div className="loja-item-loja-skin">
-                            <div className="skin">
-                                <img src={Skin} alt="" />
-                            </div>
-                            <div className="nome-skin-loja-skin">
-                                <h1>NOME DA SKIN</h1>
-                            </div>
-                            <div className="precos-loja-skin">
-                                <button className="preco-esmeralda-loja-skin" value={15} onClick={compraSkin}>
-                                    <div className="icon-loja-skin icon-esmeralda-loja-skin"></div>
-                                    <div className="preco-loja-skin"><p>100</p></div>
-                                </button>
-                                <button className="preco-moeda-loja-skin" value={16} onClick={compraSkin}>
-                                    <div className="icon-loja-skin icon-moeda-loja-skin"></div>
-                                    <div className="preco-loja-skin"><p>1000</p></div>
-                                </button>
-                            </div>
-                        </div>
-                        <div className="loja-item-loja-skin">
-                            <div className="skin">
-                                <img src={Skin} alt="" />
-                            </div>
-                            <div className="nome-skin-loja-skin">
-                                <h1>NOME DA SKIN</h1>
-                            </div>
-                            <div className="precos-loja-skin">
-                                <button className="preco-esmeralda-loja-skin" value={17} onClick={compraSkin}>
-                                    <div className="icon-loja-skin icon-esmeralda-loja-skin"></div>
-                                    <div className="preco-loja-skin"><p>100</p></div>
-                                </button>
-                                <button className="preco-moeda-loja-skin" value={18} onClick={compraSkin}>
-                                    <div className="icon-loja-skin icon-moeda-loja-skin"></div>
-                                    <div className="preco-loja-skin"><p>1000</p></div>
-                                </button>
-                            </div>
-                        </div>
-                        <div className="loja-item-loja-skin">
-                            <div className="skin">
-                                <img src={Skin} alt="" />
-                            </div>
-                            <div className="nome-skin-loja-skin">
-                                <h1>NOME DA SKIN</h1>
-                            </div>
-                            <div className="precos-loja-skin">
-                                <button className="preco-esmeralda-loja-skin" value={19} onClick={compraSkin}>
-                                    <div className="icon-loja-skin icon-esmeralda-loja-skin"></div>
-                                    <div className="preco-loja-skin"><p>100</p></div>
-                                </button>
-                                <button className="preco-moeda-loja-skin" value={20} onClick={compraSkin}>
                                     <div className="icon-loja-skin icon-moeda-loja-skin"></div>
                                     <div className="preco-loja-skin"><p>1000</p></div>
                                 </button>

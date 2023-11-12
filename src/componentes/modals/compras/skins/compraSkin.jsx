@@ -14,45 +14,35 @@ function modalCompraSkin(idItemComprado) {
         let imgItemComprado;
 
         switch (idCompraSkin) {
-            case 1:
-            case 2:
-                imgItemComprado = '/src/assets/imagens/skins/onca_caatinga.png';
-                break;
-            case 3:
-            case 4:
-                imgItemComprado = '/src/assets/imagens/skins/onca_mata-atlantica.png';
-                break;
             case 5:
-            case 6:
-                imgItemComprado = '/src/assets/imagens/skins/onca_pantanal.png';
-                break;
-            case 7:
-            case 8:
                 imgItemComprado = '/src/assets/imagens/skins/onca_halloween.png';
                 break;
-            case 9:
-            case 10:
-                imgItemComprado = '/src/assets/imagens/skins/onca_natal.png';
-            break;
-            case 11:
-            case 12:
-                imgItemComprado = '/src/assets/imagens/skins/cachorro_caatinga.png';
-                break;
-            case 13:
-            case 14:
-                imgItemComprado = '/src/assets/imagens/skins/cachorro_mata-atlantica.png';
-                break;
-            case 15:
-            case 16:
-                imgItemComprado = '/src/assets/imagens/skins/cachorro_pantanal.png';
-                break;
-            case 17:
-            case 18:
+            case 6:
                 imgItemComprado = '/src/assets/imagens/skins/cachorro_halloween.png';
                 break;
-            case 19:
-            case 20:
+            case 7:
+                imgItemComprado = '/src/assets/imagens/skins/onca_natal.png';
+                break;
+            case 8:
                 imgItemComprado = '/src/assets/imagens/skins/cachorro_natal.png';
+                break;
+            case 9:
+                imgItemComprado = '/src/assets/imagens/skins/onca_caatinga.png';
+                break;
+            case 10:
+                imgItemComprado = '/src/assets/imagens/skins/cachorro_caatinga.png';
+                break;
+            case 11:
+                imgItemComprado = '/src/assets/imagens/skins/onca_mata-atlantica.png';
+                break;
+            case 12:
+                imgItemComprado = '/src/assets/imagens/skins/cachorro_mata-atlantica.png';
+                break;
+            case 13:
+                imgItemComprado = '/src/assets/imagens/skins/onca_pantanal.png';
+                break;
+            case 14:
+                imgItemComprado = '/src/assets/imagens/skins/cachorro_pantanal.png';
                 break;
             default:
                 imgItemComprado = '';
