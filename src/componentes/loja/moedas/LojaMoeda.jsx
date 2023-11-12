@@ -1,10 +1,11 @@
-import React, {useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
+import { toast } from "react-toastify";
 import './LojaMoeda.css';
 import ReturnIcon from '/src/assets/imagens/icones/ReturnIcon';
+import ModalCompraMoeda from '/src/componentes/modals/compras/moedas/compraMoedas.jsx';
 import useAuthConta from '/src/hooks/AuthConta';
 import LojaMoedaService from '/src/services/LojaMoedasService';
-import ModalCompraMoeda from '/src/componentes/modals/compras/moedas/compraMoedas.jsx';
 
 // @Todo: pegar informação da "compra" e salvar na conta do usuário + atulizar sessão (paulo fica responsavel pela parte da sessão)
 
@@ -56,22 +57,17 @@ function LojaMoeda() {
 
         const compraMoedas = async (id, moeda, quantidade) => {
             try {
-                const data = await LojaMoedaService.sendCoins(id, moeda, quantidade);
-                
-                if (data.status === 200) {
-                    setResponse(data);
-                    setIsModalVisible(true);                    
-                } 
-                else {
-                    console.error('Erro na resposta do servidor:', data);
-                }
+                const response = await LojaMoedaService.sendCoins(id, moeda, quantidade);
+                (response && response.status === 200)
+                ? setIsModalVisible(!isModalVisible) 
+                : toast.error('Erro ao efetuar a compra! tente novamente em breve');
             } 
             catch (error) {
-                console.error('Erro na busca de dados:', error);
+                toast.error('Erro ao enviar informações!');
             }
         };
 
-        compraMoedas(user, tipoMoeda, qtdeMoeda);
+        compraMoedas(user.jogador.id, tipoMoeda, qtdeMoeda);
     }
     
     return(

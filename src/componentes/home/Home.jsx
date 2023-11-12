@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import './Home.css';
 import LogOutIcon from '/src/assets/imagens/icones/LogOutIcon';
@@ -9,7 +9,11 @@ import useAuthConta from '/src/hooks/AuthConta';
 
 function Home({musicaAtiva, toggleMusica}) {
     const navigate = useNavigate();
-    const { user, signout } = useAuthConta();
+    const { user, atualizaUser, signout } = useAuthConta();
+
+    useEffect(() => {
+        if (user?.jogador?.id) atualizaUser(user?.jogador?.id)
+    },[])
 
     const toggleVolume = () => {
         toggleMusica()

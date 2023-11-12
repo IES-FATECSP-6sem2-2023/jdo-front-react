@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Colecao.css';
+import { toast } from 'react-toastify';
 import ReturnIcon from '/src/assets/imagens/icones/ReturnIcon';
 
 function Colecao() {
