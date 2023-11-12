@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import './Colecao.css';
 import { toast } from 'react-toastify';
 import ReturnIcon from '/src/assets/imagens/icones/ReturnIcon';
-import { toast } from 'react-toastify';
 import useAuthConta from '/src/hooks/AuthConta';
 import ColecaoService from '/src/services/ColecaoService';
 
@@ -19,8 +18,7 @@ function Colecao() {
             try {
                 const data = await ColecaoService.getColecao(idUsuario);
                 if (data.status === 200) {
-                    setResponse(data);  
-                    console.log(data)               
+                    setResponse(data.data.itens);             
                 } 
                 else {
                     console.error('Erro na resposta do servidor:', data);
@@ -110,7 +108,7 @@ function Colecao() {
                     <button className="sub-menu-item-colecao" value={2} onClick={mudaColecao}>CACHORRO</button>
                 </div>
                 <div className="colecao-onca-colecao" id="colecao-onca">
-                    {/* {skinsOncas.map((item) => (
+                    {skinsOncas.map((item) => (
                         <div key={item.id} className="skin-item-colecao">
                             <label className="radio-button-label-colecao">
                                 <input type="radio" name="opcaoSkin" value={item.id} onChange={escolheSkinPadrao}/>
@@ -118,10 +116,10 @@ function Colecao() {
                                 <span className="colecao-skin-nome">{item.nome}</span>
                             </label>
                         </div>
-                    ))} */}
+                    ))}
                 </div>
                 <div className="colecao-cachorro-colecao" id="colecao-cachorro">
-                    {/* {skinsCachorro.map((item) => (
+                    {skinsCachorro.map((item) => (
                         <div key={item.id} className="skin-item-colecao">
                             <label className="radio-button-label-colecao">
                                 <input type="radio" name="opcaoSkin" value={item.id} />
@@ -129,7 +127,7 @@ function Colecao() {
                                 <span className="colecao-skin-nome">{item.nome}</span>
                             </label>
                         </div>
-                    ))} */}
+                    ))}
                 </div>
                 <div className="salva-padrao-colecao">
                     <button onClick={defineSkinPadrao}>DEFINIR COMO PADRÃO</button>

@@ -16,7 +16,7 @@ function LojaMoeda() {
     const [isModalVisible, setIsModalVisible] = useState(false);
 
     const closeModal = () => {
-        setIsModalVisible(false);
+        setIsModalVisible(!isModalVisible);
     };
   
     const compraMoeda = (event) => {

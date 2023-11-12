@@ -4,9 +4,9 @@ import axios from "axios";
 
     const getColecao = async (idUsuario) => {
         try{
-            const response = await axios.get(api +`/item/${idUsuario}/all`);
+            const response = await axios.get(api.concat(`/item/${idUsuario}/all`));
             //const response = await axios.get(`http://backendjogodaonca-env.eba-d9srpszz.us-east-1.elasticbeanstalk.com/item/${idUsuario}/all`);
-            return response.data;
+            return response;
         } catch (e) {
             throw e;
         }
@@ -19,7 +19,7 @@ import axios from "axios";
                 "iditem": idItemFavorito 
             }
             const response = axios.patch(`${api}/item/${idUsuario}/favorito/${idItem}`, authDefaultSkinRequest);
-            return response.data;
+            return response;
         } catch (e) {
             console.error(e);
             throw e;
