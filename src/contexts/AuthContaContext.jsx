@@ -2,7 +2,6 @@ import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import AuthService from "/src/services/AuthService";
 import ContaService from '/src/services/ContaService';
-import { toast } from 'react-toastify';
 
 export const AuthContaContext = createContext({});
 
