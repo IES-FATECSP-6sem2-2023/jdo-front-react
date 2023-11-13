@@ -22,6 +22,13 @@ function Tabuleiro({musicaAtiva, toggleMusica}) {
         });
         console.log('Conectado: ' + frame);
     });
+
+
+    /*
+    stompClient.send("/topic/gamestate", {}, JSON.stringify({
+        "id": 1,
+    }));
+    */
     
     const {partida, movimentarPartida, finalizarPartida} = useTabuleiro();
     const navigate = useNavigate()
