@@ -11,9 +11,24 @@ import axios from "axios";
         }
     }
 
+    const atualizaConta = async (nome, username, email, senha) => {
+        try{
+            const response = await axios.post(`${api}/autenticacao/altera`, {
+                nome: nome,
+                username: username,
+                email: email,
+                senha: senha
+            });
+            return response.data;
+        } catch (e) {
+            throw e;
+        }
+    }
+
 const ContaService = {
 
-    getConta
+    getConta,
+    atualizaConta
 
 }
 

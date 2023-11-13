@@ -208,7 +208,7 @@ h1{
         font-size: 1.6em;
     }
 
-    .radio-button-label-colecao::before {
+    .colecao-skin {
         width: 110px;
         height: 110px;
     }

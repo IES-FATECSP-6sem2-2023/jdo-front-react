@@ -18,7 +18,7 @@ function Colecao() {
             try {
                 const data = await ColecaoService.getColecao(idUsuario);
                 if (data.status === 200) {
-                    setResponse(data.data.itens);             
+                    setResponse(data.data.itens);
                 } 
                 else {
                     console.error('Erro na resposta do servidor:', data);
