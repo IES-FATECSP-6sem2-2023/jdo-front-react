@@ -1,9 +1,12 @@
 import { AuthContaProvider } from '../contexts/AuthContaContext';
+import { TabuleiroProvider } from '../contexts/TabuleiroContext';
 
 const GlobalProvider = ({children}) => {
     return (
         <AuthContaProvider>
-            {children}
+            <TabuleiroProvider>
+                {children}
+            </TabuleiroProvider>
         </AuthContaProvider>
     )
 }

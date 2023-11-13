@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import './Home.css';
 import LogOutIcon from '/src/assets/imagens/icones/LogOutIcon';
@@ -6,9 +6,11 @@ import UsuarioIcon from '/src/assets/imagens/icones/UsuarioIcon';
 import VolumeOffIcon from '/src/assets/imagens/icones/VolumeOffIcon';
 import VolumeOnIcon from '/src/assets/imagens/icones/VolumeOnIcon';
 import useAuthConta from '/src/hooks/AuthConta';
+import useTabuleiro from '/src/hooks/TabuleiroHook';
 
 function Home({musicaAtiva, toggleMusica}) {
     const navigate = useNavigate();
+    const { criarPartida } = useTabuleiro();
     const { user, atualizaUser, signout } = useAuthConta();
 
     useEffect(() => {
@@ -24,8 +26,10 @@ function Home({musicaAtiva, toggleMusica}) {
         navigate("/login")
     }
 
-    const jogar = () => {
-        navigate("/tabuleiro")
+    const jogar = async (tipo) => {
+        debugger
+        await criarPartida(tipo.toUpperCase());
+        navigate("/fila")
     }
 
     return (
@@ -73,8 +77,8 @@ function Home({musicaAtiva, toggleMusica}) {
                     <div className="arena">
                     </div>
                     <div className="menu-principal">
-                        <button className="btn menu-item" onClick={jogar}><p className="texto-p">JOGAR <br></br> COMO ONÇA</p></button>
-                        <button className="btn menu-item" onClick={jogar}><p className="texto-p">JOGAR COMO <br></br> CACHORRO</p></button>
+                        <button className="btn menu-item" onClick={() => jogar('onca')}><p className="texto-p">JOGAR <br></br> COMO ONÇA</p></button>
+                        <button className="btn menu-item" onClick={() => jogar('cachorro')}><p className="texto-p">JOGAR COMO <br></br> CACHORRO</p></button>
                         <button className="btn menu-item" onClick={() => {navigate("/loja/skins")}}><p className="texto-p">LOJA</p></button>
                         <button className="btn menu-item" onClick={() => {navigate("/colecao")}}><p className="texto-p">COLEÇÃO</p></button>
                     </div>
