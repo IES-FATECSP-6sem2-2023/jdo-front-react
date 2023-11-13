@@ -7,8 +7,22 @@ import VolumeOffIcon from '/src/assets/imagens/icones/VolumeOffIcon';
 import VolumeOnIcon from '/src/assets/imagens/icones/VolumeOnIcon';
 import placaUser from '/src/assets/imagens/placas/placa_usuario.png';
 import useTabuleiro from '/src/hooks/TabuleiroHook';
+import Sockjs from "sockjs-client/dist/sockjs"
+import { Stomp } from '@stomp/stompjs'
+
 
 function Tabuleiro({musicaAtiva, toggleMusica}) {
+    const wsConexao = new Sockjs('http://localhost:8080/ws')
+    const stompClient = Stomp.over(wsConexao)
+      
+    stompClient.connect({}, function(frame) {
+        stompClient.subscribe('/topic/gamestate', function(message) {
+            const gamestate = JSON.parse(message.body)
+            console.log(gamestate)
+        });
+        console.log('Conectado: ' + frame);
+    });
+    
     const {partida, movimentarPartida, finalizarPartida} = useTabuleiro();
     const navigate = useNavigate()
 
