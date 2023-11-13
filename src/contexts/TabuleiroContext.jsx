@@ -1,10 +1,13 @@
 import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import useAuthConta from '/src/hooks/AuthConta';
 import TabuleiroService from "../services/TabuleiroService";
 
 export const TabuleiroContext = createContext({});
 
 export const TabuleiroProvider = ({ children }) => {
+    const [pecasComidas, setPecasComida] = useState(0);
+    const { user } = useAuthConta();
     const [partida, setPartida] = useState({
         "idpartida": 279186306,
         "primeirojogador": {
@@ -26,7 +29,7 @@ export const TabuleiroProvider = ({ children }) => {
             "2,0;": "3,0;3,1;",
             "1,2;": "",
             "0,3;": "",
-            "1,1;": "",
+            "3,2;": "",
             "2,1;": "3,1;",
             "0,2;": "",
             "1,4;": "",
@@ -38,11 +41,12 @@ export const TabuleiroProvider = ({ children }) => {
         }
       });
 
-    const criarPartida = async () => {
+    const criarPartida = async (tipo) => {
         try {
             if (user && user.jogador) {
                 const idJogador = user.jogador.id;
-                await TabuleiroService.iniciaPartida(idJogador);
+                debugger
+                const teste = await TabuleiroService.iniciaPartida(idJogador,tipo);
             }
             return;
         } catch (e) {
@@ -50,20 +54,6 @@ export const TabuleiroProvider = ({ children }) => {
             return;
         }
     }
-
-    // const participarPartida = async () => {
-    //     if (user && user.jogador) {
-    //         try {
-    //             const idJogador = user.jogador.id;
-    //             const partida = await TabuleiroService.participaPartida(idJogador);
-    //             setPartida(partida.data);
-    //             return;
-    //         } catch (e) {
-    //             toast.error("Erro ao tentar entrar em uma partida!");
-    //             return;
-    //         }
-    //     }
-    // }
 
     useEffect(() => {
         
@@ -74,23 +64,14 @@ export const TabuleiroProvider = ({ children }) => {
                 if (session.jogador.id === partida?.primeirojogador?.idJogador) localStorage.setItem("timeTabuleiro", 1);
                 if (session.jogador.id === partida?.segundojogador?.idJogador) localStorage.setItem("timeTabuleiro", 2);
             }
-        
-            // const fetchData = async () => {
-            //     try {
-            //         const partidaReturn = await TabuleiroService.movimentaPartida(partida);
-            //         debugger
-            //         if (partidaReturn) setPartida(partidaReturn.data);
-            //     } catch (e) {
-            //         toast.error("Erro ao tentar efetuar movimentação!");
-            //         // @ToDo: ver como voltar o tabuleiro à versão anterior dessa movimentação
-            //     }
-            // };
-        
-            // fetchData();
         }
     }, []);
 
-    const movimentarPartida = (xOri, yOri, xDes, yDes, jogador) => {
+    // useEffect(() => {
+    //     console.log("Uma peça de cachorro foi comida, total:", pecasComidas)
+    // }, [pecasComidas]);
+
+    const movimentarPartida = async (xOri, yOri, xDes, yDes, jogador) => {
         console.log("PASSOU AQUI", partida)
         if (partida) {
             const coordenadaOrigem = `${xOri},${yOri};`;
@@ -100,15 +81,47 @@ export const TabuleiroProvider = ({ children }) => {
 
             if (atualizaPartida[jogadorAtual].posicoes.hasOwnProperty(coordenadaOrigem)) {
                 const valoresDestino = atualizaPartida[jogadorAtual].posicoes[coordenadaOrigem].split(";");
+
+                const diferencaX = Math.abs(xDes - xOri);
+                const diferencaY = Math.abs(yDes - yOri);
+                let coordenadasPuladas = "";
+                if (diferencaX > 0) {
+                    for (let i = 1; i < diferencaX; i++) {
+                        const xPulado = xOri + (xDes > xOri ? i : -i);
+                        const yPulado = yOri;
+                        coordenadasPuladas= `${xPulado},${yPulado};`;
+                    }
+                } else if (diferencaY > 0) {
+                    for (let i = 1; i < diferencaY; i++) {
+                        const xPulado = xOri;
+                        const yPulado = yOri + (yDes > yOri ? i : -i);
+                        coordenadasPuladas = `${xPulado},${yPulado};`;
+                    }
+                }
                 
                 if (valoresDestino.includes(`${xDes},${yDes}`)) {
-                    limpaPosicoes(atualizaPartida.primeirojogador)
-                    limpaPosicoes(atualizaPartida.segundojogador)
+                    limpaPosicoes(atualizaPartida.primeirojogador.posicoes)
+                    limpaPosicoes(atualizaPartida.segundojogador.posicoes)
 
                     delete atualizaPartida[jogadorAtual].posicoes[coordenadaOrigem];
                     atualizaPartida[jogadorAtual].posicoes[coordenadaDestino] = "";
                     
-                    setPartida(atualizaPartida);
+                    if (coordenadasPuladas) {
+                        debugger
+                        delete atualizaPartida.segundojogador.posicoes[coordenadasPuladas];
+                        setPecasComida(prevPecasComida => {
+                            console.log("Valor anterior de pecasComida:", prevPecasComida);
+                            return prevPecasComida + 1;
+                          });
+                    }
+                    
+                    try {
+                        const novaMovimentacao = await TabuleiroService.movimentaPartida(atualizaPartida);
+                        if (novaMovimentacao) setPartida(novaMovimentacao);
+                        return true
+                    } catch (e) {
+                        toast.error("Erro ao tentar efetuar movimentação!");
+                    }
                 }
             }
         }
@@ -123,12 +136,8 @@ export const TabuleiroProvider = ({ children }) => {
     const finalizarPartida = async (timeVitoria) => {
         if (partida) {
             try {
-                const idVencedor = timeVitoria === "onca" ? partida.primeirojogador.idJogador :partida.segundojogador.idJogador;
-                const finalRequest = {
-                    idpartida: partida.idpartida,
-                    idVendedor: idVencedor
-                }
-                const partidaReturn = await TabuleiroService.finalizaPartida(finalRequest);
+                const idVencedor = timeVitoria === 1 ? partida.primeirojogador.idJogador : partida.segundojogador.idJogador;
+                const partidaReturn = await TabuleiroService.finalizaPartida(partida.idpartida, idVencedor);
                 setPartida(partidaReturn.data);
                 return;
             } catch (e) {
@@ -139,7 +148,7 @@ export const TabuleiroProvider = ({ children }) => {
     }
 
     return (
-        <TabuleiroContext.Provider value={{partida, criarPartida, movimentarPartida, finalizarPartida}}>
+        <TabuleiroContext.Provider value={{partida, pecasComidas, criarPartida, movimentarPartida, finalizarPartida}}>
             {children}
         </TabuleiroContext.Provider>
     )

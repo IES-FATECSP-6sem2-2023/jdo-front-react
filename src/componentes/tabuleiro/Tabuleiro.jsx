@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Tabuleiro.css';
 import Cronometro from './cronometro/Cronometro';
@@ -9,16 +9,50 @@ import placaUser from '/src/assets/imagens/placas/placa_usuario.png';
 import useTabuleiro from '/src/hooks/TabuleiroHook';
 
 function Tabuleiro({musicaAtiva, toggleMusica}) {
-    const {partida, movimentarPartida, finalizarPartida} = useTabuleiro();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const {partida, pecasComidas, movimentarPartida, finalizarPartida} = useTabuleiro();
+    const [tabuleiro, setTabuleiro] = useState([]);
+    const [pecaSelecionada, setPecaSelecionada] = useState({});
 
-    const jogadorOnline = parseInt(localStorage.getItem("timeTabuleiro"));
-    const [jogadorDaVez, setJogadorAtual] = useState(2);
+    useEffect(() => {
+        if (partida) {
+          const novoTabuleiro = criarTabuleiro(partida);
+          setTabuleiro(novoTabuleiro);
+        }
+    }, [partida]);
+
+    const criarTabuleiro = (partida) => {
+        const tabuleiro = [];
+        const posicoesFixasTri = ["5,0;", "5,4;", "6,1;", "6,3;" ];
+      
+        for (let i = 0; i < 7; i++) {
+          const linha = [];
+      
+          for (let j = 0; j < 5; j++) {
+            const chave = `${i},${j};`;
+            if (posicoesFixasTri.includes(chave)) {
+                linha.push("tri")
+            } else if (partida.primeirojogador.posicoes.hasOwnProperty(chave)) {
+              linha.push(1);
+            } else if (partida.segundojogador.posicoes.hasOwnProperty(chave)) {
+              linha.push(2);
+            } else {
+              linha.push("");
+            }
+          }
+          tabuleiro.push(linha);
+        }
+        return tabuleiro;
+    };
+
+    const jogadorSessao = parseInt(localStorage.getItem("timeTabuleiro"));
+    const [jogadorDaVez, setJogadorDaVez] = useState(2);
 
     const alternarJogador = () => {
-      setJogadorAtual(jogadorDaVez === 1 ? 2 : 1);
+        setJogadorDaVez((prevJogador) => (prevJogador === 1 ? 2 : 1));
+        jogadorDaVez
     };
-  
+      
     const handleTempoEsgotado = (jogador) => {
       console.log(`Tempo esgotado para Jogador ${jogador}`);
       setPecaSelecionada({})
@@ -30,9 +64,9 @@ function Tabuleiro({musicaAtiva, toggleMusica}) {
     }
 
     const desistir = () => {
-        localStorage.removeItem("timeTabuleiro")
-        finalizarPartida()
-        navigate("/menu")
+        finalizarPartida(jogadorSessao === 1 ? 2 : 1);
+        localStorage.removeItem("timeTabuleiro");
+        navigate("/menu");
     }
 
     const somReacao = (event) => {
@@ -52,38 +86,21 @@ function Tabuleiro({musicaAtiva, toggleMusica}) {
         } else {
             console.log("Valor não reconhecido");
         }
-    }
-
-    const [formacaoInicialTabuleiro, setFormacaoInicialTabuleiro] = useState([
-        ["2", "2", "2", "2", "2"],
-        ["2", "2", "2", "2", "2"],
-        ["2", "2", "1", "2", "2"],
-        ["", "", "", "", ""],
-        ["", "", "", "", ""],
-        ["tri", "", "", "", "tri"],
-        ["", "tri", "", "tri", ""],
-        
-    ]);
-
-    const [pecaSelecionada, setPecaSelecionada] = useState({});
+    } 
     
     const handleCellClick = async (x, y, peca) => {
-        debugger
-        if (jogadorOnline === jogadorDaVez && parseInt(peca) === jogadorDaVez && peca !== "" && peca !== "tri") {
-          setPecaSelecionada({ y, x });
+        if (jogadorSessao === jogadorDaVez && peca === jogadorDaVez && Number.isInteger(peca)) {
+            setPecaSelecionada({ y, x });
         } else if (peca === "" && pecaSelecionada.y !== undefined) {
-          const movimentoValido = await movimentarPartida(pecaSelecionada.y, pecaSelecionada.x, y, x, jogadorOnline === 1 ? 1 : 2);
-          if (movimentoValido) {
-          
-            const novaFormacaoTabuleiro = [...formacaoInicialTabuleiro];
-            novaFormacaoTabuleiro[y][x] = jogadorDaVez;
-            novaFormacaoTabuleiro[pecaSelecionada.y][pecaSelecionada.x] = "";
-          
-            setFormacaoInicialTabuleiro(novaFormacaoTabuleiro);
-            handleTempoEsgotado(jogadorDaVez);
-          }
+            const movimentoValido = await movimentarPartida(pecaSelecionada.y, pecaSelecionada.x, y, x, jogadorSessao);
+            if (movimentoValido) {
+                handleTempoEsgotado(jogadorDaVez);
+            }
+            if (pecasComidas === 5) {
+                finalizarPartida(1)
+            }
         }
-      };
+    };
 
     // const modal = document.getElementById("modal");
     // const modalLoading = document.getElementById("modal-loading");
@@ -111,13 +128,9 @@ function Tabuleiro({musicaAtiva, toggleMusica}) {
                     <div className="area-onca-tabuleiro">
                         <div className="area-onca-container-tabuleiro">
                             <div className="placar-tabuleiro">
-                                <div className="placar-onca-tabuleiro"></div> 
-                                {/* Add classe "peca-comida" para mostrar o placar */}
-                                <div className="placar-onca-tabuleiro"></div>
-                                <div className="placar-onca-tabuleiro"></div>
-                                <div className="placar-onca-tabuleiro"></div>
-                                <div className="placar-onca-tabuleiro"></div>
-                                <div className="placar-onca-tabuleiro"></div>
+                                {Array.from({ length: pecasComidas }).map((_, index) => (
+                                    <div className="placar-onca-tabuleiro peca-comida-tabuleiro" key={index}></div>
+                                ))}
                             </div>
                             <Cronometro jogador={1} ativo={jogadorDaVez === 1} onTempoEsgotado={handleTempoEsgotado} />
                             <div className="info-user-tabuleiro jogador-onca-tabuleiro">
@@ -131,7 +144,7 @@ function Tabuleiro({musicaAtiva, toggleMusica}) {
                             <div className="tabuleiro-container">
                                 <div className="malha-tabuleiro">
                                     {/* Renderização dinâmica do tabuleiro */}
-                                    {formacaoInicialTabuleiro.map((row, y) => (
+                                    {tabuleiro.map((row, y) => (
                                     <div className="row-tabuleiro" key={y}>
                                         {row.map((peca, x) => (
                                         peca === "tri" ? (
@@ -143,9 +156,9 @@ function Tabuleiro({musicaAtiva, toggleMusica}) {
                                             <div
                                                 className={`
                                                 cell-tabuleiro 
-                                                peca-${peca === '1' ? 'onca' : 'cachorro'}-tabuleiro
+                                                peca-${peca === 1 ? 'onca' : 'cachorro'}-tabuleiro
                                                 ${x === pecaSelecionada?.x && y === pecaSelecionada?.y ? 'peca-selecionada-tabuleiro' : ''}
-                                                ${parseInt(peca) === jogadorDaVez && !(x === pecaSelecionada?.x && y === pecaSelecionada?.y) ? 'peca-jogador-tabuleiro' : ''} 
+                                                ${peca === jogadorDaVez && !(x === pecaSelecionada?.x && y === pecaSelecionada?.y) ? 'peca-jogador-tabuleiro' : ''} 
                                                 `}
                                                 data-x={x}
                                                 data-y={y}
