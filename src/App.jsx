@@ -3,6 +3,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Colecao from './componentes/colecao/Colecao.jsx';
 import Conta from './componentes/conta/Conta.jsx';
+import Tabuleiro from './componentes/tabuleiro/Tabuleiro.jsx';
 import Home from './componentes/home/Home.jsx';
 import Login from './componentes/login/Login.jsx';
 import EsqueciSenha from './componentes/login/esqueciSenha/EsqueciSenha.jsx';
@@ -18,7 +19,6 @@ import Loading from './componentes/modals/loading/loading.jsx';
 import Sucesso from './componentes/modals/sucesso/sucesso.jsx';
 import Vitoria from './componentes/modals/vitoria/vitoria.jsx';
 import GlobalProvider from './providers/GlobalProvider.jsx';
-import TabuleiroWithProvider from './providers/TabuleiroWithProvider.jsx';
 import useAuthConta from '/src/hooks/AuthConta';
 
 const Private = () => {
@@ -59,7 +59,7 @@ const App = () => {
               <Route path='/loja/moedas' element={<LojaMoeda />} />
               <Route path='/colecao' element={<Colecao />} />
               <Route path='/conta' element={<Conta />} />
-              <Route path='/tabuleiro' element={<TabuleiroWithProvider musicaAtiva={musicaAtiva} toggleMusica={toggleMusica} />} />
+              <Route path='/tabuleiro' element={<Tabuleiro musicaAtiva={musicaAtiva} toggleMusica={toggleMusica} />} />
               <Route path='/loading' element={<Loading />} />
               <Route path='/fila' element={<Fila />} />
               <Route path='/erro' element={<Erro />} />
