@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import ReturnIcon from '/src/assets/imagens/icones/ReturnIcon';
 import VisibilityIcon from '/src/assets/imagens/icones/VisibilityIcon';
@@ -6,6 +6,8 @@ import VisibilityOffIcon from '/src/assets/imagens/icones/VisibilityOffIcon';
 import {validatePassword} from '/src/utils/Regex.jsx';
 import useAuthConta from '/src/hooks/AuthConta';
 import './Conta.css';
+import ContaService from '../../services/ContaService';
+import { toast } from 'react-toastify';
 
 function Conta() {
     const navigate = useNavigate();
@@ -23,7 +25,8 @@ function Conta() {
     };
 
     const validaSenha = () => {
-		!validatePassword.test(senha) ? setSenhaErr(true) : setSenhaErr(false);
+        // se a senha não for válida, seta o erro como true
+		validatePassword.test(senha) ? setSenhaErr(false) : setSenhaErr(true);
 	}
 
     const toggleVisibility = (e) => {
@@ -35,8 +38,11 @@ function Conta() {
 		e.preventDefault();
 		validaSenha();
         if (!senhaErr) {
-            // @ToDo: chamada para atualizar as informações do usuário + atualizar session (monta a chamada, paulo faz a atualização da sessão depois)
+            await ContaService.atualizaConta(nome, userName, email, senha);
+            toast.success("Informações atualizadas com sucesso!");
+            return
         }
+        toast.error("Erro ao atualizar informações!\nTente novamente!");
     }
     
     return (
@@ -56,7 +62,7 @@ function Conta() {
                 </div>
                 <div className="content-main-conta">
                     <div className="content-main-superior-conta">
-                        <form className="infos-user-conta">
+                        <form className="infos-user-conta" onSubmit={atualizaUser}>
                             <div className="info-conta info-nome-conta">
                                 <label htmlFor="">NOME:</label>
                                 <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} required/>
@@ -72,7 +78,7 @@ function Conta() {
                             </div>
                             <div className="info-conta info-senha-conta">
                                 <label htmlFor="">SENHA:</label>
-                                <input type={visibilityStatus ? "text" : "password"} onChange={(e) => handleFieldChange(e.target.value, setSenha)} required/>
+                                <input type={visibilityStatus ? "text" : "password"} onChange={(e) => setSenha(e.target.value)} required/>
                                 <button className="btn-visibility btn-senha-conta" onClick={toggleVisibility}>{visibilityStatus ? <VisibilityIcon /> : <VisibilityOffIcon />}</button>
                             </div>
                             <div className="info-conta atualiza-info-conta">

@@ -27,7 +27,7 @@ function LojaSkin() {
                 const data = await LojaSkinService.getOpcoesCompraSkin(idJogador);
                 
                 if (data.status === 200) {
-                    setResponse(data);                 
+                    setResponse(data.data);                 
                 } 
                 else {
                     console.error('Erro na resposta do servidor:', data);
@@ -63,7 +63,7 @@ function LojaSkin() {
             const data = await LojaSkinService.sendSkin(idJogador, idSkin, pagamento);
             
             if (data.status === 200) {
-                setResponse(data);
+                setResponse(data.data);
                 setIsModalVisible(true);                
             } 
             else {

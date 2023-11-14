@@ -2,19 +2,15 @@ import axios from "axios";
 
     const api= 'http://localhost:8080'
 
-    const iniciaPartida = async (idJogador) => {
+    const iniciaPartida = async (idJogador, time) => {
         try{
-            const idPartida = await axios.get(api + '/paritda/iniciar', idJogador);
+            const requestInciarPartida = {
+                idJogador: idJogador,
+                tipo: time
+            }
+            debugger
+            const idPartida = await axios.post(api.concat('/partida/iniciar'), requestInciarPartida);
             return idPartida;
-        } catch (e) {
-            throw e;
-        }
-    }
-
-    const participaPartida = async (idJogador) => {
-        try{
-            const response = await axios.get(api + '/partida/participar', idJogador);
-            return response.data;
         } catch (e) {
             throw e;
         }
@@ -22,16 +18,20 @@ import axios from "axios";
 
     const movimentaPartida = async (partida) => {
         try {
-            const response = await axios.get(api + '/partida/movimentar', partida);
+            const response = await axios.post(api + '/partida/movimentar', partida);
             return response.data;
         } catch (e) {
             throw e;
         }
     }
 
-    const finalizaPartida = async (finalRequest) => {
+    const finalizaPartida = async (idPartida, idJogador) => {
         try {
-            const response = await axios.get(api + '/partida/finalizar', finalRequest);
+            const finalRequest = {
+                idPartida: idPartida,
+                idVendedor: idJogador
+            }
+            const response = await axios.post(api + '/partida/finalizar', finalRequest);
             return response.data;
         } catch (e) {
             throw e;
@@ -41,7 +41,6 @@ import axios from "axios";
 const TabuleiroService = {
 
     iniciaPartida,
-    participaPartida,
     movimentaPartida,
     finalizaPartida
 

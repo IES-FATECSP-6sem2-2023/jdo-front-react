@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router';
 import './Home.css';
 import LogOutIcon from '/src/assets/imagens/icones/LogOutIcon';
@@ -7,10 +7,16 @@ import VolumeOffIcon from '/src/assets/imagens/icones/VolumeOffIcon';
 import VolumeOnIcon from '/src/assets/imagens/icones/VolumeOnIcon';
 import useAuthConta from '/src/hooks/AuthConta';
 import Carrossel from './carrossel/carrossel'
+import useTabuleiro from '/src/hooks/TabuleiroHook';
 
 function Home({musicaAtiva, toggleMusica}) {
     const navigate = useNavigate();
-    const { user, signout } = useAuthConta();
+    const { criarPartida } = useTabuleiro();
+    const { user, atualizaUser, signout } = useAuthConta();
+
+    useEffect(() => {
+        if (user?.jogador?.id) atualizaUser(user?.jogador?.id)
+    },[])
 
     const toggleVolume = () => {
         toggleMusica()
@@ -21,8 +27,10 @@ function Home({musicaAtiva, toggleMusica}) {
         navigate("/login")
     }
 
-    const jogar = () => {
-        navigate("/tabuleiro")
+    const jogar = async (tipo) => {
+        debugger
+        await criarPartida(tipo.toUpperCase());
+        navigate("/fila")
     }
 
     const [nivel, setNivel] = useState(1);
@@ -73,8 +81,8 @@ function Home({musicaAtiva, toggleMusica}) {
                         <Carrossel nivel={nivel} />
                     </div>
                     <div className="menu-principal">
-                        <button className="btn menu-item" onClick={jogar}><p className="texto-p">JOGAR <br></br> COMO ONÇA</p></button>
-                        <button className="btn menu-item" onClick={jogar}><p className="texto-p">JOGAR COMO <br></br> CACHORRO</p></button>
+                        <button className="btn menu-item" onClick={() => jogar('onca')}><p className="texto-p">JOGAR <br></br> COMO ONÇA</p></button>
+                        <button className="btn menu-item" onClick={() => jogar('cachorro')}><p className="texto-p">JOGAR COMO <br></br> CACHORRO</p></button>
                         <button className="btn menu-item" onClick={() => {navigate("/loja/skins")}}><p className="texto-p">LOJA</p></button>
                         <button className="btn menu-item" onClick={() => {navigate("/colecao")}}><p className="texto-p">COLEÇÃO</p></button>
                     </div>

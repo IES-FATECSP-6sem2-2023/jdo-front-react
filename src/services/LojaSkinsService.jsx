@@ -5,7 +5,7 @@ import axios from "axios";
     const getOpcoesCompraSkin = async (idUsuario) => {
         try{
             const response = await axios.get(api +`/loja/consulta/${idUsuario}`);
-            return response.data;
+            return response;
         } catch (e) {
             throw e;
         }
@@ -24,7 +24,7 @@ import axios from "axios";
                 valorTotal: 0
             }
             const response = axios.post(api.concat('/loja/compra'), authBuySkinsRequest);
-            return response.data;
+            return response;
         } catch (e) {
             console.error(e);
             throw e;

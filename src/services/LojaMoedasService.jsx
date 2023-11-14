@@ -15,7 +15,7 @@ const sendCoins = async (idUser, tipoMoeda, quantidadeMoeda) => {
             valorTotal: 0
         }
         const response = axios.post(api.concat('/loja/compra'), authSendCoinsRequest);
-        return response.data;
+        return response;
     } catch (e) {
         console.error(e);
         throw e;
