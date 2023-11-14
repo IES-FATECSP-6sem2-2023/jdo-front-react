@@ -61,8 +61,8 @@ export const TabuleiroProvider = ({ children }) => {
             console.log(partida)
             if (!localStorage.getItem("timeTabuleiro")){
                 let session = JSON.parse(localStorage.getItem("userLogin"));
-                if (session.jogador.id === partida?.primeirojogador?.idJogador) localStorage.setItem("timeTabuleiro", 1);
-                if (session.jogador.id === partida?.segundojogador?.idJogador) localStorage.setItem("timeTabuleiro", 2);
+                if (session?.jogador?.id === partida?.primeirojogador?.idJogador) localStorage.setItem("timeTabuleiro", 1);
+                if (session?.jogador?.id === partida?.segundojogador?.idJogador) localStorage.setItem("timeTabuleiro", 2);
             }
         }
     }, []);
