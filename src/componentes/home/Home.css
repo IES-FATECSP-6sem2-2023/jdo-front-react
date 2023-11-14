@@ -158,13 +158,46 @@
     margin: 5vh auto;
 }
 
-.arena {
-    width: 25vw;
-    height: 30vh;
+.arenas-carrossel-container{
+    width: 40vw;
+    height: 35vh;
     margin: 0 auto;
-    background-image: url('/src/assets/imagens/mapas/amazonia.png');
-    background-size: contain;
-    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.seta {
+    width: 5vw;
+    height: 35vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.seta img {
+    width: 80%;
+    height: 20%;
+}
+
+.seta img:hover {
+    cursor: pointer;
+}
+
+.carrossel {
+    overflow: hidden;
+    width: 30vw; 
+}
+
+.mapa {
+    width: 30vw; 
+    height: 35vh;
+}
+
+.mapa > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .menu-principal {

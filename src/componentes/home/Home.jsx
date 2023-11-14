@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router';
 import './Home.css';
 import LogOutIcon from '/src/assets/imagens/icones/LogOutIcon';
@@ -6,6 +6,7 @@ import UsuarioIcon from '/src/assets/imagens/icones/UsuarioIcon';
 import VolumeOffIcon from '/src/assets/imagens/icones/VolumeOffIcon';
 import VolumeOnIcon from '/src/assets/imagens/icones/VolumeOnIcon';
 import useAuthConta from '/src/hooks/AuthConta';
+import Carrossel from './carrossel/carrossel'
 import useTabuleiro from '/src/hooks/TabuleiroHook';
 
 function Home({musicaAtiva, toggleMusica}) {
@@ -31,6 +32,8 @@ function Home({musicaAtiva, toggleMusica}) {
         await criarPartida(tipo.toUpperCase());
         navigate("/fila")
     }
+
+    const [nivel, setNivel] = useState(1);
 
     return (
         <section className="bg-home">
@@ -74,7 +77,8 @@ function Home({musicaAtiva, toggleMusica}) {
                     </div>
                 </div>
                 <div className="main">
-                    <div className="arena">
+                    <div className="arenas-carrossel">
+                        <Carrossel nivel={nivel} />
                     </div>
                     <div className="menu-principal">
                         <button className="btn menu-item" onClick={() => jogar('onca')}><p className="texto-p">JOGAR <br></br> COMO ONÇA</p></button>
