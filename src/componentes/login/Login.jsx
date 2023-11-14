@@ -37,7 +37,7 @@ function Login({musicaAtiva, toggleMusica}) {
 	
 	const cadastrar = async (e) => {
 		e.preventDefault();
-		if (!validatePassword.test(senha)) {
+		if (validatePassword.test(senha)) {
 			setSenhaErr(true);
 		} else {
 			setSenhaErr(false);
@@ -48,7 +48,7 @@ function Login({musicaAtiva, toggleMusica}) {
 
 	const entrar = async (e) => {
 		e.preventDefault();
-		if (!validatePassword.test(senha)) {
+		if (validatePassword.test(senha)) {
 			setSenhaErr(true);
 		} else {
 			setSenhaErr(false);
