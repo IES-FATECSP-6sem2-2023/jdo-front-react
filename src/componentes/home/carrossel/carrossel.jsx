@@ -26,6 +26,7 @@ const Carrossel = ({ nivel }) => {
   };
 
   const imgsCarrossel = generateCarouselImages(nivel);
+  console.log(imgsCarrossel)
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % imgsCarrossel.length);

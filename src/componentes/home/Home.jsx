@@ -25,7 +25,7 @@ function Home({musicaAtiva, toggleMusica}) {
         navigate("/tabuleiro")
     }
 
-    const [nivel, setNivel] = useState(4);
+    const [nivel, setNivel] = useState(1);
 
     return (
         <section className="bg-home">
