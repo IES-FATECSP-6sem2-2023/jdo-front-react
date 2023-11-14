@@ -14,18 +14,15 @@ const Carrossel = ({ nivel }) => {
   };
 
   const generateCarouselImages = (nivel) => {
-        if (nivel === 1) {
-            return [mapArenas[1], mapArenas[5], mapArenas[6], mapArenas[7]];
-        } 
-        else if (nivel === 2) {
-            return [mapArenas[2], mapArenas[6], mapArenas[7], mapArenas[1]];
-        } 
-        else if (nivel === 3) {
-            return [mapArenas[3], mapArenas[7], mapArenas[1], mapArenas[2]];
-        } 
-        else {
-            return [mapArenas[4], mapArenas[1], mapArenas[2], mapArenas[3]];
-        }
+    if (nivel === 1) {
+      return [mapArenas[1], mapArenas[5], mapArenas[6], mapArenas[7]];
+    } else if (nivel === 2) {
+      return [mapArenas[2], mapArenas[6], mapArenas[7], mapArenas[1]];
+    } else if (nivel === 3) {
+      return [mapArenas[3], mapArenas[7], mapArenas[1], mapArenas[2]];
+    } else {
+      return [mapArenas[4], mapArenas[1], mapArenas[2], mapArenas[3]];
+    }
   };
 
   const imgsCarrossel = generateCarouselImages(nivel);
@@ -42,19 +39,21 @@ const Carrossel = ({ nivel }) => {
 
   return (
     <div className="arenas-carrossel-container">
-        <div className="seta" onClick={prevSlide}>
-            <img src="src/assets/imagens/vetores/seta-esquerda.png" alt="Seta esquerda" />
+      <div className="seta esquerda" onClick={prevSlide}>
+        <img src="src/assets/imagens/vetores/seta-esquerda.png" alt="Seta esquerda" />
+      </div>
+      <div className="carrossel">
+        <div className="mapa arena-opcao">
+          <img
+            src={imgsCarrossel[currentIndex]}
+            alt={`Imagem ${currentIndex + 1}`}
+            className="mapa-imagem"
+          />
         </div>
-        <div className="carrossel">
-            <div className="mapa arena-opcao" style={{ transform: `translateX(${-currentIndex * 30}vw)` }}>
-                {imgsCarrossel.map((img, index) => (
-                  <img key={index} src={img} alt={`Imagem ${index}`} />
-                ))}
-            </div>
-        </div>
-        <div className="seta" onClick={nextSlide}>
-            <img src="src/assets/imagens/vetores/seta-direita.png" alt="Seta direita" />
-        </div>
+      </div>
+      <div className="seta direita" onClick={nextSlide}>
+        <img src="src/assets/imagens/vetores/seta-direita.png" alt="Seta direita" />
+      </div>
     </div>
   );
 };

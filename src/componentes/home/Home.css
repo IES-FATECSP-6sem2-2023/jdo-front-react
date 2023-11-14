@@ -187,11 +187,10 @@
 .carrossel {
     overflow: hidden;
     width: 30vw; 
-    display: flex;
 }
 
 .mapa {
-    min-width: 30vw; 
+    width: 30vw; 
     height: 35vh;
 }
 
