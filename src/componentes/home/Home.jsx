@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import './Home.css';
 import LogOutIcon from '/src/assets/imagens/icones/LogOutIcon';
@@ -6,6 +6,7 @@ import UsuarioIcon from '/src/assets/imagens/icones/UsuarioIcon';
 import VolumeOffIcon from '/src/assets/imagens/icones/VolumeOffIcon';
 import VolumeOnIcon from '/src/assets/imagens/icones/VolumeOnIcon';
 import useAuthConta from '/src/hooks/AuthConta';
+import Carrossel from './carrossel/carrossel'
 
 function Home({musicaAtiva, toggleMusica}) {
     const navigate = useNavigate();
@@ -23,6 +24,8 @@ function Home({musicaAtiva, toggleMusica}) {
     const jogar = () => {
         navigate("/tabuleiro")
     }
+
+    const [nivel, setNivel] = useState(2);
 
     return (
         <section className="bg-home">
@@ -67,17 +70,8 @@ function Home({musicaAtiva, toggleMusica}) {
                 </div>
                 <div className="main">
                     <div className="arenas-carrossel">
-                        <div className="seta">
-                            <img src="src/assets/imagens/vetores/seta-esquerda.png" />
-                        </div>
-                        <div className="mapa arena-opcao">
-                            <img src="src/assets/imagens/mapas/amazonia.png" />
-                        </div>
-                        <div className="seta">
-                            <img src="src/assets/imagens/vetores/seta-direita.png" />
-                        </div>
+                        <Carrossel nivel={nivel} />
                     </div>
-                    {/* <div className="arena"> </div>*/}
                     <div className="menu-principal">
                         <button className="btn menu-item" onClick={jogar}><p className="texto-p">JOGAR <br></br> COMO ONÇA</p></button>
                         <button className="btn menu-item" onClick={jogar}><p className="texto-p">JOGAR COMO <br></br> CACHORRO</p></button>

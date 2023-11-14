@@ -107,7 +107,7 @@ function LojaSkin() {
                     </div>
                     <div className="loja-skin">
                         {response.map((item) => (
-                            <div className="loja-item-loja-skin">
+                            <div className="loja-item-loja-skin" key={item.id}>
                                 <div className="skin">
                                     <img src={`/src/assets/imagens/skins/${item.imagem}`} />
                                 </div>

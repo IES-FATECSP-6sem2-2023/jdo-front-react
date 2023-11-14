@@ -158,7 +158,7 @@
     margin: 5vh auto;
 }
 
-.arenas-carrossel{
+.arenas-carrossel-container{
     width: 40vw;
     height: 35vh;
     margin: 0 auto;
@@ -167,7 +167,7 @@
     justify-content: center;
 }
 
-.seta{
+.seta {
     width: 5vw;
     height: 35vh;
     display: flex;
@@ -175,23 +175,30 @@
     align-items: center;
 }
 
-.seta img{
+.seta img {
     width: 80%;
     height: 20%;
 }
 
-.seta img:hover{
+.seta img:hover {
     cursor: pointer;
 }
 
-.mapa{
-    width: 30vw;
-    height: 35vh; 
+.carrossel {
+    overflow: hidden;
+    width: 30vw; 
+    display: flex;
 }
 
-.mapa > img{
+.mapa {
+    min-width: 30vw; 
+    height: 35vh;
+}
+
+.mapa > img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
 }
 
 .menu-principal {
