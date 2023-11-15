@@ -1,10 +1,11 @@
 import axios from "axios";
+import { API_URL } from "../utils/constants";
 
-    const api= 'http://localhost:8080';
+    const api = API_URL;
 
     const getOpcoesCompraSkin = async (idUsuario) => {
         try{
-            const response = await axios.get(api +`/loja/consulta/${idUsuario}`);
+            const response = await axios.get(api.concat(`/loja/consulta/${idUsuario}`));
             return response;
         } catch (e) {
             throw e;
