@@ -6,7 +6,7 @@ import ContaService from '/src/services/ContaService';
 export const AuthContaContext = createContext({});
 
 export const AuthContaProvider = ({ children }) => {
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
       const userToken = localStorage.getItem("userToken");
