@@ -39,7 +39,7 @@ export const AuthContaProvider = ({ children }) => {
         return true;
       } catch (error) {
         console.error(error);
-        toast.error("Conta não encontrada!");
+        toast.error("E-mail ou Senha inválidos!");
         return false;
       }
     };
@@ -53,7 +53,7 @@ export const AuthContaProvider = ({ children }) => {
         }
       } catch (error) {
         console.error(error);
-        toast.error("Erro ao fazer Cadastro!");
+        toast.error("User ou E-mail já existente!");
         return false;
       }
     };

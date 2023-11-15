@@ -11,7 +11,7 @@ import VolumeOffIcon from '/src/assets/imagens/icones/VolumeOffIcon';
 import VolumeOnIcon from '/src/assets/imagens/icones/VolumeOnIcon';
 import Logobranco from '/src/assets/imagens/vetores/logo-branco.png';
 import useAuthConta from '/src/hooks/AuthConta';
-import { validatePassword } from '/src/utils/Regex.jsx';
+import { validatePassword, validateEmail } from '/src/utils/Regex.jsx';
 
 function Login({musicaAtiva, toggleMusica}) {
 	const navigate = useNavigate();
@@ -20,11 +20,15 @@ function Login({musicaAtiva, toggleMusica}) {
 	
 	const [login, toggle] = React.useState(true);
 
-	const [email, setEmail] = useState("");
+	
 	const [nome, setNome] = useState("");
-	const [senha, setSenha] = useState("");
-	const [senhaErr, setSenhaErr] = useState(false);
+	const [nomeErr, setNomeErr] = useState(false)
 	const [userName, setUserName] = useState("");
+	const [userNameErr, setUserNameErr] = useState(false)
+	const [email, setEmail] = useState("");
+	const [emailErr, setEmailErr] = useState(false)
+	const [senha, setSenha] = useState("");
+	const [senhaErr, setSenhaErr] = useState(false);	
 
 	const toggleVisibility = (e) => {
 		e.preventDefault();
@@ -37,10 +41,18 @@ function Login({musicaAtiva, toggleMusica}) {
 	
 	const cadastrar = async (e) => {
 		e.preventDefault();
-		if (validatePassword.test(senha)) {
+		if (!nome) {
+			setNomeErr(true);
+		} else 
+		if (!userName) {
+			setUserNameErr(true);
+		} else
+		if (!validateEmail.test(email)) {
+			setEmailErr(true);
+		} else
+		if (!validatePassword.test(senha)) {
 			setSenhaErr(true);
 		} else {
-			setSenhaErr(false);
 			const cadastroSucesso = await signup(nome, userName, email, senha);
 			cadastroSucesso ? toggle(!login) : '';
 		}
@@ -48,10 +60,11 @@ function Login({musicaAtiva, toggleMusica}) {
 
 	const entrar = async (e) => {
 		e.preventDefault();
-		if (validatePassword.test(senha)) {
-			setSenhaErr(true);
+		if (!validateEmail.test(email)) {
+			setEmailErr((prevEmailErr) => (prevEmailErr = true));
+		}else if (!validatePassword.test(senha)) {
+			setSenhaErr((prevSenhaErr) => (prevSenhaErr = true));
 		} else {
-			setSenhaErr(false);
 			const loginSucesso = await signin(email, senha);
 			loginSucesso ? navigate("/menu") : '';
 		}
@@ -78,22 +91,37 @@ function Login({musicaAtiva, toggleMusica}) {
 						<form className="form">
 							<label htmlFor="nome" className="label-input">
 								<UserIcon />
-								<input type="text" placeholder=" Nome" value={nome} onChange={(e) => {setNome(e.target.value)}} required />
+								<input type="text" placeholder=" Nome" value={nome} onChange={(e) => {
+									setNome(e.target.value);
+									setNomeErr(false);
+									}} />
 							</label>
+							{nomeErr && <span>{!nome ? 'O nome é obrigatório.' : ''}</span>}
 							<label htmlFor="user" className="label-input">
 								<TagIcon />
-								<input type="text" placeholder=" Usuário" value={userName} onChange={(e) => {setUserName(e.target.value)}} required />
+								<input type="text" placeholder=" Usuário" value={userName} onChange={(e) => {
+									setUserName(e.target.value);
+									setUserNameErr(false);
+									}} />
 							</label>
+							{userNameErr && <span>{!userName ? 'O usuário é obrigatório.' : ''}</span>}
 							<label htmlFor="email" className="label-input">
 								<MailIcon />
-								<input type="email" placeholder=" E-mail" value={email} onChange={(e) => {setEmail(e.target.value)}} required />
+								<input type="email" placeholder=" E-mail" value={email} onChange={(e) => {
+									setEmail(e.target.value);
+									setEmailErr(false);
+									}} />
 							</label>
+							{emailErr && <span>{!email ? 'O e-mail é obrigatório.' : 'O e-mail digitada é inválido.'}</span>}
 							<label htmlFor="senha" className="label-input">
 								<LockIcon />
-								<input type={visibilityStatus ? "text" : "password"} placeholder=" Senha" value={senha} onChange={(e) => {setSenha(e.target.value)}} required />
+								<input type={visibilityStatus ? "text" : "password"} placeholder=" Senha" value={senha} onChange={(e) => {
+									setSenha(e.target.value);
+									setSenhaErr(false)
+									}} />
 								<button className="btn-visibility" onClick={toggleVisibility}>{visibilityStatus ? <VisibilityIcon /> : <VisibilityOffIcon />}</button>
 							</label>
-							{senhaErr && <span>A senha precisa conter: A-a, 0-9, (6-20)</span>}
+							{senhaErr && <span>{!senha ? 'A senha é obrigatória.' : 'A senha digitada é inválida.'}</span>}
 							<button className="btn btn-second" onClick={cadastrar}>cadastrar</button>
 						</form>
 					</div>{/* Segunda Coluna */}
@@ -113,15 +141,22 @@ function Login({musicaAtiva, toggleMusica}) {
 						<h2 className="title title-second">Login</h2>
 						<form className="form">
 							<label htmlFor="email" className="label-input">
-									<MailIcon />
-									<input type="email" placeholder=" E-mail" value={email} onChange={(e) => {setEmail(e.target.value)}} required />
-								</label>
-							<label htmlFor="senha" className="label-input">
-									<LockIcon />
-									<input type={visibilityStatus ? "text" : "password"} placeholder=" Senha" value={senha} onChange={(e) => {setSenha(e.target.value)}} required />
-									<button className="btn-visibility" onClick={toggleVisibility}>{visibilityStatus ? <VisibilityIcon /> : <VisibilityOffIcon />}</button>
+								<MailIcon />
+								<input type="email" placeholder=" E-mail" value={email} onChange={(e) => {
+									setEmail(e.target.value);
+									setEmailErr(false);
+								}} />
 							</label>
-							{senhaErr && <span>A senha precisa conter: A-a, 0-9, (6-20)</span>}
+							{emailErr && <span>{!email ? 'O e-mail é obrigatório.' : 'O e-mail digitada é inválido.'}</span>}
+							<label htmlFor="senha" className="label-input">
+								<LockIcon />
+								<input type={visibilityStatus ? "text" : "password"} placeholder=" Senha" value={senha} onChange={(e) => {
+									setSenha(e.target.value);
+									setSenhaErr(false)
+								}} />
+								<button className="btn-visibility" onClick={toggleVisibility}>{visibilityStatus ? <VisibilityIcon /> : <VisibilityOffIcon />}</button>
+							</label>
+							{senhaErr && <span>{!senha ? 'A senha é obrigatória.' : 'A senha digitada é inválida.'}</span>}
 							<a className="password" onClick={() => {navigate("/login/esqueci-senha")}}>Esqueceu a senha?</a>
 							<button className="btn btn-second" onClick={entrar}>entrar</button>
 						</form>
