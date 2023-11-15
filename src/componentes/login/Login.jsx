@@ -20,7 +20,7 @@ function Login({musicaAtiva, toggleMusica}) {
 	
 	const [login, toggle] = React.useState(true);
 
-	
+
 	const [nome, setNome] = useState("");
 	const [nomeErr, setNomeErr] = useState(false)
 	const [userName, setUserName] = useState("");
@@ -28,7 +28,7 @@ function Login({musicaAtiva, toggleMusica}) {
 	const [email, setEmail] = useState("");
 	const [emailErr, setEmailErr] = useState(false)
 	const [senha, setSenha] = useState("");
-	const [senhaErr, setSenhaErr] = useState(false);	
+	const [senhaErr, setSenhaErr] = useState(false);
 
 	const toggleVisibility = (e) => {
 		e.preventDefault();
@@ -43,7 +43,7 @@ function Login({musicaAtiva, toggleMusica}) {
 		e.preventDefault();
 		if (!nome) {
 			setNomeErr(true);
-		} else 
+		} else
 		if (!userName) {
 			setUserNameErr(true);
 		} else
