@@ -1,24 +1,20 @@
 import axios from "axios";
+import { API_URL } from "../utils/constants";
 
-    const api= 'http://localhost:8080';
+    const api = API_URL;
 
     const getColecao = async (idUsuario) => {
         try{
             const response = await axios.get(api.concat(`/item/${idUsuario}/all`));
-            //const response = await axios.get(`http://backendjogodaonca-env.eba-d9srpszz.us-east-1.elasticbeanstalk.com/item/${idUsuario}/all`);
             return response;
         } catch (e) {
             throw e;
         }
     }
 
-    const authItemFavorito = (idUsuario, idItemFavorito) => {
+    const authItemFavorito = async (idUsuario, idItem) => {
         try {
-            const authDefaultSkinRequest = {
-                "idjogador": idUsuario,
-                "iditem": idItemFavorito 
-            }
-            const response = axios.patch(`${api}/item/${idUsuario}/favorito/${idItem}`, authDefaultSkinRequest);
+            const response = await axios.patch(api.concat(`/item/${idUsuario}/favorito/${idItem}`));
             return response;
         } catch (e) {
             console.error(e);
