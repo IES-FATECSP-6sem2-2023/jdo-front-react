@@ -8,6 +8,7 @@ import './EsqueciSenha.css';
 import { useNavigate } from 'react-router-dom';
 import { validatePassword, validateEmail } from '/src/utils/Regex.jsx';
 import { toast } from 'react-toastify';
+import ContaService from '../../../services/ContaService';
 
 function EsqueciSenha() {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ function EsqueciSenha() {
 		setVisibilityStatus(!visibilityStatus);
 	}
 
-  const redefine = (e) => {
+  const redefine = async (e) => {
     e.preventDefault();
 
     if (!validateEmail.test(email)) {
@@ -37,12 +38,21 @@ function EsqueciSenha() {
 		} else if (novaSenha !== confirmaNovaSenha) {
       toast.error('As senhas não correspondem');
     }else {
-      // const loginSucesso = await signin(email, senha);
-      const loginSucesso = true;
-		  if (loginSucesso) { 
-        toast.success("Senha redefinida com sucesso!")
-        navigate("/login");
-      }
+      try {
+        const loginSucesso = await ContaService.atualizaConta(null, null, email, novaSenha);
+		debugger
+		if (loginSucesso) { 
+	        toast.success("Senha redefinida com sucesso!")
+        	navigate("/login");
+      	}
+    } catch (error) {
+		if (error.response.status === 404) {
+			toast.error("Email não cadastrado!");
+		} else {
+			toast.error("Erro ao redefinir senha!");
+		}
+    }
+      
     }
 
   }
