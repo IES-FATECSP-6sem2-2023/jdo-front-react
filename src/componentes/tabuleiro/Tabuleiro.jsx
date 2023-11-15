@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import { Stomp } from '@stomp/stompjs';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Sockjs from "sockjs-client/dist/sockjs";
 import './Tabuleiro.css';
 import Cronometro from './cronometro/Cronometro';
 import LogOutIcon from '/src/assets/imagens/icones/LogOutIcon';
 import VolumeOffIcon from '/src/assets/imagens/icones/VolumeOffIcon';
 import VolumeOnIcon from '/src/assets/imagens/icones/VolumeOnIcon';
 import placaUser from '/src/assets/imagens/placas/placa_usuario.png';
+import useSomAmbiente from '/src/hooks/SomAmbienteHook';
 import useTabuleiro from '/src/hooks/TabuleiroHook';
-import Sockjs from "sockjs-client/dist/sockjs"
-import { Stomp } from '@stomp/stompjs'
 
 
-function Tabuleiro({musicaAtiva, toggleMusica}) {
+function Tabuleiro() {
     const wsConexao = new Sockjs('http://localhost:8080/ws')
     const stompClient = Stomp.over(wsConexao)
 
@@ -34,6 +35,7 @@ function Tabuleiro({musicaAtiva, toggleMusica}) {
     const {partida, pecasComidas, movimentarPartida, finalizarPartida} = useTabuleiro();
     const [tabuleiro, setTabuleiro] = useState([]);
     const [pecaSelecionada, setPecaSelecionada] = useState({});
+    const { toggleMusica, musicaStatus } = useSomAmbiente();
 
     useEffect(() => {
         if (partida) {
@@ -79,10 +81,6 @@ function Tabuleiro({musicaAtiva, toggleMusica}) {
       setPecaSelecionada({})
       alternarJogador();
     };
-
-    const toggleVolume = () => {
-        toggleMusica()
-    }
 
     const desistir = () => {
         finalizarPartida(jogadorSessao === 1 ? 2 : 1);
@@ -213,8 +211,8 @@ function Tabuleiro({musicaAtiva, toggleMusica}) {
                     </div>
                     <div className="area-cachorro-tabuleiro">
                         <div className="menu-superior-tabuleiro">
-                            <button className="item-config-tabuleiro" onClick={toggleVolume}>
-                                {musicaAtiva ? <VolumeOnIcon /> : <VolumeOffIcon />}
+                            <button className="item-config" onClick={toggleMusica}>
+                                {musicaStatus ? <VolumeOnIcon /> : <VolumeOffIcon />}
                             </button>
                             <button className="item-config-tabuleiro" onClick={desistir}>
                                 <LogOutIcon />

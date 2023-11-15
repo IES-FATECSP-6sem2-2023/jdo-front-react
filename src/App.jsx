@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Colecao from './componentes/colecao/Colecao.jsx';
 import Conta from './componentes/conta/Conta.jsx';
-import Tabuleiro from './componentes/tabuleiro/Tabuleiro.jsx';
 import Home from './componentes/home/Home.jsx';
 import Login from './componentes/login/Login.jsx';
 import EsqueciSenha from './componentes/login/esqueciSenha/EsqueciSenha.jsx';
@@ -18,6 +17,7 @@ import Fila from './componentes/modals/fila/fila.jsx';
 import Loading from './componentes/modals/loading/loading.jsx';
 import Sucesso from './componentes/modals/sucesso/sucesso.jsx';
 import Vitoria from './componentes/modals/vitoria/vitoria.jsx';
+import Tabuleiro from './componentes/tabuleiro/Tabuleiro.jsx';
 import GlobalProvider from './providers/GlobalProvider.jsx';
 import useAuthConta from '/src/hooks/AuthConta';
 
@@ -28,38 +28,20 @@ const Private = () => {
 
 const App = () => {
 
-  const [musicaDeFundo, setMusicaDeFundo] = useState(new Audio('src/assets/sons/ambiente/ambiente2.wav'));
-  const [musicaAtiva, setMusicaAtiva] = useState(false);
-
-  const toggleMusica = () => {
-    if (musicaAtiva) {
-      musicaDeFundo.pause();
-    } else {
-      musicaDeFundo.loop = true;
-      musicaDeFundo.volume = 0.2;
-      musicaDeFundo.play();
-    }
-    setMusicaAtiva(!musicaAtiva);
-  }
-
-  useEffect(() => {
-    toggleMusica();
-  }, []);
-
   return (
     <>
       <BrowserRouter>
         <GlobalProvider>
           <Routes>
               <Route path='/' element={<Private/>} />
-              <Route path='/login' element={<Login musicaAtiva={musicaAtiva} toggleMusica={toggleMusica} />} />
-              <Route path='/menu' element={<Home musicaAtiva={musicaAtiva} toggleMusica={toggleMusica} />} />
+              <Route path='/login' element={<Login />} />
+              <Route path='/menu' element={<Home />} />
               <Route path='/login/esqueci-senha' element={<EsqueciSenha/>} />
               <Route path='/loja/skins' element={<LojaSkin />} />
               <Route path='/loja/moedas' element={<LojaMoeda />} />
               <Route path='/colecao' element={<Colecao />} />
               <Route path='/conta' element={<Conta />} />
-              <Route path='/tabuleiro' element={<Tabuleiro musicaAtiva={musicaAtiva} toggleMusica={toggleMusica} />} />
+              <Route path='/tabuleiro' element={<Tabuleiro />} />
               <Route path='/loading' element={<Loading />} />
               <Route path='/fila' element={<Fila />} />
               <Route path='/erro' element={<Erro />} />

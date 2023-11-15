@@ -11,12 +11,14 @@ import VolumeOffIcon from '/src/assets/imagens/icones/VolumeOffIcon';
 import VolumeOnIcon from '/src/assets/imagens/icones/VolumeOnIcon';
 import Logobranco from '/src/assets/imagens/vetores/logo-branco.png';
 import useAuthConta from '/src/hooks/AuthConta';
-import { validatePassword, validateEmail } from '/src/utils/Regex.jsx';
+import useSomAmbiente from '/src/hooks/SomAmbienteHook';
+import { validateEmail, validatePassword } from '/src/utils/Regex.jsx';
 
-function Login({musicaAtiva, toggleMusica}) {
+function Login() {
 	const navigate = useNavigate();
 	const [visibilityStatus, setVisibilityStatus] = useState(false);
 	const { signin, signup } = useAuthConta();
+	const { toggleMusica, musicaStatus } = useSomAmbiente();
 	
 	const [login, toggle] = React.useState(true);
 
@@ -32,10 +34,6 @@ function Login({musicaAtiva, toggleMusica}) {
 		e.preventDefault();
 		setVisibilityStatus(!visibilityStatus);
 	}
-
-	const toggleVolume = () => {
-        toggleMusica()
-    }
 	
 	const cadastrar = async (e) => {
 		e.preventDefault();
@@ -66,9 +64,9 @@ function Login({musicaAtiva, toggleMusica}) {
 
 	return (
 		<div className='bg-login'>
-			<button className='btn-som' onClick={toggleVolume}>
-                            {musicaAtiva ? <VolumeOnIcon /> : <VolumeOffIcon />}
-                        </button>
+			<button className='btn-som' onClick={toggleMusica}>
+                {musicaStatus ? <VolumeOnIcon /> : <VolumeOffIcon />}
+            </button>
 			<div className={`container ${login ? "cadastro-js" : "login-js"}`}>
 				<img src={Logobranco} alt=""/>
 				<div className="content first-content">

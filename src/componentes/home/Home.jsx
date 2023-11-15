@@ -8,19 +8,17 @@ import VolumeOnIcon from '/src/assets/imagens/icones/VolumeOnIcon';
 import useAuthConta from '/src/hooks/AuthConta';
 import Carrossel from './carrossel/carrossel'
 import useTabuleiro from '/src/hooks/TabuleiroHook';
+import useSomAmbiente from '/src/hooks/SomAmbienteHook';
 
-function Home({musicaAtiva, toggleMusica}) {
+function Home() {
     const navigate = useNavigate();
     const { criarPartida } = useTabuleiro();
     const { user, atualizaUser, signout } = useAuthConta();
+    const { toggleMusica, musicaStatus } = useSomAmbiente();
 
     useEffect(() => {
         if (user?.jogador?.id) atualizaUser(user?.jogador?.id)
     },[])
-
-    const toggleVolume = () => {
-        toggleMusica()
-    }
 	
     const logout = () => {
         signout()
@@ -65,8 +63,8 @@ function Home({musicaAtiva, toggleMusica}) {
                         </button>
                     </div>
                     <div className="menu-itens-config">
-                        <button className="item-config" onClick={toggleVolume}>
-                            {musicaAtiva ? <VolumeOnIcon /> : <VolumeOffIcon />}
+                        <button className="item-config" onClick={toggleMusica}>
+                            {musicaStatus ? <VolumeOnIcon /> : <VolumeOffIcon />}
                         </button>
                         <button className="item-config" onClick={() => navigate("/conta")}>
                             <UsuarioIcon />
