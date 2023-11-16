@@ -40,7 +40,7 @@ function EsqueciSenha() {
     }else {
       try {
         const loginSucesso = await ContaService.atualizaConta(null, null, email, novaSenha);
-		debugger
+		// debugger
 		if (loginSucesso) { 
 	        toast.success("Senha redefinida com sucesso!")
         	navigate("/login");

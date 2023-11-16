@@ -14,7 +14,7 @@ import { API_URL } from "../utils/constants";
 
     const atualizaConta = async (nome, username, email, senha) => {
         try{
-            debugger
+            // debugger
             const response = await axios.post(api.concat(`/autenticacao/altera`), {
                 nome: nome,
                 username: username,
