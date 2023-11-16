@@ -1,7 +1,5 @@
-import { Stomp } from '@stomp/stompjs';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Sockjs from "sockjs-client/dist/sockjs";
 import './Tabuleiro.css';
 import Cronometro from './cronometro/Cronometro';
 import LogOutIcon from '/src/assets/imagens/icones/LogOutIcon';
@@ -13,24 +11,6 @@ import useTabuleiro from '/src/hooks/TabuleiroHook';
 
 
 function Tabuleiro() {
-    const wsConexao = new Sockjs('http://localhost:8080/ws')
-    const stompClient = Stomp.over(wsConexao)
-
-    stompClient.connect({}, function(frame) {
-        stompClient.subscribe('/topic/gamestate', function(message) {
-            const gamestate = JSON.parse(message.body)
-            console.log(gamestate)
-        });
-        console.log('Conectado: ' + frame);
-    });
-
-
-    /*
-    stompClient.send("/topic/gamestate", {}, JSON.stringify({
-        "id": 1,
-    }));
-    */
-
     const navigate = useNavigate();
     const {partida, pecasComidas, movimentarPartida, finalizarPartida} = useTabuleiro();
     const [tabuleiro, setTabuleiro] = useState([]);
@@ -38,7 +18,7 @@ function Tabuleiro() {
     const { toggleMusica, musicaStatus } = useSomAmbiente();
 
     useEffect(() => {
-        if (partida) {
+        if (partida && Object.keys(partida).length > 0) {
           const novoTabuleiro = criarTabuleiro(partida);
           setTabuleiro(novoTabuleiro);
         }
