@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Colecao from './componentes/colecao/Colecao.jsx';
 import Conta from './componentes/conta/Conta.jsx';
+import Tabuleiro from './componentes/tabuleiro/Tabuleiro.jsx';
 import Home from './componentes/home/Home.jsx';
 import Login from './componentes/login/Login.jsx';
 import EsqueciSenha from './componentes/login/esqueciSenha/EsqueciSenha.jsx';
@@ -17,7 +18,6 @@ import Fila from './componentes/modals/fila/fila.jsx';
 import Loading from './componentes/modals/loading/loading.jsx';
 import Sucesso from './componentes/modals/sucesso/sucesso.jsx';
 import Vitoria from './componentes/modals/vitoria/vitoria.jsx';
-import Tabuleiro from './componentes/tabuleiro/Tabuleiro.jsx';
 import GlobalProvider from './providers/GlobalProvider.jsx';
 import useAuthConta from '/src/hooks/AuthConta';
 

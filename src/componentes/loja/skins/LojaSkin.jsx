@@ -2,7 +2,6 @@ import React, { useEffect, useState} from 'react';
 import { useNavigate } from 'react-router';
 import './LojaSkin.css';
 import ReturnIcon from '/src/assets/imagens/icones/ReturnIcon';
-import Skin from '/src/assets/imagens/skins/onca_amazonia.png';
 import useAuthConta from '/src/hooks/AuthConta';
 import LojaSkinService from '/src/services/LojaSkinsService';
 import ModalCompraSkin from '/src/componentes/modals/compras/skins/compraSkin';
@@ -13,7 +12,7 @@ import { toast } from 'react-toastify';
 function LojaSkin() {
     const navigate = useNavigate();
     const { user } = useAuthConta();
-    const [response, setResponse] = useState(null);
+    const [response, setResponse] = useState([]);
     const [idCompraSkin, setIdCompraSkin] = useState(null);
     const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -22,58 +21,58 @@ function LojaSkin() {
     };
 
     useEffect(() => {
-        const getOpcoesCompraSkin = async (idJogador) => {
-            try {
-                const data = await LojaSkinService.getOpcoesCompraSkin(idJogador);
-                
-                if (data.status === 200) {
-                    setResponse(data.data);                 
+        const getOpcoesCompraSkin = async () => {
+            if (user && user?.jogador?.id) {
+                try {
+                    const data = await LojaSkinService.getOpcoesCompraSkin(user?.jogador?.id);
+                    
+                    if (data.status === 200) {
+                        setResponse(data.data);                 
+                    } 
+                    else {
+                        console.error('Erro na resposta do servidor:', data);
+                    }
                 } 
-                else {
-                    console.error('Erro na resposta do servidor:', data);
+                catch (error) {
+                    console.error('Erro na busca de dados:', error);
                 }
-            } 
-            catch (error) {
-                console.error('Erro na busca de dados:', error);
             }
         };
-
-        getOpcoesCompraSkin(user.jogador.id);
-
+        getOpcoesCompraSkin();
     }, []);
 
-    const verificaSaldo = (idItem, valor, formaPagamento) => {
-        let pagamentoMoedaRara = formaPagamento === 'esmeralda' ? true : false;
+    // const verificaSaldo = (idItem, valor, formaPagamento) => {
+    //     let pagamentoMoedaRara = formaPagamento === 'esmeralda' ? true : false;
 
-        if (tipoPagamento === 'esmeralda' && jogador.qntmoedanormal >= valor) {
-            compraSkin(user.jogador.id, idItem, pagamentoMoedaRara)
-        }
-        else if (tipoPagamento === 'moeda' && jogador.qntmoedaespecial >= valor) {
-            compraSkin(user.jogador.id, idItem, pagamentoMoedaRara)
-        } 
-        else {
-            toast.info("Saldo insuficiente!");
-        }
-    };
+    //     if (tipoPagamento === 'esmeralda' && jogador.qntmoedanormal >= valor) {
+    //         compraSkin(user?.jogador?.id, idItem, pagamentoMoedaRara)
+    //     }
+    //     else if (tipoPagamento === 'moeda' && jogador.qntmoedaespecial >= valor) {
+    //         compraSkin(user?.jogador?.id, idItem, pagamentoMoedaRara)
+    //     } 
+    //     else {
+    //         toast.info("Saldo insuficiente!");
+    //     }
+    // };
 
-    const compraSkin = async (idJogador, idSkin, pagamento) => {
-        setIdCompraSkin(idSkin);
+    // const compraSkin = async (idJogador, idSkin, pagamento) => {
+    //     setIdCompraSkin(idSkin);
 
-        try {
-            const data = await LojaSkinService.sendSkin(idJogador, idSkin, pagamento);
+    //     try {
+    //         const data = await LojaSkinService.sendSkin(idJogador, idSkin, pagamento);
             
-            if (data.status === 200) {
-                setResponse(data.data);
-                setIsModalVisible(true);                
-            } 
-            else {
-                console.error('Erro na resposta do servidor:', data);
-            }
-        } 
-        catch (error) {
-            console.error('Erro na busca de dados:', error);
-        }
-    };
+    //         if (data.status === 200) {
+    //             setResponse(data.data);
+    //             setIsModalVisible(true);                
+    //         } 
+    //         else {
+    //             console.error('Erro na resposta do servidor:', data);
+    //         }
+    //     } 
+    //     catch (error) {
+    //         console.error('Erro na busca de dados:', error);
+    //     }
+    // };
 
     return (
             <section className="bg-loja-skin">
@@ -106,30 +105,34 @@ function LojaSkin() {
                         </button>
                     </div>
                     <div className="loja-skin">
-                        {response.map((item) => (
-                            <div className="loja-item-loja-skin" key={item.id}>
-                                <div className="skin">
-                                    <img src={`/src/assets/imagens/skins/${item.imagem}`} />
-                                </div>
-                                <div className="nome-skin-loja-skin">
-                                    <h1>{item.nome}</h1>
-                                </div>
-                                <div className="precos-loja-skin">
-                                    <button className="preco-esmeralda-loja-skin" onClick={()=> verificaSaldo(item.id, item.valorrara, 'esmeralda')}>
-                                        <div className="icon-loja-skin icon-moeda-loja-skin"></div>
-                                        <div className="preco-loja-skin">
-                                            <p>{item.valorrara}</p>
-                                        </div>
-                                    </button>
-                                    <button className="preco-moeda-loja-skin" onClick={()=> verificaSaldo(item.id, item.valornormal, 'moeda')}>
-                                        <div className="icon-loja-skin icon-moeda-loja-skin"></div>
+                        {response && Array.isArray(response) ? (
+                            response.map((item) => (
+                                <div className="loja-item-loja-skin" key={item.id}>
+                                    <div className="skin">
+                                        <img src={`/src/assets/imagens/skins/${item.imagem}`} alt={item.nome} />
+                                    </div>
+                                    <div className="nome-skin-loja-skin">
+                                        <h1>{item.nome}</h1>
+                                    </div>
+                                    <div className="precos-loja-skin">
+                                        <button className="preco-esmeralda-loja-skin" onClick={() => verificaSaldo(item.id, item.valorrara, 'esmeralda')}>
+                                            <div className="icon-loja-skin icon-moeda-loja-skin"></div>
+                                            <div className="preco-loja-skin">
+                                                <p>{item.valorrara}</p>
+                                            </div>
+                                        </button>
+                                        <button className="preco-moeda-loja-skin" onClick={() => verificaSaldo(item.id, item.valornormal, 'moeda')}>
+                                            <div className="icon-loja-skin icon-moeda-loja-skin"></div>
                                             <div className="preco-loja-skin">
                                                 <p>{item.valornormal}</p>
                                             </div>
-                                    </button>
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))
+                        ) : (
+                            <p>Não tem skins para comprar!</p>
+                        )}
                     </div>
                 </div>
             </section>

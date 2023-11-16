@@ -47,6 +47,8 @@ export const TabuleiroProvider = ({ children }) => {
                     setTimeout(() => {
                         navigate('/tabuleiro')
                     }, 2000)
+                } else {
+                    setPartida(teste.data.partida.idpartida)
                 }
                 
             }

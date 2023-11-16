@@ -7,10 +7,11 @@ function Fila() {
     const { partida, excluirPartida } = useTabuleiro();
     const navigate = useNavigate();
 
-
-    const excluiPartida = async () => {
+    const excluiPartida = async (e) => {
+        e.preventDefault()
+        debugger
         if (partida) {
-            const response = await excluirPartida(partida.idpartida)
+            const response = await excluirPartida(partida)
             if (response) navigate("/menu")
         }        
     }
@@ -31,7 +32,7 @@ function Fila() {
                             </div>
                         </div>
                         <div className="area-btn-modal">
-                            <button className="btn-modal-tabuleiro" onClick={() => {excluiPartida}}>CANCELAR</button>
+                            <button className="btn-modal-tabuleiro" onClick={excluiPartida}>CANCELAR</button>
                         </div>
                     </div>
                 </div>

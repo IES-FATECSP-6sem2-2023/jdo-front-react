@@ -89,7 +89,6 @@ function Login() {
 									value={nome} 
 									onChange={(e) => {
 										setNome(e.target.value);
-										setNomeErr(false);
 									}}
 									required />
 							</label>
@@ -101,7 +100,6 @@ function Login() {
 									value={userName} 
 									onChange={(e) => {
 										setUserName(e.target.value);
-										setUserNameErr(false);
 									}}
 									required />
 							</label>
