@@ -1,55 +1,58 @@
 import { createContext, useEffect, useState } from "react";
+import { useNavigate } from 'react-router';
 import { toast } from "react-toastify";
+import Sockjs from "sockjs-client/dist/sockjs";
+import { Stomp } from '@stomp/stompjs';
 import useAuthConta from '/src/hooks/AuthConta';
 import TabuleiroService from "../services/TabuleiroService";
+
 
 export const TabuleiroContext = createContext({});
 
 export const TabuleiroProvider = ({ children }) => {
+    const navigate = useNavigate();
     const [pecasComidas, setPecasComida] = useState(0);
     const { user } = useAuthConta();
-    const [partida, setPartida] = useState({
-        "idpartida": 279186306,
-        "primeirojogador": {
-          "idJogador": 3,
-          "idSkinFavorita": 3,
-          "nomeSkinFavorita": "Skin onca padrÃ£o",
-          "posicoes": {
-            "2,2;": "3,1;3,2;3,3;"
-          }
-        },
-        "segundojogador": {
-          "idJogador": 4,
-          "idSkinFavorita": 4,
-          "nomeSkinFavorita": "Skin cachorro padrÃ£o",
-          "posicoes": {
-            "1,0;": "",
-            "0,1;": "",
-            "0,0;": "",
-            "2,0;": "3,0;3,1;",
-            "1,2;": "",
-            "0,3;": "",
-            "3,2;": "",
-            "2,1;": "3,1;",
-            "0,2;": "",
-            "1,4;": "",
-            "1,3;": "",
-            "2,3;": "3,3;",
-            "0,4;": "",
-            "2,4;": "3,3;3,4;"
-          }
-        }
-      });
+    const [partida, setPartida] = useState({});
+
+    const wsConexao = new Sockjs('http://localhost:8080/ws')
+    const stompClient = Stomp.over(wsConexao)
+    stompClient.connect({}, function(frame) {})
+
 
     const criarPartida = async (tipo) => {
         try {
             if (user && user.jogador) {
                 const idJogador = user.jogador.id;
-                debugger
+                // debugger
                 const teste = await TabuleiroService.iniciaPartida(idJogador,tipo);
+                stompClient.subscribe('/topic/gamestate', function(message) {
+                    const gamestate = JSON.parse(message.body)
+                    console.log(message.body)
+
+                    if (gamestate.iniciandoPartida) {
+                        setPartida(gamestate?.partida)
+                        setTimeout(() => {
+                           navigate('/tabuleiro')
+                        }, 2000)
+                        return
+                    }
+
+                    setPartida(gamestate.partida)
+                });
+
+                if (teste.data.partidaOcupada) {
+                    stompClient.send("/topic/gamestate", {}, JSON.stringify({partida: teste.data.partida, iniciandoPartida: true }))
+                    setPartida(teste.data.partida)
+                    setTimeout(() => {
+                        navigate('/tabuleiro')
+                    }, 2000)
+                }
+                
             }
             return;
         } catch (e) {
+            console.log(e)
             toast.error("Erro ao tentar criar uma partida!");
             return;
         }
@@ -107,7 +110,7 @@ export const TabuleiroProvider = ({ children }) => {
                     atualizaPartida[jogadorAtual].posicoes[coordenadaDestino] = "";
                     
                     if (coordenadasPuladas) {
-                        debugger
+                        // debugger
                         delete atualizaPartida.segundojogador.posicoes[coordenadasPuladas];
                         setPecasComida(prevPecasComida => {
                             console.log("Valor anterior de pecasComida:", prevPecasComida);
@@ -116,8 +119,9 @@ export const TabuleiroProvider = ({ children }) => {
                     }
                     
                     try {
+                        console.log(JSON.stringify({ partida: atualizaPartida }))
                         const novaMovimentacao = await TabuleiroService.movimentaPartida(atualizaPartida);
-                        if (novaMovimentacao) setPartida(novaMovimentacao);
+                        stompClient.send("/topic/gamestate", {}, JSON.stringify({partida: novaMovimentacao}));
                         return true
                     } catch (e) {
                         toast.error("Erro ao tentar efetuar movimentação!");
@@ -147,8 +151,23 @@ export const TabuleiroProvider = ({ children }) => {
         }
     }
 
+    const excluirPartida = async (idPartida) => {
+        if (partida) {
+            try {
+                const response = await TabuleiroService.excluirPartida(idPartida);
+                if (response.status === 200) {
+                    toast.success("Partida excluida!")
+                    return response;
+                }
+            } catch (e) {
+                throw e
+            }
+            
+        }
+    }
+
     return (
-        <TabuleiroContext.Provider value={{partida, pecasComidas, criarPartida, movimentarPartida, finalizarPartida}}>
+        <TabuleiroContext.Provider value={{partida, pecasComidas, criarPartida, movimentarPartida, finalizarPartida, excluirPartida}}>
             {children}
         </TabuleiroContext.Provider>
     )

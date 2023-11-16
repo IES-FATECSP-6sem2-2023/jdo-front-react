@@ -26,7 +26,7 @@ function Home() {
     }
 
     const jogar = async (tipo) => {
-        debugger
+        // debugger
         await criarPartida(tipo.toUpperCase());
         navigate("/fila")
     }

@@ -36,11 +36,21 @@ import { API_URL } from "../utils/constants";
         }
     }
 
+    const excluirPartida = async (idPartida) => {
+        try {
+            const response = await axios.post(api.concat('partida/excluir'), idPartida);
+            return response;
+        } catch (e) {
+            throw e;
+        }
+    }
+
 const TabuleiroService = {
 
     iniciaPartida,
     movimentaPartida,
-    finalizaPartida
+    finalizaPartida,
+    excluirPartida
 
 }
 
