@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Tabuleiro.css';
 import Cronometro from './cronometro/Cronometro';
+import Desistir from '../modals/desistir/desistir.jsx';
 import LogOutIcon from '/src/assets/imagens/icones/LogOutIcon';
 import VolumeOffIcon from '/src/assets/imagens/icones/VolumeOffIcon';
 import VolumeOnIcon from '/src/assets/imagens/icones/VolumeOnIcon';
@@ -13,6 +14,7 @@ import { toast } from 'react-toastify';
 function Tabuleiro() {
     const navigate = useNavigate();
     const {partida, pecasComidas, movimentarPartida, finalizarPartida, jogadorAtualCronometro} = useTabuleiro();
+    const [modalDesistirVisiblity, setModalDesistirVisiblity] = useState(false);
     const [tabuleiro, setTabuleiro] = useState([]);
     const [jogadorDaVez, setJogadorDaVez] = useState(jogadorAtualCronometro);
     const [pecaSelecionada, setPecaSelecionada] = useState({});
@@ -57,13 +59,7 @@ function Tabuleiro() {
     const jogadorSessao = parseInt(JSON.parse(localStorage.getItem("partidaSession"))?.time, 10);
 
     const desistir = async () => {
-        const responseDesistir = await finalizarPartida(jogadorSessao === 1 ? 2 : 1, true);
-        if (responseDesistir) {
-            localStorage.removeItem("partidaSession");
-            navigate("/menu");
-        } else {
-            toast.error("Erro ao desistir da partida!");
-        }
+        setModalDesistirVisiblity(!modalDesistirVisiblity);
     }
 
     const somReacao = (event) => {
@@ -97,6 +93,7 @@ function Tabuleiro() {
     
         return(
             <section className="bg-tabuleiro">
+                {modalDesistirVisiblity && <Desistir alterarVisibilidade={desistir}/>}
                 <div className="bg-tabuleiro-container" id="tabuleiro-container">
                     <div className="area-onca-tabuleiro">
                         <div className="area-onca-container-tabuleiro">
