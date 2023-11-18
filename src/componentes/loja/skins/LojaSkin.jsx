@@ -94,7 +94,7 @@ function LojaSkin() {
                         </button>
                     </div>
                     <div className="loja-skin">
-                        {response && Array.isArray(response) ? (
+                        {response && response.length > 0 ? (
                             response.map((item) => (
                                 <div className="loja-item-loja-skin" key={item.id}>
                                     <div className="skin">
