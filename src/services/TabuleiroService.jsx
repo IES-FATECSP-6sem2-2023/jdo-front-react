@@ -28,9 +28,9 @@ import { API_URL } from "../utils/constants";
         try {
             const response = await axios.post(api.concat('/partida/finalizar'), {
                 idPartida: idPartida,
-                idVendedor: idJogador
+                idVencedor: idJogador
             });
-            return response.data;
+            return response;
         } catch (e) {
             throw e;
         }

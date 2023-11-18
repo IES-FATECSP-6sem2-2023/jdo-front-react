@@ -52,11 +52,11 @@ export const TabuleiroProvider = ({ children }) => {
                 }
                 
             }
-            return;
+            return true;
         } catch (e) {
             console.error(e)
             toast.error("Erro ao tentar criar uma partida!");
-            return;
+            return false;
         }
     }
 
@@ -120,7 +120,13 @@ export const TabuleiroProvider = ({ children }) => {
                         const novaMovimentacao = await TabuleiroService.movimentaPartida(atualizaPartida);
                         stompClient.send("/topic/gamestate", {}, JSON.stringify({partida: novaMovimentacao}));
                         passarVez()
-                        return true
+                        debugger
+                        for (let chave in novaMovimentacao.primeirojogador.posicoes) {
+                            if (!novaMovimentacao.primeirojogador.posicoes[chave]) {
+                                finalizarPartida(2);
+                            }
+                        }
+                        return true;
                     } catch (e) {
                         toast.error("Erro ao tentar efetuar movimentação!");
                     }
@@ -138,13 +144,14 @@ export const TabuleiroProvider = ({ children }) => {
     const finalizarPartida = async (timeVitoria) => {
         if (partida) {
             try {
+                debugger
                 const idVencedor = timeVitoria === 1 ? partida.primeirojogador.idJogador : partida.segundojogador.idJogador;
                 const partidaReturn = await TabuleiroService.finalizaPartida(partida.idpartida, idVencedor);
                 setPartida(partidaReturn.data);
-                return;
+                return true;
             } catch (e) {
                 toast.error("Erro inesperado ao finalizar partida!")
-                return;
+                return false;
             }
         }
     }

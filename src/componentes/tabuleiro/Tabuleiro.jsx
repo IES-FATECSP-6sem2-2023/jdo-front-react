@@ -8,11 +8,13 @@ import VolumeOnIcon from '/src/assets/imagens/icones/VolumeOnIcon';
 import placaUser from '/src/assets/imagens/placas/placa_usuario.png';
 import useSomAmbiente from '/src/hooks/SomAmbienteHook';
 import useTabuleiro from '/src/hooks/TabuleiroHook';
+import { toast } from 'react-toastify';
 
 function Tabuleiro() {
     const navigate = useNavigate();
     const {partida, pecasComidas, movimentarPartida, finalizarPartida, jogadorAtualCronometro} = useTabuleiro();
     const [tabuleiro, setTabuleiro] = useState([]);
+    const [jogadorDaVez, setJogadorDaVez] = useState(jogadorAtualCronometro);
     const [pecaSelecionada, setPecaSelecionada] = useState({});
     const { toggleMusica, musicaStatus } = useSomAmbiente();
 
@@ -22,6 +24,11 @@ function Tabuleiro() {
           setTabuleiro(novoTabuleiro);
         }
     }, [partida]);
+
+    useEffect(()=>{
+        setPecaSelecionada({})
+        setJogadorDaVez(jogadorAtualCronometro)
+    },[jogadorAtualCronometro])
 
     const criarTabuleiro = (partida) => {
         const tabuleiro = [];
@@ -49,10 +56,14 @@ function Tabuleiro() {
 
     const jogadorSessao = parseInt(localStorage.getItem("timeTabuleiro"));
 
-    const desistir = () => {
-        finalizarPartida(jogadorSessao === 1 ? 2 : 1);
-        localStorage.removeItem("timeTabuleiro");
-        navigate("/menu");
+    const desistir = async () => {
+        const responseDesistir = await finalizarPartida(jogadorSessao === 1 ? 2 : 1);
+        if (responseDesistir) {
+            localStorage.removeItem("timeTabuleiro");
+            navigate("/menu");
+        } else {
+            toast.error("Erro ao desistir da partida!");
+        }
     }
 
     const somReacao = (event) => {
@@ -73,12 +84,12 @@ function Tabuleiro() {
     }
     
     const handleCellClick = async (x, y, peca) => {
-        if (jogadorSessao === jogadorAtualCronometro && peca === jogadorAtualCronometro && Number.isInteger(peca)) {
+        if (jogadorSessao === jogadorDaVez && peca === jogadorDaVez && Number.isInteger(peca)) {
             setPecaSelecionada({ y, x });
         } else if (peca === "" && pecaSelecionada.y !== undefined) {
             const movimentoValido = await movimentarPartida(pecaSelecionada.y, pecaSelecionada.x, y, x, jogadorSessao);
             if (movimentoValido && pecasComidas === 5) {
-                finalizarPartida(1)
+                const temp = await finalizarPartida(1)
             }
         }
     };
@@ -139,7 +150,7 @@ function Tabuleiro() {
                                                 cell-tabuleiro 
                                                 peca-${peca === 1 ? 'onca' : 'cachorro'}-tabuleiro
                                                 ${x === pecaSelecionada?.x && y === pecaSelecionada?.y ? 'peca-selecionada-tabuleiro' : ''}
-                                                ${peca === jogadorAtualCronometro && !(x === pecaSelecionada?.x && y === pecaSelecionada?.y) ? 'peca-jogador-tabuleiro' : ''} 
+                                                ${peca === jogadorDaVez && !(x === pecaSelecionada?.x && y === pecaSelecionada?.y) ? 'peca-jogador-tabuleiro' : ''} 
                                                 `}
                                                 data-x={x}
                                                 data-y={y}
