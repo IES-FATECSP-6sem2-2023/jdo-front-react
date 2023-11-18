@@ -54,12 +54,12 @@ function Tabuleiro() {
         return tabuleiro;
     };
 
-    const jogadorSessao = parseInt(localStorage.getItem("timeTabuleiro"));
+    const jogadorSessao = parseInt(JSON.parse(localStorage.getItem("partidaSession"))?.time, 10);
 
     const desistir = async () => {
-        const responseDesistir = await finalizarPartida(jogadorSessao === 1 ? 2 : 1);
+        const responseDesistir = await finalizarPartida(jogadorSessao === 1 ? 2 : 1, true);
         if (responseDesistir) {
-            localStorage.removeItem("timeTabuleiro");
+            localStorage.removeItem("partidaSession");
             navigate("/menu");
         } else {
             toast.error("Erro ao desistir da partida!");
@@ -89,30 +89,11 @@ function Tabuleiro() {
         } else if (peca === "" && pecaSelecionada.y !== undefined) {
             const movimentoValido = await movimentarPartida(pecaSelecionada.y, pecaSelecionada.x, y, x, jogadorSessao);
             if (movimentoValido && pecasComidas === 5) {
+                debugger
                 const temp = await finalizarPartida(1)
             }
         }
     };
-
-    // const modal = document.getElementById("modal");
-    // const modalLoading = document.getElementById("modal-loading");
-    // const modalVitoria = document.getElementById("modal-vitoria");
-    // const modalDerrota = document.getElementById("modal-derrota");
-    // const tabuleiroContainer = document.getElementById("tabuleiro-container");
-  
-    //Se o jogador vencer
-    // tabuleiroContainer.style.display = "none"
-    // modal.style.display = "block"
-    // modalVitoria.style.display = "block"
-    // const somVitoria = new Audio('src/assets/sons/tabuleiro/jogo_ganho.mp3');
-    // somVitoria.play();
-
-    //Se o jogador perder
-    // tabuleiroContainer.style.display = "none"
-    // modal.style.display = "block"
-    // modalDerrota.style.display = "block"
-    // const somDerrota = new Audio('src/assets/sons/tabuleiro/jogo_perdido.mp3');
-    // somDerrota.play();
     
         return(
             <section className="bg-tabuleiro">
