@@ -68,11 +68,11 @@ function Tabuleiro() {
 
     const somReacao = (event) => {
         const audioLista = {
-            1: 'src/assets/sons/tabuleiro/rindo.mp3',
-            2: 'src/assets/sons/tabuleiro/nervoso.mp3',
-            3: 'src/assets/sons/tabuleiro/surpreso.mp3',
-            4: 'src/assets/sons/tabuleiro/cachorro.mp3',
-            5: 'src/assets/sons/tabuleiro/onca.mp3',
+            1: '/assets/sons/tabuleiro/rindo.mp3',
+            2: '/assets/sons/tabuleiro/nervoso.mp3',
+            3: '/assets/sons/tabuleiro/surpreso.mp3',
+            4: '/assets/sons/tabuleiro/cachorro.mp3',
+            5: '/assets/sons/tabuleiro/onca.mp3',
         };
 
         const valorDaReacao = parseInt(event.target.value);
