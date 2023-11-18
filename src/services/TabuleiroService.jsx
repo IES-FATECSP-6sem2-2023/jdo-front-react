@@ -24,11 +24,12 @@ import { API_URL } from "../utils/constants";
         }
     }
 
-    const finalizaPartida = async (idPartida, idJogador) => {
+    const finalizaPartida = async (idPartida, idJogador, desistencia) => {
         try {
             const response = await axios.post(api.concat('/partida/finalizar'), {
                 idPartida: idPartida,
-                idVencedor: idJogador
+                idVencedor: idJogador,
+                partidaAbandonada: desistencia
             });
             return response;
         } catch (e) {
