@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import ReturnIcon from '/src/assets/imagens/icones/ReturnIcon';
 import VisibilityIcon from '/src/assets/imagens/icones/VisibilityIcon';
@@ -13,6 +13,12 @@ function Conta() {
     const navigate = useNavigate();
     const [visibilityStatus, setVisibilityStatus] = useState(false);
     const { user } = useAuthConta();
+
+    useEffect(()=>{
+        setEmail(user?.jogador?.email)
+        setNome(user?.jogador?.nome)
+        setUserName(user?.jogador?.username)
+    },[user])
 
     const [email, setEmail] = useState(user?.jogador?.email);
 	const [nome, setNome] = useState(user?.jogador?.nome);
@@ -78,7 +84,7 @@ function Conta() {
                             </div>
                             <div className="info-conta info-senha-conta">
                                 <label htmlFor="">SENHA:</label>
-                                <input type={visibilityStatus ? "text" : "password"} onChange={(e) => setSenha(e.target.value)} required/>
+                                <input type={visibilityStatus ? "text" : "password"} className='inp-senha' onChange={(e) => setSenha(e.target.value)} required/>
                                 <button className="btn-visibility btn-senha-conta" onClick={toggleVisibility}>{visibilityStatus ? <VisibilityIcon /> : <VisibilityOffIcon />}</button>
                             </div>
                             <div className="info-conta atualiza-info-conta">
@@ -86,56 +92,13 @@ function Conta() {
                                 <button className="btn-atualiza">ATUALIZAR</button>
                             </div>
                         </form>
-                        {/* @ToDo: montar lógica para habilitar e desabilitar emblemas da */}
                         <div className="emblemas-conta">
-                            <div className="emblema-item-conta">
-                                <div className="icon-emblema-conta ativo"></div>
-                                <span className="tooltip-text-conta" id="top">Bem-vindo a floresta <br></br> Jogue sua primeira partida</span>
-                            </div>
-                            <div className="emblema-item-conta">
-                                <div className="icon-emblema-conta ativo" alt=""></div>
-                                <span className="tooltip-text-conta" id="top">Bem-vindo a matilha <br></br> Vença sua primeira partida como cachorro</span>
-                            </div>
-                            <div className="emblema-item-conta">
-                                <div className="icon-emblema-conta ativo" alt=""></div>
-                                <span className="tooltip-text-conta" id="top">Realeza da floresta <br></br> Vença sua primeira partida como onça</span>
-                            </div>
-                            <div className="emblema-item-conta">
-                                <div className="icon-emblema-conta ativo" alt=""></div>
-                                <span className="tooltip-text-conta" id="top">Dominando a selva <br></br> Ganhe 3 partidas consecultivas</span>
-                            </div>
-                            <div className="emblema-item-conta">
-                                <div className="icon-emblema-conta ativo" alt=""></div>
-                                <span className="tooltip-text-conta" id="top">Onça invicta <br></br> Ganhe 3 partidas consecultivas como onça</span>
-                            </div>
-                            <div className="emblema-item-conta">
-                                <div className="icon-emblema-conta ativo" alt=""></div>
-                                <span className="tooltip-text-conta" id="top">Latido imbatível <br></br> Ganhe 3 partidas consecultivas como cachorro</span>
-                            </div>
-                            <div className="emblema-item-conta">
-                                <div className="icon-emblema-conta ativo" alt=""></div>
-                                <span className="tooltip-text-conta" id="top">Estrategista e habilidoso <br></br> Ganhe 5 partidas consecultivas</span>
-                            </div>
-                            <div className="emblema-item-conta">
-                                <div className="icon-emblema-conta ativo" alt=""></div>
-                                <span className="tooltip-text-conta" id="top">Topo da cadeia <br></br> Vença 10 partidas</span>
-                            </div>
-                            <div className="emblema-item-conta">
-                                <div className="icon-emblema-conta ativo" alt=""></div>
-                                <span className="tooltip-text-conta" id="top">Astúcia felina <br></br> Execute uma captura dupla</span>
-                            </div>
-                            <div className="emblema-item-conta">
-                                <div className="icon-emblema-conta ativo" alt=""></div>
-                                <span className="tooltip-text-conta" id="top">Sobrevivente <br></br> Sobreviva a 30 movimentos</span>
-                            </div>
-                            <div className="emblema-item-conta">
-                                <div className="icon-emblema-conta ativo" alt=""></div>
-                                <span className="tooltip-text-conta" id="top">Matilha unida <br></br> Encurrale a onça sem perder nenhum cachorro</span>
-                            </div>
-                            <div className="emblema-item-conta">
-                                <div className="icon-emblema-conta ativo" alt=""></div>
-                                <span className="tooltip-text-conta" id="top">Rei da selva <br></br> Vença 50 partidas</span>
-                            </div>
+                            {user?.emblemas && user.emblemas.map(emblema => (
+                                <div className="emblema-item-conta" key={emblema.id}>
+                                    <div className="icon-emblema-conta ativo"></div>
+                                    <span className="tooltip-text-conta" id="top">{emblema.nome}<br />{emblema.descricao}</span>
+                                </div>
+                            ))}
                         </div>
                     </div>
                     <div className="historico-user-conta">

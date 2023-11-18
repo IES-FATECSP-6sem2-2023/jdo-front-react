@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
 import './LojaMoeda.css';
 import ReturnIcon from '/src/assets/imagens/icones/ReturnIcon';
@@ -7,22 +7,13 @@ import ModalCompraMoeda from '/src/componentes/modals/compras/moedas/compraMoeda
 import useAuthConta from '/src/hooks/AuthConta';
 import LojaMoedaService from '/src/services/LojaMoedasService';
 
-// @Todo: pegar informação da "compra" e salvar na conta do usuário + atulizar sessão (paulo fica responsavel pela parte da sessão)
-
 function LojaMoeda() {
     const navigate = useNavigate()
     const { user } = useAuthConta();
-    const [idCompraMoeda, setIdCompraMoeda] = useState(null);
-    const [isModalVisible, setIsModalVisible] = useState(false);
 
-    const closeModal = () => {
-        setIsModalVisible(!isModalVisible);
-    };
-  
     const compraMoeda = (event) => {
         let idMoeda = parseInt(event.target.value)
         let qtdeMoeda, tipoMoeda;
-        setIdCompraMoeda(idMoeda);
 
         switch (idMoeda) {
             case 1:
@@ -58,9 +49,8 @@ function LojaMoeda() {
         const compraMoedas = async (id, moeda, quantidade) => {
             try {
                 const response = await LojaMoedaService.sendCoins(id, moeda, quantidade);
-                (response && response.status === 200)
-                ? setIsModalVisible(!isModalVisible) 
-                : toast.error('Erro ao efetuar a compra! tente novamente em breve');
+                (response && response.status === 200) ? navigate(`/compras/moedas/${idMoeda}`) : toast.error('Erro ao efetuar a compra! Tente novamente em breve');
+
             } 
             catch (error) {
                 toast.error('Erro ao enviar informações!');
@@ -72,7 +62,6 @@ function LojaMoeda() {
     
     return(
         <section className="bg-loja-moeda">
-            {isModalVisible && <ModalCompraMoeda idCompraMoeda={idCompraMoeda} onClose={closeModal} />}
             <div className="bg-loja-moeda-container" id="bg-lojaMoeda">
                 <div className="menu-superior-loja-moeda">
                     <div className="menu-loja-moeda">
@@ -131,7 +120,7 @@ function LojaMoeda() {
                             <div className="nome-item-loja-moeda">
                                 <h1>100 MOEDAS</h1>
                             </div>
-                            <button className="valor-loja-moeda" value={4} onClick={compraMoeda}>R$50,00</button>
+                            <button className="valor-loja-moeda" value={4} onClick={compraMoeda}>R$5,00</button>
                         </div>
                         <div className="loja-moeda-item-loja-moeda">
                             <div className="foto-item-loja-moeda moeda-m-loja-moeda">

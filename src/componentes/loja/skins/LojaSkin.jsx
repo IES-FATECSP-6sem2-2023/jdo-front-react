@@ -13,12 +13,6 @@ function LojaSkin() {
     const navigate = useNavigate();
     const { user } = useAuthConta();
     const [response, setResponse] = useState([]);
-    const [idCompraSkin, setIdCompraSkin] = useState(null);
-    const [isModalVisible, setIsModalVisible] = useState(false);
-
-    const closeModal = () => {
-        setIsModalVisible(false);
-    };
 
     useEffect(() => {
         const getOpcoesCompraSkin = async () => {
@@ -39,7 +33,7 @@ function LojaSkin() {
             }
         };
         getOpcoesCompraSkin();
-    }, []);
+    }, [user]);
 
     const verificaSaldo = (idItem, valor, formaPagamento) => {
         let pagamentoMoedaRara = formaPagamento === 'esmeralda' ? true : false;
@@ -54,14 +48,12 @@ function LojaSkin() {
     };
 
     const compraSkin = async (idJogador, idSkin, pagamento) => {
-        setIdCompraSkin(idSkin);
-
         try {
             const data = await LojaSkinService.sendSkin(idJogador, idSkin, pagamento);
             
             if (data.status === 200) {
                 setResponse(data.data);
-                setIsModalVisible(true);                
+                navigate(`/compras/skins/${idSkin}`);             
             } 
             else {
                 console.error('Erro na resposta do servidor:', data);
@@ -74,7 +66,6 @@ function LojaSkin() {
 
     return (
             <section className="bg-loja-skin">
-                {isModalVisible && <ModalCompraSkin idCompraSkin={idCompraSkin} onClose={closeModal} />}
                 <div className="bg-loja-skin-container" id="bg-lojaSkin">
                     <div className="menu-superior-loja-skin">
                         <div className="menu-loja-skin">
@@ -103,7 +94,7 @@ function LojaSkin() {
                         </button>
                     </div>
                     <div className="loja-skin">
-                        {response && Array.isArray(response) ? (
+                        {response && response.length > 0 ? (
                             response.map((item) => (
                                 <div className="loja-item-loja-skin" key={item.id}>
                                     <div className="skin">
@@ -129,7 +120,7 @@ function LojaSkin() {
                                 </div>
                             ))
                         ) : (
-                            <p>Não tem skins para comprar!</p>
+                            <p className="nada-para-comprar">Aguarde novos itens chegar na loja!</p>
                         )}
                     </div>
                 </div>
