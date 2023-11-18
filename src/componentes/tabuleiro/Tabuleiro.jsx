@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Desistir from '../modals/desistir/desistir.jsx';
 import './Tabuleiro.css';
 import Cronometro from './cronometro/Cronometro';
 import LogOutIcon from '/src/assets/imagens/icones/LogOutIcon';
@@ -8,11 +9,11 @@ import VolumeOnIcon from '/src/assets/imagens/icones/VolumeOnIcon';
 import placaUser from '/src/assets/imagens/placas/placa_usuario.png';
 import useSomAmbiente from '/src/hooks/SomAmbienteHook';
 import useTabuleiro from '/src/hooks/TabuleiroHook';
-import { toast } from 'react-toastify';
 
 function Tabuleiro() {
     const navigate = useNavigate();
     const {partida, pecasComidas, movimentarPartida, finalizarPartida, jogadorAtualCronometro} = useTabuleiro();
+    const [modalDesistirVisiblity, setModalDesistirVisiblity] = useState(false);
     const [tabuleiro, setTabuleiro] = useState([]);
     const [jogadorDaVez, setJogadorDaVez] = useState(jogadorAtualCronometro);
     const [pecaSelecionada, setPecaSelecionada] = useState({});
@@ -57,13 +58,7 @@ function Tabuleiro() {
     const jogadorSessao = parseInt(JSON.parse(localStorage.getItem("partidaSession"))?.time, 10);
 
     const desistir = async () => {
-        const responseDesistir = await finalizarPartida(jogadorSessao === 1 ? 2 : 1, true);
-        if (responseDesistir) {
-            localStorage.removeItem("partidaSession");
-            navigate("/menu");
-        } else {
-            toast.error("Erro ao desistir da partida!");
-        }
+        setModalDesistirVisiblity(!modalDesistirVisiblity);
     }
 
     const somReacao = (event) => {
@@ -84,12 +79,12 @@ function Tabuleiro() {
     }
     
     const handleCellClick = async (x, y, peca) => {
+        debugger
         if (jogadorSessao === jogadorDaVez && peca === jogadorDaVez && Number.isInteger(peca)) {
             setPecaSelecionada({ y, x });
         } else if (peca === "" && pecaSelecionada.y !== undefined) {
             const movimentoValido = await movimentarPartida(pecaSelecionada.y, pecaSelecionada.x, y, x, jogadorSessao);
             if (movimentoValido && pecasComidas === 5) {
-                debugger
                 const temp = await finalizarPartida(1)
             }
         }
@@ -97,6 +92,7 @@ function Tabuleiro() {
     
         return(
             <section className="bg-tabuleiro">
+                {modalDesistirVisiblity && <Desistir alterarVisibilidade={desistir}/>}
                 <div className="bg-tabuleiro-container" id="tabuleiro-container">
                     <div className="area-onca-tabuleiro">
                         <div className="area-onca-container-tabuleiro">
