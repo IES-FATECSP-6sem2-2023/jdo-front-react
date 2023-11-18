@@ -33,7 +33,7 @@ function LojaSkin() {
             }
         };
         getOpcoesCompraSkin();
-    }, []);
+    }, [user]);
 
     const verificaSaldo = (idItem, valor, formaPagamento) => {
         let pagamentoMoedaRara = formaPagamento === 'esmeralda' ? true : false;
