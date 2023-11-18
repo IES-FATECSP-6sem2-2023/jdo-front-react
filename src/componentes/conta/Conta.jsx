@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import ReturnIcon from '/src/assets/imagens/icones/ReturnIcon';
 import VisibilityIcon from '/src/assets/imagens/icones/VisibilityIcon';
@@ -13,6 +13,12 @@ function Conta() {
     const navigate = useNavigate();
     const [visibilityStatus, setVisibilityStatus] = useState(false);
     const { user } = useAuthConta();
+
+    useEffect(()=>{
+        setEmail(user?.jogador?.email)
+        setNome(user?.jogador?.nome)
+        setUserName(user?.jogador?.username)
+    },[user])
 
     const [email, setEmail] = useState(user?.jogador?.email);
 	const [nome, setNome] = useState(user?.jogador?.nome);
