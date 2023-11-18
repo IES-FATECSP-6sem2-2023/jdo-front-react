@@ -30,7 +30,7 @@ function Colecao() {
         };
 
         getColecao();
-    }, []);
+    }, [user]);
     
     const mudaColecao = (event) => {
         const colecaoOnca = document.getElementById("colecao-onca");
