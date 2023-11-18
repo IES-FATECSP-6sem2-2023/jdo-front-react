@@ -239,10 +239,6 @@ h1{
 }
 
 .emblema-item-conta:nth-child(11) .icon-emblema-conta {
-    background-image: url('/src/assets/imagens/emblemas/emb-11.png');
-}
-
-.emblema-item-conta:nth-child(12) .icon-emblema-conta {
     background-image: url('/src/assets/imagens/emblemas/emb-12.png');
 }
 

@@ -122,10 +122,6 @@ function Conta() {
                             </div>
                             <div className="emblema-item-conta">
                                 <div className="icon-emblema-conta ativo" alt=""></div>
-                                <span className="tooltip-text-conta" id="top">Astúcia felina <br></br> Execute uma captura dupla</span>
-                            </div>
-                            <div className="emblema-item-conta">
-                                <div className="icon-emblema-conta ativo" alt=""></div>
                                 <span className="tooltip-text-conta" id="top">Sobrevivente <br></br> Sobreviva a 30 movimentos</span>
                             </div>
                             <div className="emblema-item-conta">
