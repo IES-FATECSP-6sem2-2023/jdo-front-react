@@ -6,19 +6,28 @@ import { Stomp } from '@stomp/stompjs';
 import useAuthConta from '/src/hooks/AuthConta';
 import TabuleiroService from "../services/TabuleiroService";
 
-
 export const TabuleiroContext = createContext({});
 
 export const TabuleiroProvider = ({ children }) => {
     const navigate = useNavigate();
     const [jogadorAtualCronometro, setJogadorAtualCronometro] = useState(2);
     const [pecasComidas, setPecasComida] = useState(0);
+    const [stompClient, setStompClient] = useState(null);
     const { user } = useAuthConta();
     const [partida, setPartida] = useState({});
 
-    const wsConexao = new Sockjs('http://localhost:8080/ws')
-    const stompClient = Stomp.over(wsConexao)
-    stompClient.connect({}, function(frame) {})
+    useEffect(() => {
+        // inicializa a conexão com o websocket na primeira renderização
+        const client = Stomp.over(() => new Sockjs('http://localhost:8080/ws'))
+        client.connect({}, function(frame) {});
+
+        setStompClient(client);
+
+        return () => {
+            // desconecta o websocket quando o componente for desmontado
+            client.disconnect();
+        }
+    }, [])
 
 
     const criarPartida = async (tipo) => {
@@ -28,8 +37,6 @@ export const TabuleiroProvider = ({ children }) => {
                 const teste = await TabuleiroService.iniciaPartida(idJogador,tipo);
                 stompClient.subscribe('/topic/gamestate', function(message) {
                     const gamestate = JSON.parse(message.body)
-                    console.log(message.body)
-
                     if (gamestate.iniciandoPartida) {
                         setPartida(gamestate?.partida)
                         setTimeout(() => {
@@ -118,6 +125,7 @@ export const TabuleiroProvider = ({ children }) => {
                     
                     try {
                         const novaMovimentacao = await TabuleiroService.movimentaPartida(atualizaPartida);
+                        console.log(novaMovimentacao)
                         stompClient.send("/topic/gamestate", {}, JSON.stringify({partida: novaMovimentacao}));
                         passarVez()
                         debugger
