@@ -22,7 +22,7 @@ import { API_URL } from "../utils/constants";
                     itemFavorito: true
                 }],
                 pagamentoMoedaRara: tipoPagamento,
-                valorTotal: 0
+                valorTotal: null
             }
             const response = axios.post(api.concat('/loja/compra'), authBuySkinsRequest);
             return response;
