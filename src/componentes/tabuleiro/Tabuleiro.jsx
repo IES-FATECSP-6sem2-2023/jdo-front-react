@@ -9,10 +9,9 @@ import placaUser from '/src/assets/imagens/placas/placa_usuario.png';
 import useSomAmbiente from '/src/hooks/SomAmbienteHook';
 import useTabuleiro from '/src/hooks/TabuleiroHook';
 
-
 function Tabuleiro() {
     const navigate = useNavigate();
-    const {partida, pecasComidas, movimentarPartida, finalizarPartida} = useTabuleiro();
+    const {partida, pecasComidas, movimentarPartida, finalizarPartida, jogadorAtualCronometro} = useTabuleiro();
     const [tabuleiro, setTabuleiro] = useState([]);
     const [pecaSelecionada, setPecaSelecionada] = useState({});
     const { toggleMusica, musicaStatus } = useSomAmbiente();
@@ -49,18 +48,6 @@ function Tabuleiro() {
     };
 
     const jogadorSessao = parseInt(localStorage.getItem("timeTabuleiro"));
-    const [jogadorDaVez, setJogadorDaVez] = useState(2);
-
-    const alternarJogador = () => {
-        setJogadorDaVez((prevJogador) => (prevJogador === 1 ? 2 : 1));
-        jogadorDaVez
-    };
-
-    const handleTempoEsgotado = (jogador) => {
-      console.log(`Tempo esgotado para Jogador ${jogador}`);
-      setPecaSelecionada({})
-      alternarJogador();
-    };
 
     const desistir = () => {
         finalizarPartida(jogadorSessao === 1 ? 2 : 1);
@@ -82,20 +69,15 @@ function Tabuleiro() {
         if (audioLista[valorDaReacao]) {
             const audio = new Audio(audioLista[valorDaReacao]);
             audio.play();
-        } else {
-            console.log("Valor não reconhecido");
         }
     }
     
     const handleCellClick = async (x, y, peca) => {
-        if (jogadorSessao === jogadorDaVez && peca === jogadorDaVez && Number.isInteger(peca)) {
+        if (jogadorSessao === jogadorAtualCronometro && peca === jogadorAtualCronometro && Number.isInteger(peca)) {
             setPecaSelecionada({ y, x });
         } else if (peca === "" && pecaSelecionada.y !== undefined) {
             const movimentoValido = await movimentarPartida(pecaSelecionada.y, pecaSelecionada.x, y, x, jogadorSessao);
-            if (movimentoValido) {
-                handleTempoEsgotado(jogadorDaVez);
-            }
-            if (pecasComidas === 5) {
+            if (movimentoValido && pecasComidas === 5) {
                 finalizarPartida(1)
             }
         }
@@ -131,7 +113,7 @@ function Tabuleiro() {
                                     <div className="placar-onca-tabuleiro peca-comida-tabuleiro" key={index}></div>
                                 ))}
                             </div>
-                            <Cronometro jogador={1} ativo={jogadorDaVez === 1} onTempoEsgotado={handleTempoEsgotado} />
+                            <Cronometro jogador={1}/>
                             <div className="info-user-tabuleiro jogador-onca-tabuleiro">
                                 <img src={placaUser} />
                                 <h1 id="contador-onca-tabuleiro">JOGADOR ONÇA</h1>
@@ -157,7 +139,7 @@ function Tabuleiro() {
                                                 cell-tabuleiro 
                                                 peca-${peca === 1 ? 'onca' : 'cachorro'}-tabuleiro
                                                 ${x === pecaSelecionada?.x && y === pecaSelecionada?.y ? 'peca-selecionada-tabuleiro' : ''}
-                                                ${peca === jogadorDaVez && !(x === pecaSelecionada?.x && y === pecaSelecionada?.y) ? 'peca-jogador-tabuleiro' : ''} 
+                                                ${peca === jogadorAtualCronometro && !(x === pecaSelecionada?.x && y === pecaSelecionada?.y) ? 'peca-jogador-tabuleiro' : ''} 
                                                 `}
                                                 data-x={x}
                                                 data-y={y}
@@ -199,7 +181,7 @@ function Tabuleiro() {
                             </button>
                         </div>
                         <div className="area-cachorro-container-tabuleiro">
-                            <Cronometro jogador={2} ativo={jogadorDaVez === 2} onTempoEsgotado={handleTempoEsgotado} />
+                            <Cronometro jogador={2}/>
                             <div className="info-user-tabuleiro jogador-cachorro-tabuleiro">
                                 <img src={placaUser} />
                                 <h1>JOGADOR CACHORRO</h1>
