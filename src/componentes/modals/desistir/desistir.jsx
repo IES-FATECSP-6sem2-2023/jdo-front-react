@@ -7,7 +7,6 @@ function desistir({alterarVisibilidade}) {
     const navigate = useNavigate();
     const { finalizarPartida} = useTabuleiro();
     const desistir = async () =>{
-        debugger
         const jogadorSessao = parseInt(JSON.parse(localStorage.getItem("partidaSession"))?.time, 10);
         const responseDesistir = await finalizarPartida(jogadorSessao === 1 ? 2 : 1, true);
         if (responseDesistir) {
