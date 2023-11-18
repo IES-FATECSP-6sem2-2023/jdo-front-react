@@ -120,7 +120,7 @@ function LojaMoeda() {
                             <div className="nome-item-loja-moeda">
                                 <h1>100 MOEDAS</h1>
                             </div>
-                            <button className="valor-loja-moeda" value={4} onClick={compraMoeda}>R$50,00</button>
+                            <button className="valor-loja-moeda" value={4} onClick={compraMoeda}>R$5,00</button>
                         </div>
                         <div className="loja-moeda-item-loja-moeda">
                             <div className="foto-item-loja-moeda moeda-m-loja-moeda">
