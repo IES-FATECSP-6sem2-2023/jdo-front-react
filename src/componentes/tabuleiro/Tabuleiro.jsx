@@ -8,11 +8,13 @@ import VolumeOnIcon from '/src/assets/imagens/icones/VolumeOnIcon';
 import placaUser from '/src/assets/imagens/placas/placa_usuario.png';
 import useSomAmbiente from '/src/hooks/SomAmbienteHook';
 import useTabuleiro from '/src/hooks/TabuleiroHook';
+import { toast } from 'react-toastify';
 
 function Tabuleiro() {
     const navigate = useNavigate();
     const {partida, pecasComidas, movimentarPartida, finalizarPartida, jogadorAtualCronometro} = useTabuleiro();
     const [tabuleiro, setTabuleiro] = useState([]);
+    const [jogadorDaVez, setJogadorDaVez] = useState(jogadorAtualCronometro);
     const [pecaSelecionada, setPecaSelecionada] = useState({});
     const { toggleMusica, musicaStatus } = useSomAmbiente();
 
@@ -22,6 +24,11 @@ function Tabuleiro() {
           setTabuleiro(novoTabuleiro);
         }
     }, [partida]);
+
+    useEffect(()=>{
+        setPecaSelecionada({})
+        setJogadorDaVez(jogadorAtualCronometro)
+    },[jogadorAtualCronometro])
 
     const criarTabuleiro = (partida) => {
         const tabuleiro = [];
@@ -47,21 +54,25 @@ function Tabuleiro() {
         return tabuleiro;
     };
 
-    const jogadorSessao = parseInt(localStorage.getItem("timeTabuleiro"));
+    const jogadorSessao = parseInt(JSON.parse(localStorage.getItem("partidaSession"))?.time, 10);
 
-    const desistir = () => {
-        finalizarPartida(jogadorSessao === 1 ? 2 : 1);
-        localStorage.removeItem("timeTabuleiro");
-        navigate("/menu");
+    const desistir = async () => {
+        const responseDesistir = await finalizarPartida(jogadorSessao === 1 ? 2 : 1, true);
+        if (responseDesistir) {
+            localStorage.removeItem("partidaSession");
+            navigate("/menu");
+        } else {
+            toast.error("Erro ao desistir da partida!");
+        }
     }
 
     const somReacao = (event) => {
         const audioLista = {
-            1: 'src/assets/sons/tabuleiro/rindo.mp3',
-            2: 'src/assets/sons/tabuleiro/nervoso.mp3',
-            3: 'src/assets/sons/tabuleiro/surpreso.mp3',
-            4: 'src/assets/sons/tabuleiro/cachorro.mp3',
-            5: 'src/assets/sons/tabuleiro/onca.mp3',
+            1: '/assets/sons/tabuleiro/rindo.mp3',
+            2: '/assets/sons/tabuleiro/nervoso.mp3',
+            3: '/assets/sons/tabuleiro/surpreso.mp3',
+            4: '/assets/sons/tabuleiro/cachorro.mp3',
+            5: '/assets/sons/tabuleiro/onca.mp3',
         };
 
         const valorDaReacao = parseInt(event.target.value);
@@ -73,35 +84,16 @@ function Tabuleiro() {
     }
     
     const handleCellClick = async (x, y, peca) => {
-        if (jogadorSessao === jogadorAtualCronometro && peca === jogadorAtualCronometro && Number.isInteger(peca)) {
+        if (jogadorSessao === jogadorDaVez && peca === jogadorDaVez && Number.isInteger(peca)) {
             setPecaSelecionada({ y, x });
         } else if (peca === "" && pecaSelecionada.y !== undefined) {
             const movimentoValido = await movimentarPartida(pecaSelecionada.y, pecaSelecionada.x, y, x, jogadorSessao);
             if (movimentoValido && pecasComidas === 5) {
-                finalizarPartida(1)
+                debugger
+                const temp = await finalizarPartida(1)
             }
         }
     };
-
-    // const modal = document.getElementById("modal");
-    // const modalLoading = document.getElementById("modal-loading");
-    // const modalVitoria = document.getElementById("modal-vitoria");
-    // const modalDerrota = document.getElementById("modal-derrota");
-    // const tabuleiroContainer = document.getElementById("tabuleiro-container");
-  
-    //Se o jogador vencer
-    // tabuleiroContainer.style.display = "none"
-    // modal.style.display = "block"
-    // modalVitoria.style.display = "block"
-    // const somVitoria = new Audio('src/assets/sons/tabuleiro/jogo_ganho.mp3');
-    // somVitoria.play();
-
-    //Se o jogador perder
-    // tabuleiroContainer.style.display = "none"
-    // modal.style.display = "block"
-    // modalDerrota.style.display = "block"
-    // const somDerrota = new Audio('src/assets/sons/tabuleiro/jogo_perdido.mp3');
-    // somDerrota.play();
     
         return(
             <section className="bg-tabuleiro">
@@ -139,7 +131,7 @@ function Tabuleiro() {
                                                 cell-tabuleiro 
                                                 peca-${peca === 1 ? 'onca' : 'cachorro'}-tabuleiro
                                                 ${x === pecaSelecionada?.x && y === pecaSelecionada?.y ? 'peca-selecionada-tabuleiro' : ''}
-                                                ${peca === jogadorAtualCronometro && !(x === pecaSelecionada?.x && y === pecaSelecionada?.y) ? 'peca-jogador-tabuleiro' : ''} 
+                                                ${peca === jogadorDaVez && !(x === pecaSelecionada?.x && y === pecaSelecionada?.y) ? 'peca-jogador-tabuleiro' : ''} 
                                                 `}
                                                 data-x={x}
                                                 data-y={y}

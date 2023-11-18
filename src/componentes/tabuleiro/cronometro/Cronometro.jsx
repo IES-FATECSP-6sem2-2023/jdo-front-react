@@ -14,6 +14,7 @@ function Cronometro({ jogador }) {
 
       return () => clearInterval(timer);
     }
+    setTempoRestante(10);
   }, [jogadorAtualCronometro, jogador]);
 
   useEffect(() => {

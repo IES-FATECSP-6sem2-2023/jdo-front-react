@@ -26,8 +26,8 @@ function Home() {
     }
 
     const jogar = async (tipo) => {
-        await criarPartida(tipo.toUpperCase());
-        navigate("/fila")
+        const responsePartida = await criarPartida(tipo.toUpperCase());
+        responsePartida ? navigate("/fila") : navigate("/menu")
     }
 
     const [nivel, setNivel] = useState(1);

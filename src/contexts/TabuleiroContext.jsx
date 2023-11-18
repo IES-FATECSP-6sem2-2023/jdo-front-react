@@ -6,19 +6,28 @@ import { Stomp } from '@stomp/stompjs';
 import useAuthConta from '/src/hooks/AuthConta';
 import TabuleiroService from "../services/TabuleiroService";
 
-
 export const TabuleiroContext = createContext({});
 
 export const TabuleiroProvider = ({ children }) => {
     const navigate = useNavigate();
     const [jogadorAtualCronometro, setJogadorAtualCronometro] = useState(2);
     const [pecasComidas, setPecasComida] = useState(0);
+    const [stompClient, setStompClient] = useState(null);
     const { user } = useAuthConta();
     const [partida, setPartida] = useState({});
 
-    const wsConexao = new Sockjs('http://localhost:8080/ws')
-    const stompClient = Stomp.over(wsConexao)
-    stompClient.connect({}, function(frame) {})
+    useEffect(() => {
+        // inicializa a conexão com o websocket na primeira renderização
+        const client = Stomp.over(() => new Sockjs('http://localhost:8080/ws'))
+        client.connect({}, function(frame) {});
+
+        setStompClient(client);
+
+        return () => {
+            // desconecta o websocket quando o componente for desmontado
+            client.disconnect();
+        }
+    }, [])
 
 
     const criarPartida = async (tipo) => {
@@ -28,8 +37,6 @@ export const TabuleiroProvider = ({ children }) => {
                 const teste = await TabuleiroService.iniciaPartida(idJogador,tipo);
                 stompClient.subscribe('/topic/gamestate', function(message) {
                     const gamestate = JSON.parse(message.body)
-                    console.log(message.body)
-
                     if (gamestate.iniciandoPartida) {
                         setPartida(gamestate?.partida)
                         setTimeout(() => {
@@ -52,21 +59,21 @@ export const TabuleiroProvider = ({ children }) => {
                 }
                 
             }
-            return;
+            return true;
         } catch (e) {
             console.error(e)
             toast.error("Erro ao tentar criar uma partida!");
-            return;
+            return false;
         }
     }
 
     useEffect(() => {
         
         if (partida && partida !== undefined) {
-            if (!localStorage.getItem("timeTabuleiro")){
+            if (localStorage.getItem("userLogin") && !localStorage.getItem("partidaSession")){
                 let session = JSON.parse(localStorage.getItem("userLogin"));
-                if (session?.jogador?.id === partida?.primeirojogador?.idJogador) localStorage.setItem("timeTabuleiro", 1);
-                if (session?.jogador?.id === partida?.segundojogador?.idJogador) localStorage.setItem("timeTabuleiro", 2);
+                if (session?.jogador?.id === partida?.primeirojogador?.idJogador) localStorage.setItem("partidaSession", JSON.stringify({"time":1, "idPartida": partida.idpartida}));
+                if (session?.jogador?.id === partida?.segundojogador?.idJogador) localStorage.setItem("partidaSession", JSON.stringify({"time":2, "idPartida": partida.idpartida}));
             }
         }
     }, [partida]);
@@ -84,21 +91,30 @@ export const TabuleiroProvider = ({ children }) => {
 
             if (atualizaPartida[jogadorAtual].posicoes.hasOwnProperty(coordenadaOrigem)) {
                 const valoresDestino = atualizaPartida[jogadorAtual].posicoes[coordenadaOrigem].split(";");
-
+                debugger
                 const diferencaX = Math.abs(xDes - xOri);
                 const diferencaY = Math.abs(yDes - yOri);
                 let coordenadasPuladas = "";
-                if (diferencaX > 0) {
+                if (diferencaX > 0 && diferencaY === 0) {
+                    // Movimento na horizontal
                     for (let i = 1; i < diferencaX; i++) {
                         const xPulado = xOri + (xDes > xOri ? i : -i);
                         const yPulado = yOri;
-                        coordenadasPuladas= `${xPulado},${yPulado};`;
+                        coordenadasPuladas += `${xPulado},${yPulado};`;
                     }
-                } else if (diferencaY > 0) {
+                } else if (diferencaY > 0 && diferencaX === 0) {
+                    // Movimento na vertical
                     for (let i = 1; i < diferencaY; i++) {
                         const xPulado = xOri;
                         const yPulado = yOri + (yDes > yOri ? i : -i);
-                        coordenadasPuladas = `${xPulado},${yPulado};`;
+                        coordenadasPuladas += `${xPulado},${yPulado};`;
+                    } 
+                } else if (diferencaX === diferencaY) {
+                    // Movimento na diagonal
+                    for (let i = 1; i < diferencaX; i++) {
+                        const xPulado = xOri + (xDes > xOri ? i : -i);
+                        const yPulado = yOri + (yDes > yOri ? i : -i);
+                        coordenadasPuladas += `${xPulado},${yPulado};`;
                     }
                 }
                 
@@ -118,9 +134,15 @@ export const TabuleiroProvider = ({ children }) => {
                     
                     try {
                         const novaMovimentacao = await TabuleiroService.movimentaPartida(atualizaPartida);
+                        console.log(novaMovimentacao)
                         stompClient.send("/topic/gamestate", {}, JSON.stringify({partida: novaMovimentacao}));
                         passarVez()
-                        return true
+                        for (let chave in novaMovimentacao.primeirojogador.posicoes) {
+                            if (!novaMovimentacao.primeirojogador.posicoes[chave]) {
+                                finalizarPartida(2);
+                            }
+                        }
+                        return true;
                     } catch (e) {
                         toast.error("Erro ao tentar efetuar movimentação!");
                     }
@@ -135,16 +157,16 @@ export const TabuleiroProvider = ({ children }) => {
         }
     }
 
-    const finalizarPartida = async (timeVitoria) => {
+    const finalizarPartida = async (timeVitoria, desistencia) => {
         if (partida) {
             try {
                 const idVencedor = timeVitoria === 1 ? partida.primeirojogador.idJogador : partida.segundojogador.idJogador;
-                const partidaReturn = await TabuleiroService.finalizaPartida(partida.idpartida, idVencedor);
+                const partidaReturn = await TabuleiroService.finalizaPartida(partida.idpartida, idVencedor, desistencia ? true : false);
                 setPartida(partidaReturn.data);
-                return;
+                return true;
             } catch (e) {
                 toast.error("Erro inesperado ao finalizar partida!")
-                return;
+                return false;
             }
         }
     }
