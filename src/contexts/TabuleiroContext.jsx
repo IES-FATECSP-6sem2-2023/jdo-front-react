@@ -70,7 +70,7 @@ export const TabuleiroProvider = ({ children }) => {
     useEffect(() => {
         
         if (partida && partida !== undefined) {
-            if (!localStorage.getItem("partidaSession")){
+            if (localStorage.getItem("userLogin") && !localStorage.getItem("partidaSession")){
                 let session = JSON.parse(localStorage.getItem("userLogin"));
                 if (session?.jogador?.id === partida?.primeirojogador?.idJogador) localStorage.setItem("partidaSession", JSON.stringify({"time":1, "idPartida": partida.idpartida}));
                 if (session?.jogador?.id === partida?.segundojogador?.idJogador) localStorage.setItem("partidaSession", JSON.stringify({"time":2, "idPartida": partida.idpartida}));
