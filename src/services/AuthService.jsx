@@ -1,14 +1,14 @@
 import axios from "axios";
+import { API_URL } from "../utils/constants";
 
-    const api= 'http://localhost:8080';
+    const api = API_URL;
 
     const authLoginConta = async (email, senha) => {
         try{
-            const authContaRequest = {
+            const response = await axios.post(api.concat('/autenticacao/verifica'), {
                 email: email,
                 senha: senha
-            }
-            const response = await axios.post(api.concat('/autenticacao/verifica'), authContaRequest);
+            });
             return response.data;
         } catch (e) {
             console.error(e);
@@ -18,13 +18,12 @@ import axios from "axios";
 
     const authCadastroConta = async (nome, username, email, senha) => {
         try {
-            const authCadastroContaRequest = {
+            const response = await axios.post(api.concat('/autenticacao/cadastra'), {
                 nome: nome,
                 username: username,
                 email: email,
                 senha: senha
-            }
-            const response = await axios.post(api.concat('/autenticacao/cadastra'), authCadastroContaRequest);
+            });
             return response.data;
         } catch (e) {
             console.error(e);

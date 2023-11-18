@@ -1,10 +1,19 @@
-import React, { Component } from 'react';
-import './fila.css';
+import React from 'react';
 import { useNavigate } from 'react-router';
+import './fila.css';
+import useTabuleiro from '/src/hooks/TabuleiroHook';
 
-function fila() {
+function Fila() {
+    const { partida, excluirPartida } = useTabuleiro();
     const navigate = useNavigate();
 
+    const excluiPartida = async (e) => {
+        e.preventDefault()
+        if (partida) {
+            const response = await excluirPartida(partida)
+            if (response) navigate("/menu")
+        }        
+    }
     return(
         <section className="background">
             <div className="modal-container" id="modal">
@@ -22,7 +31,7 @@ function fila() {
                             </div>
                         </div>
                         <div className="area-btn-modal">
-                            <button className="btn-modal-tabuleiro" onClick={() => {navigate("/menu")}}>CANCELAR</button>
+                            <button className="btn-modal-tabuleiro" onClick={excluiPartida}>CANCELAR</button>
                         </div>
                     </div>
                 </div>
@@ -31,4 +40,4 @@ function fila() {
     )
 }
 
-export default fila
+export default Fila

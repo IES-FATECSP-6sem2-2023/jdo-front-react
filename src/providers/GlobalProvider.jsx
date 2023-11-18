@@ -1,10 +1,15 @@
-import { AuthContaProvider } from '../contexts/AuthContaContext';
+import { SomAmbienteProvider } from '../contexts/SomAmbienteContext';
+import { TabuleiroProvider } from '../contexts/TabuleiroContext';
 
 const GlobalProvider = ({children}) => {
     return (
-        <AuthContaProvider>
-            {children}
-        </AuthContaProvider>
+        
+            <SomAmbienteProvider>
+                <TabuleiroProvider>
+                    {children}
+                </TabuleiroProvider>
+            </SomAmbienteProvider>
+        
     )
 }
 

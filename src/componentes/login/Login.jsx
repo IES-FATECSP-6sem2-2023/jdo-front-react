@@ -11,36 +11,39 @@ import VolumeOffIcon from '/src/assets/imagens/icones/VolumeOffIcon';
 import VolumeOnIcon from '/src/assets/imagens/icones/VolumeOnIcon';
 import Logobranco from '/src/assets/imagens/vetores/logo-branco.png';
 import useAuthConta from '/src/hooks/AuthConta';
-import { validatePassword } from '/src/utils/Regex.jsx';
+import useSomAmbiente from '/src/hooks/SomAmbienteHook';
+import { validateEmail, validatePassword } from '/src/utils/Regex.jsx';
 
-function Login({musicaAtiva, toggleMusica}) {
+function Login() {
 	const navigate = useNavigate();
 	const [visibilityStatus, setVisibilityStatus] = useState(false);
 	const { signin, signup } = useAuthConta();
+	const { toggleMusica, musicaStatus } = useSomAmbiente();
 	
 	const [login, toggle] = React.useState(true);
 
-	const [email, setEmail] = useState("");
+
 	const [nome, setNome] = useState("");
+	const [userName, setUserName] = useState("");
+	const [email, setEmail] = useState("");
+	const [emailErr, setEmailErr] = useState(false)
 	const [senha, setSenha] = useState("");
 	const [senhaErr, setSenhaErr] = useState(false);
-	const [userName, setUserName] = useState("");
 
 	const toggleVisibility = (e) => {
 		e.preventDefault();
 		setVisibilityStatus(!visibilityStatus);
 	}
-
-	const toggleVolume = () => {
-        toggleMusica()
-    }
 	
 	const cadastrar = async (e) => {
 		e.preventDefault();
+
+		if (!validateEmail.test(email)) {
+			setEmailErr(true);
+		} else
 		if (!validatePassword.test(senha)) {
 			setSenhaErr(true);
 		} else {
-			setSenhaErr(false);
 			const cadastroSucesso = await signup(nome, userName, email, senha);
 			cadastroSucesso ? toggle(!login) : '';
 		}
@@ -48,10 +51,12 @@ function Login({musicaAtiva, toggleMusica}) {
 
 	const entrar = async (e) => {
 		e.preventDefault();
-		if (!validatePassword.test(senha)) {
+
+		if (!validateEmail.test(email)) {
+			setEmailErr(true);
+		}else if (!validatePassword.test(senha)) {
 			setSenhaErr(true);
 		} else {
-			setSenhaErr(false);
 			const loginSucesso = await signin(email, senha);
 			loginSucesso ? navigate("/menu") : '';
 		}
@@ -59,9 +64,9 @@ function Login({musicaAtiva, toggleMusica}) {
 
 	return (
 		<div className='bg-login'>
-			<button className='btn-som' onClick={toggleVolume}>
-                            {musicaAtiva ? <VolumeOnIcon /> : <VolumeOffIcon />}
-                        </button>
+			<button className='btn-som' onClick={toggleMusica}>
+                {musicaStatus ? <VolumeOnIcon /> : <VolumeOffIcon />}
+            </button>
 			<div className={`container ${login ? "cadastro-js" : "login-js"}`}>
 				<img src={Logobranco} alt=""/>
 				<div className="content first-content">
@@ -75,26 +80,56 @@ function Login({musicaAtiva, toggleMusica}) {
 
 					<div className="second-column">
 						<h2 className="title title-secondary">Cadastre-se</h2>
-						<form className="form">
+						<form className="form" onSubmit={cadastrar}>
 							<label htmlFor="nome" className="label-input">
 								<UserIcon />
-								<input type="text" placeholder=" Nome" value={nome} onChange={(e) => {setNome(e.target.value)}} required />
+								<input 
+									type="text" 
+									placeholder=" Nome" 
+									value={nome} 
+									onChange={(e) => {
+										setNome(e.target.value);
+									}}
+									required />
 							</label>
 							<label htmlFor="user" className="label-input">
 								<TagIcon />
-								<input type="text" placeholder=" Usuário" value={userName} onChange={(e) => {setUserName(e.target.value)}} required />
+								<input 
+									type="text" 
+									placeholder=" Usuário" 
+									value={userName} 
+									onChange={(e) => {
+										setUserName(e.target.value);
+									}}
+									required />
 							</label>
 							<label htmlFor="email" className="label-input">
 								<MailIcon />
-								<input type="email" placeholder=" E-mail" value={email} onChange={(e) => {setEmail(e.target.value)}} required />
+								<input 
+									type="email"
+									placeholder=" E-mail"
+									value={email} onChange={(e) => {
+										setEmail(e.target.value);
+										setEmailErr(false);
+									}}
+									required />
 							</label>
+							{emailErr && <span>O e-mail digitada é inválido.</span>}
 							<label htmlFor="senha" className="label-input">
 								<LockIcon />
-								<input type={visibilityStatus ? "text" : "password"} placeholder=" Senha" value={senha} onChange={(e) => {setSenha(e.target.value)}} required />
+								<input 
+									type={visibilityStatus ? "text" : "password"} 
+									placeholder=" Senha" 
+									value={senha} 
+									onChange={(e) => {
+										setSenha(e.target.value);
+										setSenhaErr(false)
+									}}
+									required />
 								<button className="btn-visibility" onClick={toggleVisibility}>{visibilityStatus ? <VisibilityIcon /> : <VisibilityOffIcon />}</button>
 							</label>
-							{senhaErr && <span>A senha precisa conter: A-a, 0-9, (6-20)</span>}
-							<button className="btn btn-second" onClick={cadastrar}>cadastrar</button>
+							{senhaErr && <span>A senha digitada é inválida.</span>}
+							<button className="btn btn-second" type="submit">cadastrar</button>
 						</form>
 					</div>{/* Segunda Coluna */}
 
@@ -111,19 +146,36 @@ function Login({musicaAtiva, toggleMusica}) {
 
 					<div className="second-column">
 						<h2 className="title title-second">Login</h2>
-						<form className="form">
+						<form className="form" onSubmit={entrar}>
 							<label htmlFor="email" className="label-input">
-									<MailIcon />
-									<input type="email" placeholder=" E-mail" value={email} onChange={(e) => {setEmail(e.target.value)}} required />
-								</label>
-							<label htmlFor="senha" className="label-input">
-									<LockIcon />
-									<input type={visibilityStatus ? "text" : "password"} placeholder=" Senha" value={senha} onChange={(e) => {setSenha(e.target.value)}} required />
-									<button className="btn-visibility" onClick={toggleVisibility}>{visibilityStatus ? <VisibilityIcon /> : <VisibilityOffIcon />}</button>
+								<MailIcon />
+								<input 								
+									type="email" 
+									placeholder=" E-mail" 
+									value={email} 
+									onChange={(e) => {
+										setEmail(e.target.value);
+										setEmailErr(false);
+									}}
+									required />
 							</label>
-							{senhaErr && <span>A senha precisa conter: A-a, 0-9, (6-20)</span>}
+							{emailErr && <span>{!email ? 'O e-mail é obrigatório.' : 'O e-mail digitada é inválido.'}</span>}
+							<label htmlFor="senha" className="label-input">
+								<LockIcon />
+								<input 
+									type={visibilityStatus ? "text" : "password"} 
+									placeholder=" Senha" 
+									value={senha} 
+									onChange={(e) => {
+										setSenha(e.target.value);
+										setSenhaErr(false)
+									}} 
+									required />
+								<button className="btn-visibility" onClick={toggleVisibility}>{visibilityStatus ? <VisibilityIcon /> : <VisibilityOffIcon />}</button>
+							</label>
+							{senhaErr && <span>{!senha ? 'A senha é obrigatória.' : 'A senha digitada é inválida.'}</span>}
 							<a className="password" onClick={() => {navigate("/login/esqueci-senha")}}>Esqueceu a senha?</a>
-							<button className="btn btn-second" onClick={entrar}>entrar</button>
+							<button className="btn btn-second" type='submit'>entrar</button>
 						</form>
 					</div>{/* Segunda Coluna */}
 

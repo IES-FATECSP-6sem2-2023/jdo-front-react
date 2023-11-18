@@ -1,20 +1,15 @@
 import axios from "axios";
+import { API_URL } from "../utils/constants";
 
-    const api= 'http://localhost:8080'
+    const api = API_URL;
 
-    const iniciaPartida = async (idJogador) => {
+    const iniciaPartida = async (idJogador, time) => {
         try{
-            const idPartida = await axios.get(api + '/paritda/iniciar', idJogador);
+            const idPartida = await axios.post(api.concat('/partida/iniciar'), {
+                idJogador: idJogador,
+                tipo: time
+            });
             return idPartida;
-        } catch (e) {
-            throw e;
-        }
-    }
-
-    const participaPartida = async (idJogador) => {
-        try{
-            const response = await axios.get(api + '/partida/participar', idJogador);
-            return response.data;
         } catch (e) {
             throw e;
         }
@@ -22,17 +17,29 @@ import axios from "axios";
 
     const movimentaPartida = async (partida) => {
         try {
-            const response = await axios.get(api + '/partida/movimentar', partida);
+            const response = await axios.post(api.concat('/partida/movimentar'), partida);
             return response.data;
         } catch (e) {
             throw e;
         }
     }
 
-    const finalizaPartida = async (finalRequest) => {
+    const finalizaPartida = async (idPartida, idJogador) => {
         try {
-            const response = await axios.get(api + '/partida/finalizar', finalRequest);
+            const response = await axios.post(api.concat('/partida/finalizar'), {
+                idPartida: idPartida,
+                idVendedor: idJogador
+            });
             return response.data;
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    const excluirPartida = async (idPartida) => {
+        try {
+            const response = await axios.post(api.concat(`/partida/excluir/${idPartida}`));
+            return response;
         } catch (e) {
             throw e;
         }
@@ -41,9 +48,9 @@ import axios from "axios";
 const TabuleiroService = {
 
     iniciaPartida,
-    participaPartida,
     movimentaPartida,
-    finalizaPartida
+    finalizaPartida,
+    excluirPartida
 
 }
 
