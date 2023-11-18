@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Desistir from '../modals/desistir/desistir.jsx';
 import './Tabuleiro.css';
 import Cronometro from './cronometro/Cronometro';
-import Desistir from '../modals/desistir/desistir.jsx';
 import LogOutIcon from '/src/assets/imagens/icones/LogOutIcon';
 import VolumeOffIcon from '/src/assets/imagens/icones/VolumeOffIcon';
 import VolumeOnIcon from '/src/assets/imagens/icones/VolumeOnIcon';
 import placaUser from '/src/assets/imagens/placas/placa_usuario.png';
 import useSomAmbiente from '/src/hooks/SomAmbienteHook';
 import useTabuleiro from '/src/hooks/TabuleiroHook';
-import { toast } from 'react-toastify';
 
 function Tabuleiro() {
     const navigate = useNavigate();
@@ -80,12 +79,12 @@ function Tabuleiro() {
     }
     
     const handleCellClick = async (x, y, peca) => {
+        debugger
         if (jogadorSessao === jogadorDaVez && peca === jogadorDaVez && Number.isInteger(peca)) {
             setPecaSelecionada({ y, x });
         } else if (peca === "" && pecaSelecionada.y !== undefined) {
             const movimentoValido = await movimentarPartida(pecaSelecionada.y, pecaSelecionada.x, y, x, jogadorSessao);
             if (movimentoValido && pecasComidas === 5) {
-                debugger
                 const temp = await finalizarPartida(1)
             }
         }
