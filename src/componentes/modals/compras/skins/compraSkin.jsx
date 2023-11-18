@@ -1,10 +1,11 @@
 import React, { useRef, useEffect } from 'react';
 import './compraSkin.css';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router-dom';
 
-function modalCompraSkin(idItemComprado) {
+function modalCompraSkin() {
     const navigate = useNavigate();
-    const { idCompraSkin } = idItemComprado;
+    const { id } = useParams();
+    const idCompraSkin = parseInt(id, 10);
     const imgItemRef = useRef(null);
 
     useEffect(() => {

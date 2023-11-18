@@ -44,8 +44,8 @@ const App = () => {
               <Route path='/vitoria' element={<Vitoria />} />
               <Route path='/derrota' element={<Derrota />} />
               <Route path='/desistir' element={<Desistir />} />
-              <Route path='/compras/moedas' element={<CompraMoedas />} />
-              <Route path='/compras/skins' element={<CompraSkins />} />
+              <Route path='/compras/moedas/:id' element={<CompraMoedas />} />
+              <Route path='/compras/skins/:id' element={<CompraSkins />} />
           </Routes>
         </GlobalProvider>
       </BrowserRouter>

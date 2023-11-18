@@ -236,6 +236,11 @@ button{
     cursor: pointer;
 }
 
+.nada-para-comprar{
+    font-size: 2em;
+    color: #fff;
+}
+
 @media screen and (max-width: 1366px) and (max-height: 768px) {
     .box-titulo-loja-skin{
         width: 450px;

@@ -1,10 +1,11 @@
 import React, { useRef, useEffect } from 'react';
 import './compraMoedas.css';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router-dom';
 
-function compraMoedas(idItemComprado) {
+function compraMoedas() {
     const navigate = useNavigate();
-    const { idCompraMoeda } = idItemComprado;
+    const { id } = useParams();
+    const idCompraMoeda = parseInt(id, 10);
 
     const imgItemRef = useRef(null);
     const textoItemRef = useRef(null);
