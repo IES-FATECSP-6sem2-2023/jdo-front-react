@@ -11,6 +11,7 @@ export const TabuleiroContext = createContext({});
 
 export const TabuleiroProvider = ({ children }) => {
     const navigate = useNavigate();
+    const [jogadorAtualCronometro, setJogadorAtualCronometro] = useState(2);
     const [pecasComidas, setPecasComida] = useState(0);
     const { user } = useAuthConta();
     const [partida, setPartida] = useState({});
@@ -24,7 +25,6 @@ export const TabuleiroProvider = ({ children }) => {
         try {
             if (user && user.jogador) {
                 const idJogador = user.jogador.id;
-                // debugger
                 const teste = await TabuleiroService.iniciaPartida(idJogador,tipo);
                 stompClient.subscribe('/topic/gamestate', function(message) {
                     const gamestate = JSON.parse(message.body)
@@ -54,7 +54,7 @@ export const TabuleiroProvider = ({ children }) => {
             }
             return;
         } catch (e) {
-            console.log(e)
+            console.error(e)
             toast.error("Erro ao tentar criar uma partida!");
             return;
         }
@@ -63,21 +63,19 @@ export const TabuleiroProvider = ({ children }) => {
     useEffect(() => {
         
         if (partida && partida !== undefined) {
-            console.log(partida)
             if (!localStorage.getItem("timeTabuleiro")){
                 let session = JSON.parse(localStorage.getItem("userLogin"));
                 if (session?.jogador?.id === partida?.primeirojogador?.idJogador) localStorage.setItem("timeTabuleiro", 1);
                 if (session?.jogador?.id === partida?.segundojogador?.idJogador) localStorage.setItem("timeTabuleiro", 2);
             }
         }
-    }, []);
+    }, [partida]);
 
-    // useEffect(() => {
-    //     console.log("Uma peça de cachorro foi comida, total:", pecasComidas)
-    // }, [pecasComidas]);
-
+    const passarVez = () => {
+        setJogadorAtualCronometro((jogadorAtualCronometro) => (jogadorAtualCronometro === 1 ? 2 : 1))
+    }
+    
     const movimentarPartida = async (xOri, yOri, xDes, yDes, jogador) => {
-        console.log("PASSOU AQUI", partida)
         if (partida) {
             const coordenadaOrigem = `${xOri},${yOri};`;
             const coordenadaDestino = `${xDes},${yDes};`;
@@ -112,18 +110,16 @@ export const TabuleiroProvider = ({ children }) => {
                     atualizaPartida[jogadorAtual].posicoes[coordenadaDestino] = "";
                     
                     if (coordenadasPuladas) {
-                        // debugger
                         delete atualizaPartida.segundojogador.posicoes[coordenadasPuladas];
                         setPecasComida(prevPecasComida => {
-                            console.log("Valor anterior de pecasComida:", prevPecasComida);
                             return prevPecasComida + 1;
                           });
                     }
                     
                     try {
-                        console.log(JSON.stringify({ partida: atualizaPartida }))
                         const novaMovimentacao = await TabuleiroService.movimentaPartida(atualizaPartida);
                         stompClient.send("/topic/gamestate", {}, JSON.stringify({partida: novaMovimentacao}));
+                        passarVez()
                         return true
                     } catch (e) {
                         toast.error("Erro ao tentar efetuar movimentação!");
@@ -169,7 +165,7 @@ export const TabuleiroProvider = ({ children }) => {
     }
 
     return (
-        <TabuleiroContext.Provider value={{partida, pecasComidas, criarPartida, movimentarPartida, finalizarPartida, excluirPartida}}>
+        <TabuleiroContext.Provider value={{partida, pecasComidas, criarPartida, movimentarPartida, finalizarPartida, excluirPartida, jogadorAtualCronometro, passarVez}}>
             {children}
         </TabuleiroContext.Provider>
     )

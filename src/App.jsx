@@ -3,7 +3,6 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Colecao from './componentes/colecao/Colecao.jsx';
 import Conta from './componentes/conta/Conta.jsx';
-import Tabuleiro from './componentes/tabuleiro/Tabuleiro.jsx';
 import Home from './componentes/home/Home.jsx';
 import Login from './componentes/login/Login.jsx';
 import EsqueciSenha from './componentes/login/esqueciSenha/EsqueciSenha.jsx';
@@ -18,22 +17,18 @@ import Fila from './componentes/modals/fila/fila.jsx';
 import Loading from './componentes/modals/loading/loading.jsx';
 import Sucesso from './componentes/modals/sucesso/sucesso.jsx';
 import Vitoria from './componentes/modals/vitoria/vitoria.jsx';
+import Tabuleiro from './componentes/tabuleiro/Tabuleiro.jsx';
 import GlobalProvider from './providers/GlobalProvider.jsx';
 import useAuthConta from '/src/hooks/AuthConta';
 
-const Private = () => {
-  const { signed } = useAuthConta();
-  return signed > 0 ? <Navigate to={'/menu'} /> : <Navigate to={'/login'} />
-}
-
 const App = () => {
-
+  const { signed } = useAuthConta();
   return (
     <>
       <BrowserRouter>
         <GlobalProvider>
           <Routes>
-              <Route path='/' element={<Private/>} />
+              <Route path='/' element={signed ? <Navigate to={"/menu"}/> : <Navigate to={"/login"}/>}/>
               <Route path='/login' element={<Login />} />
               <Route path='/menu' element={<Home />} />
               <Route path='/login/esqueci-senha' element={<EsqueciSenha/>} />
@@ -47,10 +42,10 @@ const App = () => {
               <Route path='/erro' element={<Erro />} />
               <Route path='/sucesso' element={<Sucesso />} />
               <Route path='/vitoria' element={<Vitoria />} />
-              <Route path='/derrota' element={<Derrota />} />    
-              <Route path='/desistir' element={<Desistir />} />    
-              <Route path='/compras/moedas' element={<CompraMoedas />} />      
-              <Route path='/compras/skins' element={<CompraSkins />} />      
+              <Route path='/derrota' element={<Derrota />} />
+              <Route path='/desistir' element={<Desistir />} />
+              <Route path='/compras/moedas' element={<CompraMoedas />} />
+              <Route path='/compras/skins' element={<CompraSkins />} />
           </Routes>
         </GlobalProvider>
       </BrowserRouter>

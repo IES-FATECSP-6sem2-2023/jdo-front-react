@@ -1,20 +1,28 @@
 import React, { useEffect, useState } from 'react';
+import useTabuleiro from '/src/hooks/TabuleiroHook';
 
-function Cronometro({ jogador, ativo, onTempoEsgotado }) {
-    const [tempoRestante, setTempoRestante] = useState(10);
-  
-    useEffect(() => {
-      if (tempoRestante > 0 && ativo) {
-        const timer = setTimeout(() => {
-          setTempoRestante(tempoRestante - 1);
-        }, 1000);
-  
-        return () => clearTimeout(timer);
-      } else if (tempoRestante === 0 && ativo) {
-        onTempoEsgotado(jogador);
-      }
+function Cronometro({ jogador }) {
+  const { jogadorAtualCronometro, passarVez } = useTabuleiro();
+  const [tempoRestante, setTempoRestante] = useState(10);
+  let timer;
+
+  useEffect(() => {
+    if (jogadorAtualCronometro === jogador) {
+      timer = setInterval(() => {
+        setTempoRestante((prevTempo) => prevTempo - 1);
+      }, 1000);
+
+      return () => clearInterval(timer);
+    }
+  }, [jogadorAtualCronometro, jogador]);
+
+  useEffect(() => {
+    if (tempoRestante === 0 && jogadorAtualCronometro === jogador) {
+      clearInterval(timer);
       setTempoRestante(10);
-    }, [tempoRestante, jogador, ativo, onTempoEsgotado]);
+      passarVez();
+    }
+  }, [tempoRestante, jogadorAtualCronometro, jogador, passarVez]);
 
   return (
     <div className='contador-tabuleiro'>
@@ -23,4 +31,4 @@ function Cronometro({ jogador, ativo, onTempoEsgotado }) {
   );
 }
 
-export default Cronometro
+export default Cronometro;

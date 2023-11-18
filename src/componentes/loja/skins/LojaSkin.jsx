@@ -41,38 +41,36 @@ function LojaSkin() {
         getOpcoesCompraSkin();
     }, []);
 
-    // const verificaSaldo = (idItem, valor, formaPagamento) => {
-    //     let pagamentoMoedaRara = formaPagamento === 'esmeralda' ? true : false;
+    const verificaSaldo = (idItem, valor, formaPagamento) => {
+        let pagamentoMoedaRara = formaPagamento === 'esmeralda' ? true : false;
+        
+        if (formaPagamento === 'esmeralda' && user.jogador.qntmoedaespecial >= valor) {
+            compraSkin(user?.jogador?.id, idItem, pagamentoMoedaRara)
+        } else if (formaPagamento === 'moeda' && user.jogador.qntmoedanormal >= valor) {
+            compraSkin(user?.jogador?.id, idItem, pagamentoMoedaRara)
+        } else {
+            toast.info("Saldo insuficiente!");
+        }
+    };
 
-    //     if (tipoPagamento === 'esmeralda' && jogador.qntmoedanormal >= valor) {
-    //         compraSkin(user?.jogador?.id, idItem, pagamentoMoedaRara)
-    //     }
-    //     else if (tipoPagamento === 'moeda' && jogador.qntmoedaespecial >= valor) {
-    //         compraSkin(user?.jogador?.id, idItem, pagamentoMoedaRara)
-    //     } 
-    //     else {
-    //         toast.info("Saldo insuficiente!");
-    //     }
-    // };
+    const compraSkin = async (idJogador, idSkin, pagamento) => {
+        setIdCompraSkin(idSkin);
 
-    // const compraSkin = async (idJogador, idSkin, pagamento) => {
-    //     setIdCompraSkin(idSkin);
-
-    //     try {
-    //         const data = await LojaSkinService.sendSkin(idJogador, idSkin, pagamento);
+        try {
+            const data = await LojaSkinService.sendSkin(idJogador, idSkin, pagamento);
             
-    //         if (data.status === 200) {
-    //             setResponse(data.data);
-    //             setIsModalVisible(true);                
-    //         } 
-    //         else {
-    //             console.error('Erro na resposta do servidor:', data);
-    //         }
-    //     } 
-    //     catch (error) {
-    //         console.error('Erro na busca de dados:', error);
-    //     }
-    // };
+            if (data.status === 200) {
+                setResponse(data.data);
+                setIsModalVisible(true);                
+            } 
+            else {
+                console.error('Erro na resposta do servidor:', data);
+            }
+        } 
+        catch (error) {
+            console.error('Erro na busca de dados:', error);
+        }
+    };
 
     return (
             <section className="bg-loja-skin">
@@ -116,7 +114,7 @@ function LojaSkin() {
                                     </div>
                                     <div className="precos-loja-skin">
                                         <button className="preco-esmeralda-loja-skin" onClick={() => verificaSaldo(item.id, item.valorrara, 'esmeralda')}>
-                                            <div className="icon-loja-skin icon-moeda-loja-skin"></div>
+                                            <div className="icon-loja-skin icon-esmeralda-loja-skin"></div>
                                             <div className="preco-loja-skin">
                                                 <p>{item.valorrara}</p>
                                             </div>

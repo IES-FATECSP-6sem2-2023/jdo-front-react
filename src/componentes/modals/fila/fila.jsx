@@ -9,7 +9,6 @@ function Fila() {
 
     const excluiPartida = async (e) => {
         e.preventDefault()
-        debugger
         if (partida) {
             const response = await excluirPartida(partida)
             if (response) navigate("/menu")

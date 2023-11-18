@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router';
 function modalCompraSkin(idItemComprado) {
     const navigate = useNavigate();
     const { idCompraSkin } = idItemComprado;
-    console.log(idCompraSkin)
     const imgItemRef = useRef(null);
 
     useEffect(() => {
