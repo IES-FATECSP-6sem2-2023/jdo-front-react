@@ -181,7 +181,16 @@ h1{
     height: 100px;
     background-repeat: no-repeat;
     background-size: contain;
-    border: none; /* Remova a borda da imagem */
+    border: none;
+    outline: none;
+}
+
+.icon-emblema-nao-conquistado{
+    width: 100px;
+    height: 100px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: none;
     outline: none;
 }
 
