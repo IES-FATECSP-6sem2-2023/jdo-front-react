@@ -14,7 +14,7 @@ import { API_URL } from "../utils/constants";
 
     const authItemFavorito = async (idUsuario, idItem) => {
         try {
-            const response = await axios.patch(api.concat(`/item/${idUsuario}/favorito/${idItem}`));
+            const response = await axios.put(api.concat(`/item/${idUsuario}/favorito/${idItem}`));
             return response;
         } catch (e) {
             console.error(e);

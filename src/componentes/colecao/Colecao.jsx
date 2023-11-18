@@ -14,9 +14,9 @@ function Colecao() {
     // @ToDo: montar lógica para alterar tanto cachorro e onça para o usuário e ver como salvar essa info para o usuário
 
     useEffect(() => {
-        const getColecao = async (idUsuario) => {
+        const getColecao = async () => {
             try {
-                const data = await ColecaoService.getColecao(idUsuario);
+                const data = await ColecaoService.getColecao(user.jogador.id);
                 if (data.status === 200) {
                     setResponse(data.data.itens);
                 } 
@@ -29,7 +29,7 @@ function Colecao() {
             }
         };
 
-        getColecao(1);
+        getColecao();
     }, []);
     
     const mudaColecao = (event) => {
@@ -76,7 +76,7 @@ function Colecao() {
             const dataSkinPadrao = await ColecaoService.authItemFavorito(user.jogador.id, opcaoSkin.value);
 
             if (dataSkinPadrao.status === 200) {
-                toast.info('Opção selecionada: ' + skinSelecionada.value);
+                toast.success('Skin favorita atualizada!');
             } else {
                 console.error('Erro na resposta do servidor:', dataSkinPadrao);
             }
@@ -122,7 +122,7 @@ function Colecao() {
                     {skinsCachorro.map((item) => (
                         <div key={item.id} className="skin-item-colecao">
                             <label className="radio-button-label-colecao">
-                                <input type="radio" name="opcaoSkin" value={item.id} />
+                                <input type="radio" name="opcaoSkin" value={item.id} onChange={escolheSkinPadrao}/>
                                 <img src={`/src/assets/imagens/skins/${item.imagem}`} className="colecao-skin"/>
                                 <span className="colecao-skin-nome">{item.nome}</span>
                             </label>
