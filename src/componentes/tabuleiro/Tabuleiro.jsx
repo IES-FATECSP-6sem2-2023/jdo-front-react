@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import Desistir from '../modals/desistir/desistir.jsx';
 import './Tabuleiro.css';
-import Cronometro from './cronometro/Cronometro';
+import CronometroCachorro from './cronometro/CronometroCachorro.jsx';
+import CronometroOnca from './cronometro/CronometroOnca.jsx';
 import LogOutIcon from '/src/assets/imagens/icones/LogOutIcon';
 import VolumeOffIcon from '/src/assets/imagens/icones/VolumeOffIcon';
 import VolumeOnIcon from '/src/assets/imagens/icones/VolumeOnIcon';
@@ -11,13 +11,12 @@ import useSomAmbiente from '/src/hooks/SomAmbienteHook';
 import useTabuleiro from '/src/hooks/TabuleiroHook';
 
 function Tabuleiro() {
-    const navigate = useNavigate();
     const {
         partida,
         pecasComidas,
         movimentarPartida,
-        finalizarPartida,
         jogadorAtualCronometro,
+        passarVez,
         stompClient
     } = useTabuleiro();
     const [modalDesistirVisiblity, setModalDesistirVisiblity] = useState(false);
@@ -95,14 +94,10 @@ function Tabuleiro() {
     }
     
     const handleCellClick = async (x, y, peca) => {
-        debugger
         if (jogadorSessao === jogadorDaVez && peca === jogadorDaVez && Number.isInteger(peca)) {
             setPecaSelecionada({ y, x });
         } else if (peca === "" && pecaSelecionada.y !== undefined) {
-            const movimentoValido = await movimentarPartida(pecaSelecionada.y, pecaSelecionada.x, y, x, jogadorSessao);
-            if (movimentoValido && pecasComidas === 5) {
-                const temp = await finalizarPartida(1)
-            }
+            await movimentarPartida(pecaSelecionada.y, pecaSelecionada.x, y, x, jogadorSessao);
         }
     };
     
@@ -117,7 +112,7 @@ function Tabuleiro() {
                                     <div className="placar-onca-tabuleiro peca-comida-tabuleiro" key={index}></div>
                                 ))}
                             </div>
-                            <Cronometro jogador={1}/>
+                            <CronometroOnca ativo={jogadorDaVez === 1 ? true : false}/>
                             <div className="info-user-tabuleiro jogador-onca-tabuleiro">
                                 <img src={placaUser} />
                                 <h1 id="contador-onca-tabuleiro">JOGADOR ONÇA</h1>
@@ -185,7 +180,7 @@ function Tabuleiro() {
                             </button>
                         </div>
                         <div className="area-cachorro-container-tabuleiro">
-                            <Cronometro jogador={2}/>
+                        <CronometroCachorro  ativo={jogadorDaVez === 2 ? true : false}/>
                             <div className="info-user-tabuleiro jogador-cachorro-tabuleiro">
                                 <img src={placaUser} />
                                 <h1>JOGADOR CACHORRO</h1>
