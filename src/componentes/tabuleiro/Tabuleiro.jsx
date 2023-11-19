@@ -3,7 +3,6 @@ import Desistir from '../modals/desistir/desistir.jsx';
 import './Tabuleiro.css';
 import CronometroCachorro from './cronometro/CronometroCachorro.jsx';
 import CronometroOnca from './cronometro/CronometroOnca.jsx';
-import Cronometro from './cronometro/Cronometro.jsx';
 import LogOutIcon from '/src/assets/imagens/icones/LogOutIcon';
 import VolumeOffIcon from '/src/assets/imagens/icones/VolumeOffIcon';
 import VolumeOnIcon from '/src/assets/imagens/icones/VolumeOnIcon';
