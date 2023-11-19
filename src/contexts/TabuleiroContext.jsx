@@ -16,6 +16,7 @@ export const TabuleiroProvider = ({ children }) => {
     const { user } = useAuthConta();
     const [partida, setPartida] = useState({});
     const [tempoRestante, setTempoRestante] = useState(10);
+    const jogadorSessao = parseInt(JSON.parse(localStorage.getItem("partidaSession"))?.time, 10);
 
     useEffect(() => {
         // inicializa a conexão com o websocket na primeira renderização
@@ -49,6 +50,16 @@ export const TabuleiroProvider = ({ children }) => {
                     passarVez(); 
                 });
 
+                stompClient.subscribe('/topic/finish-game', function(message) {
+                    const partidaFinalizada = JSON.parse(message.body)
+
+                    if (idJogador === partidaFinalizada.idVencedor) {
+                        navigate(`/vitoria/${jogadorSessao}`)
+                    } else{
+                        navigate(`/derrota/${jogadorSessao}`)
+                    }
+                })
+
                 if (teste.data.partidaOcupada) {
                     stompClient.send("/topic/gamestate", {}, JSON.stringify({partida: teste.data.partida, iniciandoPartida: true }))
                     setPartida(teste.data.partida)
@@ -71,7 +82,15 @@ export const TabuleiroProvider = ({ children }) => {
     useEffect(()=>{
         if (pecasComidas === 6) {
             setTimeout(() => {
-                finalizarPartida(1);
+                stompClient.send(
+                    "/topic/finish-game", 
+                    {}, 
+                    JSON.stringify({
+                        idPartida: partida.idpartida,
+                        idVencedor: user.jogador.id,
+                        partidaAbandonada: null,
+                    })
+                )
             }, 3000)
         }
     },[pecasComidas])
@@ -87,7 +106,15 @@ export const TabuleiroProvider = ({ children }) => {
             for (let chave in partida?.primeirojogador?.posicoes) {
                 if (!partida?.primeirojogador?.posicoes[chave]) {
                     setTimeout(() => {
-                        finalizarPartida(2);
+                        stompClient.send(
+                            "/topic/finish-game", 
+                            {}, 
+                            JSON.stringify({
+                                idPartida: partida.idpartida,
+                                idVencedor: user.jogador.id,
+                                partidaAbandonada: null,
+                            })
+                        )
                     }, 3000)
                 }
             }
@@ -169,7 +196,6 @@ export const TabuleiroProvider = ({ children }) => {
     }
 
     const finalizarPartida = async (timeVitoria, desistencia) => {
-        const jogadorSessao = parseInt(JSON.parse(localStorage.getItem("partidaSession"))?.time, 10);
         if (partida) {
             try {
                 const idVencedor = timeVitoria === 1 ? partida.primeirojogador.idJogador : partida.segundojogador.idJogador;
