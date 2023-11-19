@@ -95,7 +95,7 @@ function Conta() {
                         <div className="emblemas-conta">
                             {user?.emblemas && user.emblemas.map(emblema => (
                                 <div className="emblema-item-conta" key={emblema.id}>
-                                    <div className="icon-emblema-conta ativo"></div>
+                                    <div className={emblema.conquistado ? "icon-emblema-conquistado" : "icon-emblema-nao-conquistado"}></div>
                                     <span className="tooltip-text-conta" id="top">{emblema.nome}<br />{emblema.descricao}</span>
                                 </div>
                             ))}

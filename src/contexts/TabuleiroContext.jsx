@@ -15,6 +15,7 @@ export const TabuleiroProvider = ({ children }) => {
     const [stompClient, setStompClient] = useState(null);
     const { user } = useAuthConta();
     const [partida, setPartida] = useState({});
+    const [tempoRestante, setTempoRestante] = useState(10);
 
     useEffect(() => {
         // inicializa a conexão com o websocket na primeira renderização
@@ -28,7 +29,6 @@ export const TabuleiroProvider = ({ children }) => {
             client.disconnect();
         }
     }, [])
-
 
     const criarPartida = async (tipo) => {
         try {
@@ -46,6 +46,7 @@ export const TabuleiroProvider = ({ children }) => {
                     }
 
                     setPartida(gamestate.partida)
+                    setTempoRestante(10);
                 });
 
                 if (teste.data.partidaOcupada) {
@@ -83,6 +84,7 @@ export const TabuleiroProvider = ({ children }) => {
     }
     
     const movimentarPartida = async (xOri, yOri, xDes, yDes, jogador) => {
+        debugger
         if (partida) {
             const coordenadaOrigem = `${xOri},${yOri};`;
             const coordenadaDestino = `${xDes},${yDes};`;
@@ -91,7 +93,6 @@ export const TabuleiroProvider = ({ children }) => {
 
             if (atualizaPartida[jogadorAtual].posicoes.hasOwnProperty(coordenadaOrigem)) {
                 const valoresDestino = atualizaPartida[jogadorAtual].posicoes[coordenadaOrigem].split(";");
-                debugger
                 const diferencaX = Math.abs(xDes - xOri);
                 const diferencaY = Math.abs(yDes - yOri);
                 let coordenadasPuladas = "";
@@ -137,6 +138,7 @@ export const TabuleiroProvider = ({ children }) => {
                         console.log(novaMovimentacao)
                         stompClient.send("/topic/gamestate", {}, JSON.stringify({partida: novaMovimentacao}));
                         passarVez()
+                        debugger
                         for (let chave in novaMovimentacao.primeirojogador.posicoes) {
                             if (!novaMovimentacao.primeirojogador.posicoes[chave]) {
                                 finalizarPartida(2);
@@ -158,11 +160,17 @@ export const TabuleiroProvider = ({ children }) => {
     }
 
     const finalizarPartida = async (timeVitoria, desistencia) => {
+        const jogadorSessao = parseInt(JSON.parse(localStorage.getItem("partidaSession"))?.time, 10);
         if (partida) {
             try {
                 const idVencedor = timeVitoria === 1 ? partida.primeirojogador.idJogador : partida.segundojogador.idJogador;
                 const partidaReturn = await TabuleiroService.finalizaPartida(partida.idpartida, idVencedor, desistencia ? true : false);
                 setPartida(partidaReturn.data);
+                if (timeVitoria === jogadorSessao){
+                    navigate(`/vitoria/${jogadorSessao}`)
+                }else{
+                    navigate(`/derrota/${jogadorSessao}`)
+                }
                 return true;
             } catch (e) {
                 toast.error("Erro inesperado ao finalizar partida!")
@@ -187,7 +195,19 @@ export const TabuleiroProvider = ({ children }) => {
     }
 
     return (
-        <TabuleiroContext.Provider value={{partida, pecasComidas, criarPartida, movimentarPartida, finalizarPartida, excluirPartida, jogadorAtualCronometro, passarVez}}>
+        <TabuleiroContext.Provider value={{
+            partida, 
+            pecasComidas,
+            criarPartida,
+            movimentarPartida,
+            finalizarPartida,
+            excluirPartida,
+            jogadorAtualCronometro,
+            passarVez, 
+            tempoRestante,
+            setTempoRestante,
+            stompClient
+        }}>
             {children}
         </TabuleiroContext.Provider>
     )
