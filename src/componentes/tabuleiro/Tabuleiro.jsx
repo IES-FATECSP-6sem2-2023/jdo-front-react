@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Desistir from '../modals/desistir/desistir.jsx';
 import './Tabuleiro.css';
 import Cronometro from './cronometro/Cronometro';
 import LogOutIcon from '/src/assets/imagens/icones/LogOutIcon';
@@ -8,7 +9,6 @@ import VolumeOnIcon from '/src/assets/imagens/icones/VolumeOnIcon';
 import placaUser from '/src/assets/imagens/placas/placa_usuario.png';
 import useSomAmbiente from '/src/hooks/SomAmbienteHook';
 import useTabuleiro from '/src/hooks/TabuleiroHook';
-import { toast } from 'react-toastify';
 
 function Tabuleiro() {
     const navigate = useNavigate();
@@ -20,6 +20,8 @@ function Tabuleiro() {
         jogadorAtualCronometro,
         stompClient
     } = useTabuleiro();
+    const [modalDesistirVisiblity, setModalDesistirVisiblity] = useState(false);
+    
     const [tabuleiro, setTabuleiro] = useState([]);
     const [jogadorDaVez, setJogadorDaVez] = useState(jogadorAtualCronometro);
     const [pecaSelecionada, setPecaSelecionada] = useState({});
@@ -65,16 +67,10 @@ function Tabuleiro() {
         return tabuleiro;
     };
 
-    const jogadorSessao = parseInt(localStorage.getItem("timeTabuleiro"));
+    const jogadorSessao = parseInt(JSON.parse(localStorage.getItem("partidaSession"))?.time, 10);
 
     const desistir = async () => {
-        const responseDesistir = await finalizarPartida(jogadorSessao === 1 ? 2 : 1);
-        if (responseDesistir) {
-            localStorage.removeItem("timeTabuleiro");
-            navigate("/menu");
-        } else {
-            toast.error("Erro ao desistir da partida!");
-        }
+        setModalDesistirVisiblity(!modalDesistirVisiblity);
     }
 
     const clicarReacao = (event) => {
@@ -85,11 +81,11 @@ function Tabuleiro() {
 
     const somReacao = (numeroReacao) => {
         const audioLista = {
-            1: 'src/assets/sons/tabuleiro/rindo.mp3',
-            2: 'src/assets/sons/tabuleiro/nervoso.mp3',
-            3: 'src/assets/sons/tabuleiro/surpreso.mp3',
-            4: 'src/assets/sons/tabuleiro/cachorro.mp3',
-            5: 'src/assets/sons/tabuleiro/onca.mp3',
+            1: '/assets/sons/tabuleiro/rindo.mp3',
+            2: '/assets/sons/tabuleiro/nervoso.mp3',
+            3: '/assets/sons/tabuleiro/surpreso.mp3',
+            4: '/assets/sons/tabuleiro/cachorro.mp3',
+            5: '/assets/sons/tabuleiro/onca.mp3',
         };
 
         if (audioLista[numeroReacao]) {
@@ -99,6 +95,7 @@ function Tabuleiro() {
     }
     
     const handleCellClick = async (x, y, peca) => {
+        debugger
         if (jogadorSessao === jogadorDaVez && peca === jogadorDaVez && Number.isInteger(peca)) {
             setPecaSelecionada({ y, x });
         } else if (peca === "" && pecaSelecionada.y !== undefined) {
@@ -108,29 +105,10 @@ function Tabuleiro() {
             }
         }
     };
-
-    // const modal = document.getElementById("modal");
-    // const modalLoading = document.getElementById("modal-loading");
-    // const modalVitoria = document.getElementById("modal-vitoria");
-    // const modalDerrota = document.getElementById("modal-derrota");
-    // const tabuleiroContainer = document.getElementById("tabuleiro-container");
-  
-    //Se o jogador vencer
-    // tabuleiroContainer.style.display = "none"
-    // modal.style.display = "block"
-    // modalVitoria.style.display = "block"
-    // const somVitoria = new Audio('src/assets/sons/tabuleiro/jogo_ganho.mp3');
-    // somVitoria.play();
-
-    //Se o jogador perder
-    // tabuleiroContainer.style.display = "none"
-    // modal.style.display = "block"
-    // modalDerrota.style.display = "block"
-    // const somDerrota = new Audio('src/assets/sons/tabuleiro/jogo_perdido.mp3');
-    // somDerrota.play();
     
         return(
             <section className="bg-tabuleiro">
+                {modalDesistirVisiblity && <Desistir alterarVisibilidade={desistir}/>}
                 <div className="bg-tabuleiro-container" id="tabuleiro-container">
                     <div className="area-onca-tabuleiro">
                         <div className="area-onca-container-tabuleiro">

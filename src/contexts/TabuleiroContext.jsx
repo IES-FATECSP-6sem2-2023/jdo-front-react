@@ -71,10 +71,10 @@ export const TabuleiroProvider = ({ children }) => {
     useEffect(() => {
         
         if (partida && partida !== undefined) {
-            if (!localStorage.getItem("timeTabuleiro")){
+            if (localStorage.getItem("userLogin") && !localStorage.getItem("partidaSession")){
                 let session = JSON.parse(localStorage.getItem("userLogin"));
-                if (session?.jogador?.id === partida?.primeirojogador?.idJogador) localStorage.setItem("timeTabuleiro", 1);
-                if (session?.jogador?.id === partida?.segundojogador?.idJogador) localStorage.setItem("timeTabuleiro", 2);
+                if (session?.jogador?.id === partida?.primeirojogador?.idJogador) localStorage.setItem("partidaSession", JSON.stringify({"time":1, "idPartida": partida.idpartida}));
+                if (session?.jogador?.id === partida?.segundojogador?.idJogador) localStorage.setItem("partidaSession", JSON.stringify({"time":2, "idPartida": partida.idpartida}));
             }
         }
     }, [partida]);
@@ -84,6 +84,7 @@ export const TabuleiroProvider = ({ children }) => {
     }
     
     const movimentarPartida = async (xOri, yOri, xDes, yDes, jogador) => {
+        debugger
         if (partida) {
             const coordenadaOrigem = `${xOri},${yOri};`;
             const coordenadaDestino = `${xDes},${yDes};`;
@@ -92,21 +93,29 @@ export const TabuleiroProvider = ({ children }) => {
 
             if (atualizaPartida[jogadorAtual].posicoes.hasOwnProperty(coordenadaOrigem)) {
                 const valoresDestino = atualizaPartida[jogadorAtual].posicoes[coordenadaOrigem].split(";");
-
                 const diferencaX = Math.abs(xDes - xOri);
                 const diferencaY = Math.abs(yDes - yOri);
                 let coordenadasPuladas = "";
-                if (diferencaX > 0) {
+                if (diferencaX > 0 && diferencaY === 0) {
+                    // Movimento na horizontal
                     for (let i = 1; i < diferencaX; i++) {
                         const xPulado = xOri + (xDes > xOri ? i : -i);
                         const yPulado = yOri;
-                        coordenadasPuladas= `${xPulado},${yPulado};`;
+                        coordenadasPuladas += `${xPulado},${yPulado};`;
                     }
-                } else if (diferencaY > 0) {
+                } else if (diferencaY > 0 && diferencaX === 0) {
+                    // Movimento na vertical
                     for (let i = 1; i < diferencaY; i++) {
                         const xPulado = xOri;
                         const yPulado = yOri + (yDes > yOri ? i : -i);
-                        coordenadasPuladas = `${xPulado},${yPulado};`;
+                        coordenadasPuladas += `${xPulado},${yPulado};`;
+                    } 
+                } else if (diferencaX === diferencaY) {
+                    // Movimento na diagonal
+                    for (let i = 1; i < diferencaX; i++) {
+                        const xPulado = xOri + (xDes > xOri ? i : -i);
+                        const yPulado = yOri + (yDes > yOri ? i : -i);
+                        coordenadasPuladas += `${xPulado},${yPulado};`;
                     }
                 }
                 
@@ -150,13 +159,18 @@ export const TabuleiroProvider = ({ children }) => {
         }
     }
 
-    const finalizarPartida = async (timeVitoria) => {
+    const finalizarPartida = async (timeVitoria, desistencia) => {
+        const jogadorSessao = parseInt(JSON.parse(localStorage.getItem("partidaSession"))?.time, 10);
         if (partida) {
             try {
-                debugger
                 const idVencedor = timeVitoria === 1 ? partida.primeirojogador.idJogador : partida.segundojogador.idJogador;
-                const partidaReturn = await TabuleiroService.finalizaPartida(partida.idpartida, idVencedor);
+                const partidaReturn = await TabuleiroService.finalizaPartida(partida.idpartida, idVencedor, desistencia ? true : false);
                 setPartida(partidaReturn.data);
+                if (timeVitoria === jogadorSessao){
+                    navigate(`/vitoria/${jogadorSessao}`)
+                }else{
+                    navigate(`/derrota/${jogadorSessao}`)
+                }
                 return true;
             } catch (e) {
                 toast.error("Erro inesperado ao finalizar partida!")

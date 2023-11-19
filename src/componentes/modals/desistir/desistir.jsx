@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
 import './desistir.css';
+import useTabuleiro from '/src/hooks/TabuleiroHook';
 import { useNavigate } from 'react-router';
 
-function desistir() {
+function desistir({alterarVisibilidade}) {
     const navigate = useNavigate();
-
+    const { finalizarPartida} = useTabuleiro();
+    const desistir = async () =>{
+        const jogadorSessao = parseInt(JSON.parse(localStorage.getItem("partidaSession"))?.time, 10);
+        const responseDesistir = await finalizarPartida(jogadorSessao === 1 ? 2 : 1, true);
+        if (responseDesistir) {
+            localStorage.removeItem("partidaSession");
+            navigate("/menu");
+        } else {
+            toast.error("Erro ao desistir da partida!");
+        }
+    }
     return(
         <section className="background">
             <div className="modal-container" id="modal">
@@ -22,8 +33,8 @@ function desistir() {
                             </div>
                         </div>
                         <div className="area-btn-modal">
-                            <button className="btn-modal btn-sim" onClick={() => {navigate("/menu")}}>SIM</button>
-                            <button className="btn-modal btn-nao" onClick={() => {navigate("/tabuleiro")}}>NÃO</button>
+                            <button className="btn-modal btn-sim" onClick={() => {desistir()}}>SIM</button>
+                            <button className="btn-modal btn-nao" onClick={() => {alterarVisibilidade()}}>NÃO</button>
                         </div>
                     </div>
                 </div>

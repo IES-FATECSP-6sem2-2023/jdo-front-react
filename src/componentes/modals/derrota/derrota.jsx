@@ -1,9 +1,40 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { useNavigate, useParams } from 'react-router';
 import './derrota.css';
-import { useNavigate } from 'react-router';
+import { toast } from "react-toastify";
+import useTabuleiro from '/src/hooks/TabuleiroHook';
 
 function derrota() {
     const navigate = useNavigate();
+    const {id} = useParams()
+    const {partida} = useTabuleiro();
+
+    const exibir = () => {
+        if (id === 1) {
+            partida.emblemasJogador1.forEach((emblema) => {
+                toast.info(
+                    <>
+                        Novo emblema!<br/>
+                        Nome: {emblema.idemblema.nome}
+                        Descrição: {emblema.idemblema.descricao}
+                    </>
+                );
+
+              });
+        } else {
+            partida.emblemasJogador2.forEach((emblema) => {
+                toast.info(
+                    <>
+                        Novo emblema!<br/>
+                        Nome: {emblema.idemblema.nome}
+                        Descrição: {emblema.idemblema.descricao}
+                    </>
+                );
+
+              });
+        }
+    }
+    exibir();
 
     return(
         <section className="background">
