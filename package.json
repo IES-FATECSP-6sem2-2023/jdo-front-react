@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "prod": "vite --port 9000",
+    "prod": "vite --port 80",
     "dev": "vite",
     "build": "vite build",
     "start": "npm install && npm run prod",
