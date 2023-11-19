@@ -46,7 +46,7 @@ export const TabuleiroProvider = ({ children }) => {
                     }
 
                     setPartida(gamestate.partida)
-                    setTempoRestante(10);
+                    passarVez(); 
                 });
 
                 if (teste.data.partidaOcupada) {
@@ -68,6 +68,14 @@ export const TabuleiroProvider = ({ children }) => {
         }
     }
 
+    useEffect(()=>{
+        if (pecasComidas === 6) {
+            setTimeout(() => {
+                finalizarPartida(1);
+            }, 3000)
+        }
+    },[pecasComidas])
+
     useEffect(() => {
         
         if (partida && partida !== undefined) {
@@ -76,7 +84,15 @@ export const TabuleiroProvider = ({ children }) => {
                 if (session?.jogador?.id === partida?.primeirojogador?.idJogador) localStorage.setItem("partidaSession", JSON.stringify({"time":1, "idPartida": partida.idpartida}));
                 if (session?.jogador?.id === partida?.segundojogador?.idJogador) localStorage.setItem("partidaSession", JSON.stringify({"time":2, "idPartida": partida.idpartida}));
             }
+            for (let chave in partida?.primeirojogador?.posicoes) {
+                if (!partida?.primeirojogador?.posicoes[chave]) {
+                    setTimeout(() => {
+                        finalizarPartida(2);
+                    }, 3000)
+                }
+            }
         }
+        
     }, [partida]);
 
     const passarVez = () => {
@@ -84,7 +100,6 @@ export const TabuleiroProvider = ({ children }) => {
     }
     
     const movimentarPartida = async (xOri, yOri, xDes, yDes, jogador) => {
-        debugger
         if (partida) {
             const coordenadaOrigem = `${xOri},${yOri};`;
             const coordenadaDestino = `${xDes},${yDes};`;
@@ -127,23 +142,17 @@ export const TabuleiroProvider = ({ children }) => {
                     atualizaPartida[jogadorAtual].posicoes[coordenadaDestino] = "";
                     
                     if (coordenadasPuladas) {
-                        delete atualizaPartida.segundojogador.posicoes[coordenadasPuladas];
-                        setPecasComida(prevPecasComida => {
-                            return prevPecasComida + 1;
-                          });
+                        if (atualizaPartida.segundojogador.posicoes.hasOwnProperty(coordenadasPuladas)) {
+                            delete atualizaPartida.segundojogador.posicoes[coordenadasPuladas];
+                            setPecasComida(prevPecasComida => {
+                                return prevPecasComida + 1;
+                            });
+                        }
                     }
                     
                     try {
                         const novaMovimentacao = await TabuleiroService.movimentaPartida(atualizaPartida);
-                        console.log(novaMovimentacao)
-                        stompClient.send("/topic/gamestate", {}, JSON.stringify({partida: novaMovimentacao}));
-                        passarVez()
-                        debugger
-                        for (let chave in novaMovimentacao.primeirojogador.posicoes) {
-                            if (!novaMovimentacao.primeirojogador.posicoes[chave]) {
-                                finalizarPartida(2);
-                            }
-                        }
+                        stompClient.send("/topic/gamestate", {}, JSON.stringify({partida: novaMovimentacao}));                       
                         return true;
                     } catch (e) {
                         toast.error("Erro ao tentar efetuar movimentação!");

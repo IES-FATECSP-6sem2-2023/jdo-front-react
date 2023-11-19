@@ -15,7 +15,7 @@ function derrota() {
                 toast.info(
                     <>
                         Novo emblema!<br/>
-                        Nome: {emblema.idemblema.nome}
+                        Nome: {emblema.idemblema.nome}<br/>
                         Descrição: {emblema.idemblema.descricao}
                     </>
                 );
@@ -26,7 +26,7 @@ function derrota() {
                 toast.info(
                     <>
                         Novo emblema!<br/>
-                        Nome: {emblema.idemblema.nome}
+                        Nome: {emblema.idemblema.nome}<br/>
                         Descrição: {emblema.idemblema.descricao}
                     </>
                 );
