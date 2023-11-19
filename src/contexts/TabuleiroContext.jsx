@@ -1,10 +1,10 @@
+import { Stomp } from '@stomp/stompjs';
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from 'react-router';
 import { toast } from "react-toastify";
 import Sockjs from "sockjs-client/dist/sockjs";
-import { Stomp } from '@stomp/stompjs';
-import useAuthConta from '/src/hooks/AuthConta';
 import TabuleiroService from "../services/TabuleiroService";
+import useAuthConta from '/src/hooks/AuthConta';
 
 export const TabuleiroContext = createContext({});
 
@@ -15,6 +15,8 @@ export const TabuleiroProvider = ({ children }) => {
     const [stompClient, setStompClient] = useState(null);
     const { user } = useAuthConta();
     const [partida, setPartida] = useState({});
+    const [tempoRestante, setTempoRestante] = useState(10);
+    const jogadorSessao = parseInt(JSON.parse(localStorage.getItem("partidaSession"))?.time, 10);
 
     useEffect(() => {
         // inicializa a conexão com o websocket na primeira renderização
@@ -28,7 +30,6 @@ export const TabuleiroProvider = ({ children }) => {
             client.disconnect();
         }
     }, [])
-
 
     const criarPartida = async (tipo) => {
         try {
@@ -44,12 +45,22 @@ export const TabuleiroProvider = ({ children }) => {
                         }, 2000)
                         return
                     }
-
+                    passarVez(); 
                     setPartida(gamestate.partida)
                 });
 
+                stompClient.subscribe('/topic/finish-game', function(message) {
+                    const partidaFinalizada = JSON.parse(message.body)
+
+                    if (idJogador === partidaFinalizada.idVencedor) {
+                        navigate(`/vitoria/${jogadorSessao}`)
+                    } else{
+                        navigate(`/derrota/${jogadorSessao}`)
+                    }
+                })
+
                 if (teste.data.partidaOcupada) {
-                    stompClient.send("/topic/gamestate", {}, JSON.stringify({partida: teste.data.partida, iniciandoPartida: true }))
+                    stompClient.publish({ destination: "/topic/gamestate", body: JSON.stringify({partida: teste.data.partida, iniciandoPartida: true })})
                     setPartida(teste.data.partida)
                     setTimeout(() => {
                         navigate('/tabuleiro')
@@ -67,15 +78,50 @@ export const TabuleiroProvider = ({ children }) => {
         }
     }
 
+    useEffect(()=>{
+        if (pecasComidas === 6) {
+            setTimeout(() => {
+                stompClient.publish({
+                    destination: "/app/game/finish", 
+                    body: JSON.stringify({
+                        idPartida: partida.idpartida,
+                        idVencedor: user.jogador.id,
+                        partidaAbandonada: false,
+                    })
+                })
+            }, 3000)
+        }else{
+            passarVez()
+        }
+    },[pecasComidas])
+
     useEffect(() => {
         
         if (partida && partida !== undefined) {
+            
+            const temp = Object.keys(partida?.segundojogador?.posicoes ?? {}).length;
+            setPecasComida(14 - temp);
             if (localStorage.getItem("userLogin") && !localStorage.getItem("partidaSession")){
                 let session = JSON.parse(localStorage.getItem("userLogin"));
                 if (session?.jogador?.id === partida?.primeirojogador?.idJogador) localStorage.setItem("partidaSession", JSON.stringify({"time":1, "idPartida": partida.idpartida}));
                 if (session?.jogador?.id === partida?.segundojogador?.idJogador) localStorage.setItem("partidaSession", JSON.stringify({"time":2, "idPartida": partida.idpartida}));
             }
+            for (let chave in partida?.primeirojogador?.posicoes) {
+                if (!partida?.primeirojogador?.posicoes[chave]) {
+                    setTimeout(() => {
+                        stompClient.publish({
+                            destination: "/app/game/finish", 
+                            body: JSON.stringify({
+                                idPartida: partida.idpartida,
+                                idVencedor: user.jogador.id,
+                                partidaAbandonada: false,
+                            })
+                        })
+                    }, 3000)
+                }
+            }
         }
+        
     }, [partida]);
 
     const passarVez = () => {
@@ -91,7 +137,6 @@ export const TabuleiroProvider = ({ children }) => {
 
             if (atualizaPartida[jogadorAtual].posicoes.hasOwnProperty(coordenadaOrigem)) {
                 const valoresDestino = atualizaPartida[jogadorAtual].posicoes[coordenadaOrigem].split(";");
-                debugger
                 const diferencaX = Math.abs(xDes - xOri);
                 const diferencaY = Math.abs(yDes - yOri);
                 let coordenadasPuladas = "";
@@ -126,22 +171,14 @@ export const TabuleiroProvider = ({ children }) => {
                     atualizaPartida[jogadorAtual].posicoes[coordenadaDestino] = "";
                     
                     if (coordenadasPuladas) {
-                        delete atualizaPartida.segundojogador.posicoes[coordenadasPuladas];
-                        setPecasComida(prevPecasComida => {
-                            return prevPecasComida + 1;
-                          });
+                        if (atualizaPartida.segundojogador.posicoes.hasOwnProperty(coordenadasPuladas)) {
+                            delete atualizaPartida.segundojogador.posicoes[coordenadasPuladas];
+                        }
                     }
                     
                     try {
                         const novaMovimentacao = await TabuleiroService.movimentaPartida(atualizaPartida);
-                        console.log(novaMovimentacao)
-                        stompClient.send("/topic/gamestate", {}, JSON.stringify({partida: novaMovimentacao}));
-                        passarVez()
-                        for (let chave in novaMovimentacao.primeirojogador.posicoes) {
-                            if (!novaMovimentacao.primeirojogador.posicoes[chave]) {
-                                finalizarPartida(2);
-                            }
-                        }
+                        stompClient.publish({ destination: "/topic/gamestate", body: JSON.stringify({partida: novaMovimentacao})});                       
                         return true;
                     } catch (e) {
                         toast.error("Erro ao tentar efetuar movimentação!");
@@ -163,6 +200,11 @@ export const TabuleiroProvider = ({ children }) => {
                 const idVencedor = timeVitoria === 1 ? partida.primeirojogador.idJogador : partida.segundojogador.idJogador;
                 const partidaReturn = await TabuleiroService.finalizaPartida(partida.idpartida, idVencedor, desistencia ? true : false);
                 setPartida(partidaReturn.data);
+                if (timeVitoria === jogadorSessao){
+                    navigate(`/vitoria/${jogadorSessao}`)
+                }else{
+                    navigate(`/derrota/${jogadorSessao}`)
+                }
                 return true;
             } catch (e) {
                 toast.error("Erro inesperado ao finalizar partida!")
@@ -187,7 +229,19 @@ export const TabuleiroProvider = ({ children }) => {
     }
 
     return (
-        <TabuleiroContext.Provider value={{partida, pecasComidas, criarPartida, movimentarPartida, finalizarPartida, excluirPartida, jogadorAtualCronometro, passarVez}}>
+        <TabuleiroContext.Provider value={{
+            partida, 
+            pecasComidas,
+            criarPartida,
+            movimentarPartida,
+            finalizarPartida,
+            excluirPartida,
+            jogadorAtualCronometro,
+            passarVez, 
+            tempoRestante,
+            setTempoRestante,
+            stompClient
+        }}>
             {children}
         </TabuleiroContext.Provider>
     )

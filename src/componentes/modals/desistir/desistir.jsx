@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
 import './desistir.css';
-import { useNavigate } from 'react-router';
+import useTabuleiro from '/src/hooks/TabuleiroHook';
 
-function desistir() {
-    const navigate = useNavigate();
-
+function desistir({alterarVisibilidade}) {
+    const { partida, stompClient} = useTabuleiro();
+    const desistir = async () =>{
+        const jogadorSessao = parseInt(JSON.parse(localStorage.getItem("partidaSession"))?.time, 10);
+        const idVencedor = jogadorSessao === 2 ? partida.primeirojogador.idJogador : partida.segundojogador.idJogador;
+        stompClient.publish({
+            destination: "/app/game/finish", 
+            body: JSON.stringify({
+                idPartida: partida.idpartida,
+                idVencedor: idVencedor,
+                partidaAbandonada: true,
+            })
+        })
+    }
     return(
         <section className="background">
             <div className="modal-container" id="modal">
@@ -22,8 +33,8 @@ function desistir() {
                             </div>
                         </div>
                         <div className="area-btn-modal">
-                            <button className="btn-modal btn-sim" onClick={() => {navigate("/menu")}}>SIM</button>
-                            <button className="btn-modal btn-nao" onClick={() => {navigate("/tabuleiro")}}>NÃO</button>
+                            <button className="btn-modal btn-sim" onClick={() => {desistir()}}>SIM</button>
+                            <button className="btn-modal btn-nao" onClick={() => {alterarVisibilidade()}}>NÃO</button>
                         </div>
                     </div>
                 </div>

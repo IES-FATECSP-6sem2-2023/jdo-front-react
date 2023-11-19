@@ -1,18 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import Desistir from '../modals/desistir/desistir.jsx';
 import './Tabuleiro.css';
-import Cronometro from './cronometro/Cronometro';
+import CronometroCachorro from './cronometro/CronometroCachorro.jsx';
+import CronometroOnca from './cronometro/CronometroOnca.jsx';
 import LogOutIcon from '/src/assets/imagens/icones/LogOutIcon';
 import VolumeOffIcon from '/src/assets/imagens/icones/VolumeOffIcon';
 import VolumeOnIcon from '/src/assets/imagens/icones/VolumeOnIcon';
 import placaUser from '/src/assets/imagens/placas/placa_usuario.png';
 import useSomAmbiente from '/src/hooks/SomAmbienteHook';
 import useTabuleiro from '/src/hooks/TabuleiroHook';
-import { toast } from 'react-toastify';
 
 function Tabuleiro() {
-    const navigate = useNavigate();
-    const {partida, pecasComidas, movimentarPartida, finalizarPartida, jogadorAtualCronometro} = useTabuleiro();
+    const {
+        partida,
+        pecasComidas,
+        movimentarPartida,
+        jogadorAtualCronometro,
+        passarVez,
+        stompClient
+    } = useTabuleiro();
+    const [modalDesistirVisiblity, setModalDesistirVisiblity] = useState(false);
+    
     const [tabuleiro, setTabuleiro] = useState([]);
     const [jogadorDaVez, setJogadorDaVez] = useState(jogadorAtualCronometro);
     const [pecaSelecionada, setPecaSelecionada] = useState({});
@@ -22,6 +30,10 @@ function Tabuleiro() {
         if (partida && Object.keys(partida).length > 0) {
           const novoTabuleiro = criarTabuleiro(partida);
           setTabuleiro(novoTabuleiro);
+          stompClient.subscribe('/topic/game-reaction', function(message) {
+            const numeroReacao = Number(JSON.parse(message.body));
+            somReacao(numeroReacao);
+          });
         }
     }, [partida]);
 
@@ -57,16 +69,16 @@ function Tabuleiro() {
     const jogadorSessao = parseInt(JSON.parse(localStorage.getItem("partidaSession"))?.time, 10);
 
     const desistir = async () => {
-        const responseDesistir = await finalizarPartida(jogadorSessao === 1 ? 2 : 1, true);
-        if (responseDesistir) {
-            localStorage.removeItem("partidaSession");
-            navigate("/menu");
-        } else {
-            toast.error("Erro ao desistir da partida!");
-        }
+        setModalDesistirVisiblity(!modalDesistirVisiblity);
     }
 
-    const somReacao = (event) => {
+    const clicarReacao = (event) => {
+        const numeroReacao = parseInt(event.target.value)
+        stompClient.publish({ destination: "/topic/game-reaction", body: JSON.stringify(numeroReacao) });
+        somReacao(numeroReacao)
+    };
+
+    const somReacao = (numeroReacao) => {
         const audioLista = {
             1: '/assets/sons/tabuleiro/rindo.mp3',
             2: '/assets/sons/tabuleiro/nervoso.mp3',
@@ -75,10 +87,8 @@ function Tabuleiro() {
             5: '/assets/sons/tabuleiro/onca.mp3',
         };
 
-        const valorDaReacao = parseInt(event.target.value);
-
-        if (audioLista[valorDaReacao]) {
-            const audio = new Audio(audioLista[valorDaReacao]);
+        if (audioLista[numeroReacao]) {
+            const audio = new Audio(audioLista[numeroReacao]);
             audio.play();
         }
     }
@@ -87,16 +97,13 @@ function Tabuleiro() {
         if (jogadorSessao === jogadorDaVez && peca === jogadorDaVez && Number.isInteger(peca)) {
             setPecaSelecionada({ y, x });
         } else if (peca === "" && pecaSelecionada.y !== undefined) {
-            const movimentoValido = await movimentarPartida(pecaSelecionada.y, pecaSelecionada.x, y, x, jogadorSessao);
-            if (movimentoValido && pecasComidas === 5) {
-                debugger
-                const temp = await finalizarPartida(1)
-            }
+            await movimentarPartida(pecaSelecionada.y, pecaSelecionada.x, y, x, jogadorSessao);
         }
     };
     
         return(
             <section className="bg-tabuleiro">
+                {modalDesistirVisiblity && <Desistir alterarVisibilidade={desistir}/>}
                 <div className="bg-tabuleiro-container" id="tabuleiro-container">
                     <div className="area-onca-tabuleiro">
                         <div className="area-onca-container-tabuleiro">
@@ -105,7 +112,7 @@ function Tabuleiro() {
                                     <div className="placar-onca-tabuleiro peca-comida-tabuleiro" key={index}></div>
                                 ))}
                             </div>
-                            <Cronometro jogador={1}/>
+                            <CronometroOnca ativo={jogadorDaVez === 1 ? true : false}/>
                             <div className="info-user-tabuleiro jogador-onca-tabuleiro">
                                 <img src={placaUser} />
                                 <h1 id="contador-onca-tabuleiro">JOGADOR ONÇA</h1>
@@ -147,19 +154,19 @@ function Tabuleiro() {
                         </div>
                         <div className="reacoes-tabuleiro">
                             <div className="item-reacao-tabuleiro">
-                                <button className="btn-emoji-tabuleiro emoji-rindo-tabuleiro" value={1} onClick={somReacao}></button>
+                                <button className="btn-emoji-tabuleiro emoji-rindo-tabuleiro" value={1} onClick={clicarReacao}></button>
                             </div>
                             <div className="item-reacao-tabuleiro">
-                                <button className="btn-emoji-tabuleiro emoji-nervoso-tabuleiro" value={2} onClick={somReacao}></button>
+                                <button className="btn-emoji-tabuleiro emoji-nervoso-tabuleiro" value={2} onClick={clicarReacao}></button>
                             </div>
                             <div className="item-reacao-tabuleiro">
-                                <button className="btn-emoji-tabuleiro emoji-surpreso-tabuleiro" value={3} onClick={somReacao}></button>
+                                <button className="btn-emoji-tabuleiro emoji-surpreso-tabuleiro" value={3} onClick={clicarReacao}></button>
                             </div>
                             <div className="item-reacao-tabuleiro">
-                                <button className="btn-emoji-tabuleiro emoji-cachorro-tabuleiro" value={4} onClick={somReacao}></button>
+                                <button className="btn-emoji-tabuleiro emoji-cachorro-tabuleiro" value={4} onClick={clicarReacao}></button>
                             </div>
                             <div className="item-reacao-tabuleiro">
-                                <button className="btn-emoji-tabuleiro emoji-onca-tabuleiro" value={5} onClick={somReacao}></button>
+                                <button className="btn-emoji-tabuleiro emoji-onca-tabuleiro" value={5} onClick={clicarReacao}></button>
                             </div>
                         </div>
                     </div>
@@ -173,7 +180,7 @@ function Tabuleiro() {
                             </button>
                         </div>
                         <div className="area-cachorro-container-tabuleiro">
-                            <Cronometro jogador={2}/>
+                        <CronometroCachorro  ativo={jogadorDaVez === 2 ? true : false}/>
                             <div className="info-user-tabuleiro jogador-cachorro-tabuleiro">
                                 <img src={placaUser} />
                                 <h1>JOGADOR CACHORRO</h1>
