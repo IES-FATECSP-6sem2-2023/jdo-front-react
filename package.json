@@ -7,7 +7,7 @@
     "prod": "vite --port 9000",
     "dev": "vite",
     "build": "vite build",
-    "start": "npm install && npm run dev",
+    "start": "npm install && npm run prod",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
