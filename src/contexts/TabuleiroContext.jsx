@@ -45,8 +45,8 @@ export const TabuleiroProvider = ({ children }) => {
                         }, 2000)
                         return
                     }
-                    setPartida(gamestate.partida)
                     passarVez(); 
+                    setPartida(gamestate.partida)
                 });
 
                 stompClient.subscribe('/topic/finish-game', function(message) {
@@ -90,6 +90,8 @@ export const TabuleiroProvider = ({ children }) => {
                     })
                 })
             }, 3000)
+        }else{
+            passarVez()
         }
     },[pecasComidas])
 
