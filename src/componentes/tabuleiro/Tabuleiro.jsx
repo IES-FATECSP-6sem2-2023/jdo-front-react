@@ -12,7 +12,14 @@ import { toast } from 'react-toastify';
 
 function Tabuleiro() {
     const navigate = useNavigate();
-    const {partida, pecasComidas, movimentarPartida, finalizarPartida, jogadorAtualCronometro} = useTabuleiro();
+    const {
+        partida,
+        pecasComidas,
+        movimentarPartida,
+        finalizarPartida,
+        jogadorAtualCronometro,
+        stompClient
+    } = useTabuleiro();
     const [tabuleiro, setTabuleiro] = useState([]);
     const [jogadorDaVez, setJogadorDaVez] = useState(jogadorAtualCronometro);
     const [pecaSelecionada, setPecaSelecionada] = useState({});
@@ -22,6 +29,10 @@ function Tabuleiro() {
         if (partida && Object.keys(partida).length > 0) {
           const novoTabuleiro = criarTabuleiro(partida);
           setTabuleiro(novoTabuleiro);
+          stompClient.subscribe('/topic/game-reaction', function(message) {
+            const numeroReacao = Number(JSON.parse(message.body));
+            somReacao(numeroReacao);
+          });
         }
     }, [partida]);
 
@@ -66,7 +77,13 @@ function Tabuleiro() {
         }
     }
 
-    const somReacao = (event) => {
+    const clicarReacao = (event) => {
+        const numeroReacao = parseInt(event.target.value)
+        stompClient.send("/topic/game-reaction", {}, JSON.stringify(numeroReacao));
+        somReacao(numeroReacao)
+    };
+
+    const somReacao = (numeroReacao) => {
         const audioLista = {
             1: 'src/assets/sons/tabuleiro/rindo.mp3',
             2: 'src/assets/sons/tabuleiro/nervoso.mp3',
@@ -75,10 +92,8 @@ function Tabuleiro() {
             5: 'src/assets/sons/tabuleiro/onca.mp3',
         };
 
-        const valorDaReacao = parseInt(event.target.value);
-
-        if (audioLista[valorDaReacao]) {
-            const audio = new Audio(audioLista[valorDaReacao]);
+        if (audioLista[numeroReacao]) {
+            const audio = new Audio(audioLista[numeroReacao]);
             audio.play();
         }
     }
@@ -166,19 +181,19 @@ function Tabuleiro() {
                         </div>
                         <div className="reacoes-tabuleiro">
                             <div className="item-reacao-tabuleiro">
-                                <button className="btn-emoji-tabuleiro emoji-rindo-tabuleiro" value={1} onClick={somReacao}></button>
+                                <button className="btn-emoji-tabuleiro emoji-rindo-tabuleiro" value={1} onClick={clicarReacao}></button>
                             </div>
                             <div className="item-reacao-tabuleiro">
-                                <button className="btn-emoji-tabuleiro emoji-nervoso-tabuleiro" value={2} onClick={somReacao}></button>
+                                <button className="btn-emoji-tabuleiro emoji-nervoso-tabuleiro" value={2} onClick={clicarReacao}></button>
                             </div>
                             <div className="item-reacao-tabuleiro">
-                                <button className="btn-emoji-tabuleiro emoji-surpreso-tabuleiro" value={3} onClick={somReacao}></button>
+                                <button className="btn-emoji-tabuleiro emoji-surpreso-tabuleiro" value={3} onClick={clicarReacao}></button>
                             </div>
                             <div className="item-reacao-tabuleiro">
-                                <button className="btn-emoji-tabuleiro emoji-cachorro-tabuleiro" value={4} onClick={somReacao}></button>
+                                <button className="btn-emoji-tabuleiro emoji-cachorro-tabuleiro" value={4} onClick={clicarReacao}></button>
                             </div>
                             <div className="item-reacao-tabuleiro">
-                                <button className="btn-emoji-tabuleiro emoji-onca-tabuleiro" value={5} onClick={somReacao}></button>
+                                <button className="btn-emoji-tabuleiro emoji-onca-tabuleiro" value={5} onClick={clicarReacao}></button>
                             </div>
                         </div>
                     </div>

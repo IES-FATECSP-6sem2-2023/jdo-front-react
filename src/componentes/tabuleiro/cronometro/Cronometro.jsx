@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import useTabuleiro from '/src/hooks/TabuleiroHook';
 
 function Cronometro({ jogador }) {
-  const { jogadorAtualCronometro, passarVez } = useTabuleiro();
-  const [tempoRestante, setTempoRestante] = useState(10);
+  const { jogadorAtualCronometro, passarVez, tempoRestante, setTempoRestante } = useTabuleiro();
   let timer;
 
   useEffect(() => {

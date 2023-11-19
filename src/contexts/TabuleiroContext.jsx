@@ -15,6 +15,7 @@ export const TabuleiroProvider = ({ children }) => {
     const [stompClient, setStompClient] = useState(null);
     const { user } = useAuthConta();
     const [partida, setPartida] = useState({});
+    const [tempoRestante, setTempoRestante] = useState(10);
 
     useEffect(() => {
         // inicializa a conexão com o websocket na primeira renderização
@@ -28,7 +29,6 @@ export const TabuleiroProvider = ({ children }) => {
             client.disconnect();
         }
     }, [])
-
 
     const criarPartida = async (tipo) => {
         try {
@@ -46,6 +46,7 @@ export const TabuleiroProvider = ({ children }) => {
                     }
 
                     setPartida(gamestate.partida)
+                    setTempoRestante(10);
                 });
 
                 if (teste.data.partidaOcupada) {
@@ -180,7 +181,19 @@ export const TabuleiroProvider = ({ children }) => {
     }
 
     return (
-        <TabuleiroContext.Provider value={{partida, pecasComidas, criarPartida, movimentarPartida, finalizarPartida, excluirPartida, jogadorAtualCronometro, passarVez}}>
+        <TabuleiroContext.Provider value={{
+            partida, 
+            pecasComidas,
+            criarPartida,
+            movimentarPartida,
+            finalizarPartida,
+            excluirPartida,
+            jogadorAtualCronometro,
+            passarVez, 
+            tempoRestante,
+            setTempoRestante,
+            stompClient
+        }}>
             {children}
         </TabuleiroContext.Provider>
     )
