@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import './desistir.css';
 import useTabuleiro from '/src/hooks/TabuleiroHook';
-import { useNavigate } from 'react-router';
 
 function desistir({alterarVisibilidade}) {
-    const navigate = useNavigate();
-    const { finalizarPartida} = useTabuleiro();
+    const { partida, stompClient} = useTabuleiro();
     const desistir = async () =>{
         const jogadorSessao = parseInt(JSON.parse(localStorage.getItem("partidaSession"))?.time, 10);
-        const responseDesistir = await finalizarPartida(jogadorSessao === 1 ? 2 : 1, true);
-        if (responseDesistir) {
-            localStorage.removeItem("partidaSession");
-            navigate("/menu");
-        } else {
-            toast.error("Erro ao desistir da partida!");
-        }
+        const idVencedor = jogadorSessao === 2 ? partida.primeirojogador.idJogador : partida.segundojogador.idJogador;
+        stompClient.publish({
+            destination: "/app/game/finish", 
+            body: JSON.stringify({
+                idPartida: partida.idpartida,
+                idVencedor: idVencedor,
+                partidaAbandonada: true,
+            })
+        })
     }
     return(
         <section className="background">
