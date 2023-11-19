@@ -61,7 +61,7 @@ export const TabuleiroProvider = ({ children }) => {
                 })
 
                 if (teste.data.partidaOcupada) {
-                    stompClient.send("/topic/gamestate", {}, JSON.stringify({partida: teste.data.partida, iniciandoPartida: true }))
+                    stompClient.publish({ destination: "/topic/gamestate", body: JSON.stringify({partida: teste.data.partida, iniciandoPartida: true })})
                     setPartida(teste.data.partida)
                     setTimeout(() => {
                         navigate('/tabuleiro')
@@ -82,15 +82,14 @@ export const TabuleiroProvider = ({ children }) => {
     useEffect(()=>{
         if (pecasComidas === 6) {
             setTimeout(() => {
-                stompClient.send(
-                    "/topic/finish-game", 
-                    {}, 
-                    JSON.stringify({
+                stompClient.publish({
+                    destination: "/app/game/finish", 
+                    body: JSON.stringify({
                         idPartida: partida.idpartida,
                         idVencedor: user.jogador.id,
-                        partidaAbandonada: null,
+                        partidaAbandonada: false,
                     })
-                )
+                })
             }, 3000)
         }
     },[pecasComidas])
@@ -106,15 +105,14 @@ export const TabuleiroProvider = ({ children }) => {
             for (let chave in partida?.primeirojogador?.posicoes) {
                 if (!partida?.primeirojogador?.posicoes[chave]) {
                     setTimeout(() => {
-                        stompClient.send(
-                            "/topic/finish-game", 
-                            {}, 
-                            JSON.stringify({
+                        stompClient.publish({
+                            destination: "/app/game/finish", 
+                            body: JSON.stringify({
                                 idPartida: partida.idpartida,
                                 idVencedor: user.jogador.id,
-                                partidaAbandonada: null,
+                                partidaAbandonada: false,
                             })
-                        )
+                        })
                     }, 3000)
                 }
             }
@@ -179,7 +177,7 @@ export const TabuleiroProvider = ({ children }) => {
                     
                     try {
                         const novaMovimentacao = await TabuleiroService.movimentaPartida(atualizaPartida);
-                        stompClient.send("/topic/gamestate", {}, JSON.stringify({partida: novaMovimentacao}));                       
+                        stompClient.publish({ destination: "/topic/gamestate", body: JSON.stringify({partida: novaMovimentacao})});                       
                         return true;
                     } catch (e) {
                         toast.error("Erro ao tentar efetuar movimentação!");
