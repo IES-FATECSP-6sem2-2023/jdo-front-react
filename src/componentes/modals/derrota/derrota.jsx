@@ -11,7 +11,7 @@ function derrota() {
 
     const exibir = () => {
         if (id === 1) {
-            partida.emblemasJogador1.forEach((emblema) => {
+            (Array.isArray(partida.emblemasJogador1) && partida.emblemasJogador1.length >= 0) && partida.emblemasJogador1.forEach((emblema) => {
                 toast.info(
                     <>
                         Novo emblema!<br/>
@@ -22,7 +22,7 @@ function derrota() {
 
               });
         } else {
-            partida.emblemasJogador2.forEach((emblema) => {
+            (Array.isArray(partida.emblemasJogador2) && partida.emblemasJogador2.length >= 0) && partida.emblemasJogador2.forEach((emblema) => {
                 toast.info(
                     <>
                         Novo emblema!<br/>

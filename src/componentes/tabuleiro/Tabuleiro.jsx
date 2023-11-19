@@ -74,7 +74,7 @@ function Tabuleiro() {
 
     const clicarReacao = (event) => {
         const numeroReacao = parseInt(event.target.value)
-        stompClient.send("/topic/game-reaction", {}, JSON.stringify(numeroReacao));
+        stompClient.publish({ destination: "/topic/game-reaction", body: JSON.stringify(numeroReacao) });
         somReacao(numeroReacao)
     };
 
