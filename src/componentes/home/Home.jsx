@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router';
 import './Home.css';
+import { toast } from "react-toastify";
 import LogOutIcon from '/src/assets/imagens/icones/LogOutIcon';
 import UsuarioIcon from '/src/assets/imagens/icones/UsuarioIcon';
 import VolumeOffIcon from '/src/assets/imagens/icones/VolumeOffIcon';
