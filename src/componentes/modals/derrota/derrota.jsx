@@ -35,7 +35,7 @@ function derrota() {
         }
     }
     exibir();
-
+    localStorage.removeItem("partidaSession");
     return(
         <section className="background">
             <div className="modal-container" id="modal">
