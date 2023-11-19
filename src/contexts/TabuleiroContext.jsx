@@ -1,10 +1,10 @@
+import { Stomp } from '@stomp/stompjs';
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from 'react-router';
 import { toast } from "react-toastify";
 import Sockjs from "sockjs-client/dist/sockjs";
-import { Stomp } from '@stomp/stompjs';
-import useAuthConta from '/src/hooks/AuthConta';
 import TabuleiroService from "../services/TabuleiroService";
+import useAuthConta from '/src/hooks/AuthConta';
 
 export const TabuleiroContext = createContext({});
 
@@ -45,7 +45,6 @@ export const TabuleiroProvider = ({ children }) => {
                         }, 2000)
                         return
                     }
-
                     setPartida(gamestate.partida)
                     passarVez(); 
                 });
@@ -97,6 +96,9 @@ export const TabuleiroProvider = ({ children }) => {
     useEffect(() => {
         
         if (partida && partida !== undefined) {
+            
+            const temp = Object.keys(partida?.segundojogador?.posicoes ?? {}).length;
+            setPecasComida(14 - temp);
             if (localStorage.getItem("userLogin") && !localStorage.getItem("partidaSession")){
                 let session = JSON.parse(localStorage.getItem("userLogin"));
                 if (session?.jogador?.id === partida?.primeirojogador?.idJogador) localStorage.setItem("partidaSession", JSON.stringify({"time":1, "idPartida": partida.idpartida}));
@@ -169,9 +171,6 @@ export const TabuleiroProvider = ({ children }) => {
                     if (coordenadasPuladas) {
                         if (atualizaPartida.segundojogador.posicoes.hasOwnProperty(coordenadasPuladas)) {
                             delete atualizaPartida.segundojogador.posicoes[coordenadasPuladas];
-                            setPecasComida(prevPecasComida => {
-                                return prevPecasComida + 1;
-                            });
                         }
                     }
                     
