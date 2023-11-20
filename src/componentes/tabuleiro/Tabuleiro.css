@@ -217,12 +217,12 @@
 
 .peca-cachorro-tabuleiro {
     background-color: #c2c2c2e6;
-    background-image: url("/src/assets/imagens/skins/cachorro_amazonia.png");
+    /* background-image: url("/src/assets/imagens/skins/cachorro_amazonia.png"); */
 }
 
 .peca-onca-tabuleiro {
     background-color: #c2c2c2e6;
-    background-image: url("/src/assets/imagens/skins/onca_amazonia.png");
+    /* background-image: url("/src/assets/imagens/skins/onca_amazonia.png"); */
 }
 
 .reacoes-tabuleiro{

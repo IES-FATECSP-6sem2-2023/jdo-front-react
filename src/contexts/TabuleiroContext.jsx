@@ -240,7 +240,8 @@ export const TabuleiroProvider = ({ children }) => {
             passarVez, 
             tempoRestante,
             setTempoRestante,
-            stompClient
+            stompClient,
+            jogadorSessao
         }}>
             {children}
         </TabuleiroContext.Provider>

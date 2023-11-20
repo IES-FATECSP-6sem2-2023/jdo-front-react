@@ -19,6 +19,7 @@ function Home() {
 
     useEffect(() => {
         if (user?.jogador?.id) atualizaUser(user?.jogador?.id)
+        localStorage.removeItem("partidaSession")
     },[])
 	
     const logout = () => {
@@ -45,7 +46,7 @@ function Home() {
                             <div className="info inivel">
                                 <button className="info nivel">
                                     <p className="info-p">{user?.jogador?.experiencia}</p>
-                                    <p className="info-p">/100</p>
+                                    <p className="info-p">/{(user?.jogador?.nivelatual*100)}</p>
                                 </button>
                             </div>
                         </div>

@@ -16,7 +16,7 @@ function Tabuleiro() {
         pecasComidas,
         movimentarPartida,
         jogadorAtualCronometro,
-        passarVez,
+        jogadorSessao,
         stompClient
     } = useTabuleiro();
     const [modalDesistirVisiblity, setModalDesistirVisiblity] = useState(false);
@@ -65,8 +65,6 @@ function Tabuleiro() {
         }
         return tabuleiro;
     };
-
-    const jogadorSessao = parseInt(JSON.parse(localStorage.getItem("partidaSession"))?.time, 10);
 
     const desistir = async () => {
         setModalDesistirVisiblity(!modalDesistirVisiblity);
@@ -140,11 +138,16 @@ function Tabuleiro() {
                                                 ${x === pecaSelecionada?.x && y === pecaSelecionada?.y ? 'peca-selecionada-tabuleiro' : ''}
                                                 ${peca === jogadorDaVez && !(x === pecaSelecionada?.x && y === pecaSelecionada?.y) ? 'peca-jogador-tabuleiro' : ''} 
                                                 `}
+                                                style={{
+                                                    backgroundImage: `/src/assets/imagens/skins/${jogadorSessao === peca ? partida?.primeirojogador?.nomeSkinFavorita : partida?.segundojogador?.nomeSkinFavorita}`,
+                                                    backgroundFallback: `/src/assets/imagens/skins/${peca === 1 ? "/src/assets/imagens/skins/onca_amazonia.png" : "/src/assets/imagens/skins/cachorro_amazonia.png"}`
+                                                }}
                                                 data-x={x}
                                                 data-y={y}
                                                 key={x}
                                                 onClick={() => handleCellClick(x, y, peca)}
                                             ></div>
+                                            
                                         )
                                         ))}
                                     </div>
