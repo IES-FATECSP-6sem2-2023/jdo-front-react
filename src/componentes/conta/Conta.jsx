@@ -18,7 +18,6 @@ function Conta() {
         setEmail(user?.jogador?.email)
         setNome(user?.jogador?.nome)
         setUserName(user?.jogador?.username)
-        setSenha("")
     },[user])
 
     const [email, setEmail] = useState(user?.jogador?.email);
@@ -85,7 +84,7 @@ function Conta() {
                             </div>
                             <div className="info-conta info-senha-conta">
                                 <label htmlFor="">SENHA:</label>
-                                <input type={visibilityStatus ? "text" : "password"} className='inp-senha' onChange={(e) => setSenha(e.target.value)} required/>
+                                <input type={visibilityStatus ? "text" : "password"} name='senhaConta' className='inp-senha' onChange={(e) => setSenha(e.target.value)} required/>
                                 <button className="btn-visibility btn-senha-conta" onClick={toggleVisibility}>{visibilityStatus ? <VisibilityIcon /> : <VisibilityOffIcon />}</button>
                             </div>
                             <div className="info-conta atualiza-info-conta">
