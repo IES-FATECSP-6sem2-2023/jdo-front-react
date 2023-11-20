@@ -4,13 +4,13 @@ const Carrossel = ({ nivel }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const mapArenas = {
-    1: "/public/assets/imagens/mapas/amazonia.png",
-    2: "/public/assets/imagens/mapas/caatinga.png",
-    3: "/public/assets/imagens/mapas/mata-atlantica.png",
-    4: "/public/assets/imagens/mapas/pantanal.png",
-    5: "/public/assets/imagens/mapas/caatinga-bloqueado.png",
-    6: "/public/assets/imagens/mapas/mata-atlantica-bloqueado.png",
-    7: "/public/assets/imagens/mapas/pantanal-bloqueado.png",
+    1: "/assets/imagens/mapas/amazonia.png",
+    2: "/assets/imagens/mapas/caatinga.png",
+    3: "/assets/imagens/mapas/mata-atlantica.png",
+    4: "/assets/imagens/mapas/pantanal.png",
+    5: "/assets/imagens/mapas/caatinga-bloqueado.png",
+    6: "/assets/imagens/mapas/mata-atlantica-bloqueado.png",
+    7: "/assets/imagens/mapas/pantanal-bloqueado.png",
   };
 
   const generateCarouselImages = (nivel) => {
@@ -40,19 +40,19 @@ const Carrossel = ({ nivel }) => {
   return (
     <div className="arenas-carrossel-container">
       <div className="seta esquerda" onClick={prevSlide}>
-        <img src="/public/assets/imagens/vetores/seta-esquerda.png" alt="Seta esquerda" />
+        <img src={`${import.meta.env.VITE_PUBLIC_URL}/assets/imagens/vetores/seta-esquerda.png`} alt="Seta esquerda" />
       </div>
       <div className="carrossel">
         <div className="mapa arena-opcao">
           <img
-            src={imgsCarrossel[currentIndex]}
+            src={`${import.meta.env.VITE_PUBLIC_URL}${imgsCarrossel[currentIndex]}`}
             alt={`Imagem ${currentIndex + 1}`}
             className="mapa-imagem"
           />
         </div>
       </div>
       <div className="seta direita" onClick={nextSlide}>
-        <img src="/public/assets/imagens/vetores/seta-direita.png" alt="Seta direita" />
+        <img src={`${import.meta.env.VITE_PUBLIC_URL}/assets/imagens/vetores/seta-direita.png`} alt="Seta direita" />
       </div>
     </div>
   );
