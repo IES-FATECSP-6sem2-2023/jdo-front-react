@@ -107,7 +107,13 @@ function Tabuleiro() {
                         <div className="area-onca-container-tabuleiro">
                             <div className="placar-tabuleiro">
                                 {Array.from({ length: pecasComidas }).map((_, index) => (
-                                    <div className="placar-onca-tabuleiro peca-comida-tabuleiro" key={index}></div>
+                                    <div 
+                                        className="placar-onca-tabuleiro peca-comida-tabuleiro" 
+                                        key={index}
+                                        style={{
+                                            backgroundImage: `url(${`/assets/imagens/skins/${partida?.segundojogador?.nomeSkinFavorita}`})`,
+                                        }}
+                                    ></div>
                                 ))}
                             </div>
                             <CronometroOnca ativo={jogadorDaVez === 1 ? true : false}/>
@@ -139,8 +145,7 @@ function Tabuleiro() {
                                                 ${peca === jogadorDaVez && !(x === pecaSelecionada?.x && y === pecaSelecionada?.y) ? 'peca-jogador-tabuleiro' : ''} 
                                                 `}
                                                 style={{
-                                                    backgroundImage: `/assets/imagens/skins/${jogadorSessao === peca ? partida?.primeirojogador?.nomeSkinFavorita : partida?.segundojogador?.nomeSkinFavorita}`,
-                                                    backgroundFallback: `${peca === 1 ? "/assets/imagens/skins/onca_amazonia.png" : "/assets/imagens/skins/cachorro_amazonia.png"}`
+                                                    backgroundImage: `url(${`/assets/imagens/skins/${peca === 1 ? partida?.primeirojogador?.nomeSkinFavorita : partida?.segundojogador?.nomeSkinFavorita}`})`,
                                                 }}
                                                 data-x={x}
                                                 data-y={y}
