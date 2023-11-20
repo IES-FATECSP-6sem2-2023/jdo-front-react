@@ -1,5 +1,5 @@
 import { Stomp } from '@stomp/stompjs';
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState, useRef } from "react";
 import { useNavigate } from 'react-router';
 import { toast } from "react-toastify";
 import Sockjs from "sockjs-client/dist/sockjs";
@@ -12,7 +12,7 @@ export const TabuleiroProvider = ({ children }) => {
     const navigate = useNavigate();
     const [jogadorAtualCronometro, setJogadorAtualCronometro] = useState(1);
     const [pecasComidas, setPecasComida] = useState(0);
-    const [stompClient, setStompClient] = useState(null);
+    const stompClient = useRef(null);
     const { user } = useAuthConta();
     const [partida, setPartida] = useState({});
     const [tempoRestante, setTempoRestante] = useState(10);
@@ -20,14 +20,13 @@ export const TabuleiroProvider = ({ children }) => {
 
     useEffect(() => {
         return () => {
-            // Apenas desconecte o WebSocket quando o componente for desmontado
-            if (stompClient) {
-                stompClient.disconnect(() => {
+            if (stompClient.current) {
+                stompClient.current.disconnect(() => {
                     console.log('Desconectado do WebSocket.');
                 });
             }
         };
-    }, [stompClient]);
+    }, []);
 
     const criarPartida = async (tipo) => {
         try {
@@ -35,15 +34,14 @@ export const TabuleiroProvider = ({ children }) => {
                 const idJogador = user.jogador.id;
                 
                 // Verifica se o cliente Stomp já existe; se não, cria e conecta
-                if (!stompClient) {
-                    const client = Stomp.over(() => new Sockjs('https://jogodaoncabackend.onrender.com/ws'));
-                    client.connect({}, async function(frame) {
-                        setStompClient(client);
-                        await iniciarPartida(client, tipo, idJogador);
+                if (!stompClient.curent) {
+                    stompClient.current = Stomp.over(() => new Sockjs('https://jogodaoncabackend.onrender.com/ws'));
+                    stompClient.current.connect({}, async function(frame) {
+                        await iniciarPartida(stompClient.current, tipo, idJogador);
                     });
                 } else {
                     // Cliente já conectado, apenas inicia a partida
-                    await iniciarPartida(stompClient, tipo, idJogador);
+                    await iniciarPartida(stompClient.current, tipo, idJogador);
                 }
     
                 return true;
@@ -102,7 +100,7 @@ export const TabuleiroProvider = ({ children }) => {
                         partidaAbandonada: false,
                     })
                 })
-                stompClient.disconnect(() => {
+                stompClient.current.disconnect(() => {
                     console.log('Desconectado do WebSocket.');
                 });
             }, 3000)
@@ -133,7 +131,7 @@ export const TabuleiroProvider = ({ children }) => {
                                 partidaAbandonada: false,
                             })
                         })
-                        stompClient.disconnect(() => {
+                        stompClient.current.disconnect(() => {
                             console.log('Desconectado do WebSocket.');
                         });
                     }, 3000)
@@ -239,7 +237,7 @@ export const TabuleiroProvider = ({ children }) => {
                 const response = await TabuleiroService.excluirPartida(idPartida);
                 if (response.status === 200) {
                     toast.success("Partida excluida!")
-                    stompClient.disconnect(() => {
+                    stompClient.current.disconnect(() => {
                         console.log('Desconectado do WebSocket.');
                     });
                     return response;
