@@ -36,7 +36,7 @@ export const TabuleiroProvider = ({ children }) => {
                 
                 // Verifica se o cliente Stomp já existe; se não, cria e conecta
                 if (!stompClient.curent) {
-                    stompClient.current = Stomp.over(() => new Sockjs(API_URL));
+                    stompClient.current = Stomp.over(() => new Sockjs(API_URL.concat('/ws')));
                     stompClient.current.connect({}, async function(frame) {
                         await iniciarPartida(stompClient.current, tipo, idJogador);
                     });
