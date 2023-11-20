@@ -78,11 +78,11 @@ function Tabuleiro() {
 
     const somReacao = (numeroReacao) => {
         const audioLista = {
-            1: '/public/assets/sons/tabuleiro/rindo.mp3',
-            2: '/public/assets/sons/tabuleiro/nervoso.mp3',
-            3: '/public/assets/sons/tabuleiro/surpreso.mp3',
-            4: '/public/assets/sons/tabuleiro/cachorro.mp3',
-            5: '/public/assets/sons/tabuleiro/onca.mp3',
+            1: '/assets/sons/tabuleiro/rindo.mp3',
+            2: '/assets/sons/tabuleiro/nervoso.mp3',
+            3: '/assets/sons/tabuleiro/surpreso.mp3',
+            4: '/assets/sons/tabuleiro/cachorro.mp3',
+            5: '/assets/sons/tabuleiro/onca.mp3',
         };
 
         if (audioLista[numeroReacao]) {
