@@ -77,7 +77,6 @@ function Home() {
                         <Carrossel />
                     </div>
                     <div className="menu-principal">
-                        <p>ISSO É UM TESTE!</p>
                         <button className="btn menu-item" onClick={() => jogar('onca')}><p className="texto-p">JOGAR <br></br> COMO ONÇA</p></button>
                         <button className="btn menu-item" onClick={() => jogar('cachorro')}><p className="texto-p">JOGAR COMO <br></br> CACHORRO</p></button>
                         <button className="btn menu-item" onClick={() => {navigate("/loja/skins")}}><p className="texto-p">LOJA</p></button>
