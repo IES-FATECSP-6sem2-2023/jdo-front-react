@@ -31,7 +31,7 @@ function Home() {
         responsePartida ? navigate("/fila") : navigate("/menu")
     }
 
-    const [nivel, setNivel] = useState(1);
+    const [nivel, setNivel] = useState(user?.jogador?.nivelatual);
 
     return (
         <section className="bg-home">
