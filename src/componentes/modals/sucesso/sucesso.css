@@ -9,7 +9,7 @@
 .background {
     width: 100vw;
     height: 100vh;
-    background-image: url('/src/assets/imagens/backgrounds/cenario_login-tabuleiro.png');
+    background-image: url('/public/assets/imagens/backgrounds/cenario_login-tabuleiro.png');
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -30,7 +30,7 @@
     margin: 0 auto;
     background-size: contain;
     background-repeat: no-repeat;
-    background-image: url("/src/assets/imagens/placas/fundo_modal.png");
+    background-image: url("/public/assets/imagens/placas/fundo_modal.png");
 }
 
 .box-titulo{
@@ -67,7 +67,7 @@
 .icon-erro{
     width: 100%;
     height: 100%;
-    background-image: url("/src/assets/imagens/vetores/sucesso.png");
+    background-image: url("/public/assets/imagens/vetores/sucesso.png");
     background-size: contain;
     background-repeat: no-repeat;
 }

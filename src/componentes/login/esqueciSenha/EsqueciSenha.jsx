@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import LogoBranca from '/src/assets/imagens/vetores/logo-branco.png';
-import MailIcon from '/src/assets/imagens/icones/MailIcon';
-import LockIcon from '/src/assets/imagens/icones/LockIcon';
-import VisibilityIcon from '/src/assets/imagens/icones/VisibilityIcon';
-import VisibilityOffIcon from '/src/assets/imagens/icones/VisibilityOffIcon';
-import './EsqueciSenha.css';
 import { useNavigate } from 'react-router-dom';
-import { validatePassword, validateEmail } from '/src/utils/Regex.jsx';
 import { toast } from 'react-toastify';
 import ContaService from '../../../services/ContaService';
+import './EsqueciSenha.css';
+import LockIcon from '/public/assets/imagens/icones/LockIcon';
+import MailIcon from '/public/assets/imagens/icones/MailIcon';
+import VisibilityIcon from '/public/assets/imagens/icones/VisibilityIcon';
+import VisibilityOffIcon from '/public/assets/imagens/icones/VisibilityOffIcon';
+import LogoBranca from '/public/assets/imagens/vetores/logo-branco.png';
+import { validateEmail, validatePassword } from '/src/utils/Regex.jsx';
 
 function EsqueciSenha() {
   const navigate = useNavigate();

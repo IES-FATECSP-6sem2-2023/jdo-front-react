@@ -11,7 +11,7 @@
 .background {
     width: 100vw;
     height: 100vh;
-    background-image: url('/src/assets/imagens/backgrounds/cenario_login-tabuleiro.png');
+    background-image: url('/public/assets/imagens/backgrounds/cenario_login-tabuleiro.png');
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -32,7 +32,7 @@
     margin: 0 auto;
     background-size: contain;
     background-repeat: no-repeat;
-    background-image: url("/src/assets/imagens/placas/fundo_modal.png");
+    background-image: url("/public/assets/imagens/placas/fundo_modal.png");
 }
 
 .box-titulo-tabuleiro{
@@ -69,7 +69,7 @@
 .icon-vitoria-tabuleiro{
     width: 100%;
     height: 100%;
-    background-image: url("/src/assets/imagens/vetores/vitorias.png");
+    background-image: url("/public/assets/imagens/vetores/vitorias.png");
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -90,7 +90,7 @@
 .recompensa-xp-icon-tabuleiro{
     width: 30%;
     height: 50%;
-    background-image: url("/src/assets/imagens/vetores/nivel.png");
+    background-image: url("/public/assets/imagens/vetores/nivel.png");
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -111,7 +111,7 @@
 .moeda-icon-tabuleiro{
     width: 30%;
     height: 50%;
-    background-image: url("/src/assets/imagens/vetores/moedas.png");
+    background-image: url("/public/assets/imagens/vetores/moedas.png");
     background-size: contain;
     background-repeat: no-repeat;
 }

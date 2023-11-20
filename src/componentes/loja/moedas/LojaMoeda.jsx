@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
 import './LojaMoeda.css';
-import ReturnIcon from '/src/assets/imagens/icones/ReturnIcon';
+import ReturnIcon from '/public/assets/imagens/icones/ReturnIcon';
 import ModalCompraMoeda from '/src/componentes/modals/compras/moedas/compraMoedas.jsx';
 import useAuthConta from '/src/hooks/AuthConta';
 import LojaMoedaService from '/src/services/LojaMoedasService';

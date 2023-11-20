@@ -18,27 +18,27 @@ function compraMoedas() {
 
         switch (idCompraMoeda) {
             case 1:
-                imgItemComprado = '/src/assets/imagens/vetores/poucas_esmeraldas.png';
+                imgItemComprado = '/public/assets/imagens/vetores/poucas_esmeraldas.png';
                 txtItemComprado = 'VOCÊ COMPROU 100 ESMERALDAS!';
                 break;
             case 2:
-                imgItemComprado = '/src/assets/imagens/vetores/saco_esmeraldas.png';
+                imgItemComprado = '/public/assets/imagens/vetores/saco_esmeraldas.png';
                 txtItemComprado = 'VOCÊ COMPROU 500 ESMERALDAS!';
                 break;
             case 3:
-                imgItemComprado = '/src/assets/imagens/vetores/balde_esmeraldas.png';
+                imgItemComprado = '/public/assets/imagens/vetores/balde_esmeraldas.png';
                 txtItemComprado = 'VOCÊ COMPROU 1.000 ESMERALDAS!';
                 break;
             case 4:
-                imgItemComprado = '/src/assets/imagens/vetores/poucas_moedas.png';
+                imgItemComprado = '/public/assets/imagens/vetores/poucas_moedas.png';
                 txtItemComprado = 'VOCÊ COMPROU 100 MOEDAS!';
                 break;
             case 5:
-                imgItemComprado = '/src/assets/imagens/vetores/saco_moedas.png';
+                imgItemComprado = '/public/assets/imagens/vetores/saco_moedas.png';
                 txtItemComprado = 'VOCÊ COMPROU 1.000 MOEDAS!';
                 break;
             case 6:
-                imgItemComprado = '/src/assets/imagens/vetores/balde_moedas.png';
+                imgItemComprado = '/public/assets/imagens/vetores/balde_moedas.png';
                 txtItemComprado = 'VOCÊ COMPROU 10.000 MOEDAS!';
                 break;
             default:

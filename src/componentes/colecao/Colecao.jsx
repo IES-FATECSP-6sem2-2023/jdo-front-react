@@ -1,8 +1,8 @@
-import React, { useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Colecao.css';
 import { toast } from 'react-toastify';
-import ReturnIcon from '/src/assets/imagens/icones/ReturnIcon';
+import './Colecao.css';
+import ReturnIcon from '/public/assets/imagens/icones/ReturnIcon';
 import useAuthConta from '/src/hooks/AuthConta';
 import ColecaoService from '/src/services/ColecaoService';
 
@@ -112,7 +112,7 @@ function Colecao() {
                         <div key={item.id} className="skin-item-colecao">
                             <label className="radio-button-label-colecao">
                                 <input type="radio" name="opcaoSkin" value={item.id} onChange={escolheSkinPadrao}/>
-                                <img src={`/src/assets/imagens/skins/${item.imagem}`} className="colecao-skin"/>
+                                <img src={`/public/assets/imagens/skins/${item.imagem}`} className="colecao-skin"/>
                                 <span className="colecao-skin-nome">{item.nome}</span>
                             </label>
                         </div>
@@ -123,7 +123,7 @@ function Colecao() {
                         <div key={item.id} className="skin-item-colecao">
                             <label className="radio-button-label-colecao">
                                 <input type="radio" name="opcaoSkin" value={item.id} onChange={escolheSkinPadrao}/>
-                                <img src={`/src/assets/imagens/skins/${item.imagem}`} className="colecao-skin"/>
+                                <img src={`/public/assets/imagens/skins/${item.imagem}`} className="colecao-skin"/>
                                 <span className="colecao-skin-nome">{item.nome}</span>
                             </label>
                         </div>

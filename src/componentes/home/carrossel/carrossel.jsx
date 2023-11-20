@@ -4,13 +4,13 @@ const Carrossel = ({ nivel }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const mapArenas = {
-    1: "src/assets/imagens/mapas/amazonia.png",
-    2: "src/assets/imagens/mapas/caatinga.png",
-    3: "src/assets/imagens/mapas/mata-atlantica.png",
-    4: "src/assets/imagens/mapas/pantanal.png",
-    5: "src/assets/imagens/mapas/caatinga-bloqueado.png",
-    6: "src/assets/imagens/mapas/mata-atlantica-bloqueado.png",
-    7: "src/assets/imagens/mapas/pantanal-bloqueado.png",
+    1: "/public/assets/imagens/mapas/amazonia.png",
+    2: "/public/assets/imagens/mapas/caatinga.png",
+    3: "/public/assets/imagens/mapas/mata-atlantica.png",
+    4: "/public/assets/imagens/mapas/pantanal.png",
+    5: "/public/assets/imagens/mapas/caatinga-bloqueado.png",
+    6: "/public/assets/imagens/mapas/mata-atlantica-bloqueado.png",
+    7: "/public/assets/imagens/mapas/pantanal-bloqueado.png",
   };
 
   const generateCarouselImages = (nivel) => {
@@ -40,7 +40,7 @@ const Carrossel = ({ nivel }) => {
   return (
     <div className="arenas-carrossel-container">
       <div className="seta esquerda" onClick={prevSlide}>
-        <img src="src/assets/imagens/vetores/seta-esquerda.png" alt="Seta esquerda" />
+        <img src="/public/assets/imagens/vetores/seta-esquerda.png" alt="Seta esquerda" />
       </div>
       <div className="carrossel">
         <div className="mapa arena-opcao">
@@ -52,7 +52,7 @@ const Carrossel = ({ nivel }) => {
         </div>
       </div>
       <div className="seta direita" onClick={nextSlide}>
-        <img src="src/assets/imagens/vetores/seta-direita.png" alt="Seta direita" />
+        <img src="/public/assets/imagens/vetores/seta-direita.png" alt="Seta direita" />
       </div>
     </div>
   );

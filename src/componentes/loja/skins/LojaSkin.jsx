@@ -1,7 +1,7 @@
 import React, { useEffect, useState} from 'react';
 import { useNavigate } from 'react-router';
 import './LojaSkin.css';
-import ReturnIcon from '/src/assets/imagens/icones/ReturnIcon';
+import ReturnIcon from '/public/assets/imagens/icones/ReturnIcon';
 import useAuthConta from '/src/hooks/AuthConta';
 import LojaSkinService from '/src/services/LojaSkinsService';
 import ModalCompraSkin from '/src/componentes/modals/compras/skins/compraSkin';
@@ -98,7 +98,7 @@ function LojaSkin() {
                             response.map((item) => (
                                 <div className="loja-item-loja-skin" key={item.id}>
                                     <div className="skin">
-                                        <img src={`/src/assets/imagens/skins/${item.imagem}`} alt={item.nome} />
+                                        <img src={`/public/assets/imagens/skins/${item.imagem}`} alt={item.nome} />
                                     </div>
                                     <div className="nome-skin-loja-skin">
                                         <h1>{item.nome}</h1>
