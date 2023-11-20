@@ -1,15 +1,14 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import './Home.css';
-import { toast } from "react-toastify";
-import LogOutIcon from '/src/assets/imagens/icones/LogOutIcon';
-import UsuarioIcon from '/src/assets/imagens/icones/UsuarioIcon';
-import VolumeOffIcon from '/src/assets/imagens/icones/VolumeOffIcon';
-import VolumeOnIcon from '/src/assets/imagens/icones/VolumeOnIcon';
+import Carrossel from './carrossel/carrossel';
+import LogOutIcon from '/public/assets/imagens/icones/LogOutIcon';
+import UsuarioIcon from '/public/assets/imagens/icones/UsuarioIcon';
+import VolumeOffIcon from '/public/assets/imagens/icones/VolumeOffIcon';
+import VolumeOnIcon from '/public/assets/imagens/icones/VolumeOnIcon';
 import useAuthConta from '/src/hooks/AuthConta';
-import Carrossel from './carrossel/carrossel'
-import useTabuleiro from '/src/hooks/TabuleiroHook';
 import useSomAmbiente from '/src/hooks/SomAmbienteHook';
+import useTabuleiro from '/src/hooks/TabuleiroHook';
 
 function Home() {
     const navigate = useNavigate();

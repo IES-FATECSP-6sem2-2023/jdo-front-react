@@ -3,10 +3,10 @@ import Desistir from '../modals/desistir/desistir.jsx';
 import './Tabuleiro.css';
 import CronometroCachorro from './cronometro/CronometroCachorro.jsx';
 import CronometroOnca from './cronometro/CronometroOnca.jsx';
-import LogOutIcon from '/src/assets/imagens/icones/LogOutIcon';
-import VolumeOffIcon from '/src/assets/imagens/icones/VolumeOffIcon';
-import VolumeOnIcon from '/src/assets/imagens/icones/VolumeOnIcon';
-import placaUser from '/src/assets/imagens/placas/placa_usuario.png';
+import LogOutIcon from '/public/assets/imagens/icones/LogOutIcon';
+import VolumeOffIcon from '/public/assets/imagens/icones/VolumeOffIcon';
+import VolumeOnIcon from '/public/assets/imagens/icones/VolumeOnIcon';
+import placaUser from '/public/assets/imagens/placas/placa_usuario.png';
 import useSomAmbiente from '/src/hooks/SomAmbienteHook';
 import useTabuleiro from '/src/hooks/TabuleiroHook';
 
@@ -78,11 +78,11 @@ function Tabuleiro() {
 
     const somReacao = (numeroReacao) => {
         const audioLista = {
-            1: '/assets/sons/tabuleiro/rindo.mp3',
-            2: '/assets/sons/tabuleiro/nervoso.mp3',
-            3: '/assets/sons/tabuleiro/surpreso.mp3',
-            4: '/assets/sons/tabuleiro/cachorro.mp3',
-            5: '/assets/sons/tabuleiro/onca.mp3',
+            1: '/public/assets/sons/tabuleiro/rindo.mp3',
+            2: '/public/assets/sons/tabuleiro/nervoso.mp3',
+            3: '/public/assets/sons/tabuleiro/surpreso.mp3',
+            4: '/public/assets/sons/tabuleiro/cachorro.mp3',
+            5: '/public/assets/sons/tabuleiro/onca.mp3',
         };
 
         if (audioLista[numeroReacao]) {
@@ -139,8 +139,8 @@ function Tabuleiro() {
                                                 ${peca === jogadorDaVez && !(x === pecaSelecionada?.x && y === pecaSelecionada?.y) ? 'peca-jogador-tabuleiro' : ''} 
                                                 `}
                                                 style={{
-                                                    backgroundImage: `/src/assets/imagens/skins/${jogadorSessao === peca ? partida?.primeirojogador?.nomeSkinFavorita : partida?.segundojogador?.nomeSkinFavorita}`,
-                                                    backgroundFallback: `/src/assets/imagens/skins/${peca === 1 ? "/src/assets/imagens/skins/onca_amazonia.png" : "/src/assets/imagens/skins/cachorro_amazonia.png"}`
+                                                    backgroundImage: `/public/assets/imagens/skins/${jogadorSessao === peca ? partida?.primeirojogador?.nomeSkinFavorita : partida?.segundojogador?.nomeSkinFavorita}`,
+                                                    backgroundFallback: `/public/assets/imagens/skins/${peca === 1 ? "/public/assets/imagens/skins/onca_amazonia.png" : "/public/assets/imagens/skins/cachorro_amazonia.png"}`
                                                 }}
                                                 data-x={x}
                                                 data-y={y}

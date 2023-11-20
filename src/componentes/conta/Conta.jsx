@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import ReturnIcon from '/src/assets/imagens/icones/ReturnIcon';
-import VisibilityIcon from '/src/assets/imagens/icones/VisibilityIcon';
-import VisibilityOffIcon from '/src/assets/imagens/icones/VisibilityOffIcon';
-import {validatePassword} from '/src/utils/Regex.jsx';
-import useAuthConta from '/src/hooks/AuthConta';
-import './Conta.css';
-import ContaService from '../../services/ContaService';
 import { toast } from 'react-toastify';
+import ContaService from '../../services/ContaService';
+import './Conta.css';
+import ReturnIcon from '/public/assets/imagens/icones/ReturnIcon';
+import VisibilityIcon from '/public/assets/imagens/icones/VisibilityIcon';
+import VisibilityOffIcon from '/public/assets/imagens/icones/VisibilityOffIcon';
+import useAuthConta from '/src/hooks/AuthConta';
+import { validatePassword } from '/src/utils/Regex.jsx';
 
 function Conta() {
     const navigate = useNavigate();
