@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import Sockjs from "sockjs-client/dist/sockjs";
 import TabuleiroService from "../services/TabuleiroService";
 import useAuthConta from '/src/hooks/AuthConta';
+import { API_URL } from '../utils/constants';
 
 export const TabuleiroContext = createContext({});
 
@@ -35,7 +36,7 @@ export const TabuleiroProvider = ({ children }) => {
                 
                 // Verifica se o cliente Stomp já existe; se não, cria e conecta
                 if (!stompClient.curent) {
-                    stompClient.current = Stomp.over(() => new Sockjs('https://jogodaoncabackend.onrender.com/ws'));
+                    stompClient.current = Stomp.over(() => new Sockjs(API_URL));
                     stompClient.current.connect({}, async function(frame) {
                         await iniciarPartida(stompClient.current, tipo, idJogador);
                     });
@@ -70,6 +71,7 @@ export const TabuleiroProvider = ({ children }) => {
         });
     
         client.subscribe('/topic/finish-game', function(message) {
+            debugger
             const partidaFinalizada = JSON.parse(message.body);
             if (idJogador === partidaFinalizada.idVencedor) {
                 navigate(`/vitoria/${jogadorSessao}`);
