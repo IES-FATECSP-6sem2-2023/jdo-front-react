@@ -35,7 +35,7 @@ export const TabuleiroProvider = ({ children }) => {
                 
                 // Verifica se o cliente Stomp já existe; se não, cria e conecta
                 if (!stompClient.curent) {
-                    stompClient.current = Stomp.over(() => new Sockjs('https://jogodaoncabackend.onrender.com/ws'));
+                    stompClient.current = Stomp.over(() => new Sockjs('https://f3b8-2804-7f0-6840-54a4-868b-cf15-8994-738f.ngrok-free.app/ws'));
                     stompClient.current.connect({}, async function(frame) {
                         await iniciarPartida(stompClient.current, tipo, idJogador);
                     });
