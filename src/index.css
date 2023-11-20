@@ -1,6 +1,6 @@
 .bg-login {
   padding: 1rem;
-  background-image: url('./assets/imagens/backgrounds/cenario_login-tabuleiro.png');
+  background-image: url('/public/assets/imagens/backgrounds/cenario_login-tabuleiro.png');
   background-repeat: repeat;
   background-position: center;
   background-color: #0AAD44;
