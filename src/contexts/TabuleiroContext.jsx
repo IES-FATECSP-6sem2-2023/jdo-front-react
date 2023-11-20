@@ -19,64 +19,77 @@ export const TabuleiroProvider = ({ children }) => {
     const jogadorSessao = parseInt(JSON.parse(localStorage.getItem("partidaSession"))?.time, 10);
 
     useEffect(() => {
-        // inicializa a conexão com o websocket na primeira renderização
-        const client = Stomp.over(() => new Sockjs('https://jogodaoncabackend.onrender.com/ws'))
-        client.connect({}, function(frame) {});
-
-        setStompClient(client);
-
         return () => {
-            // desconecta o websocket quando o componente for desmontado
-            client.disconnect();
-        }
-    }, [])
+            // Apenas desconecte o WebSocket quando o componente for desmontado
+            if (stompClient) {
+                stompClient.disconnect(() => {
+                    console.log('Desconectado do WebSocket.');
+                });
+            }
+        };
+    }, [stompClient]);
 
     const criarPartida = async (tipo) => {
         try {
             if (user && user.jogador) {
                 const idJogador = user.jogador.id;
-                const teste = await TabuleiroService.iniciaPartida(idJogador,tipo);
-                stompClient.subscribe('/topic/gamestate', function(message) {
-                    const gamestate = JSON.parse(message.body)
-                    if (gamestate.iniciandoPartida) {
-                        setPartida(gamestate?.partida)
-                        setTimeout(() => {
-                           navigate('/tabuleiro')
-                        }, 2000)
-                        return
-                    }
-                    passarVez(); 
-                    setPartida(gamestate.partida)
-                });
-
-                stompClient.subscribe('/topic/finish-game', function(message) {
-                    const partidaFinalizada = JSON.parse(message.body)
-
-                    if (idJogador === partidaFinalizada.idVencedor) {
-                        navigate(`/vitoria/${jogadorSessao}`)
-                    } else{
-                        navigate(`/derrota/${jogadorSessao}`)
-                    }
-                })
-
-                if (teste.data.partidaOcupada) {
-                    stompClient.publish({ destination: "/topic/gamestate", body: JSON.stringify({partida: teste.data.partida, iniciandoPartida: true })})
-                    setPartida(teste.data.partida)
-                    setTimeout(() => {
-                        navigate('/tabuleiro')
-                    }, 2000)
-                } else {
-                    setPartida(teste.data.partida.idpartida)
-                }
                 
+                // Verifica se o cliente Stomp já existe; se não, cria e conecta
+                if (!stompClient) {
+                    const client = Stomp.over(() => new Sockjs('https://jogodaoncabackend.onrender.com/ws'));
+                    client.connect({}, async function(frame) {
+                        setStompClient(client);
+                        await iniciarPartida(client, tipo, idJogador);
+                    });
+                } else {
+                    // Cliente já conectado, apenas inicia a partida
+                    await iniciarPartida(stompClient, tipo, idJogador);
+                }
+    
+                return true;
             }
-            return true;
         } catch (e) {
-            console.error(e)
+            console.error(e);
             toast.error("Erro ao tentar criar uma partida!");
             return false;
         }
-    }
+    };
+    
+    const iniciarPartida = async (client, tipo, idJogador) => {
+        const teste = await TabuleiroService.iniciaPartida(idJogador, tipo);
+        
+        client.subscribe('/topic/gamestate', function(message) {
+            const gamestate = JSON.parse(message.body);
+            if (gamestate.iniciandoPartida) {
+                setPartida(gamestate?.partida);
+                setTimeout(() => {
+                    navigate('/tabuleiro');
+                }, 2000);
+                return;
+            }
+            passarVez(); 
+            setPartida(gamestate.partida);
+        });
+    
+        client.subscribe('/topic/finish-game', function(message) {
+            const partidaFinalizada = JSON.parse(message.body);
+            if (idJogador === partidaFinalizada.idVencedor) {
+                navigate(`/vitoria/${jogadorSessao}`);
+            } else {
+                navigate(`/derrota/${jogadorSessao}`);
+            }
+        });
+    
+        if (teste.data.partidaOcupada) {
+            client.publish({ destination: "/topic/gamestate", body: JSON.stringify({partida: teste.data.partida, iniciandoPartida: true })});
+            setPartida(teste.data.partida);
+            setTimeout(() => {
+                navigate('/tabuleiro');
+            }, 2000);
+        } else {
+            setPartida(teste.data.partida.idpartida);
+        }
+    };    
 
     useEffect(()=>{
         if (pecasComidas === 6) {
