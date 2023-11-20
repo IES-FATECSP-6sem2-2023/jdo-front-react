@@ -98,7 +98,7 @@ function LojaSkin() {
                             response.map((item) => (
                                 <div className="loja-item-loja-skin" key={item.id}>
                                     <div className="skin">
-                                        <img src={`${import.meta.env.VITE_PUBLIC_URL}/assets/imagens/skins/${item.imagem}`} alt={item.nome} />
+                                        <img src={`/assets/imagens/skins/${item.imagem}`} alt={item.nome} />
                                     </div>
                                     <div className="nome-skin-loja-skin">
                                         <h1>{item.nome}</h1>

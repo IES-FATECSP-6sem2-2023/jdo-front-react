@@ -15,34 +15,34 @@ function modalCompraSkin() {
 
         switch (idCompraSkin) {
             case 5:
-                imgItemComprado = '/public/assets/imagens/skins/onca_halloween.png';
+                imgItemComprado = '/assets/imagens/skins/onca_halloween.png';
                 break;
             case 6:
-                imgItemComprado = '/public/assets/imagens/skins/cachorro_halloween.png';
+                imgItemComprado = '/assets/imagens/skins/cachorro_halloween.png';
                 break;
             case 7:
-                imgItemComprado = '/public/assets/imagens/skins/onca_natal.png';
+                imgItemComprado = '/assets/imagens/skins/onca_natal.png';
                 break;
             case 8:
-                imgItemComprado = '/public/assets/imagens/skins/cachorro_natal.png';
+                imgItemComprado = '/assets/imagens/skins/cachorro_natal.png';
                 break;
             case 9:
-                imgItemComprado = '/public/assets/imagens/skins/onca_caatinga.png';
+                imgItemComprado = '/assets/imagens/skins/onca_caatinga.png';
                 break;
             case 10:
-                imgItemComprado = '/public/assets/imagens/skins/cachorro_caatinga.png';
+                imgItemComprado = '/assets/imagens/skins/cachorro_caatinga.png';
                 break;
             case 11:
-                imgItemComprado = '/public/assets/imagens/skins/onca_mata-atlantica.png';
+                imgItemComprado = '/assets/imagens/skins/onca_mata-atlantica.png';
                 break;
             case 12:
-                imgItemComprado = '/public/assets/imagens/skins/cachorro_mata-atlantica.png';
+                imgItemComprado = '/assets/imagens/skins/cachorro_mata-atlantica.png';
                 break;
             case 13:
-                imgItemComprado = '/public/assets/imagens/skins/onca_pantanal.png';
+                imgItemComprado = '/assets/imagens/skins/onca_pantanal.png';
                 break;
             case 14:
-                imgItemComprado = '/public/assets/imagens/skins/cachorro_pantanal.png';
+                imgItemComprado = '/assets/imagens/skins/cachorro_pantanal.png';
                 break;
             default:
                 imgItemComprado = '';

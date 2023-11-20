@@ -13,7 +13,7 @@ function Conta() {
     const navigate = useNavigate();
     const [visibilityStatus, setVisibilityStatus] = useState(false);
     const { user } = useAuthConta();
-
+    
     useEffect(()=>{
         setEmail(user?.jogador?.email)
         setNome(user?.jogador?.nome)
