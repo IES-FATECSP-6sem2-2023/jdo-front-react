@@ -75,12 +75,12 @@ function Conta() {
                             </div>
                             <div className="info-conta info-user-conta">
                                 <label htmlFor="">USER:</label>
-                                <input type="text" value={userName} onChange={(e) => handleFieldChange(e.target.value, setUserName)} required/>
+                                <input type="text" value={userName} onChange={(e) => setUserName(e.target.value)} required/>
                             </div>
                             <div className="info-conta info-email-conta">
                                 <label htmlFor="">E-MAIL:</label>
                                 <input type="email" value={email} pattern="^\w.{2,}\u0040[a-z]{2,}.[a-z]{2,}\S"
-                                title="Formato esperado: seuemail@email.com" onChange={(e) => handleFieldChange(e.target.value, setEmail)} required/>
+                                title="Formato esperado: seuemail@email.com" onChange={(e) => setEmail(e.target.value)} required/>
                             </div>
                             <div className="info-conta info-senha-conta">
                                 <label htmlFor="">SENHA:</label>
