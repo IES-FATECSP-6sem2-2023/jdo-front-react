@@ -94,7 +94,7 @@ export const TabuleiroProvider = ({ children }) => {
     useEffect(()=>{
         if (pecasComidas === 6) {
             setTimeout(() => {
-                stompClient.publish({
+                stompClient.current.publish({
                     destination: "/app/game/finish", 
                     body: JSON.stringify({
                         idPartida: partida.idpartida,
@@ -125,7 +125,7 @@ export const TabuleiroProvider = ({ children }) => {
             for (let chave in partida?.primeirojogador?.posicoes) {
                 if (!partida?.primeirojogador?.posicoes[chave]) {
                     setTimeout(() => {
-                        stompClient.publish({
+                        stompClient.current.publish({
                             destination: "/app/game/finish", 
                             body: JSON.stringify({
                                 idPartida: partida.idpartida,
@@ -198,7 +198,7 @@ export const TabuleiroProvider = ({ children }) => {
                     try {
                         debugger
                         const novaMovimentacao = await TabuleiroService.movimentaPartida(atualizaPartida);
-                        stompClient.publish({ destination: "/topic/gamestate", body: JSON.stringify({partida: novaMovimentacao})});                       
+                        stompClient.current.publish({ destination: "/topic/gamestate", body: JSON.stringify({partida: novaMovimentacao})});                       
                         return true;
                     } catch (e) {
                         toast.error("Erro ao tentar efetuar movimentação!");

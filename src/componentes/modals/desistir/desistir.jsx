@@ -7,7 +7,7 @@ function desistir({alterarVisibilidade}) {
     const desistir = async () =>{
         const jogadorSessao = parseInt(JSON.parse(localStorage.getItem("partidaSession"))?.time, 10);
         const idVencedor = jogadorSessao === 2 ? partida.primeirojogador.idJogador : partida.segundojogador.idJogador;
-        stompClient.publish({
+        stompClient.current.publish({
             destination: "/app/game/finish", 
             body: JSON.stringify({
                 idPartida: partida.idpartida,
