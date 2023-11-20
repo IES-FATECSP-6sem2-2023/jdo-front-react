@@ -20,7 +20,7 @@ export const TabuleiroProvider = ({ children }) => {
 
     useEffect(() => {
         // inicializa a conexão com o websocket na primeira renderização
-        const client = Stomp.over(() => new Sockjs('http://localhost:8080/ws'))
+        const client = Stomp.over(() => new Sockjs('https://jogodaoncabackend.onrender.com/ws'))
         client.connect({}, function(frame) {});
 
         setStompClient(client);
