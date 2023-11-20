@@ -102,6 +102,9 @@ export const TabuleiroProvider = ({ children }) => {
                         partidaAbandonada: false,
                     })
                 })
+                stompClient.disconnect(() => {
+                    console.log('Desconectado do WebSocket.');
+                });
             }, 3000)
         }else{
             passarVez()
@@ -130,6 +133,9 @@ export const TabuleiroProvider = ({ children }) => {
                                 partidaAbandonada: false,
                             })
                         })
+                        stompClient.disconnect(() => {
+                            console.log('Desconectado do WebSocket.');
+                        });
                     }, 3000)
                 }
             }
@@ -229,9 +235,13 @@ export const TabuleiroProvider = ({ children }) => {
     const excluirPartida = async (idPartida) => {
         if (partida) {
             try {
+
                 const response = await TabuleiroService.excluirPartida(idPartida);
                 if (response.status === 200) {
                     toast.success("Partida excluida!")
+                    stompClient.disconnect(() => {
+                        console.log('Desconectado do WebSocket.');
+                    });
                     return response;
                 }
             } catch (e) {
