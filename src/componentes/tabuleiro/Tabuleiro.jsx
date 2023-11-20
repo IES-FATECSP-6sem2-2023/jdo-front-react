@@ -139,8 +139,8 @@ function Tabuleiro() {
                                                 ${peca === jogadorDaVez && !(x === pecaSelecionada?.x && y === pecaSelecionada?.y) ? 'peca-jogador-tabuleiro' : ''} 
                                                 `}
                                                 style={{
-                                                    backgroundImage: `/public/assets/imagens/skins/${jogadorSessao === peca ? partida?.primeirojogador?.nomeSkinFavorita : partida?.segundojogador?.nomeSkinFavorita}`,
-                                                    backgroundFallback: `/public/assets/imagens/skins/${peca === 1 ? "/public/assets/imagens/skins/onca_amazonia.png" : "/public/assets/imagens/skins/cachorro_amazonia.png"}`
+                                                    backgroundImage: `/assets/imagens/skins/${jogadorSessao === peca ? partida?.primeirojogador?.nomeSkinFavorita : partida?.segundojogador?.nomeSkinFavorita}`,
+                                                    backgroundFallback: `${peca === 1 ? "/assets/imagens/skins/onca_amazonia.png" : "/assets/imagens/skins/cachorro_amazonia.png"}`
                                                 }}
                                                 data-x={x}
                                                 data-y={y}
