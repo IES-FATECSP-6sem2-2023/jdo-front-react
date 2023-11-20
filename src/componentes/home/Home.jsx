@@ -31,8 +31,6 @@ function Home() {
         responsePartida ? navigate("/fila") : navigate("/menu")
     }
 
-    const [nivel, setNivel] = useState(user?.jogador?.nivelatual);
-
     return (
         <section className="bg-home">
             <div className="bg-home-container">
@@ -76,7 +74,7 @@ function Home() {
                 </div>
                 <div className="main">
                     <div className="arenas-carrossel">
-                        <Carrossel nivel={nivel} />
+                        <Carrossel />
                     </div>
                     <div className="menu-principal">
                         <button className="btn menu-item" onClick={() => jogar('onca')}><p className="texto-p">JOGAR <br></br> COMO ONÇA</p></button>

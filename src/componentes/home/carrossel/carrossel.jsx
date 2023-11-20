@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import useAuthConta from '/src/hooks/AuthConta';
 
-const Carrossel = ({ nivel }) => {
+const Carrossel = () => {
+  const { user } = useAuthConta();
   const [currentIndex, setCurrentIndex] = useState(0);
-
+  const nivel = user?.jogador?.nivelatual
   const mapArenas = {
     1: "/assets/imagens/mapas/amazonia.png",
     2: "/assets/imagens/mapas/caatinga.png",
