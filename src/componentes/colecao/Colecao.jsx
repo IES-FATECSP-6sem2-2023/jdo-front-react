@@ -112,7 +112,7 @@ function Colecao() {
                         <div key={item.id} className="skin-item-colecao">
                             <label className="radio-button-label-colecao">
                                 <input type="radio" name="opcaoSkin" value={item.id} onChange={escolheSkinPadrao}/>
-                                <img src={`/public/assets/imagens/skins/${item.imagem}`} className="colecao-skin"/>
+                                <img src={`${import.meta.env.VITE_PUBLIC_URL}/assets/imagens/skins/${item.imagem}`} className="colecao-skin"/>
                                 <span className="colecao-skin-nome">{item.nome}</span>
                             </label>
                         </div>
@@ -123,7 +123,7 @@ function Colecao() {
                         <div key={item.id} className="skin-item-colecao">
                             <label className="radio-button-label-colecao">
                                 <input type="radio" name="opcaoSkin" value={item.id} onChange={escolheSkinPadrao}/>
-                                <img src={`/public/assets/imagens/skins/${item.imagem}`} className="colecao-skin"/>
+                                <img src={`${import.meta.env.VITE_PUBLIC_URL}/assets/imagens/skins/${item.imagem}`} className="colecao-skin"/>
                                 <span className="colecao-skin-nome">{item.nome}</span>
                             </label>
                         </div>
