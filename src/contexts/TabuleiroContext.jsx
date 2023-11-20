@@ -44,7 +44,7 @@ export const TabuleiroProvider = ({ children }) => {
                     // Cliente já conectado, apenas inicia a partida
                     await iniciarPartida(stompClient.current, tipo, idJogador);
                 }
-    
+                console.log()
                 return true;
             }
         } catch (e) {
@@ -196,6 +196,7 @@ export const TabuleiroProvider = ({ children }) => {
                     }
                     
                     try {
+                        debugger
                         const novaMovimentacao = await TabuleiroService.movimentaPartida(atualizaPartida);
                         stompClient.publish({ destination: "/topic/gamestate", body: JSON.stringify({partida: novaMovimentacao})});                       
                         return true;
