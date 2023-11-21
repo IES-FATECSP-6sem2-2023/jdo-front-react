@@ -32,7 +32,7 @@ function Home() {
         responsePartida ? navigate("/fila") : navigate("/menu")
     }
     const meta = () => {
-        switch (user.jogador.nivelatual) {
+        switch (user?.jogador?.nivelatual) {
             case 1:
                 return 100;
             case 2:
