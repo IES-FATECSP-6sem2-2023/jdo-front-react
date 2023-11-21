@@ -39,13 +39,12 @@ export const TabuleiroProvider = ({ children }) => {
                 if (!stompClient.curent) {
                     stompClient.current = Stomp.over(() => new Sockjs(API_URL.concat('/ws')));
                     stompClient.current.connect({}, async function(frame) {
-                        await iniciarPartida(stompClient.current, tipo, idJogador);
+                        await iniciarPartida(tipo, idJogador);
                     });
                 } else {
                     // Cliente já conectado, apenas inicia a partida
-                    await iniciarPartida(stompClient.current, tipo, idJogador);
+                    await iniciarPartida(tipo, idJogador);
                 }
-                console.log()
                 return true;
             }
         } catch (e) {
@@ -55,12 +54,12 @@ export const TabuleiroProvider = ({ children }) => {
         }
     };
     
-    const iniciarPartida = async (client, tipo, idJogador) => {
+    const iniciarPartida = async (tipo, idJogador) => {
         const teste = await TabuleiroService.iniciaPartida(idJogador, tipo);
         const room = teste.data.partida.idpartida;
         setWebsocketRoom(room);
         
-        client.subscribe('/topic/gamestate/' + room, function(message) {
+        stompClient.current.subscribe('/topic/gamestate/' + room, function(message) {
             const gamestate = JSON.parse(message.body);
             if (gamestate.iniciandoPartida) {
                 setPartida(gamestate?.partida);
@@ -73,7 +72,7 @@ export const TabuleiroProvider = ({ children }) => {
             setPartida(gamestate.partida);
         });
     
-        client.subscribe('/topic/finish-game/' + room, function(message) {
+        stompClient.current.subscribe('/topic/finish-game/' + room, function(message) {
             const partidaFinalizada = JSON.parse(message.body);
             if (idJogador === partidaFinalizada.idVencedor) {
                 navigate(`/vitoria/${jogadorSessao}`);
@@ -85,7 +84,7 @@ export const TabuleiroProvider = ({ children }) => {
         });
     
         if (teste.data.partidaOcupada) {
-            client.publish({ destination: "/app/game/move/" + room, body: JSON.stringify({partida: teste.data.partida, iniciandoPartida: true })});
+            stompClient.current.publish({ destination: "/app/game/move/" + room, body: JSON.stringify({partida: teste.data.partida, iniciandoPartida: true, partidaAbandonada: false })});
             setPartida(teste.data.partida);
             setTimeout(() => {
                 navigate('/tabuleiro');
@@ -103,6 +102,7 @@ export const TabuleiroProvider = ({ children }) => {
                     body: JSON.stringify({
                         idPartida: partida.idpartida,
                         idVencedor: partida?.primeirojogador?.idJogador,
+                        iniciandoPartida: false,
                         partidaAbandonada: false,
                     })
                 })
@@ -195,7 +195,7 @@ export const TabuleiroProvider = ({ children }) => {
                     
                     try {
                         const novaMovimentacao = await TabuleiroService.movimentaPartida(atualizaPartida);
-                        stompClient.current.publish({ destination: "/app/game/move/" + websocketRoom, body: JSON.stringify({partida: novaMovimentacao})});                       
+                        stompClient.current.publish({ destination: "/app/game/move/" + websocketRoom, body: JSON.stringify({partida: novaMovimentacao, iniciandoPartida: false, partidaAbandonada: false})});                       
                         return true;
                     } catch (e) {
                         toast.error("Erro ao tentar efetuar movimentação!");
