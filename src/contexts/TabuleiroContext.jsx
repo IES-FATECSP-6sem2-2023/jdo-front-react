@@ -1,11 +1,11 @@
 import { Stomp } from '@stomp/stompjs';
-import { createContext, useEffect, useState, useRef } from "react";
+import { createContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from 'react-router';
 import { toast } from "react-toastify";
 import Sockjs from "sockjs-client/dist/sockjs";
 import TabuleiroService from "../services/TabuleiroService";
-import useAuthConta from '/src/hooks/AuthConta';
 import { API_URL } from '../utils/constants';
+import useAuthConta from '/src/hooks/AuthConta';
 
 export const TabuleiroContext = createContext({});
 
@@ -214,25 +214,6 @@ export const TabuleiroProvider = ({ children }) => {
         }
     }
 
-    // const finalizarPartida = async (timeVitoria, desistencia) => {
-    //     if (partida) {
-    //         try {
-    //             const idVencedor = timeVitoria === 1 ? partida.primeirojogador.idJogador : partida.segundojogador.idJogador;
-    //             const partidaReturn = await TabuleiroService.finalizaPartida(partida.idpartida, idVencedor, desistencia ? true : false);
-    //             setPartida(partidaReturn.data);
-    //             if (timeVitoria === jogadorSessao){
-    //                 navigate(`/vitoria/${jogadorSessao}`)
-    //             }else{
-    //                 navigate(`/derrota/${jogadorSessao}`)
-    //             }
-    //             return true;
-    //         } catch (e) {
-    //             toast.error("Erro inesperado ao finalizar partida!")
-    //             return false;
-    //         }
-    //     }
-    // }
-
     const excluirPartida = async (idPartida) => {
         if (partida) {
             try {
@@ -258,7 +239,6 @@ export const TabuleiroProvider = ({ children }) => {
             pecasComidas,
             criarPartida,
             movimentarPartida,
-            // finalizarPartida,
             excluirPartida,
             jogadorAtualCronometro,
             passarVez, 

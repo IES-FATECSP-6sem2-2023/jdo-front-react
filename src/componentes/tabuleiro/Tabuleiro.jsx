@@ -6,7 +6,6 @@ import CronometroOnca from './cronometro/CronometroOnca.jsx';
 import LogOutIcon from '/public/assets/imagens/icones/LogOutIcon';
 import VolumeOffIcon from '/public/assets/imagens/icones/VolumeOffIcon';
 import VolumeOnIcon from '/public/assets/imagens/icones/VolumeOnIcon';
-import placaUser from '/public/assets/imagens/placas/placa_usuario.png';
 import useSomAmbiente from '/src/hooks/SomAmbienteHook';
 import useTabuleiro from '/src/hooks/TabuleiroHook';
 
@@ -23,7 +22,6 @@ function Tabuleiro() {
     const [modalDesistirVisiblity, setModalDesistirVisiblity] = useState(false);
     
     const [tabuleiro, setTabuleiro] = useState([]);
-    const [jogadorDaVez, setJogadorDaVez] = useState(jogadorAtualCronometro);
     const [pecaSelecionada, setPecaSelecionada] = useState({});
     const { toggleMusica, musicaStatus } = useSomAmbiente();
 
@@ -40,7 +38,6 @@ function Tabuleiro() {
 
     useEffect(()=>{
         setPecaSelecionada({})
-        setJogadorDaVez(jogadorAtualCronometro)
     },[jogadorAtualCronometro])
 
     const criarTabuleiro = (partida) => {
