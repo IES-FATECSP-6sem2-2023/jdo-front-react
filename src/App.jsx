@@ -11,6 +11,7 @@ import LojaSkin from './componentes/loja/skins/LojaSkin.jsx';
 import CompraMoedas from './componentes/modals/compras/moedas/compraMoedas.jsx';
 import CompraSkins from './componentes/modals/compras/skins/compraSkin.jsx';
 import Derrota from './componentes/modals/derrota/derrota.jsx';
+import Desistencia from './componentes/modals/derrota/desistencia/desistencia.jsx';
 import Desistir from './componentes/modals/desistir/desistir.jsx';
 import Erro from './componentes/modals/erro/erro.jsx';
 import Fila from './componentes/modals/fila/fila.jsx';
@@ -43,6 +44,7 @@ const App = () => {
               <Route path='/sucesso' element={<Sucesso />} />
               <Route path='/vitoria/:id' element={<Vitoria />} />
               <Route path='/derrota/:id' element={<Derrota />} />
+              <Route path='/desistencia' element={<Desistencia/>} />
               <Route path='/desistir' element={<Desistir />} />
               <Route path='/compras/moedas/:id' element={<CompraMoedas />} />
               <Route path='/compras/skins/:id' element={<CompraSkins />} />
