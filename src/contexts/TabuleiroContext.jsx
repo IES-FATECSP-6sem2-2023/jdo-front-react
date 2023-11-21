@@ -98,14 +98,11 @@ export const TabuleiroProvider = ({ children }) => {
                     destination: "/app/game/finish", 
                     body: JSON.stringify({
                         idPartida: partida.idpartida,
-                        idVencedor: user.jogador.id,
+                        idVencedor: partida?.primeirojogador?.idJogador,
                         partidaAbandonada: false,
                     })
                 })
-                stompClient.current.disconnect(() => {
-                    console.log('Desconectado do WebSocket.');
-                });
-            }, 3000)
+            }, 1000)
         }else{
             passarVez()
         }
@@ -129,14 +126,11 @@ export const TabuleiroProvider = ({ children }) => {
                             destination: "/app/game/finish", 
                             body: JSON.stringify({
                                 idPartida: partida.idpartida,
-                                idVencedor: user.jogador.id,
+                                idVencedor: partida?.segundojogador?.idJogador,
                                 partidaAbandonada: false,
                             })
                         })
-                        stompClient.current.disconnect(() => {
-                            console.log('Desconectado do WebSocket.');
-                        });
-                    }, 3000)
+                    }, 1000)
                 }
             }
         }
