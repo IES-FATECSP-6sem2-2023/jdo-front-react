@@ -80,7 +80,7 @@ function Conta() {
                             <div className="info-conta info-email-conta">
                                 <label htmlFor="">E-MAIL:</label>
                                 <input type="email" value={email} pattern="^\w.{2,}\u0040[a-z]{2,}.[a-z]{2,}\S"
-                                title="Formato esperado: seuemail@email.com" onChange={(e) => setEmail(e.target.value)} required/>
+                                title="Formato esperado: seuemail@email.com" required/>
                             </div>
                             <div className="info-conta info-senha-conta">
                                 <label htmlFor="">SENHA:</label>
