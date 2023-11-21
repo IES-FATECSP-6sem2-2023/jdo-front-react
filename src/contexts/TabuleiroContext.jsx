@@ -74,7 +74,9 @@ export const TabuleiroProvider = ({ children }) => {
             const partidaFinalizada = JSON.parse(message.body);
             if (idJogador === partidaFinalizada.idVencedor) {
                 navigate(`/vitoria/${jogadorSessao}`);
-            } else {
+            } else if(partidaFinalizada.partidaAbandonada) {
+                navigate(`/desistencia/${jogadorSessao}`);
+            } else {  
                 navigate(`/derrota/${jogadorSessao}`);
             }
         });
