@@ -57,6 +57,7 @@ function Login() {
 		}else if (!validatePassword.test(senha)) {
 			setSenhaErr(true);
 		} else {
+			navigate("/loading");
 			const loginSucesso = await signin(email, senha);
 			loginSucesso ? navigate("/menu") : '';
 		}
