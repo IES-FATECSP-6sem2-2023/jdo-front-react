@@ -71,7 +71,6 @@ export const TabuleiroProvider = ({ children }) => {
         });
     
         client.subscribe('/topic/finish-game', function(message) {
-            debugger
             const partidaFinalizada = JSON.parse(message.body);
             if (idJogador === partidaFinalizada.idVencedor) {
                 navigate(`/vitoria/${jogadorSessao}`);
@@ -190,7 +189,6 @@ export const TabuleiroProvider = ({ children }) => {
                     }
                     
                     try {
-                        debugger
                         const novaMovimentacao = await TabuleiroService.movimentaPartida(atualizaPartida);
                         stompClient.current.publish({ destination: "/topic/gamestate", body: JSON.stringify({partida: novaMovimentacao})});                       
                         return true;
