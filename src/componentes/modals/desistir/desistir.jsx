@@ -3,12 +3,12 @@ import './desistir.css';
 import useTabuleiro from '/src/hooks/TabuleiroHook';
 
 function desistir({alterarVisibilidade}) {
-    const { partida, stompClient} = useTabuleiro();
+    const { partida, stompClient, websocketRoom } = useTabuleiro();
     const desistir = async () =>{
         const jogadorSessao = parseInt(JSON.parse(localStorage.getItem("partidaSession"))?.time, 10);
         const idVencedor = jogadorSessao === 2 ? partida.primeirojogador.idJogador : partida.segundojogador.idJogador;
         stompClient.current.publish({
-            destination: "/app/game/finish", 
+            destination: "/app/game/finish/" + websocketRoom,
             body: JSON.stringify({
                 idPartida: partida.idpartida,
                 idVencedor: idVencedor,
