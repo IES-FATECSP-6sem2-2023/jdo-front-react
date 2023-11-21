@@ -88,8 +88,8 @@ export const TabuleiroProvider = ({ children }) => {
             setPartida(teste.data.partida);
             setTimeout(() => {
                 navigate('/tabuleiro');
+                setJogadorAtualCronometro(1)
             }, 2000);
-            setJogadorAtualCronometro(1)
         } else {
             setPartida(teste.data.partida.idpartida);
         }
