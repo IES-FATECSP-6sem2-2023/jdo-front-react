@@ -65,7 +65,7 @@ function Home() {
                             <div className="info inivel">
                                 <button className="info nivel">
                                     <p className="info-p">{user?.jogador?.experiencia}</p>
-                                    <p className="info-p">/{meta}</p>
+                                    <p className="info-p">/{()=>{meta}}</p>
                                 </button>
                             </div>
                         </div>
@@ -102,7 +102,6 @@ function Home() {
                         <Carrossel />
                     </div>
                     <div className="menu-principal">
-                        <p>TESTE</p>
                         <button className="btn menu-item" onClick={() => jogar('onca')}><p className="texto-p">JOGAR <br></br> COMO ONÇA</p></button>
                         <button className="btn menu-item" onClick={() => jogar('cachorro')}><p className="texto-p">JOGAR COMO <br></br> CACHORRO</p></button>
                         <button className="btn menu-item" onClick={() => {navigate("/loja/skins")}}><p className="texto-p">LOJA</p></button>
