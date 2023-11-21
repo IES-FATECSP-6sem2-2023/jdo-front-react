@@ -31,6 +31,27 @@ function Home() {
         const responsePartida = await criarPartida(tipo.toUpperCase());
         responsePartida ? navigate("/fila") : navigate("/menu")
     }
+    const meta = () => {
+        switch (user.jogador.nivelatual) {
+            case 1:
+                return 100;
+                break;
+            case 2:
+                return 300;
+                break;
+            case 3:
+                return 600;
+                break;
+            case 4:
+                return 1000;
+                break;
+            case 5:
+                return '00';
+                break;
+            default:
+                return 1;
+        }
+    }
 
     return (
         <section className="bg-home">
@@ -44,7 +65,7 @@ function Home() {
                             <div className="info inivel">
                                 <button className="info nivel">
                                     <p className="info-p">{user?.jogador?.experiencia}</p>
-                                    <p className="info-p">/{(user?.jogador?.nivelatual*100)}</p>
+                                    <p className="info-p">/{meta}</p>
                                 </button>
                             </div>
                         </div>
