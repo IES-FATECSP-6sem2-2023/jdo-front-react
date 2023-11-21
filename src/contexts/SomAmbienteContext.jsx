@@ -9,7 +9,7 @@ export const SomAmbienteProvider = ({ children }) => {
     const toggleMusica = () => {
         if (!musicaStatus) {
             musicaDeFundo.loop = true;
-            musicaDeFundo.volume = .2;
+            musicaDeFundo.volume = .5;
             musicaDeFundo.play();
         } else {
             musicaDeFundo.pause();
