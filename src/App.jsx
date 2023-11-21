@@ -44,7 +44,7 @@ const App = () => {
               <Route path='/sucesso' element={<Sucesso />} />
               <Route path='/vitoria/:id' element={<Vitoria />} />
               <Route path='/derrota/:id' element={<Derrota />} />
-              <Route path='/desistencia' element={<Desistencia/>} />
+              <Route path='/desistencia/:id' element={<Desistencia/>} />
               <Route path='/desistir' element={<Desistir />} />
               <Route path='/compras/moedas/:id' element={<CompraMoedas />} />
               <Route path='/compras/skins/:id' element={<CompraSkins />} />
