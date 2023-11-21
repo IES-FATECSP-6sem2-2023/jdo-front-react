@@ -17,7 +17,8 @@ function Tabuleiro() {
         movimentarPartida,
         jogadorAtualCronometro,
         jogadorSessao,
-        stompClient
+        stompClient,
+        websocketRoom,
     } = useTabuleiro();
     const [modalDesistirVisiblity, setModalDesistirVisiblity] = useState(false);
     
@@ -30,7 +31,7 @@ function Tabuleiro() {
         if (partida && Object.keys(partida).length > 0) {
           const novoTabuleiro = criarTabuleiro(partida);
           setTabuleiro(novoTabuleiro);
-          stompClient.current.subscribe('/topic/game-reaction', function(message) {
+          stompClient.current.subscribe('/app/game/react' + websocketRoom, function(message) {
             const numeroReacao = Number(JSON.parse(message.body));
             somReacao(numeroReacao);
           });
@@ -72,7 +73,7 @@ function Tabuleiro() {
 
     const clicarReacao = (event) => {
         const numeroReacao = parseInt(event.target.value)
-        stompClient.current.publish({ destination: "/topic/game-reaction", body: JSON.stringify(numeroReacao) });
+        stompClient.current.publish({ destination: "/app/game/react" + websocketRoom, body: JSON.stringify(numeroReacao) });
         somReacao(numeroReacao)
     };
 
@@ -107,7 +108,13 @@ function Tabuleiro() {
                         <div className="area-onca-container-tabuleiro">
                             <div className="placar-tabuleiro">
                                 {Array.from({ length: pecasComidas }).map((_, index) => (
-                                    <div className="placar-onca-tabuleiro peca-comida-tabuleiro" key={index}></div>
+                                    <div 
+                                        className="placar-onca-tabuleiro peca-comida-tabuleiro" 
+                                        key={index}
+                                        style={{
+                                            backgroundImage: `url(${`/assets/imagens/skins/${partida?.segundojogador?.nomeSkinFavorita}`})`,
+                                        }}
+                                    ></div>
                                 ))}
                             </div>
                             <CronometroOnca ativo={jogadorDaVez === 1 ? true : false}/>
@@ -139,8 +146,7 @@ function Tabuleiro() {
                                                 ${peca === jogadorDaVez && !(x === pecaSelecionada?.x && y === pecaSelecionada?.y) ? 'peca-jogador-tabuleiro' : ''} 
                                                 `}
                                                 style={{
-                                                    backgroundImage: `/assets/imagens/skins/${jogadorSessao === peca ? partida?.primeirojogador?.nomeSkinFavorita : partida?.segundojogador?.nomeSkinFavorita}`,
-                                                    backgroundFallback: `${peca === 1 ? "/assets/imagens/skins/onca_amazonia.png" : "/assets/imagens/skins/cachorro_amazonia.png"}`
+                                                    backgroundImage: `url(${`/assets/imagens/skins/${peca === 1 ? partida?.primeirojogador?.nomeSkinFavorita : partida?.segundojogador?.nomeSkinFavorita}`})`,
                                                 }}
                                                 data-x={x}
                                                 data-y={y}

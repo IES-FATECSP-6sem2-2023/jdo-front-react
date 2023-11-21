@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import Sockjs from "sockjs-client/dist/sockjs";
 import TabuleiroService from "../services/TabuleiroService";
 import useAuthConta from '/src/hooks/AuthConta';
+import { API_URL } from '../utils/constants';
 
 export const TabuleiroContext = createContext({});
 
@@ -16,6 +17,7 @@ export const TabuleiroProvider = ({ children }) => {
     const { user } = useAuthConta();
     const [partida, setPartida] = useState({});
     const [tempoRestante, setTempoRestante] = useState(10);
+    const [websocketRoom, setWebsocketRoom] = useState('');
     const jogadorSessao = parseInt(JSON.parse(localStorage.getItem("partidaSession"))?.time, 10);
 
     useEffect(() => {
@@ -35,7 +37,7 @@ export const TabuleiroProvider = ({ children }) => {
                 
                 // Verifica se o cliente Stomp já existe; se não, cria e conecta
                 if (!stompClient.curent) {
-                    stompClient.current = Stomp.over(() => new Sockjs('https://f3b8-2804-7f0-6840-54a4-868b-cf15-8994-738f.ngrok-free.app/ws'));
+                    stompClient.current = Stomp.over(() => new Sockjs(API_URL.concat('/ws')));
                     stompClient.current.connect({}, async function(frame) {
                         await iniciarPartida(stompClient.current, tipo, idJogador);
                     });
@@ -43,7 +45,7 @@ export const TabuleiroProvider = ({ children }) => {
                     // Cliente já conectado, apenas inicia a partida
                     await iniciarPartida(stompClient.current, tipo, idJogador);
                 }
-    
+                console.log()
                 return true;
             }
         } catch (e) {
@@ -55,8 +57,10 @@ export const TabuleiroProvider = ({ children }) => {
     
     const iniciarPartida = async (client, tipo, idJogador) => {
         const teste = await TabuleiroService.iniciaPartida(idJogador, tipo);
+        const room = teste.data.partida.idpartida;
+        setWebsocketRoom(room);
         
-        client.subscribe('/topic/gamestate', function(message) {
+        client.subscribe(app'/game/move' + room, function(message) {
             const gamestate = JSON.parse(message.body);
             if (gamestate.iniciandoPartida) {
                 setPartida(gamestate?.partida);
@@ -69,7 +73,7 @@ export const TabuleiroProvider = ({ children }) => {
             setPartida(gamestate.partida);
         });
     
-        client.subscribe('/topic/finish-game', function(message) {
+        client.subscribe('/app/finish' + room, function(message) {
             const partidaFinalizada = JSON.parse(message.body);
             if (idJogador === partidaFinalizada.idVencedor) {
                 navigate(`/vitoria/${jogadorSessao}`);
@@ -79,7 +83,7 @@ export const TabuleiroProvider = ({ children }) => {
         });
     
         if (teste.data.partidaOcupada) {
-            client.publish({ destination: "/topic/gamestate", body: JSON.stringify({partida: teste.data.partida, iniciandoPartida: true })});
+            client.publish({ destination: "/app/game/move" + room, body: JSON.stringify({partida: teste.data.partida, iniciandoPartida: true })});
             setPartida(teste.data.partida);
             setTimeout(() => {
                 navigate('/tabuleiro');
@@ -92,18 +96,15 @@ export const TabuleiroProvider = ({ children }) => {
     useEffect(()=>{
         if (pecasComidas === 6) {
             setTimeout(() => {
-                stompClient.publish({
-                    destination: "/app/game/finish", 
+                stompClient.current.publish({
+                    destination: "/app/game/finish" + websocketRoom,
                     body: JSON.stringify({
                         idPartida: partida.idpartida,
-                        idVencedor: user.jogador.id,
+                        idVencedor: partida?.primeirojogador?.idJogador,
                         partidaAbandonada: false,
                     })
                 })
-                stompClient.current.disconnect(() => {
-                    console.log('Desconectado do WebSocket.');
-                });
-            }, 3000)
+            }, 1000)
         }else{
             passarVez()
         }
@@ -123,18 +124,15 @@ export const TabuleiroProvider = ({ children }) => {
             for (let chave in partida?.primeirojogador?.posicoes) {
                 if (!partida?.primeirojogador?.posicoes[chave]) {
                     setTimeout(() => {
-                        stompClient.publish({
-                            destination: "/app/game/finish", 
+                        stompClient.current.publish({
+                            destination: "/app/game/finish" + websocketRoom,
                             body: JSON.stringify({
                                 idPartida: partida.idpartida,
-                                idVencedor: user.jogador.id,
+                                idVencedor: partida?.segundojogador?.idJogador,
                                 partidaAbandonada: false,
                             })
                         })
-                        stompClient.current.disconnect(() => {
-                            console.log('Desconectado do WebSocket.');
-                        });
-                    }, 3000)
+                    }, 1000)
                 }
             }
         }
@@ -195,7 +193,7 @@ export const TabuleiroProvider = ({ children }) => {
                     
                     try {
                         const novaMovimentacao = await TabuleiroService.movimentaPartida(atualizaPartida);
-                        stompClient.publish({ destination: "/topic/gamestate", body: JSON.stringify({partida: novaMovimentacao})});                       
+                        stompClient.current.publish({ destination: "/app/game/move" + websocketRoom, body: JSON.stringify({partida: novaMovimentacao})});                       
                         return true;
                     } catch (e) {
                         toast.error("Erro ao tentar efetuar movimentação!");
@@ -262,7 +260,8 @@ export const TabuleiroProvider = ({ children }) => {
             tempoRestante,
             setTempoRestante,
             stompClient,
-            jogadorSessao
+            jogadorSessao,
+            websocketRoom
         }}>
             {children}
         </TabuleiroContext.Provider>

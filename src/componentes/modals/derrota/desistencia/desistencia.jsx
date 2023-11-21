@@ -1,10 +1,10 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router';
-import './vitoria.css';
+import '../derrota.css';
 import { toast } from "react-toastify";
 import useTabuleiro from '/src/hooks/TabuleiroHook';
 
-function vitoria() {
+function desistencia() {
     const navigate = useNavigate();
     const {id} = useParams()
     const {partida, stompClient} = useTabuleiro();
@@ -42,25 +42,25 @@ function vitoria() {
     return(
         <section className="background">
             <div className="modal-container" id="modal">
-                <div className="box-vitoria-tabuleiro" id="modal-vitoria">
+                <div className="box-derrota-tabuleiro" id="modal-derrota">
                     <div className="box-titulo-tabuleiro">
-                        <h1>VITÓRIA!</h1>
+                        <h1>DERROTA!</h1>
                     </div>
                     <div className="box-content-tabuleiro">
                         <div className="img-resultado-tabuleiro">
-                            <div className="icon-vitoria-tabuleiro"></div>
+                            <div className="icon-derrota-tabuleiro"></div>
                         </div>
                         <div className="recompensas-tabuleiro">
                             <div className="recompensa-xp-tabuleiro">
                                 <div className="recompensa-xp-icon-tabuleiro"></div>
                                 <div className="recompensa-texto-tabuleiro">
-                                    <p>+ 25 de XP</p>
+                                    <p>- 20 de XP</p>
                                 </div>
                             </div>
                             <div className="recompensa-moeda-tabuleiro">
                                 <div className="moeda-icon-tabuleiro"></div>
                                 <div className="recompensa-texto-tabuleiro">
-                                    <p>+ 30 moedas</p>
+                                    <p>- 15 moedas</p>
                                 </div>
                             </div>
                         </div>
@@ -74,4 +74,4 @@ function vitoria() {
     )
 }
 
-export default vitoria
+export default desistencia

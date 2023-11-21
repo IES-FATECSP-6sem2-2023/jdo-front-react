@@ -58,7 +58,6 @@
 .peca-comida-tabuleiro{
     background-size: contain;
     background-repeat: no-repeat;
-    background-image: url("/public/assets/imagens/skins/cachorro_amazonia.png");
 }
 
 .contador-tabuleiro{
@@ -217,12 +216,10 @@
 
 .peca-cachorro-tabuleiro {
     background-color: #c2c2c2e6;
-    /* background-image: url("/public/assets/imagens/skins/cachorro_amazonia.png"); */
 }
 
 .peca-onca-tabuleiro {
     background-color: #c2c2c2e6;
-    /* background-image: url("/public/assets/imagens/skins/onca_amazonia.png"); */
 }
 
 .reacoes-tabuleiro{

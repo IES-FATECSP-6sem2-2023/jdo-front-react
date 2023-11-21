@@ -7,7 +7,7 @@ import useTabuleiro from '/src/hooks/TabuleiroHook';
 function derrota() {
     const navigate = useNavigate();
     const {id} = useParams()
-    const {partida} = useTabuleiro();
+    const {partida, stompClient} = useTabuleiro();
 
     const exibir = () => {
         if (id === 1) {
@@ -35,6 +35,9 @@ function derrota() {
         }
     }
     exibir();
+    stompClient.current.disconnect(() => {
+        console.log('Desconectado do WebSocket.');
+    });
     localStorage.removeItem("partidaSession");
     return(
         <section className="background">
