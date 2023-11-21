@@ -33,6 +33,10 @@
 }
 
 .area-onca-container-tabuleiro {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
     width: 20vw;
     height: 45vh;
     align-self: flex-end;
@@ -83,6 +87,13 @@
     justify-content: center;
     align-items: center;
     position: relative; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url(/assets/imagens/placas/placa_usuario.png);
+}
+
+.info-nome-user {
+    color: #fff;
 }
 
 .info-user-tabuleiro h1 {
@@ -141,6 +152,10 @@
 }
 
 .area-cachorro-container-tabuleiro {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
     width: 20vw;
     height: 25vh;
 }

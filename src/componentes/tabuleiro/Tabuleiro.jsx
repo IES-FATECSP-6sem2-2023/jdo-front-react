@@ -119,9 +119,9 @@ function Tabuleiro() {
                             </div>
                             <CronometroOnca ativo={jogadorAtualCronometro === 1 ? true : false}/>
                             <div className="info-user-tabuleiro jogador-onca-tabuleiro">
-                                <img src={placaUser} />
                                 <h1 id="contador-onca-tabuleiro">JOGADOR ONÇA</h1>
                             </div>
+                            <span class="info-nome-user">{partida?.primeirojogador?.user}</span>
                         </div>
                     </div>
                     <div className="principal-tabuleiro">
@@ -191,9 +191,9 @@ function Tabuleiro() {
                         <div className="area-cachorro-container-tabuleiro">
                         <CronometroCachorro  ativo={jogadorAtualCronometro === 2 ? true : false}/>
                             <div className="info-user-tabuleiro jogador-cachorro-tabuleiro">
-                                <img src={placaUser} />
                                 <h1>JOGADOR CACHORRO</h1>
-                            </div>
+                            </div> 
+                            <span class="info-nome-user">{partida?.primeirojogador?.user}</span>
                         </div>
                     </div>
                 </div>
