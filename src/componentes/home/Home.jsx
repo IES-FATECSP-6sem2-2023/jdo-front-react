@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import './Home.css';
 import Carrossel from './carrossel/carrossel';
+import HelpIcon from '/public/assets/imagens/icones/HelpIcon';
 import LogOutIcon from '/public/assets/imagens/icones/LogOutIcon';
 import UsuarioIcon from '/public/assets/imagens/icones/UsuarioIcon';
 import VolumeOffIcon from '/public/assets/imagens/icones/VolumeOffIcon';
@@ -30,6 +31,22 @@ function Home() {
         const responsePartida = await criarPartida(tipo.toUpperCase());
         responsePartida ? navigate("/fila") : navigate("/menu")
     }
+    const meta = () => {
+        switch (user?.jogador?.nivelatual) {
+            case 1:
+                return 100;
+            case 2:
+                return 300;
+            case 3:
+                return 600;
+            case 4:
+                return 1000;
+            case 5:
+                return '00';
+            default:
+                return 1;
+        }
+    }
 
     return (
         <section className="bg-home">
@@ -43,7 +60,7 @@ function Home() {
                             <div className="info inivel">
                                 <button className="info nivel">
                                     <p className="info-p">{user?.jogador?.experiencia}</p>
-                                    <p className="info-p">/{(user?.jogador?.nivelatual*100)}</p>
+                                    <p className="info-p">/{meta()}</p>
                                 </button>
                             </div>
                         </div>
@@ -61,6 +78,9 @@ function Home() {
                         </button>
                     </div>
                     <div className="menu-itens-config">
+                        <button className="item-config" onClick={() => navigate("/tutorial")}>
+                            <HelpIcon />
+                        </button>
                         <button className="item-config" onClick={toggleMusica}>
                             {musicaStatus ? <VolumeOnIcon /> : <VolumeOffIcon />}
                         </button>

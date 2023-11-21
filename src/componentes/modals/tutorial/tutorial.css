@@ -1,0 +1,139 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    scroll-behavior: smooth;
+}
+
+.background {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('/public/assets/imagens/backgrounds/cenario_login-tabuleiro.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.modal-container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.box-erro{
+    width: 50vw;
+    height: 100vh;
+    display: block;
+    margin: 0 auto;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("/public/assets/imagens/placas/fundo_modal.png");
+}
+
+.box-titulo{
+    width: 450px;
+    height: 150px;
+    margin: 12vh auto 2vh auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(210, 105, 30, 0);
+}
+
+.box-titulo > h1{
+    position: absolute; 
+    font-family: 'Londrina Solid', cursive;
+    font-size: 5em;
+    color: #5E2C12;
+}
+
+.box-content{
+    width: 500px;
+    height: 450px;
+    margin: 50px auto;
+}
+
+.mensagem-tutorial{
+    width: 500px;
+    height: 380px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mensagem-texto > p{
+    font-family: 'Londrina Solid', cursive;
+    font-size: 1.6em;
+    color: #5E2C12;
+    text-align: center;
+}
+
+.area-btn-modal{
+    width: 500px;
+    height: 80px;
+}
+
+.btn-modal-tutotial{
+    width: 200px;
+    height: 60px;
+    margin: 10px 10px;
+    font-family: 'Londrina Solid', cursive;
+    color: #E6B789;
+    background-color: #5E2C12;
+    font-size: 1.6em;
+    border: none;
+}
+
+.btn-modal-tutotial:hover{
+    cursor: pointer;
+    border: 3px solid #331809;
+}
+
+@media screen and (max-width: 1366px) and (max-height: 768px) {
+    .box-titulo{
+        width: 450px;
+        height: 135px;
+        margin: 10.5vh auto 2vh auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .box-titulo > h1{
+        font-size: 4em;
+    }
+
+    .box-content{
+        width: 350px;
+        height: 350px;
+        margin: 0 auto;
+    }
+
+    .mensagem-tutorial{
+        width:  350px;
+        height: 250px;
+    }
+
+    .mensagem-texto > p{
+        font-size: 1.2em;
+    }
+
+    .area-btn-modal{
+        width: 350px !important;
+        height: 80px;
+    }
+
+    .btn-modal-tutotial{
+        width: 130px;
+        height: 60px;
+        margin: 5px;
+        font-family: 'Londrina Solid', cursive;
+        color: #E6B789;
+        background-color: #5E2C12;
+        font-size: 1.2em;
+        border: none;
+    }
+}

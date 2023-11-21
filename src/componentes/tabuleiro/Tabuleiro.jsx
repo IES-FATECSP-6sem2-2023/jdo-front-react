@@ -93,7 +93,7 @@ function Tabuleiro() {
     }
     
     const handleCellClick = async (x, y, peca) => {
-        if (jogadorSessao === jogadorDaVez && peca === jogadorDaVez && Number.isInteger(peca)) {
+        if (jogadorSessao === jogadorAtualCronometro && peca === jogadorAtualCronometro && Number.isInteger(peca)) {
             setPecaSelecionada({ y, x });
         } else if (peca === "" && pecaSelecionada.y !== undefined) {
             await movimentarPartida(pecaSelecionada.y, pecaSelecionada.x, y, x, jogadorSessao);
@@ -117,7 +117,7 @@ function Tabuleiro() {
                                     ></div>
                                 ))}
                             </div>
-                            <CronometroOnca ativo={jogadorDaVez === 1 ? true : false}/>
+                            <CronometroOnca ativo={jogadorAtualCronometro === 1 ? true : false}/>
                             <div className="info-user-tabuleiro jogador-onca-tabuleiro">
                                 <img src={placaUser} />
                                 <h1 id="contador-onca-tabuleiro">JOGADOR ONÇA</h1>
@@ -143,7 +143,7 @@ function Tabuleiro() {
                                                 cell-tabuleiro 
                                                 peca-${peca === 1 ? 'onca' : 'cachorro'}-tabuleiro
                                                 ${x === pecaSelecionada?.x && y === pecaSelecionada?.y ? 'peca-selecionada-tabuleiro' : ''}
-                                                ${peca === jogadorDaVez && !(x === pecaSelecionada?.x && y === pecaSelecionada?.y) ? 'peca-jogador-tabuleiro' : ''} 
+                                                ${peca === jogadorAtualCronometro && !(x === pecaSelecionada?.x && y === pecaSelecionada?.y) ? 'peca-jogador-tabuleiro' : ''} 
                                                 `}
                                                 style={{
                                                     backgroundImage: `url(${`/assets/imagens/skins/${peca === 1 ? partida?.primeirojogador?.nomeSkinFavorita : partida?.segundojogador?.nomeSkinFavorita}`})`,
@@ -181,7 +181,7 @@ function Tabuleiro() {
                     </div>
                     <div className="area-cachorro-tabuleiro">
                         <div className="menu-superior-tabuleiro">
-                            <button className="item-config" onClick={toggleMusica}>
+                            <button className="item-config-tabuleiro" onClick={toggleMusica}>
                                 {musicaStatus ? <VolumeOnIcon /> : <VolumeOffIcon />}
                             </button>
                             <button className="item-config-tabuleiro" onClick={desistir}>
@@ -189,7 +189,7 @@ function Tabuleiro() {
                             </button>
                         </div>
                         <div className="area-cachorro-container-tabuleiro">
-                        <CronometroCachorro  ativo={jogadorDaVez === 2 ? true : false}/>
+                        <CronometroCachorro  ativo={jogadorAtualCronometro === 2 ? true : false}/>
                             <div className="info-user-tabuleiro jogador-cachorro-tabuleiro">
                                 <img src={placaUser} />
                                 <h1>JOGADOR CACHORRO</h1>

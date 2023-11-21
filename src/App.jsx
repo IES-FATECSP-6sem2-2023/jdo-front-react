@@ -17,6 +17,7 @@ import Erro from './componentes/modals/erro/erro.jsx';
 import Fila from './componentes/modals/fila/fila.jsx';
 import Loading from './componentes/modals/loading/loading.jsx';
 import Sucesso from './componentes/modals/sucesso/sucesso.jsx';
+import Tutorial from './componentes/modals/tutorial/tutorial.jsx';
 import Vitoria from './componentes/modals/vitoria/vitoria.jsx';
 import Tabuleiro from './componentes/tabuleiro/Tabuleiro.jsx';
 import GlobalProvider from './providers/GlobalProvider.jsx';
@@ -42,9 +43,10 @@ const App = () => {
               <Route path='/fila' element={<Fila />} />
               <Route path='/erro' element={<Erro />} />
               <Route path='/sucesso' element={<Sucesso />} />
+              <Route path='/tutorial' element={<Tutorial />} />
               <Route path='/vitoria/:id' element={<Vitoria />} />
               <Route path='/derrota/:id' element={<Derrota />} />
-              <Route path='/desistencia' element={<Desistencia/>} />
+              <Route path='/desistencia/:id' element={<Desistencia/>} />
               <Route path='/desistir' element={<Desistir />} />
               <Route path='/compras/moedas/:id' element={<CompraMoedas />} />
               <Route path='/compras/skins/:id' element={<CompraSkins />} />
