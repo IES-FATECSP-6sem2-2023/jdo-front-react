@@ -104,7 +104,7 @@ export const TabuleiroProvider = ({ children }) => {
                     })
                 })
             }, 1000)
-        }else{
+        }else if (pecasComidas >= 1) {
             passarVez()
         }
     },[pecasComidas])
@@ -208,24 +208,24 @@ export const TabuleiroProvider = ({ children }) => {
         }
     }
 
-    const finalizarPartida = async (timeVitoria, desistencia) => {
-        if (partida) {
-            try {
-                const idVencedor = timeVitoria === 1 ? partida.primeirojogador.idJogador : partida.segundojogador.idJogador;
-                const partidaReturn = await TabuleiroService.finalizaPartida(partida.idpartida, idVencedor, desistencia ? true : false);
-                setPartida(partidaReturn.data);
-                if (timeVitoria === jogadorSessao){
-                    navigate(`/vitoria/${jogadorSessao}`)
-                }else{
-                    navigate(`/derrota/${jogadorSessao}`)
-                }
-                return true;
-            } catch (e) {
-                toast.error("Erro inesperado ao finalizar partida!")
-                return false;
-            }
-        }
-    }
+    // const finalizarPartida = async (timeVitoria, desistencia) => {
+    //     if (partida) {
+    //         try {
+    //             const idVencedor = timeVitoria === 1 ? partida.primeirojogador.idJogador : partida.segundojogador.idJogador;
+    //             const partidaReturn = await TabuleiroService.finalizaPartida(partida.idpartida, idVencedor, desistencia ? true : false);
+    //             setPartida(partidaReturn.data);
+    //             if (timeVitoria === jogadorSessao){
+    //                 navigate(`/vitoria/${jogadorSessao}`)
+    //             }else{
+    //                 navigate(`/derrota/${jogadorSessao}`)
+    //             }
+    //             return true;
+    //         } catch (e) {
+    //             toast.error("Erro inesperado ao finalizar partida!")
+    //             return false;
+    //         }
+    //     }
+    // }
 
     const excluirPartida = async (idPartida) => {
         if (partida) {
@@ -252,7 +252,7 @@ export const TabuleiroProvider = ({ children }) => {
             pecasComidas,
             criarPartida,
             movimentarPartida,
-            finalizarPartida,
+            // finalizarPartida,
             excluirPartida,
             jogadorAtualCronometro,
             passarVez, 

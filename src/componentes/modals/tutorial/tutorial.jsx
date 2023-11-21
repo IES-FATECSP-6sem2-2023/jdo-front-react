@@ -21,7 +21,11 @@ function tutorial() {
                     <div className="box-content">
                         <div className="mensagem-tutorial">
                             <div className="mensagem-texto">
-                                <p>O jogador com a onça deve capturar seis cachorros e o jogador com a matilha deve encurralar a onça, deixando-a sem possibilidade de se movimentar pelo tabuleiro. Ganha quem conseguir alcançar o seu objetivo primeiro, podendo mover as peças que podem ser movidas em qualquer direção pelo tabuleiro (frente, trás, lados ou diagonal). O jogador com a onça sempreinicia o jogo.</p>
+                            <p>O jogador com a onça deve capturar seis cachorros e o jogador com a matilha deve encurralar a onça, 
+                                deixando-a sem possibilidade de se movimentar pelo tabuleiro. Ganha quem conseguir alcançar o seu 
+                                objetivo primeiro, podendo mover as peças que podem ser movidas em qualquer direção pelo tabuleiro 
+                                (frente, trás, lados ou diagonal). O jogador com a onça sempre inicia o jogo. Todas as peças andam 
+                                de 1 em 1 casa. A onça possui uma jogada adicional no momento em que captura um dos cachorros.</p>
                             </div>
                         </div>
                         <div className="area-btn-modal">
