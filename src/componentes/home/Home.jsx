@@ -42,7 +42,7 @@ function Home() {
             case 4:
                 return 1000;
             case 5:
-                return '00';
+                return 'Máx.';
             default:
                 return 1;
         }
