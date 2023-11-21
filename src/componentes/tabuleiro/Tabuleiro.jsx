@@ -31,7 +31,7 @@ function Tabuleiro() {
         if (partida && Object.keys(partida).length > 0) {
           const novoTabuleiro = criarTabuleiro(partida);
           setTabuleiro(novoTabuleiro);
-          stompClient.current.subscribe('/app/game/react' + websocketRoom, function(message) {
+          stompClient.current.subscribe('/topic/game-reaction/' + websocketRoom, function(message) {
             const numeroReacao = Number(JSON.parse(message.body));
             somReacao(numeroReacao);
           });
@@ -73,7 +73,7 @@ function Tabuleiro() {
 
     const clicarReacao = (event) => {
         const numeroReacao = parseInt(event.target.value)
-        stompClient.current.publish({ destination: "/app/game/react" + websocketRoom, body: JSON.stringify(numeroReacao) });
+        stompClient.current.publish({ destination: "/app/game/react/" + websocketRoom, body: JSON.stringify(numeroReacao) });
         somReacao(numeroReacao)
     };
 
