@@ -193,7 +193,7 @@ function Tabuleiro() {
                             <div className="info-user-tabuleiro jogador-cachorro-tabuleiro">
                                 <h1>JOGADOR CACHORRO</h1>
                             </div> 
-                            <span class="info-nome-user">{partida?.primeirojogador?.user}</span>
+                            <span class="info-nome-user">{partida?.segundojogador?.user}</span>
                         </div>
                     </div>
                 </div>
