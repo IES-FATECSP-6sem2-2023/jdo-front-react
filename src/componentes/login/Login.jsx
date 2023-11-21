@@ -59,7 +59,7 @@ function Login() {
 		} else {
 			navigate("/loading");
 			const loginSucesso = await signin(email, senha);
-			loginSucesso ? navigate("/menu") : '';
+			loginSucesso ? navigate("/menu") : navigate("/login");
 		}
 	}
 
