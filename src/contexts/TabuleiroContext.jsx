@@ -88,7 +88,6 @@ export const TabuleiroProvider = ({ children }) => {
             setPartida(teste.data.partida);
             setTimeout(() => {
                 navigate('/tabuleiro');
-                setJogadorAtualCronometro(1)
             }, 2000);
         } else {
             setPartida(teste.data.partida.idpartida);
@@ -142,7 +141,7 @@ export const TabuleiroProvider = ({ children }) => {
     }, [partida]);
 
     const passarVez = () => {
-        setJogadorAtualCronometro((jogadorAtualCronometro) => (jogadorAtualCronometro === 1 ? 2 : 1))
+        setJogadorAtualCronometro(jogadorAtualCronometro === 1 ? 2 : 1)
     }
     
     const movimentarPartida = async (xOri, yOri, xDes, yDes, jogador) => {
