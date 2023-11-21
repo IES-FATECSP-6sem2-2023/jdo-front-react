@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import './Home.css';
 import Carrossel from './carrossel/carrossel';
+import HelpIcon from '/public/assets/imagens/icones/HelpIcon';
 import LogOutIcon from '/public/assets/imagens/icones/LogOutIcon';
 import UsuarioIcon from '/public/assets/imagens/icones/UsuarioIcon';
 import VolumeOffIcon from '/public/assets/imagens/icones/VolumeOffIcon';
@@ -61,6 +62,9 @@ function Home() {
                         </button>
                     </div>
                     <div className="menu-itens-config">
+                        <button className="item-config" onClick={() => navigate("/tutorial")}>
+                            <HelpIcon />
+                        </button>
                         <button className="item-config" onClick={toggleMusica}>
                             {musicaStatus ? <VolumeOnIcon /> : <VolumeOffIcon />}
                         </button>

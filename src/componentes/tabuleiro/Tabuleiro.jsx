@@ -180,7 +180,7 @@ function Tabuleiro() {
                     </div>
                     <div className="area-cachorro-tabuleiro">
                         <div className="menu-superior-tabuleiro">
-                            <button className="item-config" onClick={toggleMusica}>
+                            <button className="item-config-tabuleiro" onClick={toggleMusica}>
                                 {musicaStatus ? <VolumeOnIcon /> : <VolumeOffIcon />}
                             </button>
                             <button className="item-config-tabuleiro" onClick={desistir}>
