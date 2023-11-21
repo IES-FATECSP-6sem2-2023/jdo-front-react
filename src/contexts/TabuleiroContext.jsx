@@ -60,7 +60,7 @@ export const TabuleiroProvider = ({ children }) => {
         const room = teste.data.partida.idpartida;
         setWebsocketRoom(room);
         
-        client.subscribe(app'/game/move' + room, function(message) {
+        client.subscribe('/app/game/move' + room, function(message) {
             const gamestate = JSON.parse(message.body);
             if (gamestate.iniciandoPartida) {
                 setPartida(gamestate?.partida);
