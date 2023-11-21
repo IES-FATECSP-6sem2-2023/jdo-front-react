@@ -72,6 +72,8 @@ export const TabuleiroProvider = ({ children }) => {
     
         client.subscribe('/topic/finish-game', function(message) {
             const partidaFinalizada = JSON.parse(message.body);
+            setJogadorAtualCronometro(1)
+            setTempoRestante(10)
             if (idJogador === partidaFinalizada.idVencedor) {
                 navigate(`/vitoria/${jogadorSessao}`);
             } else if(partidaFinalizada.partidaAbandonada) {
