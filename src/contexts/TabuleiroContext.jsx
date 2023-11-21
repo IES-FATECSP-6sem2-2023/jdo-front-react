@@ -74,6 +74,8 @@ export const TabuleiroProvider = ({ children }) => {
     
         stompClient.current.subscribe('/topic/finish-game/' + room, function(message) {
             const partidaFinalizada = JSON.parse(message.body);
+            setJogadorAtualCronometro(1)
+            setTempoRestante(10)
             if (idJogador === partidaFinalizada.idVencedor) {
                 navigate(`/vitoria/${jogadorSessao}`);
             } else if(partidaFinalizada.partidaAbandonada) {
