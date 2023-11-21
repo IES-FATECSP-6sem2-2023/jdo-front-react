@@ -11,7 +11,7 @@ export const TabuleiroContext = createContext({});
 
 export const TabuleiroProvider = ({ children }) => {
     const navigate = useNavigate();
-    const [jogadorAtualCronometro, setJogadorAtualCronometro] = useState(1);
+    const [jogadorAtualCronometro, setJogadorAtualCronometro] = useState(2);
     const [pecasComidas, setPecasComida] = useState(0);
     const stompClient = useRef(null);
     const { user } = useAuthConta();
